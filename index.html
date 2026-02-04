@@ -757,14 +757,22 @@
 
         .layer-btn {
             padding: 0.6rem 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            border-radius: 4px;
+            background: #f8f9fa;
+            border: 2px solid #a3a380;
+            color: #3a2f23;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 1.1rem;
             font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
+            font-weight: 600;
+            margin: 0 0.5rem 0.5rem 0;
+            transition: box-shadow 0.2s, transform 0.2s, background 0.3s, border-color 0.2s;
+            outline: none;
+        }
+        .layer-btn:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px #3498db33;
+        /* ...existing code... */
         }
 
         .layer-btn:hover {
@@ -861,13 +869,53 @@
             left: 2rem;
             z-index: 9999;
             background: #fff;
-            border-radius: 12px;
-            padding: 0.5rem;
+            border-radius: 16px;
+            padding: 0.5rem 0.75rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
             transition: all 0.5s ease;
+            border: 1.5px solid #e9e5dd;
+        }
+        .worldview-toggle.segmented .toggle-options {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .worldview-toggle.segmented .toggle-option {
+            border-radius: 16px;
+            border: 2px solid transparent;
+            background: #f8f9fa;
+            box-shadow: 0 2px 8px #e9e5dd, -2px -2px 8px #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.7rem 1.4rem;
+            margin: 0;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+            outline: none;
+        }
+        .worldview-toggle.segmented .toggle-option.active {
+            background: linear-gradient(90deg, #e3ded7 80%, #c2b280 100%);
+            border-color: #a3a380;
+            box-shadow: 0 4px 16px #d9cfc1;
+        }
+        .worldview-toggle.segmented .toggle-option.western.active {
+            background: linear-gradient(90deg, #3498db 60%, #e3ded7 100%);
+            border-color: #3498db;
+            color: #3498db;
+        }
+        .worldview-toggle.segmented .toggle-option.integrated.active {
+            background: linear-gradient(90deg, #9b59b6 60%, #e3ded7 100%);
+            border-color: #9b59b6;
+            color: #9b59b6;
+        }
+        .worldview-toggle.segmented .toggle-option.indigenous.active {
+            background: linear-gradient(90deg, #8b5a2b 60%, #e3ded7 100%);
+            border-color: #8b5a2b;
+            color: #8b5a2b;
         }
 
         .toggle-header {
@@ -896,6 +944,12 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            outline: none;
+        }
+        .toggle-option:focus {
+            border-color: #9b59b6;
+            box-shadow: 0 0 0 2px #9b59b633;
+        /* ...existing code... */
         }
 
         .toggle-option:hover {
@@ -1586,21 +1640,21 @@
     </div>
 
     <!-- Three-Way Worldview Toggle -->
-    <div class="worldview-toggle" id="worldview-toggle">
+    <div class="worldview-toggle segmented" id="worldview-toggle" role="group" aria-label="Worldview selector">
         <div class="toggle-header">Worldview</div>
-        <div class="toggle-options">
-            <div class="toggle-option western" data-mode="western">
+        <div class="toggle-options" style="flex-direction: row; gap: 0.5rem;">
+            <button class="toggle-option western" data-mode="western" aria-label="Western Science" aria-pressed="false" tabindex="0">
                 <span class="icon">🔬</span>
                 <span class="label">Western</span>
-            </div>
-            <div class="toggle-option integrated active" data-mode="integrated">
+            </button>
+            <button class="toggle-option integrated active" data-mode="integrated" aria-label="Two-Eyed Seeing" aria-pressed="true" tabindex="0">
                 <span class="icon">👁️‍🗨️</span>
                 <span class="label">Two-Eyed</span>
-            </div>
-            <div class="toggle-option indigenous" data-mode="indigenous">
+            </button>
+            <button class="toggle-option indigenous" data-mode="indigenous" aria-label="Indigenous Worldview" aria-pressed="false" tabindex="0">
                 <span class="icon">🌿</span>
                 <span class="label">Indigenous</span>
-            </div>
+            </button>
         </div>
     </div>
     <div class="toggle-info">
@@ -1807,8 +1861,8 @@
             
             <div class="map-wrapper">
                 <div id="map" aria-label="Interactive map" tabindex="0"></div>
-                <!-- Progressive Disclosure: TK/BC Labels only shown when overlays active -->
-                <div class="tkbc-labels" id="tkbc-labels" style="margin: 1.5rem 0; display:none;">
+                <!-- Progressive Disclosure: TK/BC Labels and overlay info panels -->
+                <div class="tkbc-labels" id="tkbc-labels" aria-live="polite" style="margin: 1.5rem 0; display:none; opacity:0; transition:opacity 0.4s;">
                     <div class="tkbc-label provenance" title="Provenance: Identifies cultural authority">
                         <span style="font-weight:600;color:#8b5a2b;">TK Label:</span> Provenance
                     </div>
@@ -1819,6 +1873,12 @@
                         <span style="font-weight:600;color:#4b6e3d;">BC Label:</span> Permission
                     </div>
                     <div style="font-size:0.95rem;color:#3a2f23;margin-top:0.5rem;">These labels ensure Indigenous data sovereignty and community protocols are respected in all map interactions.</div>
+                </div>
+                <div class="overlay-info" id="protected-info" style="display:none; opacity:0; transition:opacity 0.4s; margin-bottom:1rem;" aria-live="polite">
+                    <strong>Protected Areas:</strong> Global WDPA polygons and points. Data: <a href="https://www.protectedplanet.net/" target="_blank">Protected Planet</a>.
+                </div>
+                <div class="overlay-info" id="ecosystems-info" style="display:none; opacity:0; transition:opacity 0.4s; margin-bottom:1rem;" aria-live="polite">
+                    <strong>Ecosystems:</strong> OpenTopoMap landscape and tree cover. Data: <a href="https://opentopomap.org/" target="_blank">OpenTopoMap</a>.
                 </div>
                     <h4 class="view-western">Location Data</h4>
                     <h4 class="view-integrated">Place & Context</h4>
@@ -1849,14 +1909,14 @@
             
             <!-- Layer Controls -->
             <div class="layer-controls">
-                <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer" aria-pressed="false" tabindex="0">
-                    🛡️ Protected Areas
+                <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer" aria-pressed="false" tabindex="0" aria-label="Toggle Protected Areas" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <span aria-hidden="true">🛡️</span> <span>Protected Areas</span>
                 </button>
-                <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer" aria-pressed="false" tabindex="0">
-                    🌲 Tree Cover / Ecosystems
+                <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer" aria-pressed="false" tabindex="0" aria-label="Toggle Ecosystems" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <span aria-hidden="true">🌲</span> <span>Tree Cover / Ecosystems</span>
                 </button>
-                <button class="layer-btn" id="btn-satellite" title="Toggle Satellite imagery" aria-pressed="false" tabindex="0">
-                    🛰️ Satellite View
+                <button class="layer-btn" id="btn-satellite" title="Toggle Satellite imagery" aria-pressed="false" tabindex="0" aria-label="Toggle Satellite View" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <span aria-hidden="true">🛰️</span> <span>Satellite View</span>
                 </button>
             </div>
         </div>
@@ -1962,15 +2022,24 @@
             protectedActive = !protectedActive;
             this.classList.toggle('active');
             this.setAttribute('aria-pressed', protectedActive);
+            const protectedInfo = document.getElementById('protected-info');
             if (protectedActive) {
                 loadProtectedLayers();
                 wdpaPolyLayer.addTo(map);
                 wdpaPointLayer.addTo(map);
                 tkbcLabels.style.display = '';
+                setTimeout(() => { tkbcLabels.style.opacity = 1; }, 10);
+                protectedInfo.style.display = '';
+                setTimeout(() => { protectedInfo.style.opacity = 1; }, 10);
             } else {
                 if (wdpaPolyLayer) map.removeLayer(wdpaPolyLayer);
                 if (wdpaPointLayer) map.removeLayer(wdpaPointLayer);
-                tkbcLabels.style.display = 'none';
+                tkbcLabels.style.opacity = 0;
+                protectedInfo.style.opacity = 0;
+                setTimeout(() => {
+                    if (!ecosystemsActive) tkbcLabels.style.display = 'none';
+                    protectedInfo.style.display = 'none';
+                }, 400);
             }
         });
 
@@ -1978,12 +2047,21 @@
             ecosystemsActive = !ecosystemsActive;
             this.classList.toggle('active');
             this.setAttribute('aria-pressed', ecosystemsActive);
+            const ecosystemsInfo = document.getElementById('ecosystems-info');
             if (ecosystemsActive) {
                 ecosystems.addTo(map);
                 tkbcLabels.style.display = '';
+                setTimeout(() => { tkbcLabels.style.opacity = 1; }, 10);
+                ecosystemsInfo.style.display = '';
+                setTimeout(() => { ecosystemsInfo.style.opacity = 1; }, 10);
             } else {
                 map.removeLayer(ecosystems);
-                if (!protectedActive) tkbcLabels.style.display = 'none';
+                tkbcLabels.style.opacity = 0;
+                ecosystemsInfo.style.opacity = 0;
+                setTimeout(() => {
+                    if (!protectedActive) tkbcLabels.style.display = 'none';
+                    ecosystemsInfo.style.display = 'none';
+                }, 400);
             }
         });
 
