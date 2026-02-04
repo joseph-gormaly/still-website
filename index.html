@@ -150,12 +150,18 @@
         }
 
         /* ========== Cards Grid ========== */
-        .cards {
-            display: flex;
-            flex-wrap: wrap;
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1.5rem;
-            justify-content: center;
             margin-top: 2rem;
+            max-width: 900px;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
         }
 
         .card {
@@ -163,10 +169,10 @@
             border-radius: 8px;
             padding: 2rem;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            flex: 1 1 300px;
-            max-width: 350px;
             text-align: left;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
@@ -176,13 +182,32 @@
 
         .card h4 {
             font-size: 1.25rem;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             color: #2c3e50;
         }
 
         .card p {
             font-size: 1rem;
             color: #7f8c8d;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .card-btn:hover {
+            background-color: #2980b9;
         }
 
         /* ========== Timeline (Resume) ========== */
@@ -342,8 +367,17 @@
                 padding: 3rem 1.5rem;
             }
 
-            .card {
-                flex: 1 1 100%;
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skill-category {
+                max-width: 100%;
             }
         }
     </style>
@@ -474,21 +508,30 @@
     <!-- Projects Section -->
     <section id="projects">
         <div class="section-content">
-            <h2>Projects</h2>
+            <h2>Research Labs</h2>
             <div class="divider"></div>
+            <p class="section-intro">Exploring the intersection of Indigenous sovereignty, technology, and sustainable land management.</p>
             
-            <div class="cards">
+            <div class="cards-grid">
                 <div class="card">
-                    <h4>Land & Learning</h4>
-                    <p>Developing educational frameworks that integrate traditional ecological knowledge with modern sustainability practices.</p>
+                    <h4>IPCA Governance</h4>
+                    <p>Visioning and policy development for the Wuskwi Sipihk, Sapotaweyak, and Minegoziibe First Nations.</p>
+                    <a href="#" class="card-btn">Read More</a>
                 </div>
                 <div class="card">
-                    <h4>Economic Alternatives</h4>
-                    <p>Exploring heterodox economic models that prioritize community wellbeing and environmental stewardship.</p>
+                    <h4>Technical Sovereignty</h4>
+                    <p>Developing local AI (Ollama) and mobile tools for field data collection.</p>
+                    <a href="#" class="card-btn">Read More</a>
                 </div>
                 <div class="card">
-                    <h4>Resource Management</h4>
-                    <p>Creating adaptive management strategies for sustainable resource use in partnership with Indigenous communities.</p>
+                    <h4>Economic Research</h4>
+                    <p>Heterodox economics and critiques of GDP in welfare policy.</p>
+                    <a href="#" class="card-btn">Read More</a>
+                </div>
+                <div class="card">
+                    <h4>Field Operations</h4>
+                    <p>Drone surveys and CoMapeo implementation for land monitoring in Manitoba and Belize.</p>
+                    <a href="#" class="card-btn">Read More</a>
                 </div>
             </div>
         </div>
