@@ -2,6 +2,75 @@
 
 ## [Unreleased] - Planned Improvements
 
+### 🧠 Conceptual Visualizations
+
+#### Two-Eyed Seeing Toggle
+- [ ] Site-wide toggle switching between two visual modes
+- [ ] **Emissary View** (Left-Hemisphere): Data in charts, GDP metrics, resource extraction values
+- [ ] **Master View** (Right-Hemisphere): Relationships, cultural flows, ecological connections
+- [ ] Demonstrates that the same reality can be "mapped" differently
+
+#### Interactive "Maps of Meaning" Diagram
+- [ ] Animated SVG with two overlapping worldview circles
+- [ ] Colonial "Map" → linear, extractive arrows pointing outward
+- [ ] Indigenous "Map" → cyclical, relational arrows flowing between land, community, health
+- [ ] Click conflict zones to reveal case studies of epistemological clash
+
+### 📊 Data Dashboards
+
+#### Bio-Social Valuation (BSV) Calculator
+- [ ] Interactive tool comparing Traditional CBA vs BSV Model
+- [ ] Input land area and see holistic value breakdown
+- [ ] Show cultural resilience, health outcomes, carbon sequestration
+- [ ] Demonstrates the "measurement crisis" in left-hemisphere accounting
+
+#### "Cost of Severance" Visualizer
+- [ ] Map showing Indigenous communities with health outcome overlays
+- [ ] Visualize distance from traditional territory
+- [ ] Show years since land access was restricted
+- [ ] Demonstrate severance as a "social determinant of health"
+
+### 🗺️ Enhanced Dashboard Features
+
+#### Guardian Program Impact Tracker
+- [ ] Map pins showing active Guardian Programs / IPCAs across Canada
+- [ ] Click for "synergy metrics": jobs, species monitored, cultural events, health improvements
+- [ ] Before/after satellite imagery toggle for stewarded lands
+
+#### Worldview Collision Timeline
+- [ ] Scrolling timeline from 1492 → Present
+- [ ] Key colonial policies (Indian Act, residential schools, terra nullius)
+- [ ] Counter-movements (UNDRIP, TRC, IPCA designations)
+- [ ] Framed as "Left-Hemisphere Impositions" vs "Integrated Reclamation"
+
+### 🎨 Experimental/Artistic
+
+#### "Hallucinating Reality" Perception Demo
+- [ ] Embed optical illusions based on Jiang's Kant discussion
+- [ ] Captions connecting perception to colonial vs Indigenous "seeing"
+- [ ] Interactive reveal showing how frameworks shape what we see
+
+#### Hemisphere Drawing Exercise
+- [ ] Interactive canvas for users to draw objects in two modes
+- [ ] Left mode: Grid, straight lines, measurements only
+- [ ] Right mode: Freehand, flowing, contextual
+- [ ] Reveals McGilchrist's thesis experientially
+
+### 📚 Research Integration
+
+#### Living Bibliography Network
+- [ ] Interactive citation network showing source connections
+- [ ] McGilchrist → Peterson → Jiang → BSV Model
+- [ ] Click nodes to read key quotes
+- [ ] Visualizes the intellectual "map" behind the research
+
+#### "Ask the Research" Chatbot
+- [ ] Local LLM (Ollama) trained on research proposal docs
+- [ ] Visitors can ask questions about Two-Eyed Seeing, Guardian Programs, etc.
+- [ ] Demonstrates Technical Sovereignty research in practice
+
+---
+
 ### SEO
 - [ ] Add meta description tag for search engine optimization
 - [ ] Add Open Graph tags for social media sharing
