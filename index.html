@@ -540,9 +540,280 @@
                 flex-direction: column;
             }
         }
+
+        /* ========== Two-Eyed Seeing Toggle ========== */
+        .worldview-toggle {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 9999;
+            background: #fff;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.5s ease;
+        }
+
+        .worldview-toggle .toggle-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .worldview-toggle .label-emissary {
+            color: #3498db;
+        }
+
+        .worldview-toggle .label-master {
+            color: #27ae60;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(90deg, #3498db 0%, #3498db 50%, #27ae60 50%, #27ae60 100%);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.master::before {
+            transform: translateX(30px);
+        }
+
+        .toggle-info {
+            position: fixed;
+            bottom: 5rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            max-width: 280px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 9998;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .worldview-toggle:hover + .toggle-info,
+        .toggle-info:hover {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .toggle-info h5 {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .toggle-info p {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* ========== EMISSARY MODE (Left-Hemisphere) ========== */
+        body.emissary-mode {
+            /* Default mode - analytical, metrics-focused */
+        }
+
+        body.emissary-mode .worldview-toggle {
+            background: #fff;
+        }
+
+        /* Emissary-specific text alternatives */
+        body.emissary-mode .view-master {
+            display: none !important;
+        }
+
+        body.emissary-mode .view-emissary {
+            display: block !important;
+        }
+
+        /* ========== MASTER MODE (Right-Hemisphere) ========== */
+        body.master-mode {
+            background-color: #f5f0e8;
+        }
+
+        body.master-mode .worldview-toggle {
+            background: #f5f0e8;
+        }
+
+        /* Master Mode - Warmer, Earth Tones */
+        body.master-mode nav {
+            background-color: #f5f0e8;
+            box-shadow: 0 2px 10px rgba(139, 90, 43, 0.1);
+        }
+
+        body.master-mode nav a:hover {
+            background-color: #8b5a2b;
+        }
+
+        body.master-mode #home,
+        body.master-mode #resume {
+            background-color: #f5f0e8;
+        }
+
+        body.master-mode #about,
+        body.master-mode #projects {
+            background-color: #faf6f0;
+        }
+
+        body.master-mode #dashboard {
+            background-color: #3d2914;
+        }
+
+        body.master-mode #contact {
+            background-color: #5d4329;
+        }
+
+        body.master-mode footer {
+            background-color: #2d1f10;
+        }
+
+        /* Master Mode - Typography becomes more flowing */
+        body.master-mode h1,
+        body.master-mode h2,
+        body.master-mode h3,
+        body.master-mode h4 {
+            font-family: 'Merriweather', Georgia, serif;
+            letter-spacing: 0;
+        }
+
+        body.master-mode p {
+            font-family: 'Merriweather', Georgia, serif;
+            line-height: 1.8;
+        }
+
+        /* Master Mode - Accent colors shift to earth tones */
+        body.master-mode .divider {
+            background-color: #8b5a2b;
+        }
+
+        body.master-mode .timeline-item {
+            border-left-color: #8b5a2b;
+        }
+
+        body.master-mode .timeline-item::before {
+            background: #8b5a2b;
+        }
+
+        body.master-mode .timeline-item .org {
+            color: #8b5a2b;
+        }
+
+        body.master-mode .skill-category h4 {
+            color: #8b5a2b;
+        }
+
+        body.master-mode .card-btn {
+            background-color: #8b5a2b;
+        }
+
+        body.master-mode .card-btn:hover {
+            background-color: #6b4423;
+        }
+
+        body.master-mode .layer-btn.active {
+            background: #8b5a2b;
+            border-color: #8b5a2b;
+        }
+
+        body.master-mode .layer-btn:hover {
+            background: rgba(139, 90, 43, 0.3);
+            border-color: #8b5a2b;
+        }
+
+        body.master-mode .stats-panel h4,
+        body.master-mode .territory-info .stat-label {
+            color: #c4956a;
+        }
+
+        body.master-mode .territory-info {
+            background: rgba(139, 90, 43, 0.15);
+            border-left-color: #8b5a2b;
+        }
+
+        /* Master-specific text alternatives */
+        body.master-mode .view-emissary {
+            display: none !important;
+        }
+
+        body.master-mode .view-master {
+            display: block !important;
+        }
+
+        /* Hidden by default - shown based on mode */
+        .view-master {
+            display: none !important;
+        }
+
+        .view-emissary {
+            display: block !important;
+        }
+
+        /* Transition effects */
+        body, nav, section, .card, .divider, .timeline-item, footer {
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .worldview-toggle {
+                bottom: 1rem;
+                left: 1rem;
+                padding: 0.4rem;
+            }
+
+            .worldview-toggle .toggle-label {
+                display: none;
+            }
+
+            .toggle-info {
+                left: 1rem;
+                right: 1rem;
+                max-width: none;
+            }
+        }
     </style>
 </head>
-<body>
+<body class="emissary-mode">
+    <!-- Two-Eyed Seeing Toggle -->
+    <div class="worldview-toggle" id="worldview-toggle">
+        <span class="toggle-label label-emissary">🔬 Emissary</span>
+        <div class="toggle-switch" id="toggle-switch"></div>
+        <span class="toggle-label label-master">🌿 Master</span>
+    </div>
+    <div class="toggle-info">
+        <h5>Two-Eyed Seeing</h5>
+        <p class="view-emissary"><strong>Emissary View:</strong> The analytical left-hemisphere perspective—metrics, data, and measurable outcomes.</p>
+        <p class="view-master"><strong>Master View:</strong> The relational right-hemisphere perspective—context, relationships, and holistic understanding.</p>
+    </div>
+
     <!-- Navigation -->
     <nav>
         <ul>
@@ -564,10 +835,14 @@
             
             <div class="divider"></div>
             
-            <p>Advancing Indigenous sovereignty, heterodox economics, and adaptive resource management.</p>
+            <p class="view-emissary">Advancing Indigenous sovereignty, heterodox economics, and adaptive resource management.</p>
+            <p class="view-master">Nurturing the sacred bond between peoples and their lands through reciprocal stewardship and healing.</p>
             
-            <div class="tagline">
+            <div class="tagline view-emissary">
                 "Still" on the land. Transforming the future.
+            </div>
+            <div class="tagline view-master">
+                "Still" — rooted in place, flowing through time, connected to all relations.
             </div>
         </div>
     </section>
@@ -575,10 +850,13 @@
     <!-- About Section -->
     <section id="about">
         <div class="section-content">
-            <h2>About</h2>
+            <h2 class="view-emissary">About</h2>
+            <h2 class="view-master">Our Story</h2>
             <div class="divider"></div>
-            <p>STILL is dedicated to creating sustainable futures through the integration of Indigenous knowledge systems, innovative economic approaches, and responsible land stewardship.</p>
-            <p>We believe in building bridges between traditional wisdom and contemporary challenges, fostering solutions that honor both the land and the communities that depend on it.</p>
+            <p class="view-emissary">STILL is dedicated to creating sustainable futures through the integration of Indigenous knowledge systems, innovative economic approaches, and responsible land stewardship.</p>
+            <p class="view-emissary">We believe in building bridges between traditional wisdom and contemporary challenges, fostering solutions that honor both the land and the communities that depend on it.</p>
+            <p class="view-master">We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil.</p>
+            <p class="view-master">In the spirit of Two-Eyed Seeing, we hold Indigenous wisdom in one eye and Western knowledge in the other, using both together for the benefit of all.</p>
         </div>
     </section>
 
@@ -710,20 +988,24 @@
                 
                 <!-- Stats Panel -->
                 <div class="stats-panel">
-                    <h4>Location Data</h4>
+                    <h4 class="view-emissary">Location Data</h4>
+                    <h4 class="view-master">Place & Relations</h4>
                     
                     <div class="territory-info">
-                        <span class="stat-label">Indigenous Territory</span>
+                        <span class="stat-label view-emissary">Indigenous Territory</span>
+                        <span class="stat-label view-master">Whose Land You Stand Upon</span>
                         <span class="stat-value loading" id="territory-name">Locating...</span>
                     </div>
                     
                     <div class="stat-item">
-                        <span class="stat-label">Human Development Index</span>
+                        <span class="stat-label view-emissary">Human Development Index</span>
+                        <span class="stat-label view-master">Community Wellbeing</span>
                         <span class="stat-value loading" id="hdi-value">--</span>
                     </div>
                     
                     <div class="stat-item">
-                        <span class="stat-label">Biodiversity Intactness</span>
+                        <span class="stat-label view-emissary">Biodiversity Intactness</span>
+                        <span class="stat-label view-master">Health of All Relations</span>
                         <span class="stat-value loading" id="biodiversity-value">--</span>
                     </div>
                 </div>
@@ -948,6 +1230,32 @@
             
             // Query for new location
             queryNativeLand(lat, lng);
+        });
+
+        // ========== Two-Eyed Seeing Toggle ==========
+        const toggleSwitch = document.getElementById('toggle-switch');
+        const body = document.body;
+
+        // Check for saved preference
+        const savedMode = localStorage.getItem('worldview-mode');
+        if (savedMode === 'master') {
+            body.classList.remove('emissary-mode');
+            body.classList.add('master-mode');
+            toggleSwitch.classList.add('master');
+        }
+
+        toggleSwitch.addEventListener('click', function() {
+            this.classList.toggle('master');
+            
+            if (this.classList.contains('master')) {
+                body.classList.remove('emissary-mode');
+                body.classList.add('master-mode');
+                localStorage.setItem('worldview-mode', 'master');
+            } else {
+                body.classList.remove('master-mode');
+                body.classList.add('emissary-mode');
+                localStorage.setItem('worldview-mode', 'emissary');
+            }
         });
     </script>
 </body>
