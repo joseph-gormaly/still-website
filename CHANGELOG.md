@@ -9,18 +9,18 @@
 
 ### Accessibility
 - [ ] Add skip navigation link
-- [ ] Add semantic HTML5 elements (header, main, footer)
+- [x] Add semantic HTML5 elements (header, main, footer)
 - [ ] Ensure proper ARIA labels where needed
 - [ ] Test with screen reader
 
 ### Engagement
-- [ ] Add contact email or contact form link
+- [x] Add contact email or contact form link
 - [ ] Add social media links (if applicable)
 - [ ] Add newsletter signup (optional)
 
 ### Visual Polish
 - [ ] Add subtle fade-in animations on page load
-- [ ] Add hover effects for interactive elements
+- [x] Add hover effects for interactive elements
 - [ ] Consider adding a logo/icon
 
 ### Technical
@@ -29,9 +29,25 @@
 - [ ] Add 404 error page
 
 ### Structure
-- [ ] Add footer with copyright year
-- [ ] Create About page
-- [ ] Create Contact page
+- [x] Add footer with copyright year
+- [x] Create About section
+- [x] Create Contact section
+
+---
+
+## [1.1.0] - 2026-02-04
+
+### Added - Scrolling Portfolio Redesign
+- Sticky navigation bar with smooth scrolling
+- Five distinct sections: Home, About, Resume, Projects, Contact
+- Timeline component for Resume section
+- Project cards with hover effects
+- Contact section with email link
+- Footer with copyright
+- Responsive design for mobile devices
+- Flexbox-based layout system
+- Alternating section background colors
+- CSS transitions and hover states
 
 ---
 
