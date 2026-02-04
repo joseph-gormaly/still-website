@@ -781,13 +781,20 @@
         });
 
         // ========== Overlay Layers ==========
-        // Protected Areas (placeholder using World Database on Protected Areas - simplified)
-        const protectedAreas = L.tileLayer.wms('https://data-gis.unep-wcmc.org/server/services/ProtectedSites/WDPA_Latest/MapServer/WMSServer', {
-            layers: '0',
-            format: 'image/png',
-            transparent: true,
+        // Protected Areas - Using ArcGIS REST service (more reliable than WMS)
+        const protectedAreas = L.esri ? L.esri.featureLayer({
+            url: 'https://services5.arcgis.com/Mj0hjvkNtV7NRhA7/arcgis/rest/services/WDPA_v0/FeatureServer/1'
+        }) : L.tileLayer('https://tiles.arcgis.com/tiles/Mj0hjvkNtV7NRhA7/arcgis/rest/services/Protected_Areas_View/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'WDPA - Protected Planet',
-            opacity: 0.6
+            opacity: 0.7,
+            maxZoom: 12
+        });
+
+        // Alternative: Use a GeoJSON approach with Canadian Protected Areas
+        const canadaProtectedAreas = L.tileLayer('https://geoappext.nrcan.gc.ca/arcgis/rest/services/CPCAD/CPCAD_Areas_en/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Canadian Protected and Conserved Areas Database (CPCAD)',
+            opacity: 0.6,
+            maxZoom: 15
         });
 
         // Tree Cover / Ecosystems (using OpenStreetMap landscape)
@@ -807,9 +814,9 @@
             protectedActive = !protectedActive;
             this.classList.toggle('active');
             if (protectedActive) {
-                protectedAreas.addTo(map);
+                canadaProtectedAreas.addTo(map);
             } else {
-                map.removeLayer(protectedAreas);
+                map.removeLayer(canadaProtectedAreas);
             }
         });
 
