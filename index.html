@@ -1682,6 +1682,8 @@
             </form>
         </footer>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Esri Leaflet for ArcGIS REST FeatureServer support -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
     
     <script>
         // ========== Map Initialization ==========
@@ -1709,15 +1711,22 @@
         });
 
         // Alternative: Use a GeoJSON approach with Canadian Protected Areas
-        const canadaProtectedAreas = L.tileLayer('https://geoappext.nrcan.gc.ca/arcgis/rest/services/CPCAD/CPCAD_Areas_en/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Canadian Protected and Conserved Areas Database (CPCAD)',
-            opacity: 0.6,
-            maxZoom: 15
+        // WDPA Protected Areas (ArcGIS REST FeatureServer - UNEP-WCMC)
+        // Polygons (Layer 1)
+        const wdpaPolyLayer = L.esri.featureLayer({
+            url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
+            simplifyFactor: 0.5,
+            precision: 5,
+            style: function () {
+                return { color: '#27ae60', weight: 1, fillOpacity: 0.2 };
+            }
         });
-        // NOTE: CPCAD tiles may not load if CORS is not enabled on the NRCAN server.
-        // Ensure map maxZoom does not exceed 15 when this layer is active.
-        canadaProtectedAreas.on('tileerror', function(e) {
-            console.warn('CPCAD tile failed to load:', e);
+        // Points (Layer 0)
+        const wdpaPointLayer = L.esri.featureLayer({
+            url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
+            pointToLayer: function (geojson, latlng) {
+                return L.circleMarker(latlng, { radius: 4, color: '#2980b9', fillOpacity: 0.7 });
+            }
         });
 
         // Tree Cover / Ecosystems (using OpenStreetMap landscape)
@@ -1737,9 +1746,11 @@
             protectedActive = !protectedActive;
             this.classList.toggle('active');
             if (protectedActive) {
-                canadaProtectedAreas.addTo(map);
+                wdpaPolyLayer.addTo(map);
+                wdpaPointLayer.addTo(map);
             } else {
-                map.removeLayer(canadaProtectedAreas);
+                map.removeLayer(wdpaPolyLayer);
+                map.removeLayer(wdpaPointLayer);
             }
         });
 

@@ -1,6 +1,16 @@
 # STILL Website Changelog
 
+## Data Integration Notes
+- Citation for WDPA/WD-OECM data:
+	UNEP-WCMC and IUCN (2026), Protected Planet: The World Database on Protected Areas (WDPA) and World Database on Other Effective Area-based Conservation Measures (WD-OECM) [Online], February 2026, Cambridge, UK: UNEP-WCMC and IUCN. Available at: www.protectedplanet.net.
+
+- Interested in integrating the Global Database on Protected Area Management Effectiveness (GD-PAME) from Protected Planet.
+- Note: Direct GeoJSON download is not available; formats offered are CSV, SHP, File Geodatabase, and ESRI Web Service. Data may need conversion for web mapping use.
+
+
 ## [Unreleased] - Planned Improvements
+
+#### Anxiety to Agency
 
 ### 🧠 Conceptual Visualizations
 
