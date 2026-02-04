@@ -541,74 +541,101 @@
             }
         }
 
-        /* ========== Two-Eyed Seeing Toggle ========== */
+        /* ========== Three-Way Worldview Toggle ========== */
         .worldview-toggle {
             position: fixed;
             bottom: 2rem;
             left: 2rem;
             z-index: 9999;
             background: #fff;
-            border-radius: 50px;
+            border-radius: 12px;
             padding: 0.5rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            flex-direction: column;
+            gap: 0.5rem;
             transition: all 0.5s ease;
         }
 
-        .worldview-toggle .toggle-label {
+        .toggle-header {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7f8c8d;
+            text-align: center;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .toggle-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .toggle-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .toggle-option:hover {
+            background: #f8f9fa;
+        }
+
+        .toggle-option.active {
+            border-color: currentColor;
+        }
+
+        .toggle-option .icon {
+            font-size: 1.1rem;
+        }
+
+        .toggle-option .label {
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            padding: 0 0.5rem;
-            transition: all 0.3s ease;
         }
 
-        .worldview-toggle .label-emissary {
+        .toggle-option.western {
             color: #3498db;
         }
 
-        .worldview-toggle .label-master {
-            color: #27ae60;
+        .toggle-option.western.active {
+            background: rgba(52, 152, 219, 0.1);
         }
 
-        .toggle-switch {
-            position: relative;
-            width: 60px;
-            height: 30px;
-            background: linear-gradient(90deg, #3498db 0%, #3498db 50%, #27ae60 50%, #27ae60 100%);
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .toggle-option.integrated {
+            color: #9b59b6;
         }
 
-        .toggle-switch::before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
-            background: #fff;
-            border-radius: 50%;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        .toggle-option.integrated.active {
+            background: rgba(155, 89, 182, 0.1);
         }
 
-        .toggle-switch.master::before {
-            transform: translateX(30px);
+        .toggle-option.indigenous {
+            color: #8b5a2b;
+        }
+
+        .toggle-option.indigenous.active {
+            background: rgba(139, 90, 43, 0.1);
         }
 
         .toggle-info {
             position: fixed;
-            bottom: 5rem;
+            bottom: 12rem;
             left: 2rem;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 8px;
             padding: 1rem 1.25rem;
-            max-width: 280px;
+            max-width: 300px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
             z-index: 9998;
             opacity: 0;
@@ -633,148 +660,373 @@
         .toggle-info p {
             font-size: 0.8rem;
             color: #7f8c8d;
-            margin: 0;
+            margin: 0 0 0.5rem 0;
             line-height: 1.4;
         }
 
-        /* ========== EMISSARY MODE (Left-Hemisphere) ========== */
-        body.emissary-mode {
-            /* Default mode - analytical, metrics-focused */
+        .toggle-info p:last-child {
+            margin-bottom: 0;
         }
 
-        body.emissary-mode .worldview-toggle {
+        /* ========== WESTERN MODE (Left-Hemisphere / Science) ========== */
+        body.western-mode {
+            background-color: #f0f4f8;
+        }
+
+        body.western-mode .worldview-toggle {
             background: #fff;
         }
 
-        /* Emissary-specific text alternatives */
-        body.emissary-mode .view-master {
+        body.western-mode nav {
+            background-color: #fff;
+        }
+
+        body.western-mode nav a:hover {
+            background-color: #3498db;
+        }
+
+        body.western-mode #home,
+        body.western-mode #resume {
+            background-color: #f0f4f8;
+        }
+
+        body.western-mode #about,
+        body.western-mode #projects {
+            background-color: #fff;
+        }
+
+        body.western-mode .divider {
+            background-color: #3498db;
+        }
+
+        body.western-mode .timeline-item {
+            border-left-color: #3498db;
+        }
+
+        body.western-mode .timeline-item::before {
+            background: #3498db;
+        }
+
+        body.western-mode .timeline-item .org {
+            color: #3498db;
+        }
+
+        body.western-mode .skill-category h4 {
+            color: #3498db;
+        }
+
+        body.western-mode .card-btn {
+            background-color: #3498db;
+        }
+
+        body.western-mode .card-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Western-specific text */
+        body.western-mode .view-indigenous,
+        body.western-mode .view-integrated {
             display: none !important;
         }
 
-        body.emissary-mode .view-emissary {
+        body.western-mode .view-western {
             display: block !important;
         }
 
-        /* ========== MASTER MODE (Right-Hemisphere) ========== */
-        body.master-mode {
+        /* ========== INTEGRATED MODE (Two-Eyed Seeing) ========== */
+        body.integrated-mode {
+            background-color: #faf9f7;
+        }
+
+        body.integrated-mode .worldview-toggle {
+            background: linear-gradient(135deg, #f0f4f8 0%, #f5f0e8 100%);
+        }
+
+        body.integrated-mode nav {
+            background: linear-gradient(90deg, #fff 0%, #faf6f0 100%);
+        }
+
+        body.integrated-mode nav a:hover {
+            background: linear-gradient(135deg, #3498db 0%, #8b5a2b 100%);
+        }
+
+        body.integrated-mode #home,
+        body.integrated-mode #resume {
+            background: linear-gradient(180deg, #f0f4f8 0%, #f5f0e8 100%);
+        }
+
+        body.integrated-mode #about,
+        body.integrated-mode #projects {
+            background: linear-gradient(180deg, #fff 0%, #faf6f0 100%);
+        }
+
+        body.integrated-mode .divider {
+            background: linear-gradient(90deg, #3498db 0%, #9b59b6 50%, #8b5a2b 100%);
+            width: 80px;
+        }
+
+        body.integrated-mode .timeline-item {
+            border-left-color: #9b59b6;
+        }
+
+        body.integrated-mode .timeline-item::before {
+            background: linear-gradient(135deg, #3498db 0%, #8b5a2b 100%);
+        }
+
+        body.integrated-mode .timeline-item .org {
+            color: #9b59b6;
+        }
+
+        body.integrated-mode .skill-category h4 {
+            color: #9b59b6;
+        }
+
+        body.integrated-mode .card-btn {
+            background: linear-gradient(135deg, #3498db 0%, #8b5a2b 100%);
+        }
+
+        body.integrated-mode .card-btn:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #6b4423 100%);
+        }
+
+        body.integrated-mode .stats-panel h4,
+        body.integrated-mode .territory-info .stat-label {
+            color: #9b59b6;
+        }
+
+        body.integrated-mode .territory-info {
+            background: rgba(155, 89, 182, 0.1);
+            border-left-color: #9b59b6;
+        }
+
+        /* Integrated-specific text */
+        body.integrated-mode .view-western,
+        body.integrated-mode .view-indigenous {
+            display: none !important;
+        }
+
+        body.integrated-mode .view-integrated {
+            display: block !important;
+        }
+
+        /* ========== INDIGENOUS MODE (Right-Hemisphere / Traditional) ========== */
+        body.indigenous-mode {
             background-color: #f5f0e8;
         }
 
-        body.master-mode .worldview-toggle {
+        body.indigenous-mode .worldview-toggle {
             background: #f5f0e8;
         }
 
-        /* Master Mode - Warmer, Earth Tones */
-        body.master-mode nav {
+        body.indigenous-mode nav {
             background-color: #f5f0e8;
             box-shadow: 0 2px 10px rgba(139, 90, 43, 0.1);
         }
 
-        body.master-mode nav a:hover {
+        body.indigenous-mode nav a:hover {
             background-color: #8b5a2b;
         }
 
-        body.master-mode #home,
-        body.master-mode #resume {
+        body.indigenous-mode #home,
+        body.indigenous-mode #resume {
             background-color: #f5f0e8;
         }
 
-        body.master-mode #about,
-        body.master-mode #projects {
+        body.indigenous-mode #about,
+        body.indigenous-mode #projects {
             background-color: #faf6f0;
         }
 
-        body.master-mode #dashboard {
+        body.indigenous-mode #dashboard {
             background-color: #3d2914;
         }
 
-        body.master-mode #contact {
+        body.indigenous-mode #contact {
             background-color: #5d4329;
         }
 
-        body.master-mode footer {
+        body.indigenous-mode footer {
             background-color: #2d1f10;
         }
 
-        /* Master Mode - Typography becomes more flowing */
-        body.master-mode h1,
-        body.master-mode h2,
-        body.master-mode h3,
-        body.master-mode h4 {
+        /* Indigenous Mode - Typography becomes more flowing */
+        body.indigenous-mode h1,
+        body.indigenous-mode h2,
+        body.indigenous-mode h3,
+        body.indigenous-mode h4 {
             font-family: 'Merriweather', Georgia, serif;
             letter-spacing: 0;
         }
 
-        body.master-mode p {
+        body.indigenous-mode p {
             font-family: 'Merriweather', Georgia, serif;
             line-height: 1.8;
         }
 
-        /* Master Mode - Accent colors shift to earth tones */
-        body.master-mode .divider {
+        /* Indigenous Mode - Accent colors shift to earth tones */
+        body.indigenous-mode .divider {
             background-color: #8b5a2b;
         }
 
-        body.master-mode .timeline-item {
+        body.indigenous-mode .timeline-item {
             border-left-color: #8b5a2b;
         }
 
-        body.master-mode .timeline-item::before {
+        body.indigenous-mode .timeline-item::before {
             background: #8b5a2b;
         }
 
-        body.master-mode .timeline-item .org {
+        body.indigenous-mode .timeline-item .org {
             color: #8b5a2b;
         }
 
-        body.master-mode .skill-category h4 {
+        body.indigenous-mode .skill-category h4 {
             color: #8b5a2b;
         }
 
-        body.master-mode .card-btn {
+        body.indigenous-mode .card-btn {
             background-color: #8b5a2b;
         }
 
-        body.master-mode .card-btn:hover {
+        body.indigenous-mode .card-btn:hover {
             background-color: #6b4423;
         }
 
-        body.master-mode .layer-btn.active {
+        body.indigenous-mode .layer-btn.active {
             background: #8b5a2b;
             border-color: #8b5a2b;
         }
 
-        body.master-mode .layer-btn:hover {
+        body.indigenous-mode .layer-btn:hover {
             background: rgba(139, 90, 43, 0.3);
             border-color: #8b5a2b;
         }
 
-        body.master-mode .stats-panel h4,
-        body.master-mode .territory-info .stat-label {
+        body.indigenous-mode .stats-panel h4,
+        body.indigenous-mode .territory-info .stat-label {
             color: #c4956a;
         }
 
-        body.master-mode .territory-info {
+        body.indigenous-mode .territory-info {
             background: rgba(139, 90, 43, 0.15);
             border-left-color: #8b5a2b;
         }
 
-        /* Master-specific text alternatives */
-        body.master-mode .view-emissary {
+        /* Indigenous-specific text */
+        body.indigenous-mode .view-western,
+        body.indigenous-mode .view-integrated {
             display: none !important;
         }
 
-        body.master-mode .view-master {
+        body.indigenous-mode .view-indigenous {
             display: block !important;
         }
 
         /* Hidden by default - shown based on mode */
-        .view-master {
+        .view-indigenous,
+        .view-integrated {
             display: none !important;
         }
 
-        .view-emissary {
+        .view-western {
             display: block !important;
+        }
+
+        /* ========== Landscape Visual Banner ========== */
+        .landscape-visual {
+            width: 100%;
+            max-width: 900px;
+            height: 300px;
+            border-radius: 12px;
+            margin: 2.5rem auto 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .landscape-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.8s ease;
+            opacity: 0;
+        }
+
+        .landscape-western {
+            /* Agricultural monoculture - geometric, ordered rows */
+            background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&q=80');
+        }
+
+        .landscape-integrated {
+            /* Mixed landscape - showing both cultivated and wild */
+            background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80');
+        }
+
+        .landscape-indigenous {
+            /* Natural prairie - organic, diverse, flowing */
+            background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80');
+        }
+
+        .landscape-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: #fff;
+            text-align: left;
+        }
+
+        .landscape-overlay h5 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 0.25rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .landscape-overlay p {
+            font-size: 1rem;
+            margin: 0;
+            color: #fff;
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+        }
+
+        /* Western mode - show agriculture */
+        body.western-mode .landscape-western {
+            opacity: 1;
+        }
+
+        /* Integrated mode - show mixed landscape */
+        body.integrated-mode .landscape-integrated {
+            opacity: 1;
+        }
+
+        /* Indigenous mode - show prairie */
+        body.indigenous-mode .landscape-indigenous {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .landscape-visual {
+                height: 200px;
+                margin: 1.5rem auto 0;
+            }
+
+            .landscape-overlay {
+                padding: 1rem;
+            }
+
+            .landscape-overlay p {
+                font-size: 0.9rem;
+            }
         }
 
         /* Transition effects */
@@ -801,17 +1053,30 @@
         }
     </style>
 </head>
-<body class="emissary-mode">
-    <!-- Two-Eyed Seeing Toggle -->
+<body class="integrated-mode">
+    <!-- Three-Way Worldview Toggle -->
     <div class="worldview-toggle" id="worldview-toggle">
-        <span class="toggle-label label-emissary">🔬 Emissary</span>
-        <div class="toggle-switch" id="toggle-switch"></div>
-        <span class="toggle-label label-master">🌿 Master</span>
+        <div class="toggle-header">Worldview</div>
+        <div class="toggle-options">
+            <div class="toggle-option western" data-mode="western">
+                <span class="icon">🔬</span>
+                <span class="label">Western</span>
+            </div>
+            <div class="toggle-option integrated active" data-mode="integrated">
+                <span class="icon">👁️‍🗨️</span>
+                <span class="label">Two-Eyed</span>
+            </div>
+            <div class="toggle-option indigenous" data-mode="indigenous">
+                <span class="icon">🌿</span>
+                <span class="label">Indigenous</span>
+            </div>
+        </div>
     </div>
     <div class="toggle-info">
-        <h5>Two-Eyed Seeing</h5>
-        <p class="view-emissary"><strong>Emissary View:</strong> The analytical left-hemisphere perspective—metrics, data, and measurable outcomes.</p>
-        <p class="view-master"><strong>Master View:</strong> The relational right-hemisphere perspective—context, relationships, and holistic understanding.</p>
+        <h5>Three Ways of Seeing</h5>
+        <p><strong style="color: #3498db;">🔬 Western:</strong> Analytical, metrics-focused, extractive valuation.</p>
+        <p><strong style="color: #9b59b6;">👁️‍🗨️ Two-Eyed Seeing:</strong> Integration of both knowledge systems for the benefit of all.</p>
+        <p><strong style="color: #8b5a2b;">🌿 Indigenous:</strong> Relational, holistic, reciprocal stewardship.</p>
     </div>
 
     <!-- Navigation -->
@@ -835,14 +1100,33 @@
             
             <div class="divider"></div>
             
-            <p class="view-emissary">Advancing Indigenous sovereignty, heterodox economics, and adaptive resource management.</p>
-            <p class="view-master">Nurturing the sacred bond between peoples and their lands through reciprocal stewardship and healing.</p>
+            <p class="view-western">Advancing Indigenous sovereignty, heterodox economics, and adaptive resource management through evidence-based policy frameworks.</p>
+            <p class="view-integrated">Weaving together Indigenous wisdom and Western science to create sustainable futures that honour both the land and its peoples.</p>
+            <p class="view-indigenous">Nurturing the sacred bond between peoples and their lands through reciprocal stewardship, ceremony, and the teachings of our ancestors.</p>
             
-            <div class="tagline view-emissary">
+            <div class="tagline view-western">
                 "Still" on the land. Transforming the future.
             </div>
-            <div class="tagline view-master">
-                "Still" — rooted in place, flowing through time, connected to all relations.
+            <div class="tagline view-integrated">
+                "Still" — seeing with both eyes, walking in two worlds, honouring all relations.
+            </div>
+            <div class="tagline view-indigenous">
+                "Still" — rooted in place, flowing through time, connected to all our relations.
+            </div>
+
+            <!-- Contrasting Landscape Visual -->
+            <div class="landscape-visual">
+                <div class="landscape-img landscape-western"></div>
+                <div class="landscape-img landscape-integrated"></div>
+                <div class="landscape-img landscape-indigenous"></div>
+                <div class="landscape-overlay">
+                    <h5 class="view-western">The Extractive View</h5>
+                    <h5 class="view-integrated">The Integrated View</h5>
+                    <h5 class="view-indigenous">The Relational View</h5>
+                    <p class="view-western">Land as resource: measured, divided, optimized for yield.</p>
+                    <p class="view-integrated">Land as teacher: where Western precision meets Indigenous wisdom.</p>
+                    <p class="view-indigenous">Land as relation: alive, interconnected, home to all beings.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -850,13 +1134,16 @@
     <!-- About Section -->
     <section id="about">
         <div class="section-content">
-            <h2 class="view-emissary">About</h2>
-            <h2 class="view-master">Our Story</h2>
+            <h2 class="view-western">About</h2>
+            <h2 class="view-integrated">About Us</h2>
+            <h2 class="view-indigenous">Our Story</h2>
             <div class="divider"></div>
-            <p class="view-emissary">STILL is dedicated to creating sustainable futures through the integration of Indigenous knowledge systems, innovative economic approaches, and responsible land stewardship.</p>
-            <p class="view-emissary">We believe in building bridges between traditional wisdom and contemporary challenges, fostering solutions that honor both the land and the communities that depend on it.</p>
-            <p class="view-master">We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil.</p>
-            <p class="view-master">In the spirit of Two-Eyed Seeing, we hold Indigenous wisdom in one eye and Western knowledge in the other, using both together for the benefit of all.</p>
+            <p class="view-western">STILL is a research initiative focused on developing evidence-based policy frameworks for Indigenous-led land management. We specialize in IPCA governance, GIS analysis, and resource valuation methodologies.</p>
+            <p class="view-western">Our work bridges academic research with practical implementation, providing measurable outcomes for sustainable land use.</p>
+            <p class="view-integrated">STILL brings together Indigenous knowledge keepers and Western scientists to create holistic approaches to land stewardship. We practice Etuaptmumk (Two-Eyed Seeing)—learning to see from one eye with the strengths of Indigenous ways of knowing, and from the other eye with the strengths of Western ways of knowing, and using both eyes together.</p>
+            <p class="view-integrated">This approach allows us to develop solutions that are both scientifically rigorous and culturally grounded.</p>
+            <p class="view-indigenous">We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil.</p>
+            <p class="view-indigenous">We carry the responsibility passed down through generations: to care for the land so that it may care for those yet to come. All our relations.</p>
         </div>
     </section>
 
@@ -979,33 +1266,41 @@
     <!-- Dashboard Section -->
     <section id="dashboard">
         <div class="section-content dashboard-container">
-            <h2>Field Dashboard</h2>
+            <h2 class="view-western">Field Dashboard</h2>
+            <h2 class="view-integrated">Territory Monitor</h2>
+            <h2 class="view-indigenous">Land & Relations</h2>
             <div class="divider"></div>
-            <p style="color: #95a5a6; margin-bottom: 2rem;">Interactive Territory & Ecosystem Monitor</p>
+            <p class="view-western" style="color: #95a5a6; margin-bottom: 2rem;">Interactive GIS-based Territory & Ecosystem Monitor</p>
+            <p class="view-integrated" style="color: #95a5a6; margin-bottom: 2rem;">Weaving spatial data with Indigenous territory knowledge</p>
+            <p class="view-indigenous" style="color: #95a5a6; margin-bottom: 2rem;">Honouring the lands and peoples who have cared for them since time immemorial</p>
             
             <div class="map-wrapper">
                 <div id="map"></div>
                 
                 <!-- Stats Panel -->
                 <div class="stats-panel">
-                    <h4 class="view-emissary">Location Data</h4>
-                    <h4 class="view-master">Place & Relations</h4>
+                    <h4 class="view-western">Location Data</h4>
+                    <h4 class="view-integrated">Place & Context</h4>
+                    <h4 class="view-indigenous">Where You Stand</h4>
                     
                     <div class="territory-info">
-                        <span class="stat-label view-emissary">Indigenous Territory</span>
-                        <span class="stat-label view-master">Whose Land You Stand Upon</span>
+                        <span class="stat-label view-western">Indigenous Territory</span>
+                        <span class="stat-label view-integrated">Traditional Territory</span>
+                        <span class="stat-label view-indigenous">Whose Land You Are a Guest Upon</span>
                         <span class="stat-value loading" id="territory-name">Locating...</span>
                     </div>
                     
                     <div class="stat-item">
-                        <span class="stat-label view-emissary">Human Development Index</span>
-                        <span class="stat-label view-master">Community Wellbeing</span>
+                        <span class="stat-label view-western">Human Development Index</span>
+                        <span class="stat-label view-integrated">Community Wellbeing</span>
+                        <span class="stat-label view-indigenous">Strength of the People</span>
                         <span class="stat-value loading" id="hdi-value">--</span>
                     </div>
                     
                     <div class="stat-item">
-                        <span class="stat-label view-emissary">Biodiversity Intactness</span>
-                        <span class="stat-label view-master">Health of All Relations</span>
+                        <span class="stat-label view-western">Biodiversity Intactness Index</span>
+                        <span class="stat-label view-integrated">Ecosystem Health</span>
+                        <span class="stat-label view-indigenous">Health of All Our Relations</span>
                         <span class="stat-value loading" id="biodiversity-value">--</span>
                     </div>
                 </div>
@@ -1232,30 +1527,39 @@
             queryNativeLand(lat, lng);
         });
 
-        // ========== Two-Eyed Seeing Toggle ==========
-        const toggleSwitch = document.getElementById('toggle-switch');
+        // ========== Three-Way Worldview Toggle ==========
+        const toggleOptions = document.querySelectorAll('.toggle-option');
         const body = document.body;
+
+        function setWorldviewMode(mode) {
+            // Remove all mode classes
+            body.classList.remove('western-mode', 'integrated-mode', 'indigenous-mode');
+            // Add selected mode
+            body.classList.add(mode + '-mode');
+            
+            // Update toggle UI
+            toggleOptions.forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.dataset.mode === mode) {
+                    opt.classList.add('active');
+                }
+            });
+            
+            // Save preference
+            localStorage.setItem('worldview-mode', mode);
+        }
 
         // Check for saved preference
         const savedMode = localStorage.getItem('worldview-mode');
-        if (savedMode === 'master') {
-            body.classList.remove('emissary-mode');
-            body.classList.add('master-mode');
-            toggleSwitch.classList.add('master');
+        if (savedMode && ['western', 'integrated', 'indigenous'].includes(savedMode)) {
+            setWorldviewMode(savedMode);
         }
 
-        toggleSwitch.addEventListener('click', function() {
-            this.classList.toggle('master');
-            
-            if (this.classList.contains('master')) {
-                body.classList.remove('emissary-mode');
-                body.classList.add('master-mode');
-                localStorage.setItem('worldview-mode', 'master');
-            } else {
-                body.classList.remove('master-mode');
-                body.classList.add('emissary-mode');
-                localStorage.setItem('worldview-mode', 'emissary');
-            }
+        // Add click handlers to each option
+        toggleOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                setWorldviewMode(this.dataset.mode);
+            });
         });
     </script>
 </body>
