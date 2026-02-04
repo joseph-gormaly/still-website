@@ -26,6 +26,135 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
+                                        /* Neomorphism for toggles and controls */
+                                        .worldview-toggle, .layer-btn {
+                                            box-shadow: 8px 8px 24px #e9e5dd, -8px -8px 24px #fff;
+                                            background: var(--color-bg-alt);
+                                            border-radius: 16px;
+                                            border: none;
+                                        }
+                                        .toggle-option {
+                                            box-shadow: 2px 2px 8px #e9e5dd, -2px -2px 8px #fff;
+                                            background: var(--color-bg);
+                                            border-radius: 12px;
+                                            border: none;
+                                            margin: 0 0.5rem;
+                                            padding: 0.6rem 1.2rem;
+                                            transition: box-shadow 0.2s, background 0.2s;
+                                        }
+                                        .toggle-option.active {
+                                            box-shadow: 0 4px 16px #d9cfc1;
+                                            background: var(--color-highlight);
+                                        }
+                                /* Kinetic typography for hero/mission headings */
+                                .kinetic-heading {
+                                    display: inline-block;
+                                    position: relative;
+                                    animation: kineticText 2.5s cubic-bezier(0.4,0,0.2,1) infinite alternate;
+                                }
+                                @keyframes kineticText {
+                                    0% { letter-spacing: -1px; transform: scale(1) rotate(-1deg); }
+                                    30% { letter-spacing: 2px; transform: scale(1.04) rotate(1deg); }
+                                    60% { letter-spacing: 0px; transform: scale(0.98) rotate(-2deg); }
+                                    100% { letter-spacing: 1px; transform: scale(1.02) rotate(2deg); }
+                                }
+                        /* Tactile maximalist dashboard/map UI */
+                        .layer-btn {
+                            background: linear-gradient(135deg, var(--color-accent) 60%, var(--color-highlight) 100%);
+                            color: var(--color-primary);
+                            border: none;
+                            border-radius: 12px;
+                            box-shadow: 0 4px 16px rgba(139, 90, 43, 0.12), 0 1.5px 0 var(--color-bg-alt) inset;
+                            padding: 0.8rem 1.6rem;
+                            font-size: 1.1rem;
+                            font-family: 'Inter', sans-serif;
+                            font-weight: 600;
+                            margin: 0 0.5rem 0.5rem 0;
+                            cursor: pointer;
+                            transition: box-shadow 0.2s, transform 0.2s, background 0.3s;
+                            position: relative;
+                        }
+                        .layer-btn:active {
+                            box-shadow: 0 2px 8px rgba(139, 90, 43, 0.18);
+                            transform: scale(0.97);
+                            background: linear-gradient(135deg, var(--color-highlight) 60%, var(--color-accent) 100%);
+                        }
+                        .layer-btn.active {
+                            background: linear-gradient(135deg, var(--color-primary) 60%, var(--color-secondary) 100%);
+                            color: #fff;
+                            box-shadow: 0 6px 24px rgba(139, 90, 43, 0.18);
+                        }
+
+                        /* Dashboard icon enhancements */
+                        .layer-btn::before {
+                            content: '';
+                            display: inline-block;
+                            width: 28px;
+                            height: 28px;
+                            margin-right: 0.5rem;
+                            vertical-align: middle;
+                            background: radial-gradient(circle at 60% 40%, var(--color-secondary) 60%, var(--color-accent) 100%);
+                            border-radius: 50%;
+                            box-shadow: 0 2px 8px rgba(139, 90, 43, 0.09);
+                        }
+                        .layer-btn#btn-protected::before {
+                            background: radial-gradient(circle at 60% 40%, #8b5a2b 60%, #d9cfc1 100%);
+                        }
+                        .layer-btn#btn-ecosystems::before {
+                            background: radial-gradient(circle at 60% 40%, #a3a380 60%, #d9cfc1 100%);
+                        }
+                        .layer-btn#btn-satellite::before {
+                            background: radial-gradient(circle at 60% 40%, #4b6e3d 60%, #e3ded7 100%);
+                        }
+                /* Organic/handmade heading styles */
+                h1, h2, h3, h4 {
+                    font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+                    font-variant-ligatures: discretionary-ligatures;
+                    letter-spacing: -0.5px;
+                }
+
+                h1 {
+                    font-size: 4rem;
+                    margin-bottom: 0.5rem;
+                    color: var(--color-hero);
+                    font-weight: 700;
+                    text-shadow: 0 2px 8px var(--color-accent);
+                    font-style: italic;
+                    border-bottom: 2px solid var(--color-primary);
+                    padding-bottom: 0.5rem;
+                    background: linear-gradient(90deg, var(--color-hero) 80%, var(--color-highlight) 100%);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+
+                h2 {
+                    font-size: 2.5rem;
+                    margin-bottom: 1.5rem;
+                    color: var(--color-primary);
+                    font-weight: 700;
+                    font-style: italic;
+                    text-shadow: 0 1px 4px var(--color-accent);
+                }
+
+                h3 {
+                    font-size: 1.5rem;
+                    font-weight: 400;
+                    color: var(--color-secondary);
+                    margin-bottom: 2rem;
+                    line-height: 1.4;
+                    font-family: 'Merriweather', Georgia, serif;
+                    font-style: italic;
+                }
+
+                /* Hero section organic illustration (placeholder) */
+                .hero-illustration {
+                    width: 100%;
+                    max-width: 480px;
+                    margin: 2rem auto 1rem auto;
+                    display: block;
+                    filter: drop-shadow(0 4px 16px var(--color-accent));
+                }
         /* ========== CSS Reset & Base ========== */
         * {
             margin: 0;
@@ -37,11 +166,90 @@
         }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
-            background-color: #faf9f7;
-            color: #2c3e50;
-            line-height: 1.6;
+            background-color: #f5f3ef; /* Nature-distilled: unbleached neutral, like limestone/sand */
+            color: #3a2f23; /* Earthy brown, readable and warm */
+            line-height: 1.7;
             opacity: 0;
             animation: fadeInBody 1.2s ease forwards;
+        }
+
+        /* Nature-distilled palette variables */
+        :root {
+            --color-bg: #f5f3ef;
+            --color-bg-alt: #e9e5dd;
+            --color-primary: #8b5a2b; /* Ochre brown */
+            --color-secondary: #a3a380; /* Sage green */
+            --color-accent: #d9cfc1; /* Warm gray */
+            --color-hero: #e3ded7; /* Cloud Dancer (Pantone 11-4201) */
+            --color-text: #3a2f23;
+            --color-link: #4b6e3d; /* Moss green */
+            --color-highlight: #c2b280; /* Sand */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+            color: var(--color-primary);
+            letter-spacing: -1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-hero);
+            font-weight: 700;
+            text-shadow: 0 2px 8px var(--color-accent);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--color-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--color-link);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Neo-minimalist: subtle texture and spacing */
+        .section-content {
+            background: var(--color-bg-alt);
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(139, 90, 43, 0.07);
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-primary);
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        /* Remove pure white backgrounds */
+        #home, #about, #resume, #projects, #dashboard, #contact {
+            background: var(--color-bg);
         }
         @keyframes fadeInBody {
             from { opacity: 0; }
@@ -1598,10 +1806,20 @@
             <p class="view-indigenous" style="color: #95a5a6; margin-bottom: 2rem;">Honouring the lands and peoples who have cared for them since time immemorial</p>
             
             <div class="map-wrapper">
-                <div id="map"></div>
-                
-                <!-- Stats Panel -->
-                <div class="stats-panel">
+                <div id="map" aria-label="Interactive map" tabindex="0"></div>
+                <!-- Progressive Disclosure: TK/BC Labels only shown when overlays active -->
+                <div class="tkbc-labels" id="tkbc-labels" style="margin: 1.5rem 0; display:none;">
+                    <div class="tkbc-label provenance" title="Provenance: Identifies cultural authority">
+                        <span style="font-weight:600;color:#8b5a2b;">TK Label:</span> Provenance
+                    </div>
+                    <div class="tkbc-label protocol" title="Protocol: Outlines access rules (seasonal/gender)">
+                        <span style="font-weight:600;color:#a3a380;">BC Label:</span> Protocol
+                    </div>
+                    <div class="tkbc-label permission" title="Permission: Indicates approved use (non-commercial/outreach)">
+                        <span style="font-weight:600;color:#4b6e3d;">BC Label:</span> Permission
+                    </div>
+                    <div style="font-size:0.95rem;color:#3a2f23;margin-top:0.5rem;">These labels ensure Indigenous data sovereignty and community protocols are respected in all map interactions.</div>
+                </div>
                     <h4 class="view-western">Location Data</h4>
                     <h4 class="view-integrated">Place & Context</h4>
                     <h4 class="view-indigenous">Where You Stand</h4>
@@ -1631,13 +1849,13 @@
             
             <!-- Layer Controls -->
             <div class="layer-controls">
-                <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer">
+                <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer" aria-pressed="false" tabindex="0">
                     🛡️ Protected Areas
                 </button>
-                <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer">
+                <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer" aria-pressed="false" tabindex="0">
                     🌲 Tree Cover / Ecosystems
                 </button>
-                <button class="layer-btn" id="btn-satellite" title="Toggle Satellite imagery">
+                <button class="layer-btn" id="btn-satellite" title="Toggle Satellite imagery" aria-pressed="false" tabindex="0">
                     🛰️ Satellite View
                 </button>
             </div>
@@ -1686,48 +1904,45 @@
     <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
     
     <script>
-        // ========== Map Initialization ==========
-        const map = L.map('map').setView([54.5, -97.5], 5); // Default: Manitoba
 
-        // ========== Basemap Layers ==========
+        // ========== Map Initialization ========== 
+        const map = L.map('map', { preferCanvas: true }).setView([54.5, -97.5], 5); // Default: Manitoba
+
+        // ========== Basemap Layers ========== 
         const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
-            maxZoom: 19
+            maxZoom: 17
         }).addTo(map);
 
         const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri'
+            attribution: 'Tiles &copy; Esri',
+            maxZoom: 17
         });
 
-        // ========== Overlay Layers ==========
-        // Protected Areas - Using ArcGIS REST service (more reliable than WMS)
-        const protectedAreas = L.esri ? L.esri.featureLayer({
-            url: 'https://services5.arcgis.com/Mj0hjvkNtV7NRhA7/arcgis/rest/services/WDPA_v0/FeatureServer/1'
-        }) : L.tileLayer('https://tiles.arcgis.com/tiles/Mj0hjvkNtV7NRhA7/arcgis/rest/services/Protected_Areas_View/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'WDPA - Protected Planet',
-            opacity: 0.7,
-            maxZoom: 12
-        });
-
-        // Alternative: Use a GeoJSON approach with Canadian Protected Areas
-        // WDPA Protected Areas (ArcGIS REST FeatureServer - UNEP-WCMC)
-        // Polygons (Layer 1)
-        const wdpaPolyLayer = L.esri.featureLayer({
-            url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
-            simplifyFactor: 0.5,
-            precision: 5,
-            style: function () {
-                return { color: '#27ae60', weight: 1, fillOpacity: 0.2 };
+        // ========== Overlay Layers ========== 
+        // Protected Areas - Vector Tiles (if available)
+        let wdpaPolyLayer, wdpaPointLayer;
+        function loadProtectedLayers() {
+            if (!wdpaPolyLayer) {
+                wdpaPolyLayer = L.esri.featureLayer({
+                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
+                    simplifyFactor: 0.7,
+                    precision: 4,
+                    style: function () {
+                        return { color: '#27ae60', weight: 1, fillOpacity: 0.18 };
+                    }
+                });
             }
-        });
-        // Points (Layer 0)
-        const wdpaPointLayer = L.esri.featureLayer({
-            url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
-            pointToLayer: function (geojson, latlng) {
-                return L.circleMarker(latlng, { radius: 4, color: '#2980b9', fillOpacity: 0.7 });
+            if (!wdpaPointLayer) {
+                wdpaPointLayer = L.esri.featureLayer({
+                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
+                    pointToLayer: function (geojson, latlng) {
+                        return L.circleMarker(latlng, { radius: 3, color: '#2980b9', fillOpacity: 0.6 });
+                    }
+                });
             }
-        });
+        }
 
         // Tree Cover / Ecosystems (using OpenStreetMap landscape)
         const ecosystems = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
@@ -1736,37 +1951,46 @@
             opacity: 0.7
         });
 
-        // ========== Layer Control State ==========
+        // ========== Layer Control State ========== 
         let protectedActive = false;
         let ecosystemsActive = false;
         let satelliteActive = false;
 
-        // ========== Layer Toggle Buttons ==========
+        // ========== Layer Toggle Buttons ========== 
+        const tkbcLabels = document.getElementById('tkbc-labels');
         document.getElementById('btn-protected').addEventListener('click', function() {
             protectedActive = !protectedActive;
             this.classList.toggle('active');
+            this.setAttribute('aria-pressed', protectedActive);
             if (protectedActive) {
+                loadProtectedLayers();
                 wdpaPolyLayer.addTo(map);
                 wdpaPointLayer.addTo(map);
+                tkbcLabels.style.display = '';
             } else {
-                map.removeLayer(wdpaPolyLayer);
-                map.removeLayer(wdpaPointLayer);
+                if (wdpaPolyLayer) map.removeLayer(wdpaPolyLayer);
+                if (wdpaPointLayer) map.removeLayer(wdpaPointLayer);
+                tkbcLabels.style.display = 'none';
             }
         });
 
         document.getElementById('btn-ecosystems').addEventListener('click', function() {
             ecosystemsActive = !ecosystemsActive;
             this.classList.toggle('active');
+            this.setAttribute('aria-pressed', ecosystemsActive);
             if (ecosystemsActive) {
                 ecosystems.addTo(map);
+                tkbcLabels.style.display = '';
             } else {
                 map.removeLayer(ecosystems);
+                if (!protectedActive) tkbcLabels.style.display = 'none';
             }
         });
 
         document.getElementById('btn-satellite').addEventListener('click', function() {
             satelliteActive = !satelliteActive;
             this.classList.toggle('active');
+            this.setAttribute('aria-pressed', satelliteActive);
             if (satelliteActive) {
                 map.removeLayer(cartoPositron);
                 satellite.addTo(map);
@@ -1796,34 +2020,36 @@
         function queryNativeLand(lat, lng) {
             // Native-Land.ca API
             const url = `https://native-land.ca/api/index.php?maps=territories&position=${lat},${lng}`;
-            
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.length > 0) {
-                        // Get all territory names
-                        const territories = data.map(t => t.properties.Name).join(', ');
-                        updateTerritoryDisplay(territories);
-                        
-                        // Update marker popup
-                        if (userMarker) {
-                            const popupContent = `
-                                <div style="text-align: center; min-width: 200px;">
-                                    <strong style="color: #27ae60;">Your Location</strong><br>
-                                    <small style="color: #7f8c8d;">Traditional territory of:</small><br>
-                                    <strong>${territories}</strong>
-                                </div>
-                            `;
-                            userMarker.setPopupContent(popupContent).openPopup();
+            // Debounce requests
+            if (window._territoryTimeout) clearTimeout(window._territoryTimeout);
+            window._territoryTimeout = setTimeout(() => {
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            // Get all territory names
+                            const territories = data.map(t => t.properties.Name).join(', ');
+                            updateTerritoryDisplay(territories);
+                            // Update marker popup
+                            if (userMarker) {
+                                const popupContent = `
+                                    <div style="text-align: center; min-width: 200px;">
+                                        <strong style="color: #27ae60;">Your Location</strong><br>
+                                        <small style="color: #7f8c8d;">Traditional territory of:</small><br>
+                                        <strong>${territories}</strong>
+                                    </div>
+                                `;
+                                userMarker.setPopupContent(popupContent).openPopup();
+                            }
+                        } else {
+                            updateTerritoryDisplay('Data unavailable');
                         }
-                    } else {
-                        updateTerritoryDisplay('Data unavailable');
-                    }
-                })
-                .catch(error => {
-                    console.error('Native Land API error:', error);
-                    updateTerritoryDisplay('Unable to fetch');
-                });
+                    })
+                    .catch(error => {
+                        console.error('Native Land API error:', error);
+                        updateTerritoryDisplay('Unable to fetch');
+                    });
+            }, 350);
         }
 
         function onLocationFound(e) {

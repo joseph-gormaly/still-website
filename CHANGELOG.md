@@ -1,4 +1,16 @@
 # STILL Website Changelog
+## [Planned: Visual Refresh - feature/visual-refresh]
+
+- Apply nature-distilled color palette and neo-minimalist base styles
+- Refine typography and add organic/handmade elements
+- Add tactile maximalist details to dashboard/map UI
+- Implement kinetic typography for hero/mission sections
+- Introduce neomorphism for toggles and controls
+- Add TK/BC Labels and Indigenous data sovereignty UI
+- Optimize dashboard for vector tiles and performance
+- Refine worldview toggle with segmented control and color cues
+- Progressive disclosure for research/project sections
+- Accessibility and engagement improvements
 
 ## Data Integration Notes
 - Citation for WDPA/WD-OECM data:
