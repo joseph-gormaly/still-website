@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STILL | Sustainable Transformation Initiative for Land & Learning</title>
+    <meta name="description" content="Sustainable Transformation Initiative for Land & Learning (STILL) – Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="STILL | Sustainable Transformation Initiative for Land & Learning">
+    <meta property="og:description" content="Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://still-website.github.io/">
+    <meta property="og:image" content="https://still-website.github.io/og-image.png">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="STILL | Sustainable Transformation Initiative for Land & Learning">
+    <meta name="twitter:description" content="Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <meta name="twitter:image" content="https://still-website.github.io/og-image.png">
+    <!-- Favicon and Apple Touch Icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://still-website.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://still-website.github.io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://still-website.github.io/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
@@ -16,18 +32,30 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
             background-color: #faf9f7;
             color: #2c3e50;
             line-height: 1.6;
+            opacity: 0;
+            animation: fadeInBody 1.2s ease forwards;
         }
-
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        main, section {
+            opacity: 0;
+            animation: fadeInSection 1.2s ease forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes fadeInSection {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         /* ========== Navigation ========== */
         nav {
             position: sticky;
@@ -36,7 +64,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000;
         }
-
         nav ul {
             display: flex;
             justify-content: center;
@@ -47,7 +74,6 @@
             margin: 0 auto;
             gap: 2rem;
         }
-
         nav a {
             text-decoration: none;
             color: #2c3e50;
@@ -56,7 +82,86 @@
             border-radius: 4px;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
+        nav a:hover {
+            background-color: #27ae60;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-nav" aria-label="Skip to main content" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;background:#fff;color:#0077cc;padding:8px;z-index:2000;">Skip to main content</a>
+    <nav aria-label="Main navigation">
+        <ul>
+            <li class="logo" style="margin-right:2rem;">
+                <a href="#home" aria-label="STILL Home">
+                    <img src="https://still-website.github.io/logo-icon.png" alt="STILL Logo" style="height:32px;width:32px;vertical-align:middle;margin-right:8px;">
+                    STILL
+                </a>
+            </li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <meta property="og:image" content="https://still-website.github.io/og-image.png">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="STILL | Sustainable Transformation Initiative for Land & Learning">
+    <meta name="twitter:description" content="Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <meta name="twitter:image" content="https://still-website.github.io/og-image.png">
+    <!-- Favicon and Apple Touch Icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://still-website.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://still-website.github.io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://still-website.github.io/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+        /* ========== CSS Reset & Base ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+            background-color: #faf9f7;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        /* ========== Navigation ========== */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
         nav a:hover {
             background-color: #27ae60;
             color: #fff;
@@ -1555,9 +1660,27 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 STILL - Sustainable Transformation Initiative for Land & Learning. All rights reserved.</p>
-    </footer>
 
     <!-- Leaflet JS -->
+        <footer>
+            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <a href="https://twitter.com/stillinitiative" target="_blank" rel="noopener" aria-label="Twitter" style="margin-right: 1rem;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:24px;height:24px;vertical-align:middle;">
+                </a>
+                <a href="https://facebook.com/stillinitiative" target="_blank" rel="noopener" aria-label="Facebook" style="margin-right: 1rem;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="width:24px;height:24px;vertical-align:middle;">
+                </a>
+                <a href="https://linkedin.com/company/stillinitiative" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" style="width:24px;height:24px;vertical-align:middle;">
+                </a>
+            </div>
+            <form class="newsletter-signup" style="margin-top:2rem;max-width:320px;text-align:left;" aria-label="Newsletter signup">
+                <label for="newsletter-email" style="font-weight:500;">Sign up for our newsletter:</label><br>
+                <input type="email" id="newsletter-email" name="newsletter-email" placeholder="Your email address" required style="width:70%;padding:6px;margin-top:6px;">
+                <button type="submit" style="padding:6px 16px;margin-top:6px;background:#27ae60;color:#fff;border:none;border-radius:4px;cursor:pointer;">Subscribe</button>
+            </form>
+        </footer>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     
     <script>
@@ -1590,6 +1713,11 @@
             attribution: 'Canadian Protected and Conserved Areas Database (CPCAD)',
             opacity: 0.6,
             maxZoom: 15
+        });
+        // NOTE: CPCAD tiles may not load if CORS is not enabled on the NRCAN server.
+        // Ensure map maxZoom does not exceed 15 when this layer is active.
+        canadaProtectedAreas.on('tileerror', function(e) {
+            console.warn('CPCAD tile failed to load:', e);
         });
 
         // Tree Cover / Ecosystems (using OpenStreetMap landscape)
