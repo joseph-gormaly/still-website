@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
         /* ========== CSS Reset & Base ========== */
         * {
@@ -341,6 +343,139 @@
             color: #2c3e50;
         }
 
+        /* ========== Dashboard Section ========== */
+        #dashboard {
+            background-color: #1a252f;
+            color: #fff;
+            min-height: auto;
+            padding: 4rem 2rem;
+        }
+
+        #dashboard h2 {
+            color: #fff;
+        }
+
+        #dashboard .divider {
+            background-color: #27ae60;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+        }
+
+        .map-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        /* Stats Panel */
+        .stats-panel {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(26, 37, 47, 0.95);
+            border-radius: 8px;
+            padding: 1.25rem;
+            min-width: 220px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-panel h4 {
+            color: #27ae60;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stat-item {
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #95a5a6;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .stat-value.loading {
+            color: #7f8c8d;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* Layer Controls */
+        .layer-controls {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .layer-btn {
+            padding: 0.6rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .layer-btn:hover {
+            background: rgba(39, 174, 96, 0.3);
+            border-color: #27ae60;
+        }
+
+        .layer-btn.active {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .territory-info {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(39, 174, 96, 0.15);
+            border-radius: 4px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .territory-info .stat-label {
+            color: #27ae60;
+        }
+
         /* ========== Footer ========== */
         footer {
             background-color: #1a252f;
@@ -388,6 +523,22 @@
             .skill-category {
                 max-width: 100%;
             }
+
+            #map {
+                height: 350px;
+            }
+
+            .stats-panel {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            .layer-controls {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -400,6 +551,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#resume">Resume</a></li>
             <li><a href="#projects">Research Labs</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -546,6 +698,52 @@
         </div>
     </section>
 
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+        <div class="section-content dashboard-container">
+            <h2>Field Dashboard</h2>
+            <div class="divider"></div>
+            <p style="color: #95a5a6; margin-bottom: 2rem;">Interactive Territory & Ecosystem Monitor</p>
+            
+            <div class="map-wrapper">
+                <div id="map"></div>
+                
+                <!-- Stats Panel -->
+                <div class="stats-panel">
+                    <h4>Location Data</h4>
+                    
+                    <div class="territory-info">
+                        <span class="stat-label">Indigenous Territory</span>
+                        <span class="stat-value loading" id="territory-name">Locating...</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-label">Human Development Index</span>
+                        <span class="stat-value loading" id="hdi-value">--</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-label">Biodiversity Intactness</span>
+                        <span class="stat-value loading" id="biodiversity-value">--</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Layer Controls -->
+            <div class="layer-controls">
+                <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer">
+                    🛡️ Protected Areas
+                </button>
+                <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer">
+                    🌲 Tree Cover / Ecosystems
+                </button>
+                <button class="layer-btn" id="btn-satellite" title="Toggle Satellite imagery">
+                    🛰️ Satellite View
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="section-content">
@@ -563,5 +761,187 @@
     <footer>
         <p>&copy; 2026 STILL - Sustainable Transformation Initiative for Land & Learning. All rights reserved.</p>
     </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <script>
+        // ========== Map Initialization ==========
+        const map = L.map('map').setView([54.5, -97.5], 5); // Default: Manitoba
+
+        // ========== Basemap Layers ==========
+        const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        }).addTo(map);
+
+        const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri'
+        });
+
+        // ========== Overlay Layers ==========
+        // Protected Areas (placeholder using World Database on Protected Areas - simplified)
+        const protectedAreas = L.tileLayer.wms('https://data-gis.unep-wcmc.org/server/services/ProtectedSites/WDPA_Latest/MapServer/WMSServer', {
+            layers: '0',
+            format: 'image/png',
+            transparent: true,
+            attribution: 'WDPA - Protected Planet',
+            opacity: 0.6
+        });
+
+        // Tree Cover / Ecosystems (using OpenStreetMap landscape)
+        const ecosystems = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap',
+            maxZoom: 17,
+            opacity: 0.7
+        });
+
+        // ========== Layer Control State ==========
+        let protectedActive = false;
+        let ecosystemsActive = false;
+        let satelliteActive = false;
+
+        // ========== Layer Toggle Buttons ==========
+        document.getElementById('btn-protected').addEventListener('click', function() {
+            protectedActive = !protectedActive;
+            this.classList.toggle('active');
+            if (protectedActive) {
+                protectedAreas.addTo(map);
+            } else {
+                map.removeLayer(protectedAreas);
+            }
+        });
+
+        document.getElementById('btn-ecosystems').addEventListener('click', function() {
+            ecosystemsActive = !ecosystemsActive;
+            this.classList.toggle('active');
+            if (ecosystemsActive) {
+                ecosystems.addTo(map);
+            } else {
+                map.removeLayer(ecosystems);
+            }
+        });
+
+        document.getElementById('btn-satellite').addEventListener('click', function() {
+            satelliteActive = !satelliteActive;
+            this.classList.toggle('active');
+            if (satelliteActive) {
+                map.removeLayer(cartoPositron);
+                satellite.addTo(map);
+            } else {
+                map.removeLayer(satellite);
+                cartoPositron.addTo(map);
+            }
+        });
+
+        // ========== User Location & Native Land API ==========
+        let userMarker = null;
+
+        // Custom marker icon
+        const userIcon = L.divIcon({
+            className: 'user-marker',
+            html: '<div style="background: #27ae60; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
+        });
+
+        function updateTerritoryDisplay(name) {
+            const el = document.getElementById('territory-name');
+            el.textContent = name;
+            el.classList.remove('loading');
+        }
+
+        function queryNativeLand(lat, lng) {
+            // Native-Land.ca API
+            const url = `https://native-land.ca/api/index.php?maps=territories&position=${lat},${lng}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        // Get all territory names
+                        const territories = data.map(t => t.properties.Name).join(', ');
+                        updateTerritoryDisplay(territories);
+                        
+                        // Update marker popup
+                        if (userMarker) {
+                            const popupContent = `
+                                <div style="text-align: center; min-width: 200px;">
+                                    <strong style="color: #27ae60;">Your Location</strong><br>
+                                    <small style="color: #7f8c8d;">Traditional territory of:</small><br>
+                                    <strong>${territories}</strong>
+                                </div>
+                            `;
+                            userMarker.setPopupContent(popupContent).openPopup();
+                        }
+                    } else {
+                        updateTerritoryDisplay('Data unavailable');
+                    }
+                })
+                .catch(error => {
+                    console.error('Native Land API error:', error);
+                    updateTerritoryDisplay('Unable to fetch');
+                });
+        }
+
+        function onLocationFound(e) {
+            const { lat, lng } = e.latlng;
+            
+            // Fly to user location
+            map.flyTo([lat, lng], 10, {
+                duration: 2
+            });
+            
+            // Add marker
+            userMarker = L.marker([lat, lng], { icon: userIcon })
+                .addTo(map)
+                .bindPopup('<div style="text-align: center;"><strong>Your Location</strong><br><small>Fetching territory data...</small></div>')
+                .openPopup();
+            
+            // Query Native Land API
+            queryNativeLand(lat, lng);
+        }
+
+        function onLocationError(e) {
+            console.warn('Geolocation error:', e.message);
+            updateTerritoryDisplay('Location access denied');
+            
+            // Default to Manitoba view
+            map.setView([54.5, -97.5], 6);
+        }
+
+        // Request user location
+        if (navigator.geolocation) {
+            map.locate({ setView: false, maxZoom: 12 });
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+        } else {
+            updateTerritoryDisplay('Geolocation not supported');
+        }
+
+        // ========== Click to Query Territory ==========
+        map.on('click', function(e) {
+            const { lat, lng } = e.latlng;
+            
+            // Remove existing marker
+            if (userMarker) {
+                map.removeLayer(userMarker);
+            }
+            
+            // Add new marker
+            userMarker = L.marker([lat, lng], { icon: userIcon })
+                .addTo(map)
+                .bindPopup('<div style="text-align: center;"><strong>Selected Location</strong><br><small>Fetching territory data...</small></div>')
+                .openPopup();
+            
+            // Update stats panel
+            document.getElementById('territory-name').textContent = 'Searching...';
+            document.getElementById('territory-name').classList.add('loading');
+            
+            // Query for new location
+            queryNativeLand(lat, lng);
+        });
+    </script>
 </body>
 </html>
