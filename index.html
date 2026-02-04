@@ -1051,9 +1051,227 @@
                 max-width: none;
             }
         }
+
+        /* ========== Welcome Modal ========== */
+        .welcome-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .welcome-modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .welcome-modal {
+            background: #fff;
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+
+        .welcome-modal-overlay.hidden .welcome-modal {
+            transform: translateY(30px);
+        }
+
+        .welcome-modal h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-modal .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-modal .intro {
+            font-size: 1rem;
+            color: #34495e;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-options {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome-option {
+            flex: 1;
+            min-width: 200px;
+            max-width: 240px;
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            text-align: center;
+        }
+
+        .welcome-option:hover {
+            transform: translateY(-5px);
+        }
+
+        .welcome-option.western {
+            background: linear-gradient(135deg, #e8f4fc 0%, #d4e9f7 100%);
+        }
+
+        .welcome-option.western:hover {
+            border-color: #3498db;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+        }
+
+        .welcome-option.integrated {
+            background: linear-gradient(135deg, #f3e8fc 0%, #e8d4f7 100%);
+        }
+
+        .welcome-option.integrated:hover {
+            border-color: #9b59b6;
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+        }
+
+        .welcome-option.indigenous {
+            background: linear-gradient(135deg, #f7efe4 0%, #efe0cc 100%);
+        }
+
+        .welcome-option.indigenous:hover {
+            border-color: #8b5a2b;
+            box-shadow: 0 10px 30px rgba(139, 90, 43, 0.3);
+        }
+
+        .welcome-option .icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-option h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .welcome-option.western h3 {
+            color: #3498db;
+        }
+
+        .welcome-option.integrated h3 {
+            color: #9b59b6;
+        }
+
+        .welcome-option.indigenous h3 {
+            color: #8b5a2b;
+        }
+
+        .welcome-option p {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .welcome-footer {
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        .welcome-footer a {
+            color: #9b59b6;
+            text-decoration: none;
+        }
+
+        .welcome-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-modal {
+                padding: 2rem 1.5rem;
+            }
+
+            .welcome-modal h2 {
+                font-size: 1.5rem;
+            }
+
+            .welcome-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .welcome-option {
+                max-width: 100%;
+                padding: 1.5rem 1rem;
+            }
+
+            .welcome-option .icon {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body class="integrated-mode">
+    <!-- Welcome Modal (First Visit) -->
+    <div class="welcome-modal-overlay hidden" id="welcome-modal">
+        <div class="welcome-modal">
+            <h2>Welcome to STILL</h2>
+            <p class="subtitle">Sustainable Transformation Initiative for Land & Learning</p>
+            
+            <p class="intro">
+                This site offers three ways of seeing—each representing a different knowledge system and worldview. 
+                Choose how you'd like to experience our work. You can change this anytime using the toggle in the corner.
+            </p>
+            
+            <div class="welcome-options">
+                <div class="welcome-option western" data-mode="western">
+                    <span class="icon">🔬</span>
+                    <h3>Western Science</h3>
+                    <p>Analytical perspective focused on data, metrics, and evidence-based frameworks.</p>
+                </div>
+                
+                <div class="welcome-option integrated" data-mode="integrated">
+                    <span class="icon">👁️‍🗨️</span>
+                    <h3>Two-Eyed Seeing</h3>
+                    <p>Etuaptmumk—weaving Indigenous wisdom and Western knowledge together for the benefit of all.</p>
+                </div>
+                
+                <div class="welcome-option indigenous" data-mode="indigenous">
+                    <span class="icon">🌿</span>
+                    <h3>Indigenous Worldview</h3>
+                    <p>Relational perspective honouring the sacred bond between peoples, land, and all our relations.</p>
+                </div>
+            </div>
+            
+            <p class="welcome-footer">
+                Based on the Mi'kmaw concept of <a href="https://www.integrativescience.ca/Principles/TwoEyedSeeing/" target="_blank">Etuaptmumk (Two-Eyed Seeing)</a> as shared by Elder Albert Marshall.
+            </p>
+        </div>
+    </div>
+
     <!-- Three-Way Worldview Toggle -->
     <div class="worldview-toggle" id="worldview-toggle">
         <div class="toggle-header">Worldview</div>
@@ -1531,7 +1749,7 @@
         const toggleOptions = document.querySelectorAll('.toggle-option');
         const body = document.body;
 
-        function setWorldviewMode(mode) {
+        function setWorldviewMode(mode, isInitialChoice = false) {
             // Remove all mode classes
             body.classList.remove('western-mode', 'integrated-mode', 'indigenous-mode');
             // Add selected mode
@@ -1547,18 +1765,52 @@
             
             // Save preference
             localStorage.setItem('worldview-mode', mode);
+            
+            // Mark that user has made a choice (for welcome modal)
+            if (isInitialChoice) {
+                localStorage.setItem('worldview-chosen', 'true');
+            }
         }
 
-        // Check for saved preference
+        // ========== Welcome Modal Logic ==========
+        const welcomeModal = document.getElementById('welcome-modal');
+        const welcomeOptions = document.querySelectorAll('.welcome-option');
+        const hasChosenBefore = localStorage.getItem('worldview-chosen');
+
+        // Show modal on first visit
+        if (!hasChosenBefore) {
+            welcomeModal.classList.remove('hidden');
+            // Prevent scrolling while modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Handle welcome modal option clicks
+        welcomeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const mode = this.dataset.mode;
+                setWorldviewMode(mode, true);
+                
+                // Hide modal with animation
+                welcomeModal.classList.add('hidden');
+                document.body.style.overflow = '';
+                
+                // Remove modal from DOM after animation
+                setTimeout(() => {
+                    welcomeModal.style.display = 'none';
+                }, 500);
+            });
+        });
+
+        // Check for saved preference (returning visitors)
         const savedMode = localStorage.getItem('worldview-mode');
         if (savedMode && ['western', 'integrated', 'indigenous'].includes(savedMode)) {
             setWorldviewMode(savedMode);
         }
 
-        // Add click handlers to each option
+        // Add click handlers to corner toggle
         toggleOptions.forEach(option => {
             option.addEventListener('click', function() {
-                setWorldviewMode(this.dataset.mode);
+                setWorldviewMode(this.dataset.mode, true);
             });
         });
     </script>
