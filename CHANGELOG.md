@@ -21,6 +21,8 @@
 
 
 ## [Unreleased] - Planned Improvements
+### Deployment
+- [x] Under construction page set as live landing page (index.html); main site backed up as main-site.html
 ### Assets
 - [x] Created assets folder and added an image for future use
 

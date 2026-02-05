@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STILL | Sustainable Transformation Initiative for Land & Learning</title>
+    <meta name="description" content="Sustainable Transformation Initiative for Land & Learning (STILL) – Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="STILL | Sustainable Transformation Initiative for Land & Learning">
+    <meta property="og:description" content="Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://still-website.github.io/">
+    <meta property="og:image" content="https://still-website.github.io/og-image.png">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="STILL | Sustainable Transformation Initiative for Land & Learning">
+    <meta name="twitter:description" content="Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <meta name="twitter:image" content="https://still-website.github.io/og-image.png">
+    <!-- Favicon and Apple Touch Icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://still-website.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://still-website.github.io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://still-website.github.io/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+                                        /* Neomorphism for toggles and controls */
+                                        .worldview-toggle, .layer-btn {
+                                            box-shadow: 8px 8px 24px #e9e5dd, -8px -8px 24px #fff;
+                                            background: var(--color-bg-alt);
+                                            border-radius: 16px;
+                                            border: none;
+                                        }
+                                        .toggle-option {
+                                            box-shadow: 2px 2px 8px #e9e5dd, -2px -2px 8px #fff;
+                                            background: var(--color-bg);
+                                            border-radius: 12px;
+                                            border: none;
+                                            margin: 0 0.5rem;
+                                            padding: 0.6rem 1.2rem;
+                                            transition: box-shadow 0.2s, background 0.2s;
+                                        }
+                                        .toggle-option.active {
+                                            box-shadow: 0 4px 16px #d9cfc1;
+                                            background: var(--color-highlight);
+                                        }
+                                /* Kinetic typography for hero/mission headings */
+                                .kinetic-heading {
+                                    display: inline-block;
+                                    position: relative;
+                                    animation: kineticText 2.5s cubic-bezier(0.4,0,0.2,1) infinite alternate;
+                                }
+                                @keyframes kineticText {
+                                    0% { letter-spacing: -1px; transform: scale(1) rotate(-1deg); }
+                                    30% { letter-spacing: 2px; transform: scale(1.04) rotate(1deg); }
+                                    60% { letter-spacing: 0px; transform: scale(0.98) rotate(-2deg); }
+                                    100% { letter-spacing: 1px; transform: scale(1.02) rotate(2deg); }
+                                }
+                        /* Tactile maximalist dashboard/map UI */
+                        .layer-btn {
+                            background: linear-gradient(135deg, var(--color-accent) 60%, var(--color-highlight) 100%);
+                            color: var(--color-primary);
+                            border: none;
+                            border-radius: 12px;
+                            box-shadow: 0 4px 16px rgba(139, 90, 43, 0.12), 0 1.5px 0 var(--color-bg-alt) inset;
+                            padding: 0.8rem 1.6rem;
+                            font-size: 1.1rem;
+                            font-family: 'Inter', sans-serif;
+                            font-weight: 600;
+                            margin: 0 0.5rem 0.5rem 0;
+                            cursor: pointer;
+                            transition: box-shadow 0.2s, transform 0.2s, background 0.3s;
+                            position: relative;
+                        }
+                        .layer-btn:active {
+                            box-shadow: 0 2px 8px rgba(139, 90, 43, 0.18);
+                            transform: scale(0.97);
+                            background: linear-gradient(135deg, var(--color-highlight) 60%, var(--color-accent) 100%);
+                        }
+                        .layer-btn.active {
+                            background: linear-gradient(135deg, var(--color-primary) 60%, var(--color-secondary) 100%);
+                            color: #fff;
+                            box-shadow: 0 6px 24px rgba(139, 90, 43, 0.18);
+                        }
+
+                        /* Dashboard icon enhancements */
+                        .layer-btn::before {
+                            content: '';
+                            display: inline-block;
+                            width: 28px;
+                            height: 28px;
+                            margin-right: 0.5rem;
+                            vertical-align: middle;
+                            background: radial-gradient(circle at 60% 40%, var(--color-secondary) 60%, var(--color-accent) 100%);
+                            border-radius: 50%;
+                            box-shadow: 0 2px 8px rgba(139, 90, 43, 0.09);
+                        }
+                        .layer-btn#btn-protected::before {
+                            background: radial-gradient(circle at 60% 40%, #8b5a2b 60%, #d9cfc1 100%);
+                        }
+                        .layer-btn#btn-ecosystems::before {
+                            background: radial-gradient(circle at 60% 40%, #a3a380 60%, #d9cfc1 100%);
+                        }
+                        .layer-btn#btn-satellite::before {
+                            background: radial-gradient(circle at 60% 40%, #4b6e3d 60%, #e3ded7 100%);
+                        }
+                /* Organic/handmade heading styles */
+                h1, h2, h3, h4 {
+                    font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+                    font-variant-ligatures: discretionary-ligatures;
+                    letter-spacing: -0.5px;
+                }
+
+                h1 {
+                    font-size: 4rem;
+                    margin-bottom: 0.5rem;
+                    color: var(--color-hero);
+                    font-weight: 700;
+                    text-shadow: 0 2px 8px var(--color-accent);
+                    font-style: italic;
+                    border-bottom: 2px solid var(--color-primary);
+                    padding-bottom: 0.5rem;
+                    background: linear-gradient(90deg, var(--color-hero) 80%, var(--color-highlight) 100%);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                }
+
+                h2 {
+                    font-size: 2.5rem;
+                    margin-bottom: 1.5rem;
+                    color: var(--color-primary);
+                    font-weight: 700;
+                    font-style: italic;
+                    text-shadow: 0 1px 4px var(--color-accent);
+                }
+
+                h3 {
+                    font-size: 1.5rem;
+                    font-weight: 400;
+                    color: var(--color-secondary);
+                    margin-bottom: 2rem;
+                    line-height: 1.4;
+                    font-family: 'Merriweather', Georgia, serif;
+                    font-style: italic;
+                }
+
+                /* Hero section organic illustration (placeholder) */
+                .hero-illustration {
+                    width: 100%;
+                    max-width: 480px;
+                    margin: 2rem auto 1rem auto;
+                    display: block;
+                    filter: drop-shadow(0 4px 16px var(--color-accent));
+                }
+        /* ========== CSS Reset & Base ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+            background-color: #f5f3ef; /* Nature-distilled: unbleached neutral, like limestone/sand */
+            color: #3a2f23; /* Earthy brown, readable and warm */
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeInBody 1.2s ease forwards;
+        }
+
+        /* Nature-distilled palette variables */
+        :root {
+            --color-bg: #f5f3ef;
+            --color-bg-alt: #e9e5dd;
+            --color-primary: #8b5a2b; /* Ochre brown */
+            --color-secondary: #a3a380; /* Sage green */
+            --color-accent: #d9cfc1; /* Warm gray */
+            --color-hero: #e3ded7; /* Cloud Dancer (Pantone 11-4201) */
+            --color-text: #3a2f23;
+            --color-link: #4b6e3d; /* Moss green */
+            --color-highlight: #c2b280; /* Sand */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+            color: var(--color-primary);
+            letter-spacing: -1px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-hero);
+            font-weight: 700;
+            text-shadow: 0 2px 8px var(--color-accent);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--color-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--color-link);
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+        a:hover {
+            color: var(--color-primary);
+        }
+
+        /* Neo-minimalist: subtle texture and spacing */
+        .section-content {
+            background: var(--color-bg-alt);
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(139, 90, 43, 0.07);
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-primary);
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        /* Remove pure white backgrounds */
+        #home, #about, #resume, #projects, #dashboard, #contact {
+            background: var(--color-bg);
+        }
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        main, section {
+            opacity: 0;
+            animation: fadeInSection 1.2s ease forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes fadeInSection {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* ========== Navigation ========== */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #27ae60;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-nav" aria-label="Skip to main content" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;background:#fff;color:#0077cc;padding:8px;z-index:2000;">Skip to main content</a>
+    <nav aria-label="Main navigation">
+        <ul>
+            <li class="logo" style="margin-right:2rem;">
+                <a href="#home" aria-label="STILL Home">
+                    <img src="https://still-website.github.io/logo-icon.png" alt="STILL Logo" style="height:32px;width:32px;vertical-align:middle;margin-right:8px;">
+                    STILL
+                </a>
+            </li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <meta property="og:image" content="https://still-website.github.io/og-image.png">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="STILL | Sustainable Transformation Initiative for Land & Learning">
+    <meta name="twitter:description" content="Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
+    <meta name="twitter:image" content="https://still-website.github.io/og-image.png">
+    <!-- Favicon and Apple Touch Icon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://still-website.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://still-website.github.io/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://still-website.github.io/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+        /* ========== CSS Reset & Base ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+            background-color: #faf9f7;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        /* ========== Navigation ========== */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #27ae60;
+            color: #fff;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -1px;
+            margin-right: auto;
+        }
+
+        /* ========== Sections ========== */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+
+        .section-content {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ========== Section Alternating Colors ========== */
+        #home {
+            background-color: #faf9f7;
+        }
+
+        #about {
+            background-color: #fff;
+        }
+
+        #resume {
+            background-color: #faf9f7;
+        }
+
+        #projects {
+            background-color: #fff;
+        }
+
+        #contact {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+
+        #contact h2, #contact p {
+            color: #fff;
+        }
+
+        /* ========== Typography ========== */
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: #34495e;
+            margin-bottom: 1rem;
+        }
+
+        /* ========== Components ========== */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background-color: #27ae60;
+            margin: 2rem auto;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: #95a5a6;
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        /* ========== Cards Grid ========== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            max-width: 900px;
+        }
+
+        .section-intro {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #2c3e50;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #7f8c8d;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #27ae60;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .card-btn:hover {
+            background-color: #1e8449;
+        }
+
+        /* ========== Timeline (Resume) ========== */
+        .timeline {
+            text-align: left;
+            max-width: 600px;
+            margin: 2rem auto 0;
+        }
+
+        .timeline-item {
+            padding-left: 2rem;
+            border-left: 2px solid #27ae60;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #27ae60;
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 0;
+        }
+
+        .timeline-item h4 {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-item .date {
+            font-size: 0.9rem;
+            color: #95a5a6;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+
+        .timeline-item .org {
+            font-size: 0.95rem;
+            color: #27ae60;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .resume-intro {
+            font-size: 1.15rem;
+            color: #34495e;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-heading {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========== Skills Grid ========== */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .skill-category {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            flex: 1 1 200px;
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .skill-category h4 {
+            font-size: 1rem;
+            color: #27ae60;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-category p {
+            font-size: 0.95rem;
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        /* ========== Contact Form ========== */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #fff;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: inline-block;
+        }
+
+        .contact-link:hover {
+            background-color: #fff;
+            color: #2c3e50;
+        }
+
+        /* ========== Dashboard Section ========== */
+        #dashboard {
+            background-color: #1a252f;
+            color: #fff;
+            min-height: auto;
+            padding: 4rem 2rem;
+        }
+
+        #dashboard h2 {
+            color: #fff;
+        }
+
+        #dashboard .divider {
+            background-color: #27ae60;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+        }
+
+        .map-wrapper {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        /* Stats Panel */
+        .stats-panel {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(26, 37, 47, 0.95);
+            border-radius: 8px;
+            padding: 1.25rem;
+            min-width: 220px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-panel h4 {
+            color: #27ae60;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .stat-item {
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #95a5a6;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .stat-value.loading {
+            color: #7f8c8d;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* Layer Controls */
+        .layer-controls {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .layer-btn {
+            padding: 0.6rem 1rem;
+            background: #f8f9fa;
+            border: 2px solid #a3a380;
+            color: #3a2f23;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            margin: 0 0.5rem 0.5rem 0;
+            transition: box-shadow 0.2s, transform 0.2s, background 0.3s, border-color 0.2s;
+            outline: none;
+        }
+        .layer-btn:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px #3498db33;
+        /* ...existing code... */
+        }
+
+        .layer-btn:hover {
+            background: rgba(39, 174, 96, 0.3);
+            border-color: #27ae60;
+        }
+
+        .layer-btn.active {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+
+        .territory-info {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: rgba(39, 174, 96, 0.15);
+            border-radius: 4px;
+            border-left: 3px solid #27ae60;
+        }
+
+        .territory-info .stat-label {
+            color: #27ae60;
+        }
+
+        /* ========== Footer ========== */
+        footer {
+            background-color: #1a252f;
+            color: #95a5a6;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            nav .logo {
+                margin-right: 0;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .skill-category {
+                max-width: 100%;
+            }
+
+            #map {
+                height: 350px;
+            }
+
+            .stats-panel {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            .layer-controls {
+                flex-direction: column;
+            }
+        }
+
+        /* ========== Three-Way Worldview Toggle ========== */
+        .worldview-toggle {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 9999;
+            background: #fff;
+            border-radius: 16px;
+            padding: 0.5rem 0.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.5s ease;
+            border: 1.5px solid #e9e5dd;
+        }
+        .worldview-toggle.segmented .toggle-options {
+            display: flex;
+            flex-direction: row;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+        .worldview-toggle.segmented .toggle-option {
+            border-radius: 16px;
+            border: 2px solid transparent;
+            background: #f8f9fa;
+            box-shadow: 0 2px 8px #e9e5dd, -2px -2px 8px #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.7rem 1.4rem;
+            margin: 0;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+            outline: none;
+        }
+        .worldview-toggle.segmented .toggle-option.active {
+            background: linear-gradient(90deg, #e3ded7 80%, #c2b280 100%);
+            border-color: #a3a380;
+            box-shadow: 0 4px 16px #d9cfc1;
+        }
+        .worldview-toggle.segmented .toggle-option.western.active {
+            background: linear-gradient(90deg, #3498db 60%, #e3ded7 100%);
+            border-color: #3498db;
+            color: #3498db;
+        }
+        .worldview-toggle.segmented .toggle-option.integrated.active {
+            background: linear-gradient(90deg, #9b59b6 60%, #e3ded7 100%);
+            border-color: #9b59b6;
+            color: #9b59b6;
+        }
+        .worldview-toggle.segmented .toggle-option.indigenous.active {
+            background: linear-gradient(90deg, #8b5a2b 60%, #e3ded7 100%);
+            border-color: #8b5a2b;
+            color: #8b5a2b;
+        }
+
+        .toggle-header {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7f8c8d;
+            text-align: center;
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .toggle-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .toggle-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            outline: none;
+        }
+        .toggle-option:focus {
+            border-color: #9b59b6;
+            box-shadow: 0 0 0 2px #9b59b633;
+        /* ...existing code... */
+        }
+
+        .toggle-option:hover {
+            background: #f8f9fa;
+        }
+
+        .toggle-option.active {
+            border-color: currentColor;
+        }
+
+        .toggle-option .icon {
+            font-size: 1.1rem;
+        }
+
+        .toggle-option .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle-option.western {
+            color: #3498db;
+        }
+
+        .toggle-option.western.active {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .toggle-option.integrated {
+            color: #9b59b6;
+        }
+
+        .toggle-option.integrated.active {
+            background: rgba(155, 89, 182, 0.1);
+        }
+
+        .toggle-option.indigenous {
+            color: #8b5a2b;
+        }
+
+        .toggle-option.indigenous.active {
+            background: rgba(139, 90, 43, 0.1);
+        }
+
+        .toggle-info {
+            position: fixed;
+            bottom: 12rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            max-width: 300px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 9998;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .worldview-toggle:hover + .toggle-info,
+        .toggle-info:hover {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .toggle-info h5 {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .toggle-info p {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.4;
+        }
+
+        .toggle-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== WESTERN MODE (Left-Hemisphere / Science) ========== */
+        body.western-mode {
+            background-color: #f0f4f8;
+        }
+
+        body.western-mode .worldview-toggle {
+            background: #fff;
+        }
+
+        body.western-mode nav {
+            background-color: #fff;
+        }
+
+        body.western-mode nav a:hover {
+            background-color: #3498db;
+        }
+
+        body.western-mode #home,
+        body.western-mode #resume {
+            background-color: #f0f4f8;
+        }
+
+        body.western-mode #about,
+        body.western-mode #projects {
+            background-color: #fff;
+        }
+
+        body.western-mode .divider {
+            background-color: #3498db;
+        }
+
+        body.western-mode .timeline-item {
+            border-left-color: #3498db;
+        }
+
+        body.western-mode .timeline-item::before {
+            background: #3498db;
+        }
+
+        body.western-mode .timeline-item .org {
+            color: #3498db;
+        }
+
+        body.western-mode .skill-category h4 {
+            color: #3498db;
+        }
+
+        body.western-mode .card-btn {
+            background-color: #3498db;
+        }
+
+        body.western-mode .card-btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Western-specific text */
+        body.western-mode .view-indigenous,
+        body.western-mode .view-integrated {
+            display: none !important;
+        }
+
+        body.western-mode .view-western {
+            display: block !important;
+        }
+
+        /* ========== INTEGRATED MODE (Two-Eyed Seeing) ========== */
+        body.integrated-mode {
+            background-color: #faf9f7;
+        }
+
+        body.integrated-mode .worldview-toggle {
+            background: linear-gradient(135deg, #f0f4f8 0%, #f5f0e8 100%);
+        }
+
+        body.integrated-mode nav {
+            background: linear-gradient(90deg, #fff 0%, #faf6f0 100%);
+        }
+
+        body.integrated-mode nav a:hover {
+            background: linear-gradient(135deg, #3498db 0%, #8b5a2b 100%);
+        }
+
+        body.integrated-mode #home,
+        body.integrated-mode #resume {
+            background: linear-gradient(180deg, #f0f4f8 0%, #f5f0e8 100%);
+        }
+
+        body.integrated-mode #about,
+        body.integrated-mode #projects {
+            background: linear-gradient(180deg, #fff 0%, #faf6f0 100%);
+        }
+
+        body.integrated-mode .divider {
+            background: linear-gradient(90deg, #3498db 0%, #9b59b6 50%, #8b5a2b 100%);
+            width: 80px;
+        }
+
+        body.integrated-mode .timeline-item {
+            border-left-color: #9b59b6;
+        }
+
+        body.integrated-mode .timeline-item::before {
+            background: linear-gradient(135deg, #3498db 0%, #8b5a2b 100%);
+        }
+
+        body.integrated-mode .timeline-item .org {
+            color: #9b59b6;
+        }
+
+        body.integrated-mode .skill-category h4 {
+            color: #9b59b6;
+        }
+
+        body.integrated-mode .card-btn {
+            background: linear-gradient(135deg, #3498db 0%, #8b5a2b 100%);
+        }
+
+        body.integrated-mode .card-btn:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #6b4423 100%);
+        }
+
+        body.integrated-mode .stats-panel h4,
+        body.integrated-mode .territory-info .stat-label {
+            color: #9b59b6;
+        }
+
+        body.integrated-mode .territory-info {
+            background: rgba(155, 89, 182, 0.1);
+            border-left-color: #9b59b6;
+        }
+
+        /* Integrated-specific text */
+        body.integrated-mode .view-western,
+        body.integrated-mode .view-indigenous {
+            display: none !important;
+        }
+
+        body.integrated-mode .view-integrated {
+            display: block !important;
+        }
+
+        /* ========== INDIGENOUS MODE (Right-Hemisphere / Traditional) ========== */
+        body.indigenous-mode {
+            background-color: #f5f0e8;
+        }
+
+        body.indigenous-mode .worldview-toggle {
+            background: #f5f0e8;
+        }
+
+        body.indigenous-mode nav {
+            background-color: #f5f0e8;
+            box-shadow: 0 2px 10px rgba(139, 90, 43, 0.1);
+        }
+
+        body.indigenous-mode nav a:hover {
+            background-color: #8b5a2b;
+        }
+
+        body.indigenous-mode #home,
+        body.indigenous-mode #resume {
+            background-color: #f5f0e8;
+        }
+
+        body.indigenous-mode #about,
+        body.indigenous-mode #projects {
+            background-color: #faf6f0;
+        }
+
+        body.indigenous-mode #dashboard {
+            background-color: #3d2914;
+        }
+
+        body.indigenous-mode #contact {
+            background-color: #5d4329;
+        }
+
+        body.indigenous-mode footer {
+            background-color: #2d1f10;
+        }
+
+        /* Indigenous Mode - Typography becomes more flowing */
+        body.indigenous-mode h1,
+        body.indigenous-mode h2,
+        body.indigenous-mode h3,
+        body.indigenous-mode h4 {
+            font-family: 'Merriweather', Georgia, serif;
+            letter-spacing: 0;
+        }
+
+        body.indigenous-mode p {
+            font-family: 'Merriweather', Georgia, serif;
+            line-height: 1.8;
+        }
+
+        /* Indigenous Mode - Accent colors shift to earth tones */
+        body.indigenous-mode .divider {
+            background-color: #8b5a2b;
+        }
+
+        body.indigenous-mode .timeline-item {
+            border-left-color: #8b5a2b;
+        }
+
+        body.indigenous-mode .timeline-item::before {
+            background: #8b5a2b;
+        }
+
+        body.indigenous-mode .timeline-item .org {
+            color: #8b5a2b;
+        }
+
+        body.indigenous-mode .skill-category h4 {
+            color: #8b5a2b;
+        }
+
+        body.indigenous-mode .card-btn {
+            background-color: #8b5a2b;
+        }
+
+        body.indigenous-mode .card-btn:hover {
+            background-color: #6b4423;
+        }
+
+        body.indigenous-mode .layer-btn.active {
+            background: #8b5a2b;
+            border-color: #8b5a2b;
+        }
+
+        body.indigenous-mode .layer-btn:hover {
+            background: rgba(139, 90, 43, 0.3);
+            border-color: #8b5a2b;
+        }
+
+        body.indigenous-mode .stats-panel h4,
+        body.indigenous-mode .territory-info .stat-label {
+            color: #c4956a;
+        }
+
+        body.indigenous-mode .territory-info {
+            background: rgba(139, 90, 43, 0.15);
+            border-left-color: #8b5a2b;
+        }
+
+        /* Indigenous-specific text */
+        body.indigenous-mode .view-western,
+        body.indigenous-mode .view-integrated {
+            display: none !important;
+        }
+
+        body.indigenous-mode .view-indigenous {
+            display: block !important;
+        }
+
+        /* Hidden by default - shown based on mode */
+        .view-indigenous,
+        .view-integrated {
+            display: none !important;
+        }
+
+        .view-western {
+            display: block !important;
+        }
+
+        /* ========== Landscape Visual Banner ========== */
+        .landscape-visual {
+            width: 100%;
+            max-width: 900px;
+            height: 300px;
+            border-radius: 12px;
+            margin: 2.5rem auto 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .landscape-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.8s ease;
+            opacity: 0;
+        }
+
+        .landscape-western {
+            /* Agricultural monoculture - geometric, ordered rows */
+            background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&q=80');
+        }
+
+        .landscape-integrated {
+            /* Mixed landscape - showing both cultivated and wild */
+            background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1200&q=80');
+        }
+
+        .landscape-indigenous {
+            /* Natural prairie - organic, diverse, flowing */
+            background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80');
+        }
+
+        .landscape-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: #fff;
+            text-align: left;
+        }
+
+        .landscape-overlay h5 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            margin-bottom: 0.25rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .landscape-overlay p {
+            font-size: 1rem;
+            margin: 0;
+            color: #fff;
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+        }
+
+        /* Western mode - show agriculture */
+        body.western-mode .landscape-western {
+            opacity: 1;
+        }
+
+        /* Integrated mode - show mixed landscape */
+        body.integrated-mode .landscape-integrated {
+            opacity: 1;
+        }
+
+        /* Indigenous mode - show prairie */
+        body.indigenous-mode .landscape-indigenous {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .landscape-visual {
+                height: 200px;
+                margin: 1.5rem auto 0;
+            }
+
+            .landscape-overlay {
+                padding: 1rem;
+            }
+
+            .landscape-overlay p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Transition effects */
+        body, nav, section, .card, .divider, .timeline-item, footer {
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .worldview-toggle {
+                bottom: 1rem;
+                left: 1rem;
+                padding: 0.4rem;
+            }
+
+            .worldview-toggle .toggle-label {
+                display: none;
+            }
+
+            .toggle-info {
+                left: 1rem;
+                right: 1rem;
+                max-width: none;
+            }
+        }
+
+        /* ========== Welcome Modal ========== */
+        .welcome-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .welcome-modal-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .welcome-modal {
+            background: #fff;
+            border-radius: 16px;
+            max-width: 800px;
+            width: 100%;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(0);
+            transition: transform 0.5s ease;
+        }
+
+        .welcome-modal-overlay.hidden .welcome-modal {
+            transform: translateY(30px);
+        }
+
+        .welcome-modal h2 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-modal .subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-modal .intro {
+            font-size: 1rem;
+            color: #34495e;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .welcome-options {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .welcome-option {
+            flex: 1;
+            min-width: 200px;
+            max-width: 240px;
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            text-align: center;
+        }
+
+        .welcome-option:hover {
+            transform: translateY(-5px);
+        }
+
+        .welcome-option.western {
+            background: linear-gradient(135deg, #e8f4fc 0%, #d4e9f7 100%);
+        }
+
+        .welcome-option.western:hover {
+            border-color: #3498db;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+        }
+
+        .welcome-option.integrated {
+            background: linear-gradient(135deg, #f3e8fc 0%, #e8d4f7 100%);
+        }
+
+        .welcome-option.integrated:hover {
+            border-color: #9b59b6;
+            box-shadow: 0 10px 30px rgba(155, 89, 182, 0.3);
+        }
+
+        .welcome-option.indigenous {
+            background: linear-gradient(135deg, #f7efe4 0%, #efe0cc 100%);
+        }
+
+        .welcome-option.indigenous:hover {
+            border-color: #8b5a2b;
+            box-shadow: 0 10px 30px rgba(139, 90, 43, 0.3);
+        }
+
+        .welcome-option .icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-option h3 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .welcome-option.western h3 {
+            color: #3498db;
+        }
+
+        .welcome-option.integrated h3 {
+            color: #9b59b6;
+        }
+
+        .welcome-option.indigenous h3 {
+            color: #8b5a2b;
+        }
+
+        .welcome-option p {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .welcome-footer {
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: #95a5a6;
+        }
+
+        .welcome-footer a {
+            color: #9b59b6;
+            text-decoration: none;
+        }
+
+        .welcome-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-modal {
+                padding: 2rem 1.5rem;
+            }
+
+            .welcome-modal h2 {
+                font-size: 1.5rem;
+            }
+
+            .welcome-options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .welcome-option {
+                max-width: 100%;
+                padding: 1.5rem 1rem;
+            }
+
+            .welcome-option .icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body class="integrated-mode">
+    <!-- Welcome Modal (First Visit) -->
+    <div class="welcome-modal-overlay hidden" id="welcome-modal">
+        <div class="welcome-modal">
+            <h2>Welcome to STILL</h2>
+            <p class="subtitle">Sustainable Transformation Initiative for Land & Learning</p>
+            
+            <p class="intro">
+                This site offers three ways of seeing—each representing a different knowledge system and worldview. 
+                Choose how you'd like to experience our work. You can change this anytime using the toggle in the corner.
+            </p>
+            
+            <div class="welcome-options">
+                <div class="welcome-option western" data-mode="western">
+                    <span class="icon">🔬</span>
+                    <h3>Western Science</h3>
+                    <p>Analytical perspective focused on data, metrics, and evidence-based frameworks.</p>
+                </div>
+                
+                <div class="welcome-option integrated" data-mode="integrated">
+                    <span class="icon">👁️‍🗨️</span>
+                    <h3>Two-Eyed Seeing</h3>
+                    <p>Etuaptmumk—weaving Indigenous wisdom and Western knowledge together for the benefit of all.</p>
+                </div>
+                
+                <div class="welcome-option indigenous" data-mode="indigenous">
+                    <span class="icon">🌿</span>
+                    <h3>Indigenous Worldview</h3>
+                    <p>Relational perspective honouring the sacred bond between peoples, land, and all our relations.</p>
+                </div>
+            </div>
+            
+            <p class="welcome-footer">
+                Based on the Mi'kmaw concept of <a href="https://www.integrativescience.ca/Principles/TwoEyedSeeing/" target="_blank">Etuaptmumk (Two-Eyed Seeing)</a> as shared by Elder Albert Marshall.
+            </p>
+        </div>
+    </div>
+
+    <!-- Three-Way Worldview Toggle -->
+    <div class="worldview-toggle segmented" id="worldview-toggle" role="group" aria-label="Worldview selector">
+        <div class="toggle-header">Worldview</div>
+        <div class="toggle-options" style="flex-direction: row; gap: 0.5rem;">
+            <button class="toggle-option western" data-mode="western" aria-label="Western Science" aria-pressed="false" tabindex="0">
+                <span class="icon">🔬</span>
+                <span class="label">Western</span>
+            </button>
+            <button class="toggle-option integrated active" data-mode="integrated" aria-label="Two-Eyed Seeing" aria-pressed="true" tabindex="0">
+                <span class="icon">👁️‍🗨️</span>
+                <span class="label">Two-Eyed</span>
+            </button>
+            <button class="toggle-option indigenous" data-mode="indigenous" aria-label="Indigenous Worldview" aria-pressed="false" tabindex="0">
+                <span class="icon">🌿</span>
+                <span class="label">Indigenous</span>
+            </button>
+        </div>
+    </div>
+    <div class="toggle-info">
+        <h5>Three Ways of Seeing</h5>
+        <p><strong style="color: #3498db;">🔬 Western:</strong> Analytical, metrics-focused, extractive valuation.</p>
+        <p><strong style="color: #9b59b6;">👁️‍🗨️ Two-Eyed Seeing:</strong> Integration of both knowledge systems for the benefit of all.</p>
+        <p><strong style="color: #8b5a2b;">🌿 Indigenous:</strong> Relational, holistic, reciprocal stewardship.</p>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home" class="logo">STILL</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Research Labs</a></li>
+            <li><a href="#dashboard">Dashboard</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="section-content">
+            <h1>STILL</h1>
+            <h3>Sustainable Transformation Initiative<br>for Land & Learning</h3>
+            
+            <div class="divider"></div>
+            
+            <p class="view-western">Advancing Indigenous sovereignty, heterodox economics, and adaptive resource management through evidence-based policy frameworks.</p>
+            <p class="view-integrated">Weaving together Indigenous wisdom and Western science to create sustainable futures that honour both the land and its peoples.</p>
+            <p class="view-indigenous">Nurturing the sacred bond between peoples and their lands through reciprocal stewardship, ceremony, and the teachings of our ancestors.</p>
+            
+            <div class="tagline view-western">
+                "Still" on the land. Transforming the future.
+            </div>
+            <div class="tagline view-integrated">
+                "Still" — seeing with both eyes, walking in two worlds, honouring all relations.
+            </div>
+            <div class="tagline view-indigenous">
+                "Still" — rooted in place, flowing through time, connected to all our relations.
+            </div>
+
+            <!-- Contrasting Landscape Visual -->
+            <div class="landscape-visual">
+                <div class="landscape-img landscape-western"></div>
+                <div class="landscape-img landscape-integrated"></div>
+                <div class="landscape-img landscape-indigenous"></div>
+                <div class="landscape-overlay">
+                    <h5 class="view-western">The Extractive View</h5>
+                    <h5 class="view-integrated">The Integrated View</h5>
+                    <h5 class="view-indigenous">The Relational View</h5>
+                    <p class="view-western">Land as resource: measured, divided, optimized for yield.</p>
+                    <p class="view-integrated">Land as teacher: where Western precision meets Indigenous wisdom.</p>
+                    <p class="view-indigenous">Land as relation: alive, interconnected, home to all beings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-content">
+            <h2 class="view-western">About</h2>
+            <h2 class="view-integrated">About Us</h2>
+            <h2 class="view-indigenous">Our Story</h2>
+            <div class="divider"></div>
+            <p class="view-western">STILL is a research initiative focused on developing evidence-based policy frameworks for Indigenous-led land management. We specialize in IPCA governance, GIS analysis, and resource valuation methodologies.</p>
+            <p class="view-western">Our work bridges academic research with practical implementation, providing measurable outcomes for sustainable land use.</p>
+            <p class="view-integrated">STILL brings together Indigenous knowledge keepers and Western scientists to create holistic approaches to land stewardship. We practice Etuaptmumk (Two-Eyed Seeing)—learning to see from one eye with the strengths of Indigenous ways of knowing, and from the other eye with the strengths of Western ways of knowing, and using both eyes together.</p>
+            <p class="view-integrated">This approach allows us to develop solutions that are both scientifically rigorous and culturally grounded.</p>
+            <p class="view-indigenous">We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil.</p>
+            <p class="view-indigenous">We carry the responsibility passed down through generations: to care for the land so that it may care for those yet to come. All our relations.</p>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <div class="section-content">
+            <h2>Resume</h2>
+            <div class="divider"></div>
+            <p class="resume-intro">Environmental professional with expertise in Indigenous land use planning, GIS, and project management.</p>
+            
+            <h3 class="timeline-heading">Experience</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Protected Area Project Manager</h4>
+                    <div class="org">Wuskwi Sipihk First Nation, Birch River, MB</div>
+                    <div class="date">Aug 2025 – Present</div>
+                    <p>Leading development of a comprehensive vision and plan for a proposed Indigenous Protected Area in west-central Manitoba. Facilitating tri-Nation Working Group coordination, managing ECCC funding, and conducting community engagement to ensure land use plans reflect Nation values.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>GIS Specialist</h4>
+                    <div class="org">Chris Werner Consulting, Winnipeg, MB</div>
+                    <div class="date">Oct 2023 – Aug 2025</div>
+                    <p>Designed and maintained geospatial systems supporting Indigenous communities in land claim negotiations. Built workflows for data analysis and cartography using ArcGIS and Python. Collaborated on monitoring during community culture camps in Northern Manitoba, Southern Nunavut, and NWT.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Environmental Program Manager</h4>
+                    <div class="org">Kátł'odeeche First Nation, Hay River, NT</div>
+                    <div class="date">Jul 2021 – Jan 2023</div>
+                    <p>Led planning, implementation, and reporting of community-based environmental monitoring programs. Managed environmental data collection and analysis using MS Access and ArcGIS. Oversaw budget management and authored comprehensive technical reports.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Wildfire Firefighter / Crew Boss</h4>
+                    <div class="org">GNWT & Evergreen Forestry Ltd., Hay River, NT</div>
+                    <div class="date">2019 – 2020</div>
+                    <p>Suppressed forest fires in remote boreal environments; used GIS to map fire perimeters. Supervised crew during fire suppression operations in challenging remote conditions.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Research Assistant</h4>
+                    <div class="org">Carleton University, Ottawa, ON</div>
+                    <div class="date">Aug 2017 – Apr 2018</div>
+                    <p>Managed research project analyzing changes in growing season in the Canadian Arctic using remotely sensed data.</p>
+                </div>
+            </div>
+
+            <h3 class="timeline-heading">Education</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>Master of Natural Resources Management</h4>
+                    <div class="org">University of Manitoba, Winnipeg, MB</div>
+                    <div class="date">In Progress</div>
+                    <p>Coursework: Natural Resources Policy, Human Dimensions, Ecological Dimensions, Project Management.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Bachelor of Applied Technology – GIS</h4>
+                    <div class="org">SAIT, Calgary, AB</div>
+                    <div class="date">2022</div>
+                </div>
+                <div class="timeline-item">
+                    <h4>Diploma in Natural Resource Technology</h4>
+                    <div class="org">Aurora College, Fort Smith, NT</div>
+                    <div class="date">2018</div>
+                    <p>Coursework: Aboriginal Land Claims and Self Government.</p>
+                </div>
+            </div>
+
+            <h3 class="timeline-heading">Core Skills</h3>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Land Management</h4>
+                    <p>IPCAs, Land Use Planning, Environmental Monitoring</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Technical</h4>
+                    <p>ArcGIS Pro, Python (ArcPy), Remote Sensing, Data Management</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Engagement</h4>
+                    <p>Community Consultation, Stakeholder Facilitation, Government Relations</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Administration</h4>
+                    <p>Proposal Writing, Budget Management ($300k+), Staff Supervision</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-content">
+            <h2>Research Labs</h2>
+            <div class="divider"></div>
+            <p class="section-intro">Exploring the intersection of Indigenous sovereignty, technology, and sustainable land management.</p>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>IPCA Governance</h4>
+                    <p>Visioning and policy development for the Wuskwi Sipihk, Sapotaweyak, and Minegoziibe First Nations.</p>
+                    <a href="#" class="card-btn">Read More</a>
+                </div>
+                <div class="card">
+                    <h4>Technical Sovereignty</h4>
+                    <p>Developing local AI (Ollama) and mobile tools for field data collection.</p>
+                    <a href="#" class="card-btn">Read More</a>
+                </div>
+                <div class="card">
+                    <h4>Economic Research</h4>
+                    <p>Heterodox economics and critiques of GDP in welfare policy.</p>
+                    <a href="#" class="card-btn">Read More</a>
+                </div>
+                <div class="card">
+                    <h4>Field Operations</h4>
+                    <p>Drone surveys and CoMapeo implementation for land monitoring in Manitoba and Belize.</p>
+                    <a href="#" class="card-btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+        <div class="section-content dashboard-container">
+            <h2 class="view-western">Field Dashboard</h2>
+            <h2 class="view-integrated">Territory Monitor</h2>
+            <h2 class="view-indigenous">Land & Relations</h2>
+            <div class="divider"></div>
+            <p class="view-western" style="color: #95a5a6; margin-bottom: 2rem;">Interactive GIS-based Territory & Ecosystem Monitor</p>
+            <p class="view-integrated" style="color: #95a5a6; margin-bottom: 2rem;">Weaving spatial data with Indigenous territory knowledge</p>
+            <p class="view-indigenous" style="color: #95a5a6; margin-bottom: 2rem;">Honouring the lands and peoples who have cared for them since time immemorial</p>
+            
+            <div class="map-wrapper">
+                <div id="map" aria-label="Interactive map" tabindex="0"></div>
+                <!-- Progressive Disclosure: TK/BC Labels and overlay info panels -->
+                <div class="tkbc-labels" id="tkbc-labels" aria-live="polite" style="margin: 1.5rem 0; display:none; opacity:0; transition:opacity 0.4s;">
+                    <div class="tkbc-label provenance" title="Provenance: Identifies cultural authority">
+                        <span style="font-weight:600;color:#8b5a2b;">TK Label:</span> Provenance
+                    </div>
+                    <div class="tkbc-label protocol" title="Protocol: Outlines access rules (seasonal/gender)">
+                        <span style="font-weight:600;color:#a3a380;">BC Label:</span> Protocol
+                    </div>
+                    <div class="tkbc-label permission" title="Permission: Indicates approved use (non-commercial/outreach)">
+                        <span style="font-weight:600;color:#4b6e3d;">BC Label:</span> Permission
+                    </div>
+                    <div style="font-size:0.95rem;color:#3a2f23;margin-top:0.5rem;">These labels ensure Indigenous data sovereignty and community protocols are respected in all map interactions.</div>
+                </div>
+                <div class="overlay-info" id="protected-info" style="display:none; opacity:0; transition:opacity 0.4s; margin-bottom:1rem;" aria-live="polite">
+                    <strong>Protected Areas:</strong> Global WDPA polygons and points. Data: <a href="https://www.protectedplanet.net/" target="_blank">Protected Planet</a>.
+                </div>
+                <div class="overlay-info" id="ecosystems-info" style="display:none; opacity:0; transition:opacity 0.4s; margin-bottom:1rem;" aria-live="polite">
+                    <strong>Ecosystems:</strong> OpenTopoMap landscape and tree cover. Data: <a href="https://opentopomap.org/" target="_blank">OpenTopoMap</a>.
+                </div>
+                    <h4 class="view-western">Location Data</h4>
+                    <h4 class="view-integrated">Place & Context</h4>
+                    <h4 class="view-indigenous">Where You Stand</h4>
+                    
+                    <div class="territory-info">
+                        <span class="stat-label view-western">Indigenous Territory</span>
+                        <span class="stat-label view-integrated">Traditional Territory</span>
+                        <span class="stat-label view-indigenous">Whose Land You Are a Guest Upon</span>
+                        <span class="stat-value loading" id="territory-name">Locating...</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-label view-western">Human Development Index</span>
+                        <span class="stat-label view-integrated">Community Wellbeing</span>
+                        <span class="stat-label view-indigenous">Strength of the People</span>
+                        <span class="stat-value loading" id="hdi-value">--</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-label view-western">Biodiversity Intactness Index</span>
+                        <span class="stat-label view-integrated">Ecosystem Health</span>
+                        <span class="stat-label view-indigenous">Health of All Our Relations</span>
+                        <span class="stat-value loading" id="biodiversity-value">--</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Layer Controls -->
+            <div class="layer-controls">
+                <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer" aria-pressed="false" tabindex="0" aria-label="Toggle Protected Areas" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <span aria-hidden="true">🛡️</span> <span>Protected Areas</span>
+                </button>
+                <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer" aria-pressed="false" tabindex="0" aria-label="Toggle Ecosystems" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <span aria-hidden="true">🌲</span> <span>Tree Cover / Ecosystems</span>
+                </button>
+                <button class="layer-btn" id="btn-satellite" title="Toggle Satellite imagery" aria-pressed="false" tabindex="0" aria-label="Toggle Satellite View" onkeydown="if(event.key==='Enter'||event.key===' '){this.click();}">
+                    <span aria-hidden="true">🛰️</span> <span>Satellite View</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-content">
+            <h2>Contact</h2>
+            <div class="divider"></div>
+            <p>Interested in collaborating or learning more about STILL?</p>
+            
+            <div class="contact-info">
+                <a href="mailto:hello@still.org" class="contact-link">hello@still.org</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 STILL - Sustainable Transformation Initiative for Land & Learning. All rights reserved.</p>
+
+    <!-- Leaflet JS -->
+        <footer>
+            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <a href="https://twitter.com/stillinitiative" target="_blank" rel="noopener" aria-label="Twitter" style="margin-right: 1rem;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" style="width:24px;height:24px;vertical-align:middle;">
+                </a>
+                <a href="https://facebook.com/stillinitiative" target="_blank" rel="noopener" aria-label="Facebook" style="margin-right: 1rem;">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" style="width:24px;height:24px;vertical-align:middle;">
+                </a>
+                <a href="https://linkedin.com/company/stillinitiative" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" style="width:24px;height:24px;vertical-align:middle;">
+                </a>
+            </div>
+            <form class="newsletter-signup" style="margin-top:2rem;max-width:320px;text-align:left;" aria-label="Newsletter signup">
+                <label for="newsletter-email" style="font-weight:500;">Sign up for our newsletter:</label><br>
+                <input type="email" id="newsletter-email" name="newsletter-email" placeholder="Your email address" required style="width:70%;padding:6px;margin-top:6px;">
+                <button type="submit" style="padding:6px 16px;margin-top:6px;background:#27ae60;color:#fff;border:none;border-radius:4px;cursor:pointer;">Subscribe</button>
+            </form>
+        </footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Esri Leaflet for ArcGIS REST FeatureServer support -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+    
+    <script>
+
+        // ========== Map Initialization ========== 
+        const map = L.map('map', { preferCanvas: true }).setView([54.5, -97.5], 5); // Default: Manitoba
+
+        // ========== Basemap Layers ========== 
+        const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 17
+        }).addTo(map);
+
+        const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri',
+            maxZoom: 17
+        });
+
+        // ========== Overlay Layers ========== 
+        // Protected Areas - Vector Tiles (if available)
+        let wdpaPolyLayer, wdpaPointLayer;
+        function loadProtectedLayers() {
+            if (!wdpaPolyLayer) {
+                wdpaPolyLayer = L.esri.featureLayer({
+                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
+                    simplifyFactor: 0.7,
+                    precision: 4,
+                    style: function () {
+                        return { color: '#27ae60', weight: 1, fillOpacity: 0.18 };
+                    }
+                });
+            }
+            if (!wdpaPointLayer) {
+                wdpaPointLayer = L.esri.featureLayer({
+                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
+                    pointToLayer: function (geojson, latlng) {
+                        return L.circleMarker(latlng, { radius: 3, color: '#2980b9', fillOpacity: 0.6 });
+                    }
+                });
+            }
+        }
+
+        // Tree Cover / Ecosystems (using OpenStreetMap landscape)
+        const ecosystems = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap',
+            maxZoom: 17,
+            opacity: 0.7
+        });
+
+        // ========== Layer Control State ========== 
+        let protectedActive = false;
+        let ecosystemsActive = false;
+        let satelliteActive = false;
+
+        // ========== Layer Toggle Buttons ========== 
+        const tkbcLabels = document.getElementById('tkbc-labels');
+        document.getElementById('btn-protected').addEventListener('click', function() {
+            protectedActive = !protectedActive;
+            this.classList.toggle('active');
+            this.setAttribute('aria-pressed', protectedActive);
+            const protectedInfo = document.getElementById('protected-info');
+            if (protectedActive) {
+                loadProtectedLayers();
+                wdpaPolyLayer.addTo(map);
+                wdpaPointLayer.addTo(map);
+                tkbcLabels.style.display = '';
+                setTimeout(() => { tkbcLabels.style.opacity = 1; }, 10);
+                protectedInfo.style.display = '';
+                setTimeout(() => { protectedInfo.style.opacity = 1; }, 10);
+            } else {
+                if (wdpaPolyLayer) map.removeLayer(wdpaPolyLayer);
+                if (wdpaPointLayer) map.removeLayer(wdpaPointLayer);
+                tkbcLabels.style.opacity = 0;
+                protectedInfo.style.opacity = 0;
+                setTimeout(() => {
+                    if (!ecosystemsActive) tkbcLabels.style.display = 'none';
+                    protectedInfo.style.display = 'none';
+                }, 400);
+            }
+        });
+
+        document.getElementById('btn-ecosystems').addEventListener('click', function() {
+            ecosystemsActive = !ecosystemsActive;
+            this.classList.toggle('active');
+            this.setAttribute('aria-pressed', ecosystemsActive);
+            const ecosystemsInfo = document.getElementById('ecosystems-info');
+            if (ecosystemsActive) {
+                ecosystems.addTo(map);
+                tkbcLabels.style.display = '';
+                setTimeout(() => { tkbcLabels.style.opacity = 1; }, 10);
+                ecosystemsInfo.style.display = '';
+                setTimeout(() => { ecosystemsInfo.style.opacity = 1; }, 10);
+            } else {
+                map.removeLayer(ecosystems);
+                tkbcLabels.style.opacity = 0;
+                ecosystemsInfo.style.opacity = 0;
+                setTimeout(() => {
+                    if (!protectedActive) tkbcLabels.style.display = 'none';
+                    ecosystemsInfo.style.display = 'none';
+                }, 400);
+            }
+        });
+
+        document.getElementById('btn-satellite').addEventListener('click', function() {
+            satelliteActive = !satelliteActive;
+            this.classList.toggle('active');
+            this.setAttribute('aria-pressed', satelliteActive);
+            if (satelliteActive) {
+                map.removeLayer(cartoPositron);
+                satellite.addTo(map);
+            } else {
+                map.removeLayer(satellite);
+                cartoPositron.addTo(map);
+            }
+        });
+
+        // ========== User Location & Native Land API ==========
+        let userMarker = null;
+
+        // Custom marker icon
+        const userIcon = L.divIcon({
+            className: 'user-marker',
+            html: '<div style="background: #27ae60; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
+        });
+
+        function updateTerritoryDisplay(name) {
+            const el = document.getElementById('territory-name');
+            el.textContent = name;
+            el.classList.remove('loading');
+        }
+
+        function queryNativeLand(lat, lng) {
+            // Native-Land.ca API
+            const url = `https://native-land.ca/api/index.php?maps=territories&position=${lat},${lng}`;
+            // Debounce requests
+            if (window._territoryTimeout) clearTimeout(window._territoryTimeout);
+            window._territoryTimeout = setTimeout(() => {
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.length > 0) {
+                            // Get all territory names
+                            const territories = data.map(t => t.properties.Name).join(', ');
+                            updateTerritoryDisplay(territories);
+                            // Update marker popup
+                            if (userMarker) {
+                                const popupContent = `
+                                    <div style="text-align: center; min-width: 200px;">
+                                        <strong style="color: #27ae60;">Your Location</strong><br>
+                                        <small style="color: #7f8c8d;">Traditional territory of:</small><br>
+                                        <strong>${territories}</strong>
+                                    </div>
+                                `;
+                                userMarker.setPopupContent(popupContent).openPopup();
+                            }
+                        } else {
+                            updateTerritoryDisplay('Data unavailable');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Native Land API error:', error);
+                        updateTerritoryDisplay('Unable to fetch');
+                    });
+            }, 350);
+        }
+
+        function onLocationFound(e) {
+            const { lat, lng } = e.latlng;
+            
+            // Fly to user location
+            map.flyTo([lat, lng], 10, {
+                duration: 2
+            });
+            
+            // Add marker
+            userMarker = L.marker([lat, lng], { icon: userIcon })
+                .addTo(map)
+                .bindPopup('<div style="text-align: center;"><strong>Your Location</strong><br><small>Fetching territory data...</small></div>')
+                .openPopup();
+            
+            // Query Native Land API
+            queryNativeLand(lat, lng);
+        }
+
+        function onLocationError(e) {
+            console.warn('Geolocation error:', e.message);
+            updateTerritoryDisplay('Location access denied');
+            
+            // Default to Manitoba view
+            map.setView([54.5, -97.5], 6);
+        }
+
+        // Request user location
+        if (navigator.geolocation) {
+            map.locate({ setView: false, maxZoom: 12 });
+            map.on('locationfound', onLocationFound);
+            map.on('locationerror', onLocationError);
+        } else {
+            updateTerritoryDisplay('Geolocation not supported');
+        }
+
+        // ========== Click to Query Territory ==========
+        map.on('click', function(e) {
+            const { lat, lng } = e.latlng;
+            
+            // Remove existing marker
+            if (userMarker) {
+                map.removeLayer(userMarker);
+            }
+            
+            // Add new marker
+            userMarker = L.marker([lat, lng], { icon: userIcon })
+                .addTo(map)
+                .bindPopup('<div style="text-align: center;"><strong>Selected Location</strong><br><small>Fetching territory data...</small></div>')
+                .openPopup();
+            
+            // Update stats panel
+            document.getElementById('territory-name').textContent = 'Searching...';
+            document.getElementById('territory-name').classList.add('loading');
+            
+            // Query for new location
+            queryNativeLand(lat, lng);
+        });
+
+        // ========== Three-Way Worldview Toggle ==========
+        const toggleOptions = document.querySelectorAll('.toggle-option');
+        const body = document.body;
+
+        function setWorldviewMode(mode, isInitialChoice = false) {
+            // Remove all mode classes
+            body.classList.remove('western-mode', 'integrated-mode', 'indigenous-mode');
+            // Add selected mode
+            body.classList.add(mode + '-mode');
+            
+            // Update toggle UI
+            toggleOptions.forEach(opt => {
+                opt.classList.remove('active');
+                if (opt.dataset.mode === mode) {
+                    opt.classList.add('active');
+                }
+            });
+            
+            // Save preference
+            localStorage.setItem('worldview-mode', mode);
+            
+            // Mark that user has made a choice (for welcome modal)
+            if (isInitialChoice) {
+                localStorage.setItem('worldview-chosen', 'true');
+            }
+        }
+
+        // ========== Welcome Modal Logic ==========
+        const welcomeModal = document.getElementById('welcome-modal');
+        const welcomeOptions = document.querySelectorAll('.welcome-option');
+        const hasChosenBefore = localStorage.getItem('worldview-chosen');
+
+        // Show modal on first visit
+        if (!hasChosenBefore) {
+            welcomeModal.classList.remove('hidden');
+            // Prevent scrolling while modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Handle welcome modal option clicks
+        welcomeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const mode = this.dataset.mode;
+                setWorldviewMode(mode, true);
+                
+                // Hide modal with animation
+                welcomeModal.classList.add('hidden');
+                document.body.style.overflow = '';
+                
+                // Remove modal from DOM after animation
+                setTimeout(() => {
+                    welcomeModal.style.display = 'none';
+                }, 500);
+            });
+        });
+
+        // Check for saved preference (returning visitors)
+        const savedMode = localStorage.getItem('worldview-mode');
+        if (savedMode && ['western', 'integrated', 'indigenous'].includes(savedMode)) {
+            setWorldviewMode(savedMode);
+        }
+
+        // Add click handlers to corner toggle
+        toggleOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                setWorldviewMode(this.dataset.mode, true);
+            });
+        });
+    </script>
+</body>
+</html>
