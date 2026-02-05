@@ -21,6 +21,8 @@
 
 
 ## [Unreleased] - Planned Improvements
+### Assets
+- [x] Created assets folder and added an image for future use
 
 #### Anxiety to Agency
 
@@ -31,6 +33,20 @@
 - [ ] **Emissary View** (Left-Hemisphere): Data in charts, GDP metrics, resource extraction values
 - [ ] **Master View** (Right-Hemisphere): Relationships, cultural flows, ecological connections
 - [ ] Demonstrates that the same reality can be "mapped" differently
+
+-### Cookie Consent Language
+
+-### Planned Graphics
+- [ ] Graphic: Puzzle silhouette image addition
+
+### Timeline
+- [ ] Add a timeline of accomplishments to the website
+- [ ] Graphic: Signpost at a crossroads between two relative and seemingly opposed fields of research
+- [ ] Graphic: Map on a surface with a 3D head and spinal cord hovering above
+- [ ] Adopt clear, user-friendly cookie consent statements similar to:
+	- Required: Only cookies and Google Fonts are loaded (minimum website functionality is secured, no YouTube, Google Maps etc).
+	- Comfort: Necessary cookies, Google Fonts, Google Maps, OpenStreetMap and Youtube are loaded.
+	- Statistics: Necessary cookies, Google Fonts, Google Maps, OpenStreetMap, Youtube and Google Analytics are loaded.
 
 #### Interactive "Maps of Meaning" Diagram
 - [ ] Animated SVG with two overlapping worldview circles
