@@ -26,7 +26,16 @@
 ### Assets
 - [x] Created assets folder and added an image for future use
 
-#### Anxiety to Agency
+#### Anxiety to Agency - this is the goal.  Integrate this idea throughout potentialy
+
+### Training & Learning Modules
+- [ ] Develop interactive training modules based on past presentations and research papers
+- [ ] Integrate "Bicycle as Metaphor" content for systems thinking and resilience
+- [ ] Create multimedia lessons (video, slides, text) for Two-Eyed Seeing and Guardian Programs
+- [ ] Add self-assessment quizzes and reflection prompts
+- [ ] Implement progress tracking for users
+- [ ] Provide downloadable resources and reading lists
+- [ ] Enable community-contributed lesson content and feedback
 
 ### 🧠 Conceptual Visualizations
 
