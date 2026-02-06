@@ -1,5 +1,33 @@
 # STILL Website Changelog
 
+## [1.3.0] - 2026-02-06
+
+### Enhanced - Map Dashboard Improvements
+- Protected areas layer now displays by default on page load
+- Added loading indicators for layer initialization
+- Significantly improved mobile responsive layout:
+  - Optimized map height (400px mobile, 350px small mobile, 450px tablet)
+  - Stats panel transforms to full-width below map on mobile devices
+  - Layer controls switch to single-column grid on mobile
+  - Touch-friendly button sizes (56px height on mobile, 48px minimum)
+  - Enhanced Leaflet zoom controls (44px touch targets on mobile)
+- Improved visual design:
+  - Enhanced stats panel with backdrop blur and better shadows
+  - Added hover states and transitions to stat items
+  - Improved territory info section with gradient background
+  - Better visual hierarchy with updated typography
+  - Added loading animations (spinner and dots)
+- Touch device optimizations:
+  - Larger tap targets for all interactive elements
+  - Better touch feedback with scale animations
+  - Improved control positioning and spacing
+- Enhanced accessibility:
+  - Better ARIA labels for layer toggle states
+  - Improved keyboard navigation support
+- Added tablet-specific layout (769px-1024px)
+- Improved TK/BC labels and overlay info styling
+- Better visual feedback for active/loading states
+
 ## [1.2.0] - 2026-02-06
 
 ### Fixed - Critical Bugs
