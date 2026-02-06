@@ -1,4 +1,46 @@
 # STILL Website Changelog
+
+## [1.2.0] - 2026-02-06
+
+### Fixed - Critical Bugs
+- Removed duplicate meta tags and link elements incorrectly placed in body section
+- Fixed duplicate/nested footer elements - consolidated into single semantic footer
+- Improved HTML structure and validity
+
+### Added - Accessibility Improvements
+- Enhanced skip navigation link with proper CSS for keyboard focus visibility
+- Wrapped all sections in semantic `<main>` element with `id="main-content"`
+- Added `role="main"` to main element for screen reader compatibility
+- Added `aria-labelledby` attributes to all sections (home, about, resume, projects, dashboard, contact)
+- Added unique IDs to all section headings for ARIA references
+- Added `role="contentinfo"` to footer element
+- Improved ARIA labels for social media links (more descriptive)
+- Added `aria-hidden="true"` to decorative social media icons
+- Added `aria-required="true"` to newsletter email input
+
+### Enhanced - 404 Error Page
+- Complete redesign matching main site branding and color palette
+- Added proper meta tags (description, favicons)
+- Integrated STILL logo and matching typography (Inter, Merriweather)
+- Added semantic HTML with `role="main"` and `aria-labelledby`
+- Implemented smooth fade-in and slide-up animations
+- Improved button styling with hover and focus states
+- Added proper ARIA labels throughout
+- Enhanced visual design with gradient background and card-style container
+
+### Improved - Visual Enhancements
+- Enhanced page load animations with subtle slide-up transform effect
+- Changed animation easing to cubic-bezier for smoother transitions
+- Added staggered animation delays for sequential section loading
+- Improved overall visual polish and user experience
+
+### Technical
+- Added security improvement: `rel="noopener noreferrer"` to external social links
+- Cleaned up inline styles in favor of CSS classes where appropriate
+- Improved code organization and maintainability
+
+---
+
 ## [Planned: Visual Refresh - feature/visual-refresh]
 
 - Apply nature-distilled color palette and neo-minimalist base styles
@@ -126,9 +168,9 @@
 - [ ] Add Twitter Card meta tags
 
 ### Accessibility
-- [ ] Add skip navigation link
+- [x] Add skip navigation link
 - [x] Add semantic HTML5 elements (header, main, footer)
-- [ ] Ensure proper ARIA labels where needed
+- [x] Ensure proper ARIA labels where needed
 - [ ] Test with screen reader
 
 ### Engagement
@@ -137,14 +179,14 @@
 - [ ] Add newsletter signup (optional)
 
 ### Visual Polish
-- [ ] Add subtle fade-in animations on page load
+- [x] Add subtle fade-in animations on page load
 - [x] Add hover effects for interactive elements
 - [ ] Consider adding a logo/icon
 
 ### Technical
-- [ ] Add favicon for browser tabs
-- [ ] Add Apple touch icon for mobile bookmarks
-- [ ] Add 404 error page
+- [x] Add favicon for browser tabs
+- [x] Add Apple touch icon for mobile bookmarks
+- [x] Add 404 error page
 
 ### Structure
 - [x] Add footer with copyright year
