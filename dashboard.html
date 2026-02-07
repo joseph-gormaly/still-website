@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | STILL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard-link {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            margin-top: 2rem;
+        }
+        .dashboard-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <ul>
+            <li class="logo" style="margin-right:2rem;">
+                <a href="index.html" aria-label="STILL Home">
+                    <img src="assetts/logo_v0.png" alt="STILL Logo" style="height:32px;width:32px;vertical-align:middle;margin-right:8px;">
+                    STILL
+                </a>
+            </li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="projects.html">Research Labs</a></li>
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="page-section" style="text-align: center;">
+            <div class="section-content">
+                <h1>Field Dashboard</h1>
+                <div class="divider"></div>
+
+                <p>Interactive mapping and data visualization tools for Indigenous land management and conservation planning.</p>
+
+                <a href="main-site.html#dashboard" class="dashboard-link">Launch Interactive Map Dashboard →</a>
+
+                <p style="margin-top: 3rem; color: #7f8c8d; font-size: 0.95rem;">The full dashboard includes protected areas, Indigenous territories, ecosystem data, and more.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    </footer>
+</body>
+</html>

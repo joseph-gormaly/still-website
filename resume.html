@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume | STILL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .timeline {
+            max-width: 700px;
+            margin: 3rem auto;
+        }
+        .timeline-item {
+            padding-left: 2rem;
+            border-left: 3px solid #27ae60;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: #27ae60;
+            border-radius: 50%;
+            position: absolute;
+            left: -9px;
+            top: 0;
+            box-shadow: 0 0 0 4px #fff;
+        }
+        .timeline-item h3 {
+            font-size: 1.35rem;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        .timeline-item .org {
+            font-weight: 600;
+            color: #27ae60;
+            margin-bottom: 0.25rem;
+        }
+        .timeline-item .date {
+            font-size: 0.95rem;
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <nav aria-label="Main navigation">
+        <ul>
+            <li class="logo" style="margin-right:2rem;">
+                <a href="index.html" aria-label="STILL Home">
+                    <img src="assetts/logo_v0.png" alt="STILL Logo" style="height:32px;width:32px;vertical-align:middle;margin-right:8px;">
+                    STILL
+                </a>
+            </li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="resume.html" class="active">Resume</a></li>
+            <li><a href="projects.html">Research Labs</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="page-section">
+            <div class="section-content">
+                <h1>Resume</h1>
+                <div class="divider"></div>
+                <p style="text-align: center; font-size: 1.15rem; color: #2c3e50;">Environmental professional with expertise in Indigenous land use planning, GIS, and project management.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h3>Protected Area Project Manager</h3>
+                        <div class="org">Wuskwi Sipihk First Nation, Birch River, MB</div>
+                        <div class="date">Aug 2025 – Present</div>
+                        <p>Leading development of a comprehensive vision and plan for a proposed Indigenous Protected Area in west-central Manitoba. Facilitating tri-Nation Working Group coordination, managing ECCC funding, and conducting community engagement to ensure land use plans reflect Nation values.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>GIS Specialist</h3>
+                        <div class="org">Chris Werner Consulting, Winnipeg, MB</div>
+                        <div class="date">Oct 2023 – Aug 2025</div>
+                        <p>Designed and maintained geospatial systems supporting Indigenous communities in land claim negotiations. Built workflows for data analysis and cartography using ArcGIS and Python. Collaborated on monitoring during community culture camps in Northern Manitoba, Southern Nunavut, and NWT.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Wildland Firefighter (Crewmember)</h3>
+                        <div class="org">Government of the Northwest Territories, Yellowknife, NT</div>
+                        <div class="date">2016, 2018, 2019, 2023</div>
+                        <p>Suppressed forest fires in remote boreal environments; used GIS to map fire perimeters. Supervised crew during fire suppression operations in challenging remote conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    </footer>
+</body>
+</html>
