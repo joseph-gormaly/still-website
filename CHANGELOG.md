@@ -2,18 +2,20 @@
 
 ## [1.6.0] - 2026-02-07
 
-### Added - Cryptocurrency Donation Support
-- Created dedicated donation page (donate.html) with Solana wallet integration
+### Added - Coinbase Commerce Payment Integration
+- Integrated Coinbase Commerce checkout for professional cryptocurrency donations
 - Added "Support" button to top-right of navigation on all pages
-- Implemented one-click copy functionality for wallet address
-- Added styled cryptocurrency donation box with visual feedback
-- Integrated Solana (SOL) wallet address: GfH1KUSryGDTRNJXNoNpoRWLhHsLDUxiBBLRQmpBVP9
-- Added support button styling to styles.css with gradient background and hover effects
+- Linked Support button directly to Coinbase Commerce checkout page
+- Checkout URL: https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4
+- Supports multiple cryptocurrencies (BTC, ETH, USDC, SOL, and more)
+- Professional payment flow with hosted checkout experience
+- Added support button styling with gradient background and hover effects
+- Opens in new tab for seamless donation experience
 
 ### Enhanced
-- Improved site-wide navigation with prominent donation call-to-action
-- Added accessibility features to donation page
-- Created responsive donation page design matching site aesthetics
+- Improved donation UX with professional payment processor
+- Site-wide navigation with prominent donation call-to-action
+- Secure external payment handling through Coinbase Commerce
 
 ## [1.5.0] - 2026-02-07
 
