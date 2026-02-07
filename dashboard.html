@@ -4,27 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | STILL</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
     <style>
-        .dashboard-link {
-            display: inline-block;
-            padding: 1.25rem 2.5rem;
+        /* Dashboard specific styles */
+        .dashboard-section {
+            background: #1a252f;
+            color: #fff;
+            padding: 3rem 1rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        .dashboard-section h1 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-intro {
+            text-align: center;
+            color: #95a5a6;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #1a252f;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+
+        .stats-panel {
+            background: rgba(26, 37, 47, 0.96);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid #27ae60;
+            transition: all 0.2s;
+        }
+
+        .stat-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #95a5a6;
+            display: block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 1.25rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .stat-value.loading {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .layer-controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .layer-btn {
             background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
             color: #fff;
-            text-decoration: none;
+            border: none;
             border-radius: 12px;
+            padding: 1rem 2rem;
+            font-size: 1rem;
             font-weight: 600;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-            margin-top: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(39, 174, 96, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .dashboard-link:hover {
+
+        .layer-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+
+        .layer-btn.active {
+            background: linear-gradient(135deg, #8b5a2b 60%, #a3a380 100%);
+            box-shadow: 0 6px 24px rgba(139, 90, 43, 0.4);
+        }
+
+        .layer-btn.loading::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .data-note {
+            background: rgba(39, 174, 96, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #27ae60;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #e8f8f0;
+        }
+
+        .data-note a {
+            color: #5deca0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .data-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            #map {
+                height: 400px;
+            }
+
+            .layer-controls {
+                flex-direction: column;
+            }
+
+            .layer-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-section {
+                padding: 2rem 0.5rem;
+            }
+        }
+
+        footer {
+            background: #1a252f;
+            color: #95a5a6;
         }
     </style>
 </head>
@@ -47,23 +224,242 @@
         </ul>
     </nav>
 
-    <main>
-        <section class="page-section" style="text-align: center;">
-            <div class="section-content">
-                <h1>Field Dashboard</h1>
-                <div class="divider"></div>
+    <main class="dashboard-section">
+        <h1>Field Dashboard</h1>
+        <div class="divider" style="max-width: 200px; margin: 1rem auto 1.5rem auto;"></div>
+        <p class="dashboard-intro">Interactive GIS-based Territory & Ecosystem Monitor</p>
 
-                <p>Interactive mapping and data visualization tools for Indigenous land management and conservation planning.</p>
+        <div class="map-container">
+            <div id="map" aria-label="Interactive map" tabindex="0"></div>
+        </div>
 
-                <a href="main-site-archive.html#dashboard" class="dashboard-link">Launch Interactive Map Dashboard →</a>
-
-                <p style="margin-top: 3rem; color: #7f8c8d; font-size: 0.95rem;">The full dashboard includes protected areas, Indigenous territories, ecosystem data, and more.</p>
+        <div class="stats-panel">
+            <h3 style="color: #27ae60; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;">Location Data</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Indigenous Territory</span>
+                    <span class="stat-value loading" id="territory-name">Locating...</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Human Development Index</span>
+                    <span class="stat-value loading" id="hdi-value">--</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Biodiversity Intactness Index</span>
+                    <span class="stat-value loading" id="biodiversity-value">--</span>
+                </div>
             </div>
-        </section>
+            <div class="data-note" id="data-source" style="display:none; margin-top: 1rem;">
+                <strong>Data Sources:</strong> <span id="data-source-text"></span>
+            </div>
+        </div>
+
+        <div class="layer-controls">
+            <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer">
+                <span>🛡️</span>
+                <span>Protected Areas</span>
+            </button>
+            <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer">
+                <span>🌲</span>
+                <span>Tree Cover</span>
+            </button>
+            <button class="layer-btn" id="btn-satellite" title="Toggle Satellite View">
+                <span>🛰️</span>
+                <span>Satellite View</span>
+            </button>
+        </div>
     </main>
 
     <footer role="contentinfo">
         <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
     </footer>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Esri Leaflet -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+
+    <script>
+        // Map initialization
+        const map = L.map('map', { preferCanvas: true }).setView([54.5, -97.5], 5);
+
+        // Base layers
+        const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO',
+            maxZoom: 17
+        }).addTo(map);
+
+        const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles &copy; Esri',
+            maxZoom: 17
+        });
+
+        // Overlay layers
+        let wdpaPolyLayer, wdpaPointLayer;
+        const ecosystems = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap, OpenTopoMap',
+            maxZoom: 17,
+            opacity: 0.7
+        });
+
+        // Layer state
+        let protectedActive = true;
+        let ecosystemsActive = false;
+        let satelliteActive = false;
+
+        // Load protected areas
+        function loadProtectedLayers() {
+            if (!wdpaPolyLayer) {
+                wdpaPolyLayer = L.esri.featureLayer({
+                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
+                    simplifyFactor: 0.7,
+                    precision: 4,
+                    style: () => ({ color: '#27ae60', weight: 1, fillOpacity: 0.18 })
+                });
+                wdpaPointLayer = L.esri.featureLayer({
+                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
+                    pointToLayer: (geojson, latlng) => L.circleMarker(latlng, { radius: 3, color: '#2980b9', fillOpacity: 0.6 })
+                });
+            }
+        }
+
+        // Initialize protected areas
+        function initProtectedAreas() {
+            const btn = document.getElementById('btn-protected');
+            btn.classList.add('loading');
+            loadProtectedLayers();
+
+            setTimeout(() => {
+                if (wdpaPolyLayer && wdpaPointLayer) {
+                    wdpaPolyLayer.addTo(map);
+                    wdpaPointLayer.addTo(map);
+                    btn.classList.remove('loading');
+                    btn.classList.add('active');
+                    showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
+                }
+            }, 500);
+        }
+
+        // Show data source
+        function showDataSource(text, url) {
+            const sourceEl = document.getElementById('data-source');
+            const textEl = document.getElementById('data-source-text');
+            textEl.innerHTML = url ? `<a href="${url}" target="_blank">${text}</a>` : text;
+            sourceEl.style.display = 'block';
+        }
+
+        // Layer button handlers
+        document.getElementById('btn-protected').addEventListener('click', function() {
+            protectedActive = !protectedActive;
+            this.classList.toggle('active');
+
+            if (protectedActive) {
+                this.classList.add('loading');
+                if (!wdpaPolyLayer) loadProtectedLayers();
+                setTimeout(() => {
+                    wdpaPolyLayer.addTo(map);
+                    wdpaPointLayer.addTo(map);
+                    this.classList.remove('loading');
+                    showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
+                }, 300);
+            } else {
+                if (wdpaPolyLayer) map.removeLayer(wdpaPolyLayer);
+                if (wdpaPointLayer) map.removeLayer(wdpaPointLayer);
+                if (!ecosystemsActive) document.getElementById('data-source').style.display = 'none';
+            }
+        });
+
+        document.getElementById('btn-ecosystems').addEventListener('click', function() {
+            ecosystemsActive = !ecosystemsActive;
+            this.classList.toggle('active');
+
+            if (ecosystemsActive) {
+                ecosystems.addTo(map);
+                showDataSource('OpenTopoMap', 'https://opentopomap.org/');
+            } else {
+                map.removeLayer(ecosystems);
+                if (!protectedActive) document.getElementById('data-source').style.display = 'none';
+            }
+        });
+
+        document.getElementById('btn-satellite').addEventListener('click', function() {
+            satelliteActive = !satelliteActive;
+            this.classList.toggle('active');
+
+            if (satelliteActive) {
+                map.removeLayer(cartoPositron);
+                satellite.addTo(map);
+            } else {
+                map.removeLayer(satellite);
+                cartoPositron.addTo(map);
+            }
+        });
+
+        // Territory data
+        const userIcon = L.divIcon({
+            className: 'user-marker',
+            html: '<div style="background: #27ae60; width: 16px; height: 16px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"></div>',
+            iconSize: [22, 22],
+            iconAnchor: [11, 11]
+        });
+
+        let userMarker = null;
+
+        function updateTerritory(name) {
+            const el = document.getElementById('territory-name');
+            el.textContent = name;
+            el.classList.remove('loading');
+        }
+
+        function queryNativeLand(lat, lng) {
+            const url = `https://native-land.ca/api/index.php?maps=territories&position=${lat},${lng}`;
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const territories = data.map(t => t.properties.Name).join(', ');
+                        updateTerritory(territories);
+                        if (userMarker) {
+                            userMarker.setPopupContent(`<div style="text-align: center;"><strong style="color: #27ae60;">Your Location</strong><br><small>Traditional territory of:</small><br><strong>${territories}</strong></div>`).openPopup();
+                        }
+                    } else {
+                        updateTerritory('Data unavailable');
+                    }
+                })
+                .catch(() => updateTerritory('Unable to fetch'));
+        }
+
+        // Geolocation
+        if (navigator.geolocation) {
+            map.locate({ setView: false, maxZoom: 12 });
+            map.on('locationfound', e => {
+                map.flyTo(e.latlng, 10, { duration: 2 });
+                userMarker = L.marker(e.latlng, { icon: userIcon })
+                    .addTo(map)
+                    .bindPopup('<div style="text-align: center;"><strong>Your Location</strong><br><small>Fetching territory data...</small></div>')
+                    .openPopup();
+                queryNativeLand(e.latlng.lat, e.latlng.lng);
+            });
+            map.on('locationerror', () => {
+                updateTerritory('Location access denied');
+                map.setView([54.5, -97.5], 6);
+            });
+        }
+
+        // Click to query
+        map.on('click', e => {
+            if (userMarker) map.removeLayer(userMarker);
+            userMarker = L.marker(e.latlng, { icon: userIcon })
+                .addTo(map)
+                .bindPopup('<div style="text-align: center;"><strong>Selected Location</strong><br><small>Fetching...</small></div>')
+                .openPopup();
+            document.getElementById('territory-name').textContent = 'Searching...';
+            document.getElementById('territory-name').classList.add('loading');
+            queryNativeLand(e.latlng.lat, e.latlng.lng);
+        });
+
+        // Initialize protected areas on load
+        setTimeout(initProtectedAreas, 500);
+    </script>
 </body>
 </html>
