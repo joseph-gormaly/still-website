@@ -1,5 +1,21 @@
 # STILL Website Changelog
 
+## [1.5.0] - 2026-02-07
+
+### Changed - Site Architecture
+- Established multi-page site structure as primary architecture
+- Updated projects.html to include blog post cards
+- Added "Research Publications & Case Studies" section to Research Labs page
+- Connected Arctic Vegetation and Axolotl Conservation blogs to projects.html
+- Archived main-site.html → main-site-archive.html (single-page version kept for reference)
+- Renamed assets folder from 'assetts' to 'assets' for correct spelling
+- Updated all asset references across 10 HTML files
+
+### Enhanced
+- Multi-page navigation now provides access to blog content
+- Improved separation of concerns with dedicated pages
+- Better organization with card-based blog presentation
+
 ## [1.4.0] - 2026-02-07
 
 ### Added - Research Blog Posts
