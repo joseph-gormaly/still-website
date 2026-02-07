@@ -1,5 +1,20 @@
 # STILL Website Changelog
 
+## [1.6.0] - 2026-02-07
+
+### Added - Cryptocurrency Donation Support
+- Created dedicated donation page (donate.html) with Solana wallet integration
+- Added "Support" button to top-right of navigation on all pages
+- Implemented one-click copy functionality for wallet address
+- Added styled cryptocurrency donation box with visual feedback
+- Integrated Solana (SOL) wallet address: GfH1KUSryGDTRNJXNoNpoRWLhHsLDUxiBBLRQmpBVP9
+- Added support button styling to styles.css with gradient background and hover effects
+
+### Enhanced
+- Improved site-wide navigation with prominent donation call-to-action
+- Added accessibility features to donation page
+- Created responsive donation page design matching site aesthetics
+
 ## [1.5.0] - 2026-02-07
 
 ### Changed - Site Architecture

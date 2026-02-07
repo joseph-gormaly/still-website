@@ -76,6 +76,21 @@ nav .logo a:hover {
     color: #27ae60;
 }
 
+/* Support button styling */
+.support-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%) !important;
+    color: #fff !important;
+    padding: 0.625rem 1.5rem !important;
+    border-radius: 50px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+.support-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4) !important;
+}
+
 /* ========== Main Content ========== */
 main {
     min-height: calc(100vh - 200px);
