@@ -1,5 +1,26 @@
 # STILL Website Changelog
 
+## [1.4.0] - 2026-02-07
+
+### Added - Arctic Vegetation Research Blog
+- Integrated Arctic Vegetation Monitoring blog post to Research Labs section
+- Created `/blog` directory for technical articles and research content
+- Added "Arctic Vegetation Monitoring" card to main site projects section
+- Published comprehensive research article: "Using Remote Sensing to Monitor 28 Years of Vegetation Changes in the Low Canadian Arctic"
+  - Study period: 1981-2008 analysis of vegetation changes near Daring Lake TERS, NT
+  - Interactive Chart.js visualizations of temperature trends and growing season changes
+  - Complete dataset table with 28 years of temperature and phenology data
+  - Includes study area map and phenology metrics figures
+  - Full academic references and methodology section
+- Added navigation between main site and blog posts
+- Implemented responsive design with Tailwind CSS for blog layout
+- Added proper semantic HTML and accessibility features
+
+### Enhanced
+- Research Labs section now features real content (Arctic vegetation research)
+- Improved project showcase with clickable "Read More" links to actual content
+- Better content organization with dedicated blog directory
+
 ## [1.3.0] - 2026-02-06
 
 ### Enhanced - Map Dashboard Improvements
