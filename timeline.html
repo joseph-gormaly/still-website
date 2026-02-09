@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldview Collision Timeline | STILL</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .timeline-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            position: relative;
+            padding: 2rem;
+        }
+        /* The central line */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: #ddd;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        /* Left side (Colonial) */
+        .left {
+            left: 0;
+            text-align: right;
+        }
+        /* Right side (Indigenous) */
+        .right {
+            left: 50%;
+            text-align: left;
+        }
+        /* The circles on the timeline */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: white;
+            border: 4px solid #FF9F55;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .right::after {
+            left: -10px;
+        }
+        /* Content box */
+        .content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .left .content {
+            border-right: 5px solid #e74c3c; /* Red for Colonial/Imposition */
+        }
+        .right .content {
+            border-left: 5px solid #27ae60; /* Green for Indigenous/Reclamation */
+        }
+        .date {
+            font-weight: 800;
+            color: #888;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        /* Mobile Responsive */
+        @media screen and (max-width: 600px) {
+            .timeline-container::after {
+                left: 31px;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item::before {
+                left: 60px;
+                border: medium solid white;
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+            }
+            .left::after, .right::after {
+                left: 21px;
+            }
+            .left {
+                text-align: left;
+            }
+            .left .content {
+                border-right: none;
+                border-left: 5px solid #e74c3c;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation">
+        <ul>
+            <li class="logo" style="margin-right:2rem;"><a href="index.html">STILL</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Research Labs</a></li>
+            <li><a href="timeline.html" class="active">Timeline</a></li>
+            <li><a href="bsv-calculator.html">BSV Calculator</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div style="text-align: center; margin-top: 4rem;">
+            <h1>Worldview Collision Timeline</h1>
+            <p style="max-width: 600px; margin: 0 auto; color: #555;">Tracing the historical collision of colonial policy and Indigenous resilience.</p>
+        </div>
+
+        <div class="timeline-container">
+            <!-- 1492 -->
+            <div class="timeline-item left">
+                <div class="content">
+                    <span class="date">1492</span>
+                    <h2>Terra Nullius</h2>
+                    <p>The Doctrine of Discovery declares Indigenous lands "empty" and available for claim by Christian monarchs, initiating centuries of dispossession.</p>
+                </div>
+            </div>
+
+            <!-- 1763 -->
+            <div class="timeline-item right">
+                <div class="content">
+                    <span class="date">1763</span>
+                    <h2>Royal Proclamation</h2>
+                    <p>Recognizes Aboriginal title and establishes the protocol for treaty-making, acknowledging Indigenous nations as distinct political entities.</p>
+                </div>
+            </div>
+
+            <!-- 1876 -->
+            <div class="timeline-item left">
+                <div class="content">
+                    <span class="date">1876</span>
+                    <h2>The Indian Act</h2>
+                    <p>Consolidated colonial control over Indigenous identity, governance, and land. Imposed the reserve system and banned cultural practices like the Potlatch.</p>
+                </div>
+            </div>
+
+            <!-- 1927 -->
+            <div class="timeline-item left">
+                <div class="content">
+                    <span class="date">1927</span>
+                    <h2>Legal Counsel Ban</h2>
+                    <p>Amendment to the Indian Act makes it illegal for First Nations to hire lawyers to pursue land claims, effectively silencing legal resistance for decades.</p>
+                </div>
+            </div>
+
+            <!-- 1973 -->
+            <div class="timeline-item right">
+                <div class="content">
+                    <span class="date">1973</span>
+                    <h2>Calder Case</h2>
+                    <p>Supreme Court of Canada acknowledges that Aboriginal title existed prior to colonization and was not extinguished by it, opening the door for modern land claims.</p>
+                </div>
+            </div>
+
+            <!-- 1996 -->
+            <div class="timeline-item left">
+                <div class="content">
+                    <span class="date">1996</span>
+                    <h2>Last Residential School Closes</h2>
+                    <p>The closure of the Gordon Residential School in Saskatchewan marks the end of the state-run school system designed to assimilate Indigenous children.</p>
+                </div>
+            </div>
+
+            <!-- 2015 -->
+            <div class="timeline-item right">
+                <div class="content">
+                    <span class="date">2015</span>
+                    <h2>TRC Final Report</h2>
+                    <p>The Truth and Reconciliation Commission releases 94 Calls to Action, framing reconciliation as a process of healing relationships and addressing historical wrongs.</p>
+                </div>
+            </div>
+
+            <!-- 2018 -->
+            <div class="timeline-item right">
+                <div class="content">
+                    <span class="date">2018</span>
+                    <h2>Rise of IPCAs</h2>
+                    <p>Indigenous Protected and Conserved Areas (IPCAs) gain momentum, asserting Indigenous law and governance over traditional territories (e.g., Edéhzhíe).</p>
+                </div>
+            </div>
+
+            <!-- Present -->
+            <div class="timeline-item right">
+                <div class="content">
+                    <span class="date">Present</span>
+                    <h2>Two-Eyed Seeing</h2>
+                    <p>A growing movement to integrate Indigenous and Western knowledge systems in science, law, and land management for a sustainable future.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    </footer>
+</body>
+</html>
