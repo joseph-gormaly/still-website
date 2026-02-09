@@ -35,28 +35,28 @@
                     <div class="calculator-inputs">
                         <div class="input-group">
                             <label for="sensor-count">Number of Active Sensors</label>
-                            <input type="number" id="sensor-count" placeholder="e.g. 50">
+                            <input type="number" id="sensor-count" placeholder="e.g. 50" value="50">
                         </div>
                         <div class="input-group">
-                            <label for="data-rate">Data Points per Day</label>
-                            <input type="number" id="data-rate" placeholder="e.g. 1440 (1 per min)">
+                            <label for="data-rate">Data Points per Day (per sensor)</label>
+                            <input type="number" id="data-rate" placeholder="e.g. 1440" value="1440">
                         </div>
                         <div class="input-group">
                             <label for="bsv-price">BSV Price (USD)</label>
-                            <input type="number" id="bsv-price" placeholder="e.g. 50">
+                            <input type="number" id="bsv-price" placeholder="e.g. 50" value="50">
                         </div>
-                        <button class="btn-primary" style="background: var(--color-primary); color: white; border: none; padding: 10px 20px; border-radius: 4px; margin-top: 1rem; cursor: pointer;">Calculate Impact</button>
+                        <button id="calculate-btn" class="btn-calculate">Calculate Impact</button>
                     </div>
 
                     <div class="results-panel">
                         <h3>Estimated Impact</h3>
                         <p>Based on current network fees and transaction volume.</p>
                         
-                        <div class="result-item" style="margin-bottom: 1rem;">
+                        <div class="result-item">
                             <strong>Total Daily Transactions:</strong>
                             <span id="res-daily-tx">0</span>
                         </div>
-                        <div class="result-item" style="margin-bottom: 1rem;">
+                        <div class="result-item">
                             <strong>Estimated Network Fees (BSV):</strong>
                             <span id="res-fees-bsv">0.000000</span>
                         </div>
@@ -75,5 +75,34 @@
             <p>&copy; 2026 STILL.bz. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('calculate-btn');
+            
+            btn.addEventListener('click', function() {
+                // Get inputs
+                const sensors = parseFloat(document.getElementById('sensor-count').value) || 0;
+                const rate = parseFloat(document.getElementById('data-rate').value) || 0;
+                const price = parseFloat(document.getElementById('bsv-price').value) || 0;
+                
+                // Calculations
+                const dailyTx = sensors * rate;
+                // Assuming standard tx fee is minimal, e.g., 0.0000005 BSV per tx for small data
+                const feePerTx = 0.0000005; 
+                const totalFeesBSV = dailyTx * feePerTx;
+                
+                // Simulated CO2 offset logic: 
+                // e.g. 1 tx represents 0.01kg of CO2 data captured/avoided
+                const co2PerTx = 0.01; 
+                const totalCO2 = dailyTx * co2PerTx;
+                
+                // Update UI
+                document.getElementById('res-daily-tx').textContent = dailyTx.toLocaleString();
+                document.getElementById('res-fees-bsv').textContent = totalFeesBSV.toFixed(6);
+                document.getElementById('res-co2').textContent = totalCO2.toFixed(2) + ' kg';
+            });
+        });
+    </script>
 </body>
 </html>
