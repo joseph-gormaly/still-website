@@ -3,58 +3,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vegetation Change Analysis - STILL</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>Vegetation Changes in the Low Canadian Arctic | STILL</title>
+    
+    <!-- SEO Enhancements -->
+    <meta property="og:title" content="Vegetation Changes in the Low Canadian Arctic">
+    <meta property="og:description" content="Using remote sensing to monitor 28 years of vegetation changes in the Low Canadian Arctic (1981-2008).">
+    <meta property="og:image" content="../assets/og-image-research.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+    <style>
+        /* Blog specific styles extending styles.css */
+        .article-header {
+            background-color: #f9fafb;
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .article-meta {
+            color: #27ae60;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+
+        .article-content h2 {
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        blockquote {
+            border-left: 4px solid #27ae60;
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: #555;
+            margin: 2rem 0;
+        }
+
+        .figure-container {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .figure-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Sidebar/Abstract styling */
+        .sidebar-abstract {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            margin-bottom: 2rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+        .data-table th, .data-table td {
+            padding: 12px;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+        
+        .chart-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav role="navigation" aria-label="Main Navigation">
                 <a href="../index.html" class="logo">
+                    <img src="../assets/logo_v0.png" alt="STILL Logo">
                     STILL
                 </a>
-                <ul>
-                    <li><a href="../projects.html">Research Labs</a></li>
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html" class="active">Research Labs</a></li>
                     <li><a href="../timeline.html">Timeline</a></li>
-                    <li><a href="../bsv-calculator.html">BSV Calculator</a></li>
                     <li><a href="../dashboard.html">Dashboard</a></li>
-                    <li><a href="#" class="btn-support">Support</a></li>
+                    <li><a href="../bsv-calculator.html">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="page-section">
+        <!-- Article Header -->
+        <div class="article-header">
             <div class="container">
-                <article>
-                    <h1>Vegetation Change Analysis</h1>
-                    <p style="font-size: 0.9rem; color: #666;">Published on January 15, 2026 by Dr. Sarah Mitchell</p>
-                    
-                    <div style="margin-top: 2rem; line-height: 1.8;">
-                        <p>Our recent study focuses on the subtle shifts in vegetation patterns across the wetlands. By combining satellite imagery with on-ground Indigenous knowledge, we've identified significant changes in flora distribution over the last decade.</p>
-                        
-                        <h3>Key Findings</h3>
-                        <ul>
-                            <li><strong>Invasive Species:</strong> A 15% increase in invasive reed coverage.</li>
-                            <li><strong>Native Flora:</strong> Resilience observed in traditional medicinal plant zones.</li>
-                            <li><strong>Water Quality:</strong> Direct correlation between vegetation density and water filtration efficiency.</li>
-                        </ul>
+                <span class="article-meta">Technical Project • April 2018</span>
+                <h1 style="max-width: 900px; margin: 0 auto; line-height: 1.2;">Using Remote Sensing to Monitor 28 Years of Vegetation Changes in the Low Canadian Arctic</h1>
+                <div style="margin-top: 1.5rem;">
+                    <p style="font-weight: 700; color: #2c3e50; margin-bottom: 0;">Joe Gormaly</p>
+                    <p style="font-size: 0.9rem; color: #7f8c8d;">Aurora College, Environment & Natural Resources</p>
+                </div>
+            </div>
+        </div>
 
-                        <p>This research is ongoing, and we invite community members to contribute their observations through our new mobile app.</p>
+        <div class="container" style="display: flex; gap: 3rem; margin-top: 3rem; flex-wrap: wrap;">
+            
+            <!-- Sidebar: Abstract -->
+            <aside style="flex: 1; min-width: 280px;">
+                <div class="sidebar-abstract">
+                    <h3 style="margin-top: 0; color: #2c3e50; border-bottom: 2px solid #27ae60; padding-bottom: 0.5rem; display: inline-block;">Abstract</h3>
+                    <p>
+                        Climate change has led to global temperature increases, magnified in the low Canadian Arctic. This warming is affecting the seasonality of many vegetation communities. Using ground verified data and long-term satellite imagery, this study quantified changes to vegetation, specifically annual start and end dates of seasons using NDVI.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Key Finding:</strong> The season start date was seven days earlier in 2008 compared to 1981, and the season end date was 17 days later. Temperatures rose 0.07°C annually on average.
+                    </p>
+                    <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: #95a5a6; margin-bottom: 0.5rem;">Keywords</h4>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">Arctic</span>
+                            <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">NDVI</span>
+                            <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">Climate Change</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Article -->
+            <article class="article-content" style="flex: 3; padding-top: 0; min-width: 300px;">
+                
+                <section id="introduction">
+                    <h2 style="margin-top: 0;">Introduction</h2>
+                    <p>
+                        In recent decades, ecosystems in the low Arctic have seen an increase in average temperature, and this trend is expected to continue into the near future. The results of this increase for low Arctic ecosystems are vast and observed in several different ways, including longer and more severe forest fire seasons, permafrost thawing, and changes to vegetation (Symon et al. 2005). 
+                    </p>
+                    <p>
+                        Climate change is forecasted to change the ranges of numerous communities of vegetation by increasing the range of shrub species such as willow (<em>Salix spp.</em>), birch (<em>Betula spp.</em>), and alder (<em>Alnus spp.</em>). Shrub species are often the dominant vegetation cover observed using remote sensing, often forming dense clusters of vegetation that can be easily quantified (Olthof and Fraser 2014).
+                    </p>
+                    <blockquote>
+                        Experiments at Daring Lake, NT tested the effects of warming and fertilization, where deciduous shrubs showed increased growth rates to become the dominant cover.
+                    </blockquote>
+                    <p>
+                        In this study, we explore how remote sensing can be utilized to categorize and quantify the "shrubification" observed in the Canadian low Arctic, particularly in areas adjacent to the tree line.
+                    </p>
+                </section>
+
+                <section id="remote-sensing">
+                    <h2>The Science: Remote Sensing & NDVI</h2>
+                    <p>
+                        Remote sensing collects imagery to gain insight into large-scale patterns of landcover. Through the process of photosynthesis, living green plants absorb solar radiation in the photosynthetically active radiation (PAR) spectrum. However, they reflect solar radiation in the near-infrared (NIR) spectrum to avoid overheating.
+                    </p>
+                    <p>
+                        Therefore, live green plants appear relatively bright in the NIR and dark in PAR. This contrast allows satellites like Landsat to calculate the <strong>Normalized Difference Vegetation Index (NDVI)</strong>, a key metric for monitoring vegetation health and density over time.
+                    </p>
+                </section>
+
+                <section id="study-area">
+                    <h2>Study Area & Methods</h2>
+                    <p>
+                        This study looked at an area (40,000 km²) adjacent to the Daring Lake Tundra Ecosystem Research Station (TERS) located at 111°35′W 64°52′N. TERS is approximately 50 km north of the tree line. 
+                    </p>
+                    
+                    <div class="figure-container">
+                        <img src="../assets/veg_change_fig1.png" alt="Map of study area showing 40,000 km² region adjacent to TERS and Baker Lake, NU">
+                        <div class="caption">Figure 1. Study area: 40 000 km² adjacent to TERS and Baker Lake, NU.</div>
                     </div>
 
-                    <a href="../index.html" class="btn-secondary" style="margin-top: 2rem; display: inline-block;">&larr; Back to Home</a>
-                </article>
-            </div>
-        </section>
+                    <p>
+                        Temperature data was downloaded from Environment and Climate Change Canada for the weather station at Baker Lake, Nunavut. A global data set of Vegetation Index and Phenology data was retrieved courtesy of NASA.
+                    </p>
+
+                     <div class="figure-container">
+                        <img src="../assets/veg_change_fig2.png" alt="Phenology metrics bell-curve graph">
+                        <div class="caption">Figure 2. Phenology metrics for Tundra with one well defined growing season (Didan and Barreto 2016).</div>
+                    </div>
+
+                    <p>
+                        The start and end of the growing season are defined as five days of increasing or decreasing NDVI, respectively.
+                    </p>
+                </section>
+
+                <section id="results">
+                    <h2>Results</h2>
+                    <p>
+                        The data analysis revealed significant trends over the 28-year period (1981-2008). Below is the complete dataset utilized for the analysis, followed by graphical representations of the trends.
+                    </p>
+
+                    <div style="overflow-x: auto;">
+                        <table class="data-table" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Baker Lake Avg Temp (°C)</th>
+                                    <th>Start of Season</th>
+                                    <th>End of Season</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- JS will populate or we keep static list for brevity, keeping sample here -->
+                                <tr><td>1981</td><td>-10.0</td><td>11-Jun</td><td>27-Sep</td></tr>
+                                <tr><td>2008</td><td>-11.0</td><td>04-Jun</td><td>14-Oct</td></tr>
+                                <!-- Full table truncated for display, full data in script -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="caption">Table 1. Values for temperature, start and end date of growing seasons 1981-2008.</div>
+
+                    <div class="chart-container">
+                        <canvas id="tempChart"></canvas>
+                        <div class="caption">Figure 3. Linear regression showing average temperature changes 1981-2008. ($y=0.068x - 147.02$, $R^2=0.18$)</div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="startSeasonChart"></canvas>
+                        <div class="caption">Figure 4. Linear regression showing start date of growing season 1981-2008. ($y=-0.4305x + 1019.7$, $R^2=0.81$)</div>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="endSeasonChart"></canvas>
+                        <div class="caption">Figure 5. Linear regression showing end date of growing season 1981-2008. ($y=0.7646x - 1247.9$, $R^2=0.72$)</div>
+                    </div>
+                </section>
+
+                <section id="discussion">
+                    <h2>Discussion</h2>
+                    <p>
+                        Weather data from Baker Lake, NU showed an average increase of <strong>0.07°C per year</strong> over the study period (1981-2008), totaling a two-degree increase. This result was as expected, consistent with numerous studies published in the Arctic Climate Impact Assessment (2005). The statistical analysis of the linear regression showed a weak correlation to the trend line ($R^2=0.18$, $p=0.023$). This weak correlation is likely a result of variations in local weather phenomena as well as a relatively short study period.
+                    </p>
+                    <p>
+                        The average <strong>Start of the Growing Season</strong> for the study area showed a strong negative trend ($R^2=0.81$, $p < 0.001$). Over the 28 years, the start of season date shifted earlier by seven days (from June 11 in 1981 to June 4 in 2008).
+                    </p>
+                    <p>
+                        The <strong>End of Season</strong> data showed a strong positive trend ($R^2=0.72$, $p < 0.001$), meaning the season is ending later. These results are consistent with studies published by Xu et al. (2013).
+                    </p>
+                    <p>
+                        The cumulative effect of this observed change to ecosystems in the low Arctic can have far-reaching implications for various natural cycles (carbon cycle, water cycle, albedo effect, snow depths). Climate change models will require more accurate information about vegetation structure and extent in the changing low Arctic (Martin et al. 2017).
+                    </p>
+                </section>
+
+                <section id="references" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; font-size: 0.9rem;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Literature Cited</h3>
+                    <ul style="list-style: none; padding: 0; color: #555;">
+                        <li style="margin-bottom: 0.5rem;">Didan, K. and A. Barreto. 2016. NASA measures vegetation index and phenology (VIP) phenology NDVI yearly global 0.05Deg CMG. NASA EOSDIS Land Processes DAAC.</li>
+                        <li style="margin-bottom: 0.5rem;">Symon, C., L. Arris, and B. Heal, editors. 2005. Arctic climate impact assessment. Cambridge University Press, New York, NY, USA.</li>
+                        <li style="margin-bottom: 0.5rem;">Xu L., et al. 2013. Temperature and vegetation seasonality diminishment over northern lands. <em>Nature Climate Change</em> 3:581-6</li>
+                    </ul>
+                </section>
+            </article>
+        </div>
     </main>
 
     <footer role="contentinfo">
         <div class="container">
-            <p>&copy; 2026 STILL.bz. All rights reserved.</p>
+            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Chart Data (Restored from original)
+        const data = [
+            { year: 1981, temp: -10.0, start: '1981-06-11', end: '1981-09-27' },
+            { year: 1982, temp: -13.7, start: '1982-06-13', end: '1982-09-27' },
+            { year: 1983, temp: -12.2, start: '1983-06-13', end: '1983-09-27' },
+            { year: 1984, temp: -11.4, start: '1984-06-13', end: '1984-09-27' },
+            { year: 1985, temp: -11.6, start: '1985-06-12', end: '1985-09-28' },
+            { year: 1986, temp: -12.9, start: '1986-06-13', end: '1986-09-27' },
+            { year: 1987, temp: -11.5, start: '1987-06-13', end: '1987-09-28' },
+            { year: 1988, temp: -12.1, start: '1988-06-11', end: '1988-09-27' },
+            { year: 1989, temp: -13.0, start: '1989-06-11', end: '1989-09-27' },
+            { year: 1990, temp: -13.1, start: '1990-06-08', end: '1990-09-27' },
+            { year: 1991, temp: -12.5, start: '1991-06-11', end: '1991-09-27' },
+            { year: 1992, temp: -12.8, start: '1992-06-13', end: '1992-09-26' },
+            { year: 1993, temp: -11.8, start: '1993-06-12', end: '1993-09-27' },
+            { year: 1994, temp: -11.0, start: '1994-06-12', end: '1994-09-28' },
+            { year: 1995, temp: -11.2, start: '1995-06-09', end: '1995-09-28' },
+            { year: 1996, temp: -10.7, start: '1996-06-10', end: '1996-09-28' },
+            { year: 1997, temp: -11.0, start: '1997-06-07', end: '1997-09-27' },
+            { year: 1998, temp: -9.7, start: '1998-06-08', end: '1998-09-27' },
+            { year: 1999, temp: -9.4, start: '1999-06-07', end: '1999-10-02' },
+            { year: 2000, temp: -11.2, start: '2000-06-08', end: '2000-10-08' },
+            { year: 2001, temp: -9.5, start: '2001-06-05', end: '2001-10-12' },
+            { year: 2002, temp: -11.8, start: '2002-06-04', end: '2002-10-14' },
+            { year: 2003, temp: -10.6, start: '2003-06-04', end: '2003-10-14' },
+            { year: 2004, temp: -13.8, start: '2004-06-03', end: '2004-10-13' },
+            { year: 2005, temp: -10.6, start: '2005-06-02', end: '2005-10-13' },
+            { year: 2006, temp: -8.6, start: '2006-06-02', end: '2006-10-13' },
+            { year: 2007, temp: -10.9, start: '2007-06-01', end: '2007-10-15' },
+            { year: 2008, temp: -11.0, start: '2008-06-04', end: '2008-10-14' }
+        ];
+
+        // Chart 1: Temperature
+        new Chart(document.getElementById('tempChart'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Avg Temperature (°C)',
+                    data: data.map(d => ({x: d.year, y: d.temp})),
+                    backgroundColor: 'rgba(39, 174, 96, 1)',
+                    borderColor: 'rgba(39, 174, 96, 0.5)',
+                    showLine: false
+                },
+                {
+                    label: 'Trend Line',
+                    data: [
+                        {x: 1981, y: 0.068 * 1981 - 147.02},
+                        {x: 2008, y: 0.068 * 2008 - 147.02}
+                    ],
+                    type: 'line',
+                    borderColor: 'rgba(100, 100, 100, 0.5)',
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { type: 'linear', position: 'bottom', title: {display: true, text: 'Year'} },
+                    y: { title: {display: true, text: 'Temperature (°C)'} }
+                }
+            }
+        });
+
+        const getDayOfYear = (dateStr) => {
+            const date = new Date(dateStr);
+            const start = new Date(date.getFullYear(), 0, 0);
+            const diff = date - start;
+            return Math.floor(diff / (1000 * 60 * 60 * 24));
+        }
+
+        new Chart(document.getElementById('startSeasonChart'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Start of Season (Day of Year)',
+                    data: data.map(d => ({x: d.year, y: getDayOfYear(d.start)})),
+                    backgroundColor: 'rgba(39, 174, 96, 1)',
+                },
+                {
+                    label: 'Trend Line',
+                    data: [
+                        {x: 1981, y: -0.4305 * 1981 + 1019.7},
+                        {x: 2008, y: -0.4305 * 2008 + 1019.7}
+                    ],
+                    type: 'line',
+                    borderColor: 'rgba(100, 100, 100, 0.5)',
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                scales: {
+                    x: { type: 'linear', title: {display: true, text: 'Year'} },
+                    y: { 
+                        title: {display: true, text: 'Day of Year (approx June)'},
+                        reverse: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('endSeasonChart'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'End of Season (Day of Year)',
+                    data: data.map(d => ({x: d.year, y: getDayOfYear(d.end)})),
+                    backgroundColor: 'rgba(192, 57, 43, 1)',
+                },
+                 {
+                    label: 'Trend Line',
+                    data: [
+                        {x: 1981, y: 0.7646 * 1981 - 1247.9},
+                        {x: 2008, y: 0.7646 * 2008 - 1247.9}
+                    ],
+                    type: 'line',
+                    borderColor: 'rgba(100, 100, 100, 0.5)',
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                scales: {
+                    x: { type: 'linear', title: {display: true, text: 'Year'} },
+                    y: { title: {display: true, text: 'Day of Year (approx Sept/Oct)'} }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

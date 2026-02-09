@@ -3,58 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Axolotl Protection Initiative - STILL</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>Protecting the Pulse of Xochimilco: The Fight for the Mexican Axolotl | STILL</title>
+    
+    <!-- SEO Enhancements -->
+    <meta property="og:title" content="Protecting the Pulse of Xochimilco">
+    <meta property="og:description" content="The Fight for the Mexican Axolotl: Biodiversity, Urbanization, and Environmental Justice in Mexico City.">
+    <meta property="og:image" content="../assets/axolotl.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+
+    <style>
+        /* Blog specific styles extending styles.css */
+        .hero-banner {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-image: url('../assets/axolotl.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-tag {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid #27ae60;
+            color: #2ecc71;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+        }
+
+        .article-content h2, .article-content h3 {
+            font-family: 'Inter', sans-serif;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .highlight-box {
+                flex-direction: column;
+            }
+        }
+
+        .highlight-box img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+        }
+
+        blockquote {
+            border-left: 4px solid #27ae60;
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: #555;
+            margin: 3rem 0;
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        figure {
+            margin: 3rem 0;
+        }
+
+        figure img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .conclusion-box {
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .conclusion-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container">
             <nav role="navigation" aria-label="Main Navigation">
                 <a href="../index.html" class="logo">
+                    <img src="../assets/logo_v0.png" alt="STILL Logo">
                     STILL
                 </a>
-                <ul>
-                    <li><a href="../projects.html">Research Labs</a></li>
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../projects.html" class="active">Research Labs</a></li>
                     <li><a href="../timeline.html">Timeline</a></li>
-                    <li><a href="../bsv-calculator.html">BSV Calculator</a></li>
                     <li><a href="../dashboard.html">Dashboard</a></li>
-                    <li><a href="#" class="btn-support">Support</a></li>
+                    <li><a href="../bsv-calculator.html">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="page-section">
-            <div class="container">
-                <article>
-                    <h1>Axolotl Protection Initiative</h1>
-                    <p style="font-size: 0.9rem; color: #666;">Published on January 22, 2026 by Miguel Torres</p>
-                    
-                    <div style="margin-top: 2rem; line-height: 1.8;">
-                        <p>The axolotl (<em>Ambystoma mexicanum</em>), a unique amphibian critical to our ecosystem's cultural and biological heritage, faces unprecedented threats. Our new initiative combines ancient chinampa farming techniques with modern water quality monitoring.</p>
-                        
-                        <h3>The Plan</h3>
-                        <ol>
-                            <li><strong>Habitat Restoration:</strong> Cleaning canals and reintroducing native aquatic plants.</li>
-                            <li><strong>Predator Control:</strong> Managing populations of invasive fish species that prey on axolotl eggs.</li>
-                            <li><strong>Community Guardians:</strong> Training local farmers as custodians of the species.</li>
-                        </ol>
-
-                        <p>We believe that by healing the water, we heal ourselves. Join us in protecting this "water monster" and symbol of regeneration.</p>
-                    </div>
-
-                    <a href="../index.html" class="btn-secondary" style="margin-top: 2rem; display: inline-block;">&larr; Back to Home</a>
-                </article>
+        <!-- Hero Section -->
+        <div class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag">Biodiversity & Urbanization</span>
+                <h1 style="color: white; margin-bottom: 1rem; font-size: clamp(2rem, 5vw, 3.5rem);">Protecting the Pulse of Xochimilco: The Fight for the Mexican Axolotl</h1>
+                <p style="font-size: 1.1rem; opacity: 0.9;">By Joseph Gormaly | December 5, 2024</p>
             </div>
-        </section>
+        </div>
+
+        <article class="article-content">
+            <p style="font-size: 1.25rem; color: #555; margin-bottom: 2rem;">
+                Earth is entering a period of unprecedented change. As anthropogenic activities drive global warming and rapid biodiversity loss, few creatures symbolize the struggle between urban expansion and nature quite like the Mexican Axolotl (<em>Ambystoma mexicanum</em>).
+            </p>
+
+            <div class="highlight-box">
+                <div>
+                    <img src="../assets/peso.jpg" alt="50 Peso Note featuring the Axolotl">
+                </div>
+                <div>
+                    <h3 style="margin-top: 0;">A National Icon in Peril</h3>
+                    <p style="margin-bottom: 0;">
+                        The Axolotl is celebrated enough to be featured on Mexico's 50 Peso note, yet it is critically endangered in the wild. This paradox highlights a crucial gap between cultural appreciation and environmental reality.
+                    </p>
+                </div>
+            </div>
+
+            <h2>The Urban Threat</h2>
+            <p>
+                In the sprawling metropolis of Mexico City, conservation isn't just about biology—it's about survival in an urban jungle. The Axolotl's only remaining natural habitats, Lake Xochimilco and Lake Chalco, are under immense pressure.
+            </p>
+            <p>
+                Surrounded by a conurbation of over 20 million inhabitants, these ancient waterways face severe habitat degradation. The challenge is stark: How do we protect a delicate aquatic species when it lives in the shadow of one of the world's largest cities?
+            </p>
+
+            <figure>
+                <img src="../assets/map.jpg" alt="Map showing the Axolotl habitat relative to Mexico City's urban sprawl">
+                <figcaption>Figure 1: Satellite imagery highlights the Axolotl's shrinking habitat (red outline) against the dense gray of Mexico City's urban development.</figcaption>
+            </figure>
+
+            <h2>A Question of Environmental Justice</h2>
+            <p>
+                To save the Axolotl, we must look beyond traditional conservation methods. The current crisis is a matter of <strong>Environmental Justice</strong>. The loss of biodiversity affects global populations, yet it is often driven by the activities of specific societal groups.
+            </p>
+            <blockquote>
+                "If we want to grow good citizens, then let us teach reciprocity. If we want to aspire to justice for all, let it be justice for all of creation."
+                <br>
+                <span style="display: block; margin-top: 1rem; font-size: 0.9rem; font-weight: bold; font-style: normal; color: #27ae60;">— Robin Wall Kimmerer, Braiding Sweetgrass</span>
+            </blockquote>
+            <p>
+                Modern conservation strategies in Xochimilco are shifting perspective. They are adopting a "Multilevel Perspective" framework that values diverse viewpoints and prioritizes the redistribution of decision-making power. It acknowledges that local communities are not just bystanders; they are the guardians of the land.
+            </p>
+
+            <div class="highlight-box">
+                <figure style="margin: 0; flex: 1;">
+                    <img src="../assets/Sign.jpg" alt="Virginia Graue next to an interpretive sign">
+                    <figcaption>Local advocacy plays a vital role in raising awareness.</figcaption>
+                </figure>
+                <div style="flex: 1;">
+                    <h3 style="margin-top: 0;">Community at the Core</h3>
+                    <p>
+                        Successful conservation requires moving from top-down mandates to community-based solutions. In Xochimilco, this means engaging stakeholders like the <em>remeros</em> (boat operators), farmers, and local residents.
+                    </p>
+                    <p>
+                        By understanding the "Social Practice Theory"—how resource use and cultural meanings shape beliefs—conservationists can foster lasting behavioral changes that benefit both the people and the Axolotl.
+                    </p>
+                </div>
+            </div>
+
+            <h2>Science in Action: The Remeros Partnership</h2>
+            <p>
+                One of the most promising developments has been the partnership between researchers and the local community. Fishermen and tour boat operators have joined forces with scientists to model Axolotl habitats.
+            </p>
+            <p>
+                Using past population survey data combined with rigorous water quality sampling, these teams have identified a critical finding: <strong>Axolotls prefer freshwater low in minerals and pollution, specifically near submerged ground-fed springs.</strong>
+            </p>
+
+            <figure>
+                <img src="../assets/collect_NW.jpg" alt="Researchers and locals working together on boats">
+                <figcaption>Collaborative Fieldwork: Researchers and local boatmen (remeros) sampling water quality and monitoring populations in the canals.</figcaption>
+            </figure>
+
+            <h2>The Path Forward</h2>
+            <p>
+                The fight for the Axolotl is far from over, but the path forward is becoming clearer. It requires a blend of legislative support, financial investment, and unwavering community engagement.
+            </p>
+            <ul style="margin-bottom: 2rem; color: #2c3e50;">
+                <li><strong>Legislative Support:</strong> The Mexican Natural Resources Commission must prioritize habitat preservation policies.</li>
+                <li><strong>Stakeholder Engagement:</strong> Continued partnerships with academia, zoos, and local workers are essential.</li>
+                <li><strong>Sustainable Development:</strong> Cities must balance urban growth with the preservation of green and blue spaces.</li>
+            </ul>
+
+            <div class="conclusion-box">
+                <img src="../assets/ax2.jpg" alt="Close up of an Axolotl">
+                <div>
+                    <h3 style="margin-top: 0; color: #27ae60;">A Model for the World</h3>
+                    <p style="margin-bottom: 0;">
+                        The conservation of the Axolotl represents the intersection of environmental justice and sustainable urban development. If we can save this "water monster" in the heart of a megacity, we create a template for urban conservation initiatives worldwide.
+                    </p>
+                </div>
+            </div>
+
+            <hr style="margin: 3rem 0; border: 0; border-top: 1px solid #eee;">
+
+            <div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; font-size: 0.9rem; color: #777;">
+                <h4 style="margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; color: #333;">References & Further Reading</h4>
+                <ul style="padding-left: 1rem;">
+                    <li>American Association of Landscape Architects. (n.d.). Xochimilco Ecological Park.</li>
+                    <li>Bride, I. G., et al. (2008). Flying an amphibian flagship: conservation of the Axolotl through nature tourism.</li>
+                    <li>Contreras, V., et al. (2009). Recent decline and potential distribution in the last remnant area of the microendemic Mexican Axolotl.</li>
+                    <li>Martin, A., et al. (2020). Environmental Justice and Transformations to Sustainability.</li>
+                    <li>Mexico Lore. (2019). Axolotl.</li>
+                </ul>
+            </div>
+
+        </article>
     </main>
 
     <footer role="contentinfo">
         <div class="container">
-            <p>&copy; 2026 STILL.bz. All rights reserved.</p>
+            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
