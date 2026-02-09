@@ -4,92 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume | STILL</title>
+    
+    <!-- SEO Enhancements -->
+    <meta property="og:title" content="Resume | Joe Gormaly">
+    <meta property="og:description" content="Environmental professional with expertise in Indigenous land use planning, GIS, and project management.">
+    <meta name="twitter:card" content="summary">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+
     <style>
-        .timeline {
-            max-width: 700px;
+        /* Specific timeline styles for resume */
+        .resume-timeline {
+            max-width: 800px;
             margin: 3rem auto;
-        }
-        .timeline-item {
-            padding-left: 2rem;
-            border-left: 3px solid #27ae60;
-            margin-bottom: 2.5rem;
             position: relative;
         }
-        .timeline-item::before {
+        .resume-item {
+            padding-left: 2.5rem;
+            border-left: 3px solid #27ae60;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .resume-item::before {
             content: '';
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             background: #27ae60;
             border-radius: 50%;
             position: absolute;
-            left: -9px;
+            left: -10px;
             top: 0;
             box-shadow: 0 0 0 4px #fff;
         }
-        .timeline-item h3 {
-            font-size: 1.35rem;
-            color: #1a1a1a;
+        .resume-item h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
             margin-bottom: 0.5rem;
             margin-top: 0;
+            font-family: 'Merriweather', serif;
         }
-        .timeline-item .org {
+        .resume-item .org {
             font-weight: 600;
             color: #27ae60;
             margin-bottom: 0.25rem;
+            font-size: 1.1rem;
         }
-        .timeline-item .date {
-            font-size: 0.95rem;
+        .resume-item .date {
+            font-size: 0.9rem;
             color: #7f8c8d;
             margin-bottom: 1rem;
+            font-style: italic;
+        }
+        .resume-item p {
+            line-height: 1.6;
+            color: #555;
         }
     </style>
 </head>
 <body>
-    <nav aria-label="Main navigation">
-        <ul>
-            <li class="logo" style="margin-right:2rem;">
-                <a href="index.html" aria-label="STILL Home">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height:32px;width:32px;vertical-align:middle;margin-right:8px;">
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo_v0.png" alt="STILL Logo">
                     STILL
                 </a>
-            </li>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resume.html" class="active">Resume</a></li>
-            <li><a href="projects.html">Research Labs</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li style="margin-left: auto;"><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="support-btn" target="_blank" rel="noopener noreferrer">Support</a></li>
-        </ul>
-    </nav>
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resume.html" class="active">Resume</a></li>
+                    <li><a href="projects.html">Research Labs</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <main>
         <section class="page-section">
-            <div class="section-content">
-                <h1>Resume</h1>
-                <div class="divider"></div>
-                <p style="text-align: center; font-size: 1.15rem; color: #2c3e50;">Environmental professional with expertise in Indigenous land use planning, GIS, and project management.</p>
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <h1>Resume</h1>
+                    <div class="divider" style="margin: 1.5rem auto;"></div>
+                    <p style="font-size: 1.25rem; color: #555; max-width: 700px; margin: 0 auto;">
+                        Environmental professional with expertise in Indigenous land use planning, GIS, and project management.
+                    </p>
+                </div>
 
-                <div class="timeline">
-                    <div class="timeline-item">
+                <div class="resume-timeline">
+                    <div class="resume-item">
                         <h3>Protected Area Project Manager</h3>
                         <div class="org">Wuskwi Sipihk First Nation, Birch River, MB</div>
                         <div class="date">Aug 2025 – Present</div>
                         <p>Leading development of a comprehensive vision and plan for a proposed Indigenous Protected Area in west-central Manitoba. Facilitating tri-Nation Working Group coordination, managing ECCC funding, and conducting community engagement to ensure land use plans reflect Nation values.</p>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="resume-item">
                         <h3>GIS Specialist</h3>
                         <div class="org">Chris Werner Consulting, Winnipeg, MB</div>
                         <div class="date">Oct 2023 – Aug 2025</div>
                         <p>Designed and maintained geospatial systems supporting Indigenous communities in land claim negotiations. Built workflows for data analysis and cartography using ArcGIS and Python. Collaborated on monitoring during community culture camps in Northern Manitoba, Southern Nunavut, and NWT.</p>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="resume-item">
                         <h3>Wildland Firefighter (Crewmember)</h3>
                         <div class="org">Government of the Northwest Territories, Yellowknife, NT</div>
                         <div class="date">2016, 2018, 2019, 2023</div>
@@ -101,7 +130,16 @@
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+        <div class="container">
+            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+        </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
