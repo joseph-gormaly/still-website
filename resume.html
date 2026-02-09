@@ -17,51 +17,104 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
 
     <style>
-        /* Specific timeline styles for resume */
-        .resume-timeline {
+        /* Resume Specific Styles */
+        .resume-section {
             max-width: 800px;
-            margin: 3rem auto;
-            position: relative;
+            margin: 0 auto 4rem auto;
         }
-        .resume-item {
-            padding-left: 2.5rem;
-            border-left: 3px solid #27ae60;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        .resume-item::before {
-            content: '';
-            width: 16px;
-            height: 16px;
-            background: #27ae60;
-            border-radius: 50%;
-            position: absolute;
-            left: -10px;
-            top: 0;
-            box-shadow: 0 0 0 4px #fff;
-        }
-        .resume-item h3 {
+        
+        .resume-heading {
             font-size: 1.5rem;
             color: #2c3e50;
-            margin-bottom: 0.5rem;
-            margin-top: 0;
+            border-bottom: 2px solid #27ae60;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            padding-left: 2rem;
+            border-left: 3px solid #e0e0e0;
+            margin-bottom: 2.5rem;
+            position: relative;
+            transition: border-color 0.3s;
+        }
+        
+        .timeline-item:hover {
+            border-left-color: #27ae60;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border: 3px solid #27ae60;
+            border-radius: 50%;
+            position: absolute;
+            left: -9px;
+            top: 0;
+        }
+
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin: 0 0 0.25rem 0;
             font-family: 'Merriweather', serif;
         }
-        .resume-item .org {
+
+        .timeline-item .org {
             font-weight: 600;
             color: #27ae60;
+            font-size: 1rem;
             margin-bottom: 0.25rem;
-            font-size: 1.1rem;
         }
-        .resume-item .date {
-            font-size: 0.9rem;
+
+        .timeline-item .date {
+            font-size: 0.85rem;
             color: #7f8c8d;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .resume-item p {
+
+        .timeline-item p {
             line-height: 1.6;
             color: #555;
+            margin-bottom: 0;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+
+        .skill-card h4 {
+            color: #27ae60;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .skill-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
         }
     </style>
 </head>
@@ -95,7 +148,7 @@
     <main>
         <section class="page-section">
             <div class="container">
-                <div style="text-align: center; margin-bottom: 3rem;">
+                <div style="text-align: center; margin-bottom: 4rem;">
                     <h1>Resume</h1>
                     <div class="divider" style="margin: 1.5rem auto;"></div>
                     <p style="font-size: 1.25rem; color: #555; max-width: 700px; margin: 0 auto;">
@@ -103,28 +156,94 @@
                     </p>
                 </div>
 
-                <div class="resume-timeline">
-                    <div class="resume-item">
+                <!-- Experience -->
+                <div class="resume-section">
+                    <h2 class="resume-heading">Professional Experience</h2>
+                    
+                    <div class="timeline-item">
                         <h3>Protected Area Project Manager</h3>
                         <div class="org">Wuskwi Sipihk First Nation, Birch River, MB</div>
                         <div class="date">Aug 2025 – Present</div>
                         <p>Leading development of a comprehensive vision and plan for a proposed Indigenous Protected Area in west-central Manitoba. Facilitating tri-Nation Working Group coordination, managing ECCC funding, and conducting community engagement to ensure land use plans reflect Nation values.</p>
                     </div>
 
-                    <div class="resume-item">
+                    <div class="timeline-item">
                         <h3>GIS Specialist</h3>
                         <div class="org">Chris Werner Consulting, Winnipeg, MB</div>
                         <div class="date">Oct 2023 – Aug 2025</div>
                         <p>Designed and maintained geospatial systems supporting Indigenous communities in land claim negotiations. Built workflows for data analysis and cartography using ArcGIS and Python. Collaborated on monitoring during community culture camps in Northern Manitoba, Southern Nunavut, and NWT.</p>
                     </div>
 
-                    <div class="resume-item">
-                        <h3>Wildland Firefighter (Crewmember)</h3>
-                        <div class="org">Government of the Northwest Territories, Yellowknife, NT</div>
-                        <div class="date">2016, 2018, 2019, 2023</div>
+                    <div class="timeline-item">
+                        <h3>Environmental Program Manager</h3>
+                        <div class="org">Kátł'odeeche First Nation, Hay River, NT</div>
+                        <div class="date">Jul 2021 – Jan 2023</div>
+                        <p>Led planning, implementation, and reporting of community-based environmental monitoring programs. Managed environmental data collection and analysis using MS Access and ArcGIS. Oversaw budget management and authored comprehensive technical reports.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Wildfire Firefighter / Crew Boss</h3>
+                        <div class="org">GNWT & Evergreen Forestry Ltd., Hay River, NT</div>
+                        <div class="date">2016, 2018, 2019, 2020, 2023</div>
                         <p>Suppressed forest fires in remote boreal environments; used GIS to map fire perimeters. Supervised crew during fire suppression operations in challenging remote conditions.</p>
                     </div>
+
+                    <div class="timeline-item">
+                        <h3>Research Assistant</h3>
+                        <div class="org">Carleton University, Ottawa, ON</div>
+                        <div class="date">Aug 2017 – Apr 2018</div>
+                        <p>Managed research project analyzing changes in growing season in the Canadian Arctic using remotely sensed data.</p>
+                    </div>
                 </div>
+
+                <!-- Education -->
+                <div class="resume-section">
+                    <h2 class="resume-heading">Education</h2>
+                    
+                    <div class="timeline-item">
+                        <h3>Master of Natural Resources Management</h3>
+                        <div class="org">University of Manitoba, Winnipeg, MB</div>
+                        <div class="date">In Progress</div>
+                        <p>Focus: Natural Resources Policy, Human Dimensions, Ecological Dimensions, Project Management.</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Bachelor of Applied Technology – GIS</h3>
+                        <div class="org">SAIT, Calgary, AB</div>
+                        <div class="date">2022</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3>Diploma in Natural Resource Technology</h3>
+                        <div class="org">Aurora College, Fort Smith, NT</div>
+                        <div class="date">2018</div>
+                        <p>Coursework includes Aboriginal Land Claims and Self Government.</p>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="resume-section">
+                    <h2 class="resume-heading">Core Competencies</h2>
+                    <div class="skills-grid">
+                        <div class="skill-card">
+                            <h4>Land Management</h4>
+                            <p>IPCAs, Land Use Planning, Environmental Monitoring</p>
+                        </div>
+                        <div class="skill-card">
+                            <h4>Technical</h4>
+                            <p>ArcGIS Pro, Python (ArcPy), Remote Sensing, Data Management</p>
+                        </div>
+                        <div class="skill-card">
+                            <h4>Engagement</h4>
+                            <p>Community Consultation, Stakeholder Facilitation, Government Relations</p>
+                        </div>
+                        <div class="skill-card">
+                            <h4>Administration</h4>
+                            <p>Proposal Writing, Budget Management, Staff Supervision</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
     </main>
