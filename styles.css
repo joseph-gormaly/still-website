@@ -1,253 +1,56 @@
-/* ========== CSS Reset & Base ========== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif;
-    background: #fafafa;
-    color: #1a1a1a;
-    line-height: 1.7;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* ========== Navigation ========== */
-nav {
-    position: sticky;
-    top: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-nav ul {
+/* Two-Eyed Seeing Toggle */
+.view-toggle {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    padding: 1.25rem 2rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    gap: 1rem;
-}
-
-nav a {
-    text-decoration: none;
-    color: #1a1a1a;
-    font-weight: 600;
-    padding: 0.625rem 1.25rem;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-size: 0.95rem;
-    letter-spacing: 0.3px;
-}
-
-nav a:hover, nav a.active {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-    color: #fff;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
-}
-
-nav .logo {
-    font-weight: 800;
-    font-size: 1.35rem;
-    letter-spacing: -1.5px;
-    margin-right: auto;
-}
-
-nav .logo a {
-    padding: 0.5rem 0;
-}
-
-nav .logo a:hover {
-    background: transparent;
-    transform: none;
-    box-shadow: none;
-    color: #27ae60;
-}
-
-/* Support button styling */
-.support-btn {
-    background: linear-gradient(135deg, #27ae60 0%, #229954 100%) !important;
-    color: #fff !important;
-    padding: 0.625rem 1.5rem !important;
-    border-radius: 50px !important;
-    font-weight: 600 !important;
-    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
-}
-
-.support-btn:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4) !important;
-}
-
-/* ========== Main Content ========== */
-main {
-    min-height: calc(100vh - 200px);
-}
-
-.page-section {
-    padding: 4rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.section-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-/* ========== Typography ========== */
-h1, h2, h3, h4 {
-    font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    margin-bottom: 1rem;
-    letter-spacing: -2px;
-    color: #1a1a1a;
-    font-weight: 800;
-}
-
-h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 1.5rem;
-    margin-top: 2rem;
-    color: #1a1a1a;
-    font-weight: 700;
-    letter-spacing: -1px;
-}
-
-h3 {
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
-    line-height: 1.5;
-}
-
-p {
-    font-size: 1.125rem;
-    color: #2c3e50;
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
-}
-
-.divider {
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #27ae60, #229954);
-    margin: 2rem auto;
-    border-radius: 2px;
-}
-
-/* ========== Footer ========== */
-footer {
-    background: #2c3e50;
-    color: #ecf0f1;
-    text-align: center;
-    padding: 2rem;
-    margin-top: 4rem;
-}
-
-footer p {
-    color: #ecf0f1;
-    font-size: 0.95rem;
-}
-
-/* ========== Contact Page Specific ========== */
-.contact-section {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: #fff;
-    padding: 4rem 2rem;
-    min-height: calc(100vh - 200px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.contact-section h1 {
-    color: #fff;
-}
-
-.contact-section p {
-    color: #ecf0f1;
-    font-size: 1.2rem;
-}
-
-.contact-section .section-content {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    padding: 3rem;
+    background: #e0e0e0;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 2px;
+    margin-right: 15px;
+    border: 1px solid #ccc;
 }
 
-.contact-info {
-    margin-top: 2rem;
+.toggle-btn {
+    background: none;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+    transition: all 0.3s ease;
 }
 
-.contact-link {
-    display: inline-block;
-    padding: 1rem 2.5rem;
+.toggle-btn.active {
     background: #fff;
     color: #2c3e50;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.contact-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    background: #27ae60;
-    color: #fff;
+/* Master View (Right Hemisphere/Indigenous) Styles */
+body[data-view-mode="master"] {
+    font-family: 'Merriweather', serif; /* More organic typography */
+    background-image: url('assets/paper-texture.png'); /* Placeholder for texture */
+    background-blend-mode: multiply;
 }
 
-/* ========== Responsive ========== */
-@media (max-width: 768px) {
-    nav ul {
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        padding: 1rem 1.5rem;
-    }
+body[data-view-mode="master"] .hero {
+    background: linear-gradient(135deg, #fdfbf7 0%, #f3e7e2 100%);
+}
 
-    nav .logo {
-        margin-right: 0;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 0.75rem;
-    }
+body[data-view-mode="master"] .cta-btn {
+    border-radius: 2px 15px 5px 20px; /* Imperfect/organic shape */
+    background: linear-gradient(135deg, #8b5a2b 0%, #a07248 100%); /* Earth tones */
+    box-shadow: 2px 4px 10px rgba(139, 90, 43, 0.3);
+}
 
-    nav a {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-    }
+body[data-view-mode="master"] h1, 
+body[data-view-mode="master"] h2 {
+    color: #5d4037;
+}
 
-    .page-section {
-        padding: 2.5rem 1.25rem;
-    }
-
-    .contact-section .section-content {
-        padding: 2rem 1.5rem;
-        border-radius: 16px;
-    }
+/* Emissary View (Left Hemisphere/Western) - Default is already close to this, but enforcing strictness */
+body[data-view-mode="emissary"] .hero {
+    background-image: radial-gradient(#ccc 1px, transparent 1px);
+    background-size: 20px 20px; /* Grid pattern */
 }
