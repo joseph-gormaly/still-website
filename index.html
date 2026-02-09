@@ -1,165 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- SEO Enhancements -->
-        <meta property="og:title" content="STILL | Sustainable Transformation Initiative">
-        <meta property="og:description" content="Integrating Western and Indigenous worldviews for sustainable land stewardship.">
-        <meta property="og:image" content="https://your-site.com/assets/og-image.png">
-        <meta property="og:url" content="https://your-site.com">
-        <meta name="twitter:card" content="summary_large_image">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STILL | Sustainable Transformation Initiative for Land & Learning</title>
-    <meta name="description" content="Integrating Western and Indigenous worldviews for land stewardship, research, and education.">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <title>STILL - Sustainable Transformation Initiative for Land & Learning</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f5f3ef 0%, #faf9f7 100%);
-            text-align: center;
-            padding: 4rem 2rem;
-        }
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            margin-bottom: 1.5rem;
-            letter-spacing: -3px;
-        }
-        .hero .subtitle {
-            font-size: clamp(1.25rem, 3vw, 2rem);
-            color: #2c3e50;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            line-height: 1.4;
-        }
-        .hero .tagline {
-            font-size: 1.25rem;
-            color: #7f8c8d;
-            font-style: italic;
-            max-width: 700px;
-            margin: 2rem auto;
-        }
-        .cta-buttons {
-            margin-top: 3rem;
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .cta-btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        }
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
-        }
-        .cta-btn.secondary {
-            background: #fff;
-            color: #2c3e50;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .cta-btn.secondary:hover {
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-    </style>
+    <meta name="description" content="Integrating Western science and Indigenous wisdom for sustainable land and learning transformation.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav role="navigation" aria-label="Main navigation">
-        <ul>
-            <li class="logo" style="margin-right:2rem;">
-                <a href="index.html" aria-label="STILL Home">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height:32px;width:32px;vertical-align:middle;margin-right:8px;">
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    <img src="logo_v0.png" alt="STILL Logo" style="height: 40px; width: auto; display: inline-block; vertical-align: middle; margin-right: 10px;">
                     STILL
                 </a>
-            </li>
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resume.html">Resume</a></li>
-            <li><a href="projects.html">Research Labs</a></li>
-            <li><a href="timeline.html">Timeline</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="bsv-calculator.html">BSV Calculator</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li style="margin-left: auto;">
-                <div class="view-toggle" aria-label="Toggle Worldview">
-                    <button id="emissary-btn" class="toggle-btn active" title="Emissary View (Data/Metrics)">Emissary</button>
-                    <button id="master-btn" class="toggle-btn" title="Master View (Relational/Holistic)">Master</button>
-                </div>
-            </li>
-            <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="support-btn" target="_blank" rel="noopener noreferrer">Support</a></li>
-        </ul>
-    </nav>
+                <ul>
+                    <li><a href="projects.html">Research Labs</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
+                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" class="btn-support">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <main>
-        <section role="banner" class="hero">
-            <div>
-                <h1>STILL</h1>
-                <p class="subtitle">Sustainable Transformation Initiative<br>for Land & Learning</p>
-                <div class="divider"></div>
-                <p class="tagline">"Still" — rooted in place, seeing with both eyes, honoring all relations.</p>
-
-                <div class="cta-buttons">
-                    <a href="about.html" class="cta-btn">Learn About Our Work</a>
-                    <a href="dashboard.html" class="cta-btn secondary">Explore the Map</a>
+        <section class="section-content">
+            <div class="container">
+                <h1>Sustainable Transformation Initiative for Land & Learning</h1>
+                <p style="font-size: 1.25rem; color: #555; max-width: 800px;">
+                    We bridge the gap between Western science and Indigenous wisdom through <strong>Etuaptmumk</strong> (Two-Eyed Seeing). 
+                    Our mission is to foster sustainable relationships with the land and each other.
+                </p>
+                <div style="margin-top: 2rem;">
+                    <a href="projects.html" class="btn-primary" style="background: var(--color-primary); color: white; padding: 10px 20px; border-radius: 4px; margin-right: 10px;">Learn About Our Work</a>
+                    <a href="dashboard.html" class="btn-secondary" style="border: 1px solid var(--color-primary); color: var(--color-primary); padding: 10px 20px; border-radius: 4px;">Explore the Map</a>
                 </div>
             </div>
         </section>
 
-        <section class="page-section" style="background: #fff;">
-            <div class="section-content" style="text-align: center;">
-                <h2>Our Mission</h2>
-                <div class="divider"></div>
-                <p>Weaving together Indigenous wisdom and Western science to create sustainable futures that honour both the land and its peoples.</p>
-                <p>We practice Etuaptmumk (Two-Eyed Seeing)—learning to see from one eye with the strengths of Indigenous ways of knowing, and from the other eye with the strengths of Western ways of knowing, and using both eyes together.</p>
+        <section class="page-section" style="background-color: var(--color-light-gray);">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 3rem;">Our Approach: Two-Eyed Seeing</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>Indigenous Wisdom</h3>
+                        <p>Honouring traditional knowledge systems, oral histories, and deep connection to the land that has sustained communities for millennia.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Western Science</h3>
+                        <p>Utilizing data-driven analysis, ecological monitoring, and modern technological tools to understand environmental changes.</p>
+                    </div>
+                    <div class="card">
+                        <h3>The Synthesis</h3>
+                        <p>By viewing the world through both lenses simultaneously, we create more holistic, resilient, and effective solutions for the future.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+        <div class="container">
+            <p>&copy; 2026 STILL.bz. All rights reserved.</p>
+            <p>Honouring all relations.</p>
+            <p>
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Contact Us</a>
+            </p>
+        </div>
     </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const emissaryBtn = document.getElementById('emissary-btn');
-            const masterBtn = document.getElementById('master-btn');
-            const body = document.body;
-
-            // Check for saved preference
-            const currentMode = localStorage.getItem('viewMode') || 'emissary';
-            setMode(currentMode);
-
-            emissaryBtn.addEventListener('click', () => setMode('emissary'));
-            masterBtn.addEventListener('click', () => setMode('master'));
-
-            function setMode(mode) {
-                body.setAttribute('data-view-mode', mode);
-                localStorage.setItem('viewMode', mode);
-                
-                if (mode === 'emissary') {
-                    if(emissaryBtn) emissaryBtn.classList.add('active');
-                    if(masterBtn) masterBtn.classList.remove('active');
-                } else {
-                    if(masterBtn) masterBtn.classList.add('active');
-                    if(emissaryBtn) emissaryBtn.classList.remove('active');
-                }
-            }
-        });
-    </script>
 </body>
 </html>

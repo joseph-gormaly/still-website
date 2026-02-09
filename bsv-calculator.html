@@ -3,205 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio-Social Valuation Calculator | STILL</title>
+    <title>BSV Calculator - STILL</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        .calculator-container {
-            max-width: 800px;
-            margin: 4rem auto;
-            background: #fff;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-        select, input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-            border-top: 2px solid #f0f0f0;
-            padding-top: 2rem;
-        }
-        .result-box {
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .conventional-result {
-            background: #f8f9fa;
-            border-left: 5px solid #bdc3c7;
-        }
-        .bsv-result {
-            background: #e8f6f3;
-            border-left: 5px solid #27ae60;
-        }
-        .value-display {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 1rem 0;
-        }
-        .breakdown-list {
-            text-align: left;
-            font-size: 0.9rem;
-            color: #555;
-            list-style: none;
-            padding: 0;
-        }
-        .breakdown-list li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-        }
-        button.calc-btn {
-            width: 100%;
-            padding: 1rem;
-            background: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        button.calc-btn:hover {
-            background: #34495e;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav role="navigation">
-        <ul>
-            <li class="logo" style="margin-right:2rem;"><a href="index.html">STILL</a></li>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="projects.html">Research Labs</a></li>
-            <li><a href="timeline.html">Timeline</a></li>
-            <li><a href="bsv-calculator.html" class="active">BSV Calculator</a></li>
-        </ul>
-    </nav>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    STILL
+                </a>
+                <ul>
+                    <li><a href="projects.html">Research Labs</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
+                    <li><a href="bsv-calculator.html" class="active">BSV Calculator</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#" class="btn-support">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
     <main>
-        <div class="calculator-container">
-            <h1>Bio-Social Valuation Calculator</h1>
-            <p>Compare the traditional economic value of land development against its holistic bio-social value.</p>
-            
-            <div class="form-group">
-                <label for="landType">Ecosystem Type</label>
-                <select id="landType">
-                    <button value="wetland">Wetland / Muskeg</button>
-                    <option value="forest">Boreal Forest</option>
-                    <option value="grassland">Native Grassland</option>
-                </select>
-            </div>
+        <section class="page-section">
+            <div class="container">
+                <h1>BSV Profit Calculator</h1>
+                <p>Estimate the potential impact and value of environmental data transactions on the Bitcoin SV network.</p>
 
-            <div class="form-group">
-                <label for="areaSize">Area Size (Hectares)</label>
-                <input type="number" id="areaSize" value="100" min="1">
-            </div>
+                <div class="calculator-grid">
+                    <div class="calculator-inputs">
+                        <div class="input-group">
+                            <label for="sensor-count">Number of Active Sensors</label>
+                            <input type="number" id="sensor-count" placeholder="e.g. 50">
+                        </div>
+                        <div class="input-group">
+                            <label for="data-rate">Data Points per Day</label>
+                            <input type="number" id="data-rate" placeholder="e.g. 1440 (1 per min)">
+                        </div>
+                        <div class="input-group">
+                            <label for="bsv-price">BSV Price (USD)</label>
+                            <input type="number" id="bsv-price" placeholder="e.g. 50">
+                        </div>
+                        <button class="btn-primary" style="background: var(--color-primary); color: white; border: none; padding: 10px 20px; border-radius: 4px; margin-top: 1rem; cursor: pointer;">Calculate Impact</button>
+                    </div>
 
-            <div class="form-group">
-                <label for="proposedUse">Proposed Development</label>
-                <select id="proposedUse">
-                    <option value="mining">Resource Extraction / Mining</option>
-                    <option value="urban">Urban Development</option>
-                    <option value="agriculture">Industrial Agriculture</option>
-                </select>
-            </div>
-
-            <button class="calc-btn" onclick="calculateValue()">Calculate Impact</button>
-
-            <div class="results-grid" id="resultsArea" style="opacity: 0.5;">
-                <!-- Left Eye: Conventional -->
-                <div class="result-box conventional-result">
-                    <h3>Conventional CBA</h3>
-                    <p class="subtitle">Economic Output Only</p>
-                    <div class="value-display" id="cbaValue">$0</div>
-                    <ul class="breakdown-list">
-                        <li><span>Resource Revenue:</span> <span id="resRevenue">$0</span></li>
-                        <li><span>Job Creation:</span> <span id="jobValue">$0</span></li>
-                        <li><span>Tax Revenue:</span> <span id="taxValue">$0</span></li>
-                    </ul>
-                </div>
-
-                <!-- Right Eye: BSV -->
-                <div class="result-box bsv-result">
-                    <h3>Bio-Social Value</h3>
-                    <p class="subtitle">Holistic Ecosystem Services</p>
-                    <div class="value-display" id="bsvValue">$0</div>
-                    <ul class="breakdown-list">
-                        <li><span>Carbon Sequestration:</span> <span id="carbonValue">$0</span></li>
-                        <li><span>Water Filtration:</span> <span id="waterValue">$0</span></li>
-                        <li><span>Cultural Resilience:</span> <span id="cultureValue">$0</span></li>
-                        <li><span>Biodiversity Support:</span> <span id="bioValue">$0</span></li>
-                    </ul>
+                    <div class="results-panel">
+                        <h3>Estimated Impact</h3>
+                        <p>Based on current network fees and transaction volume.</p>
+                        
+                        <div class="result-item" style="margin-bottom: 1rem;">
+                            <strong>Total Daily Transactions:</strong>
+                            <span id="res-daily-tx">0</span>
+                        </div>
+                        <div class="result-item" style="margin-bottom: 1rem;">
+                            <strong>Estimated Network Fees (BSV):</strong>
+                            <span id="res-fees-bsv">0.000000</span>
+                        </div>
+                        <div class="result-item">
+                            <strong>Equivalent CO2 Offset (simulated):</strong>
+                            <span id="res-co2">0 kg</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 
-    <script>
-        function calculateValue() {
-            const area = parseFloat(document.getElementById('areaSize').value);
-            const landType = document.getElementById('landType').value;
-            const use = document.getElementById('proposedUse').value;
-
-            // Mock Data Multipliers (per hectare/year)
-            const values = {
-                wetland: { carbon: 5000, water: 8000, culture: 12000, bio: 6000 },
-                forest: { carbon: 3000, water: 4000, culture: 10000, bio: 5000 },
-                grassland: { carbon: 2000, water: 3000, culture: 8000, bio: 4000 }
-            };
-
-            const economic = {
-                mining: { revenue: 50000, jobs: 10000, tax: 5000 },
-                urban: { revenue: 100000, jobs: 20000, tax: 15000 },
-                agriculture: { revenue: 5000, jobs: 1000, tax: 500 }
-            };
-
-            // Calculate Conventional (CBA)
-            const econData = economic[use];
-            const totalCBA = (econData.revenue + econData.jobs + econData.tax) * area;
-
-            // Calculate BSV (Holistic)
-            const ecoData = values[landType];
-            const totalBSV = (ecoData.carbon + ecoData.water + ecoData.culture + ecoData.bio) * area;
-
-            // Update UI
-            document.getElementById('resultsArea').style.opacity = '1';
-            
-            // CBA Update
-            document.getElementById('cbaValue').textContent = formatCurrency(totalCBA);
-            document.getElementById('resRevenue').textContent = formatCurrency(econData.revenue * area);
-            document.getElementById('jobValue').textContent = formatCurrency(econData.jobs * area);
-            document.getElementById('taxValue').textContent = formatCurrency(econData.tax * area);
-
-            // BSV Update
-            document.getElementById('bsvValue').textContent = formatCurrency(totalBSV);
-            document.getElementById('carbonValue').textContent = formatCurrency(ecoData.carbon * area);
-            document.getElementById('waterValue').textContent = formatCurrency(ecoData.water * area);
-            document.getElementById('cultureValue').textContent = formatCurrency(ecoData.culture * area);
-            document.getElementById('bioValue').textContent = formatCurrency(ecoData.bio * area);
-        }
-
-        function formatCurrency(num) {
-            return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(num);
-        }
-    </script>
+    <footer role="contentinfo">
+        <div class="container">
+            <p>&copy; 2026 STILL.bz. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
