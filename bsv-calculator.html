@@ -3,23 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSV Calculator - STILL</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>BSV Calculator | STILL</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
 </head>
 <body>
     <header>
         <div class="container">
             <nav role="navigation" aria-label="Main Navigation">
                 <a href="index.html" class="logo">
+                    <img src="assets/logo_v0.png" alt="STILL Logo">
                     STILL
                 </a>
-                <ul>
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span></span><span></span><span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resume.html">Resume</a></li>
                     <li><a href="projects.html">Research Labs</a></li>
                     <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="bsv-calculator.html" class="active">BSV Calculator</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="#" class="btn-support">Support</a></li>
+                    <li><a href="bsv-calculator.html" class="active">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
@@ -45,18 +53,18 @@
                             <label for="bsv-price">BSV Price (USD)</label>
                             <input type="number" id="bsv-price" placeholder="e.g. 50" value="50">
                         </div>
-                        <button id="calculate-btn" class="btn-calculate">Calculate Impact</button>
+                        <button id="calculate-btn" style="background-color: var(--color-primary); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: 600;">Calculate Impact</button>
                     </div>
 
                     <div class="results-panel">
                         <h3>Estimated Impact</h3>
                         <p>Based on current network fees and transaction volume.</p>
                         
-                        <div class="result-item">
+                        <div class="result-item" style="margin-bottom: 1rem;">
                             <strong>Total Daily Transactions:</strong>
                             <span id="res-daily-tx">0</span>
                         </div>
-                        <div class="result-item">
+                        <div class="result-item" style="margin-bottom: 1rem;">
                             <strong>Estimated Network Fees (BSV):</strong>
                             <span id="res-fees-bsv">0.000000</span>
                         </div>
@@ -72,7 +80,7 @@
 
     <footer role="contentinfo">
         <div class="container">
-            <p>&copy; 2026 STILL.bz. All rights reserved.</p>
+            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
         </div>
     </footer>
 
@@ -101,6 +109,10 @@
                 document.getElementById('res-daily-tx').textContent = dailyTx.toLocaleString();
                 document.getElementById('res-fees-bsv').textContent = totalFeesBSV.toFixed(6);
                 document.getElementById('res-co2').textContent = totalCO2.toFixed(2) + ' kg';
+            });
+
+            document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('active');
             });
         });
     </script>
