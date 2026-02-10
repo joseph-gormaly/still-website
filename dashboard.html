@@ -4,39 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | STILL</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
-    
-    <!-- SEO Enhancements -->
-    <meta property="og:title" content="Dashboard | STILL">
-    <meta property="og:description" content="Interactive GIS dashboard for monitoring Indigenous territories and ecosystem health.">
-    <meta property="og:image" content="https://your-site.com/assets/og-image-dashboard.png">
-    <meta property="og:url" content="https://your-site.com/dashboard.html">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <header>
         <div class="container">
             <nav role="navigation" aria-label="Main Navigation">
                 <a href="index.html" class="logo">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; width: auto; vertical-align: middle;">
+                    <img src="assets/logo_v0.png" alt="STILL Logo">
                     STILL
                 </a>
                 <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
+                    <li><a href="resume.html">Resume</a></li>
                     <li><a href="projects.html">Research Labs</a></li>
                     <li><a href="timeline.html">Timeline</a></li>
                     <li><a href="dashboard.html" class="active">Dashboard</a></li>
@@ -50,42 +37,33 @@
     <main class="dashboard-section">
         <div class="container">
             <h1>Field Dashboard</h1>
-            <p class="dashboard-intro">Interactive GIS-based Territory & Ecosystem Monitor</p>
+            <p style="text-align:center; color:#bdc3c7;">Interactive GIS-based Territory & Ecosystem Monitor</p>
 
             <div class="map-container">
-                <div id="map" aria-label="Interactive map" tabindex="0"></div>
+                <div id="map"></div>
             </div>
 
             <div class="stats-panel">
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-label">Indigenous Territory</span>
-                        <span class="stat-value loading" id="territory-name">Locating...</span>
+                        <span class="stat-value" id="territory-name">Locating...</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-label">Human Development Index</span>
-                        <span class="stat-value loading" id="hdi-value">--</span>
+                        <span class="stat-value">0.929</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-label">Biodiversity Intactness Index</span>
-                        <span class="stat-value loading" id="biodiversity-value">--</span>
+                        <span class="stat-label">Biodiversity Intactness</span>
+                        <span class="stat-value">84%</span>
                     </div>
-                </div>
-                <div class="data-note" id="data-source" style="display:none; margin-top: 1rem; color: #bdc3c7; font-size: 0.85rem;">
-                    <strong>Data Sources:</strong> <span id="data-source-text"></span>
                 </div>
             </div>
 
             <div class="layer-controls">
-                <button class="layer-btn" id="btn-protected" title="Toggle Protected Areas layer">
-                    <span>🛡️</span> Protected Areas
-                </button>
-                <button class="layer-btn" id="btn-ecosystems" title="Toggle Ecosystems layer">
-                    <span>🌲</span> Tree Cover
-                </button>
-                <button class="layer-btn" id="btn-satellite" title="Toggle Satellite View">
-                    <span>🛰️</span> Satellite View
-                </button>
+                <button class="layer-btn" id="btn-protected">🛡️ Protected Areas</button>
+                <button class="layer-btn" id="btn-ecosystems">🌲 Tree Cover</button>
+                <button class="layer-btn" id="btn-satellite">🛰️ Satellite View</button>
             </div>
         </div>
     </main>
@@ -96,159 +74,49 @@
         </div>
     </footer>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- Esri Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Map initialization
-            const map = L.map('map', { preferCanvas: true }).setView([54.5, -97.5], 5);
-
-            // Base layers
-            const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap &copy; CARTO',
-                maxZoom: 17
+        document.addEventListener('DOMContentLoaded', function() {
+            const map = L.map('map').setView([54.5, -97.5], 5);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CARTO'
             }).addTo(map);
 
             const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri',
-                maxZoom: 17
+                attribution: 'Tiles &copy; Esri'
             });
 
-            // Overlay layers
-            let wdpaPolyLayer, wdpaPointLayer;
-            const ecosystems = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap, OpenTopoMap',
-                maxZoom: 17,
-                opacity: 0.7
-            });
-
-            // Layer state
-            let protectedActive = true;
-            let ecosystemsActive = false;
             let satelliteActive = false;
+            document.getElementById('btn-satellite').addEventListener('click', function() {
+                satelliteActive = !satelliteActive;
+                if (satelliteActive) { satellite.addTo(map); } else { map.removeLayer(satellite); }
+                this.classList.toggle('active');
+            });
 
-            // Load protected areas
-            function loadProtectedLayers() {
-                if (!wdpaPolyLayer) {
-                    wdpaPolyLayer = L.esri.featureLayer({
-                        url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
-                        simplifyFactor: 0.7,
-                        precision: 4,
-                        style: () => ({ color: '#27ae60', weight: 1, fillOpacity: 0.18 })
+            // Territory Logic
+            function queryNativeLand(lat, lng) {
+                fetch(`https://native-land.ca/api/index.php?maps=territories&position=${lat},${lng}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const name = data.length > 0 ? data.map(t => t.properties.Name).join(', ') : 'Data unavailable';
+                        document.getElementById('territory-name').textContent = name;
                     });
-                    wdpaPointLayer = L.esri.featureLayer({
-                        url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
-                        pointToLayer: (geojson, latlng) => L.circleMarker(latlng, { radius: 3, color: '#2980b9', fillOpacity: 0.6 })
-                    });
-                }
             }
 
-            // Initialize protected areas
-            function initProtectedAreas() {
-                const btn = document.getElementById('btn-protected');
-                if(!btn) return;
-                btn.classList.add('loading');
-                loadProtectedLayers();
-
-                setTimeout(() => {
-                    if (wdpaPolyLayer && wdpaPointLayer) {
-                        wdpaPolyLayer.addTo(map);
-                        wdpaPointLayer.addTo(map);
-                        btn.classList.remove('loading');
-                        btn.classList.add('active');
-                        showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
-                    }
-                }, 500);
-            }
-
-            // Show data source
-            function showDataSource(text, url) {
-                const sourceEl = document.getElementById('data-source');
-                const textEl = document.getElementById('data-source-text');
-                if(textEl) {
-                    textEl.innerHTML = url ? `<a href="${url}" target="_blank" style="color: #2ecc71;">${text}</a>` : text;
-                    sourceEl.style.display = 'block';
-                }
-            }
-
-            // Layer button handlers
-            const btnProtected = document.getElementById('btn-protected');
-            if(btnProtected) {
-                btnProtected.addEventListener('click', function() {
-                    protectedActive = !protectedActive;
-                    this.classList.toggle('active');
-
-                    if (protectedActive) {
-                        this.classList.add('loading');
-                        if (!wdpaPolyLayer) loadProtectedLayers();
-                        setTimeout(() => {
-                            wdpaPolyLayer.addTo(map);
-                            wdpaPointLayer.addTo(map);
-                            this.classList.remove('loading');
-                            showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
-                        }, 300);
-                    } else {
-                        if (wdpaPolyLayer) map.removeLayer(wdpaPolyLayer);
-                        if (wdpaPointLayer) map.removeLayer(wdpaPointLayer);
-                        if (!ecosystemsActive) document.getElementById('data-source').style.display = 'none';
-                    }
+            map.on('click', e => queryNativeLand(e.latlng.lat, e.latlng.lng));
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(p => {
+                    const latlng = [p.coords.latitude, p.coords.longitude];
+                    map.flyTo(latlng, 8);
+                    queryNativeLand(latlng[0], latlng[1]);
                 });
             }
 
-            const btnEco = document.getElementById('btn-ecosystems');
-            if(btnEco) {
-                btnEco.addEventListener('click', function() {
-                    ecosystemsActive = !ecosystemsActive;
-                    this.classList.toggle('active');
-
-                    if (ecosystemsActive) {
-                        ecosystems.addTo(map);
-                        showDataSource('OpenTopoMap', 'https://opentopomap.org/');
-                    } else {
-                        map.removeLayer(ecosystems);
-                        if (!protectedActive) document.getElementById('data-source').style.display = 'none';
-                    }
-                });
-            }
-
-            const btnSat = document.getElementById('btn-satellite');
-            if(btnSat) {
-                btnSat.addEventListener('click', function() {
-                    satelliteActive = !satelliteActive;
-                    this.classList.toggle('active');
-
-                    if (satelliteActive) {
-                        map.removeLayer(cartoPositron);
-                        satellite.addTo(map);
-                    } else {
-                        map.removeLayer(satellite);
-                        cartoPositron.addTo(map);
-                    }
-                });
-            }
-
-            // Territory data logic
-            function updateTerritory(name) {
-                const el = document.getElementById('territory-name');
-                if(el) {
-                    el.textContent = name;
-                    el.classList.remove('loading');
-                }
-            }
-
-            // Mobile Menu Toggle
-            const mobileBtn = document.querySelector('.mobile-menu-toggle');
-            if(mobileBtn) {
-                mobileBtn.addEventListener('click', function() {
-                    document.querySelector('.nav-links').classList.toggle('active');
-                });
-            }
-
-            // Init
-            setTimeout(initProtectedAreas, 500);
+            document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
         });
     </script>
 </body>

@@ -4,15 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STILL - Sustainable Transformation Initiative for Land & Learning</title>
-    
-    <!-- SEO Enhancements -->
     <meta name="description" content="Integrating Western science and Indigenous wisdom for sustainable land and learning transformation.">
-    <meta property="og:title" content="STILL | Sustainable Transformation Initiative">
-    <meta property="og:description" content="Integrating Western and Indigenous worldviews for sustainable land stewardship.">
-    <meta property="og:image" content="assets/og-image.png">
-    <meta property="og:url" content="https://your-site.com">
-    <meta name="twitter:card" content="summary_large_image">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
@@ -26,9 +18,7 @@
                     STILL
                 </a>
                 <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Home</a></li>
@@ -48,13 +38,13 @@
         <section class="page-section">
             <div class="container">
                 <h1>Sustainable Transformation Initiative for Land & Learning</h1>
-                <p class="subtitle">
+                <p style="font-size: 1.25rem; color: #555; max-width: 800px;">
                     We bridge the gap between Western science and Indigenous wisdom through <strong>Etuaptmumk</strong> (Two-Eyed Seeing). 
                     Our mission is to foster sustainable relationships with the land and each other.
                 </p>
-                <div class="cta-buttons" style="margin-top: 2rem;">
-                    <a href="projects.html" class="btn-primary" style="margin-right: 1rem;">Learn About Our Work</a>
-                    <a href="dashboard.html" class="btn-secondary">Explore the Map</a>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                    <a href="projects.html" class="btn-support">Learn About Our Work</a>
+                    <a href="dashboard.html" style="border: 1px solid #27ae60; color: #27ae60; padding: 0.5rem 1rem; border-radius: 4px;">Explore the Map</a>
                 </div>
             </div>
         </section>
@@ -79,20 +69,19 @@
             </div>
         </section>
 
-        <!-- Latest Updates -->
         <section class="page-section">
             <div class="container">
-                <h2 style="text-align: center; margin-bottom: 3rem;">Latest Updates</h2>
+                <h2 style="text-align: center; margin-bottom: 3rem;">Latest Research</h2>
                 <div class="cards-grid">
                     <div class="card">
-                        <h3>Vegetation Change Analysis</h3>
+                        <h3>Arctic Vegetation Monitoring</h3>
                         <p>Using remote sensing to monitor 28 years of vegetation changes in the Low Canadian Arctic.</p>
-                        <a href="blog/veg_change.html" class="btn-text">Read More &rarr;</a>
+                        <a href="blog/veg_change.html">Read More &rarr;</a>
                     </div>
                     <div class="card">
-                        <h3>Axolotl Protection Initiative</h3>
+                        <h3>Axolotl Conservation</h3>
                         <p>Environmental justice and urban biodiversity: protecting the critically endangered Mexican Axolotl.</p>
-                        <a href="blog/axolotl_protection.html" class="btn-text">Read More &rarr;</a>
+                        <a href="blog/axolotl_protection.html">Read More &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -107,7 +96,6 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
         document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
