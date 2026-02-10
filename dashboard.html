@@ -26,7 +26,7 @@
         <div class="container">
             <nav role="navigation" aria-label="Main Navigation">
                 <a href="index.html" class="logo">
-                    <img src="assets/logo_v0.png" alt="STILL Logo">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; width: auto; vertical-align: middle;">
                     STILL
                 </a>
                 <button class="mobile-menu-toggle" aria-label="Toggle navigation">
@@ -37,7 +37,6 @@
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
-                    <li><a href="resume.html">Resume</a></li>
                     <li><a href="projects.html">Research Labs</a></li>
                     <li><a href="timeline.html">Timeline</a></li>
                     <li><a href="dashboard.html" class="active">Dashboard</a></li>
@@ -103,135 +102,154 @@
     <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
 
     <script>
-        // Map initialization
-        const map = L.map('map', { preferCanvas: true }).setView([54.5, -97.5], 5);
+        document.addEventListener('DOMContentLoaded', () => {
+            // Map initialization
+            const map = L.map('map', { preferCanvas: true }).setView([54.5, -97.5], 5);
 
-        // Base layers
-        const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap &copy; CARTO',
-            maxZoom: 17
-        }).addTo(map);
+            // Base layers
+            const cartoPositron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CARTO',
+                maxZoom: 17
+            }).addTo(map);
 
-        const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            attribution: 'Tiles &copy; Esri',
-            maxZoom: 17
-        });
+            const satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri',
+                maxZoom: 17
+            });
 
-        // Overlay layers
-        let wdpaPolyLayer, wdpaPointLayer;
-        const ecosystems = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap, OpenTopoMap',
-            maxZoom: 17,
-            opacity: 0.7
-        });
+            // Overlay layers
+            let wdpaPolyLayer, wdpaPointLayer;
+            const ecosystems = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap, OpenTopoMap',
+                maxZoom: 17,
+                opacity: 0.7
+            });
 
-        // Layer state
-        let protectedActive = true;
-        let ecosystemsActive = false;
-        let satelliteActive = false;
+            // Layer state
+            let protectedActive = true;
+            let ecosystemsActive = false;
+            let satelliteActive = false;
 
-        // Load protected areas
-        function loadProtectedLayers() {
-            if (!wdpaPolyLayer) {
-                wdpaPolyLayer = L.esri.featureLayer({
-                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
-                    simplifyFactor: 0.7,
-                    precision: 4,
-                    style: () => ({ color: '#27ae60', weight: 1, fillOpacity: 0.18 })
-                });
-                wdpaPointLayer = L.esri.featureLayer({
-                    url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
-                    pointToLayer: (geojson, latlng) => L.circleMarker(latlng, { radius: 3, color: '#2980b9', fillOpacity: 0.6 })
-                });
-            }
-        }
-
-        // Initialize protected areas
-        function initProtectedAreas() {
-            const btn = document.getElementById('btn-protected');
-            btn.classList.add('loading');
-            loadProtectedLayers();
-
-            setTimeout(() => {
-                if (wdpaPolyLayer && wdpaPointLayer) {
-                    wdpaPolyLayer.addTo(map);
-                    wdpaPointLayer.addTo(map);
-                    btn.classList.remove('loading');
-                    btn.classList.add('active');
-                    showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
+            // Load protected areas
+            function loadProtectedLayers() {
+                if (!wdpaPolyLayer) {
+                    wdpaPolyLayer = L.esri.featureLayer({
+                        url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/1',
+                        simplifyFactor: 0.7,
+                        precision: 4,
+                        style: () => ({ color: '#27ae60', weight: 1, fillOpacity: 0.18 })
+                    });
+                    wdpaPointLayer = L.esri.featureLayer({
+                        url: 'https://data-gis.unep-wcmc.org/server/rest/services/ProtectedSites/The_World_Database_of_Protected_Areas/FeatureServer/0',
+                        pointToLayer: (geojson, latlng) => L.circleMarker(latlng, { radius: 3, color: '#2980b9', fillOpacity: 0.6 })
+                    });
                 }
-            }, 500);
-        }
+            }
 
-        // Show data source
-        function showDataSource(text, url) {
-            const sourceEl = document.getElementById('data-source');
-            const textEl = document.getElementById('data-source-text');
-            textEl.innerHTML = url ? `<a href="${url}" target="_blank" style="color: #2ecc71;">${text}</a>` : text;
-            sourceEl.style.display = 'block';
-        }
+            // Initialize protected areas
+            function initProtectedAreas() {
+                const btn = document.getElementById('btn-protected');
+                if(!btn) return;
+                btn.classList.add('loading');
+                loadProtectedLayers();
 
-        // Layer button handlers
-        document.getElementById('btn-protected').addEventListener('click', function() {
-            protectedActive = !protectedActive;
-            this.classList.toggle('active');
-
-            if (protectedActive) {
-                this.classList.add('loading');
-                if (!wdpaPolyLayer) loadProtectedLayers();
                 setTimeout(() => {
-                    wdpaPolyLayer.addTo(map);
-                    wdpaPointLayer.addTo(map);
-                    this.classList.remove('loading');
-                    showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
-                }, 300);
-            } else {
-                if (wdpaPolyLayer) map.removeLayer(wdpaPolyLayer);
-                if (wdpaPointLayer) map.removeLayer(wdpaPointLayer);
-                if (!ecosystemsActive) document.getElementById('data-source').style.display = 'none';
+                    if (wdpaPolyLayer && wdpaPointLayer) {
+                        wdpaPolyLayer.addTo(map);
+                        wdpaPointLayer.addTo(map);
+                        btn.classList.remove('loading');
+                        btn.classList.add('active');
+                        showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
+                    }
+                }, 500);
             }
-        });
 
-        document.getElementById('btn-ecosystems').addEventListener('click', function() {
-            ecosystemsActive = !ecosystemsActive;
-            this.classList.toggle('active');
-
-            if (ecosystemsActive) {
-                ecosystems.addTo(map);
-                showDataSource('OpenTopoMap', 'https://opentopomap.org/');
-            } else {
-                map.removeLayer(ecosystems);
-                if (!protectedActive) document.getElementById('data-source').style.display = 'none';
+            // Show data source
+            function showDataSource(text, url) {
+                const sourceEl = document.getElementById('data-source');
+                const textEl = document.getElementById('data-source-text');
+                if(textEl) {
+                    textEl.innerHTML = url ? `<a href="${url}" target="_blank" style="color: #2ecc71;">${text}</a>` : text;
+                    sourceEl.style.display = 'block';
+                }
             }
-        });
 
-        document.getElementById('btn-satellite').addEventListener('click', function() {
-            satelliteActive = !satelliteActive;
-            this.classList.toggle('active');
+            // Layer button handlers
+            const btnProtected = document.getElementById('btn-protected');
+            if(btnProtected) {
+                btnProtected.addEventListener('click', function() {
+                    protectedActive = !protectedActive;
+                    this.classList.toggle('active');
 
-            if (satelliteActive) {
-                map.removeLayer(cartoPositron);
-                satellite.addTo(map);
-            } else {
-                map.removeLayer(satellite);
-                cartoPositron.addTo(map);
+                    if (protectedActive) {
+                        this.classList.add('loading');
+                        if (!wdpaPolyLayer) loadProtectedLayers();
+                        setTimeout(() => {
+                            wdpaPolyLayer.addTo(map);
+                            wdpaPointLayer.addTo(map);
+                            this.classList.remove('loading');
+                            showDataSource('Protected Planet (WDPA)', 'https://www.protectedplanet.net/');
+                        }, 300);
+                    } else {
+                        if (wdpaPolyLayer) map.removeLayer(wdpaPolyLayer);
+                        if (wdpaPointLayer) map.removeLayer(wdpaPointLayer);
+                        if (!ecosystemsActive) document.getElementById('data-source').style.display = 'none';
+                    }
+                });
             }
+
+            const btnEco = document.getElementById('btn-ecosystems');
+            if(btnEco) {
+                btnEco.addEventListener('click', function() {
+                    ecosystemsActive = !ecosystemsActive;
+                    this.classList.toggle('active');
+
+                    if (ecosystemsActive) {
+                        ecosystems.addTo(map);
+                        showDataSource('OpenTopoMap', 'https://opentopomap.org/');
+                    } else {
+                        map.removeLayer(ecosystems);
+                        if (!protectedActive) document.getElementById('data-source').style.display = 'none';
+                    }
+                });
+            }
+
+            const btnSat = document.getElementById('btn-satellite');
+            if(btnSat) {
+                btnSat.addEventListener('click', function() {
+                    satelliteActive = !satelliteActive;
+                    this.classList.toggle('active');
+
+                    if (satelliteActive) {
+                        map.removeLayer(cartoPositron);
+                        satellite.addTo(map);
+                    } else {
+                        map.removeLayer(satellite);
+                        cartoPositron.addTo(map);
+                    }
+                });
+            }
+
+            // Territory data logic
+            function updateTerritory(name) {
+                const el = document.getElementById('territory-name');
+                if(el) {
+                    el.textContent = name;
+                    el.classList.remove('loading');
+                }
+            }
+
+            // Mobile Menu Toggle
+            const mobileBtn = document.querySelector('.mobile-menu-toggle');
+            if(mobileBtn) {
+                mobileBtn.addEventListener('click', function() {
+                    document.querySelector('.nav-links').classList.toggle('active');
+                });
+            }
+
+            // Init
+            setTimeout(initProtectedAreas, 500);
         });
-
-        // Territory data logic (simplified for clarity)
-        function updateTerritory(name) {
-            const el = document.getElementById('territory-name');
-            el.textContent = name;
-            el.classList.remove('loading');
-        }
-
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-
-        // Init
-        setTimeout(initProtectedAreas, 500);
     </script>
 </body>
 </html>

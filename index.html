@@ -4,48 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STILL - Sustainable Transformation Initiative for Land & Learning</title>
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- SEO Enhancements -->
     <meta name="description" content="Integrating Western science and Indigenous wisdom for sustainable land and learning transformation.">
+    <meta property="og:title" content="STILL | Sustainable Transformation Initiative">
+    <meta property="og:description" content="Integrating Western and Indigenous worldviews for sustainable land stewardship.">
+    <meta property="og:image" content="assets/og-image.png">
+    <meta property="og:url" content="https://your-site.com">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
 </head>
 <body>
     <header>
         <div class="container">
             <nav role="navigation" aria-label="Main Navigation">
                 <a href="index.html" class="logo">
-                    <!-- Placeholder Logo -->
-                    <img src="https://placehold.co/150x40?text=STILL" alt="STILL Logo">
+                    <img src="assets/logo_v0.png" alt="STILL Logo">
                     STILL
                 </a>
-                <ul>
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resume.html">Resume</a></li>
                     <li><a href="projects.html">Research Labs</a></li>
                     <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
                     <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="#" class="btn-support">Support</a></li>
+                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="section-content">
+        <section class="page-section">
             <div class="container">
                 <h1>Sustainable Transformation Initiative for Land & Learning</h1>
-                <p class="hero-text">
+                <p class="subtitle">
                     We bridge the gap between Western science and Indigenous wisdom through <strong>Etuaptmumk</strong> (Two-Eyed Seeing). 
                     Our mission is to foster sustainable relationships with the land and each other.
                 </p>
-                <div class="hero-actions">
-                    <a href="projects.html" class="btn-primary">Learn About Our Work</a>
+                <div class="cta-buttons" style="margin-top: 2rem;">
+                    <a href="projects.html" class="btn-primary" style="margin-right: 1rem;">Learn About Our Work</a>
                     <a href="dashboard.html" class="btn-secondary">Explore the Map</a>
                 </div>
             </div>
         </section>
 
-        <section class="page-section bg-light">
+        <section class="page-section" style="background-color: #f9f9f9;">
             <div class="container">
-                <h2 class="section-title">Our Approach: Two-Eyed Seeing</h2>
+                <h2 style="text-align: center; margin-bottom: 3rem;">Our Approach: Two-Eyed Seeing</h2>
                 <div class="cards-grid">
                     <div class="card">
                         <h3>Indigenous Wisdom</h3>
@@ -62,21 +78,21 @@
                 </div>
             </div>
         </section>
-        
-        <!-- Blog Section (New) -->
+
+        <!-- Latest Updates -->
         <section class="page-section">
             <div class="container">
-                <h2 class="section-title">Latest Updates</h2>
+                <h2 style="text-align: center; margin-bottom: 3rem;">Latest Updates</h2>
                 <div class="cards-grid">
                     <div class="card">
                         <h3>Vegetation Change Analysis</h3>
-                        <p>Understanding how local flora is adapting to climate shifts over the last decade.</p>
-                        <a href="blog/veg_change.html" style="margin-top: 1rem;">Read More &rarr;</a>
+                        <p>Using remote sensing to monitor 28 years of vegetation changes in the Low Canadian Arctic.</p>
+                        <a href="blog/veg_change.html" class="btn-text">Read More &rarr;</a>
                     </div>
                     <div class="card">
                         <h3>Axolotl Protection Initiative</h3>
-                        <p>New conservation strategies for the critically endangered axolotl population.</p>
-                        <a href="blog/axolotl_protection.html" style="margin-top: 1rem;">Read More &rarr;</a>
+                        <p>Environmental justice and urban biodiversity: protecting the critically endangered Mexican Axolotl.</p>
+                        <a href="blog/axolotl_protection.html" class="btn-text">Read More &rarr;</a>
                     </div>
                 </div>
             </div>
@@ -85,14 +101,16 @@
 
     <footer role="contentinfo">
         <div class="container">
-            <p>&copy; 2026 STILL.bz. All rights reserved.</p>
+            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
             <p>Honouring all relations.</p>
-            <p>
-                <a href="#">Privacy Policy</a> | 
-                <a href="#">Terms of Service</a> | 
-                <a href="#">Contact Us</a>
-            </p>
         </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
