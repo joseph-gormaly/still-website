@@ -10,60 +10,62 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo_v0.png" alt="STILL Logo">
+    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
                     STILL
                 </a>
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
+                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600"></span>
                 </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="projects.html">Research Labs</a></li>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
+                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
+                    <li><a href="index.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Home</a></li>
+                    <li><a href="about.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">About</a></li>
+                    <li><a href="resume.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Resume</a></li>
+                    <li><a href="projects.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Research Labs</a></li>
+                    <li><a href="timeline.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Timeline</a></li>
+                    <li><a href="dashboard.html" class="font-medium text-blue-500 border-b-2 border-green-500 hover:no-underline">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="dashboard-section">
-        <div class="container">
-            <h1>Field Dashboard</h1>
-            <p style="text-align:center; color:#bdc3c7;">Interactive GIS-based Territory & Ecosystem Monitor</p>
+    <main class="bg-[#1a252f] text-white py-12 min-h-[calc(100vh-80px)]">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-center mb-2">Field Dashboard</h1>
+            <p class="text-center text-gray-400 mb-8">Interactive GIS-based Territory & Ecosystem Monitor</p>
 
-            <div class="map-container">
-                <div id="map"></div>
+            <div class="max-w-[1200px] mx-auto bg-[#2c3e50] rounded-xl overflow-hidden shadow-2xl border border-[#34495e]">
+                <div id="map" class="h-[600px] w-full z-10"></div>
             </div>
 
-            <div class="stats-panel">
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-label">Indigenous Territory</span>
-                        <span class="stat-value" id="territory-name">Locating...</span>
+            <div class="bg-[#2c3e50]/95 backdrop-blur-md p-6 rounded-xl mt-6 max-w-[1200px] mx-auto border border-white/10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-4 bg-white/5 rounded-lg border-l-4 border-green-500">
+                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-widest">Indigenous Territory</span>
+                        <span class="text-2xl font-bold" id="territory-name">Locating...</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Human Development Index</span>
-                        <span class="stat-value">0.929</span>
+                    <div class="p-4 bg-white/5 rounded-lg border-l-4 border-green-500">
+                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-widest">Human Development Index</span>
+                        <span class="text-2xl font-bold">0.929</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">Biodiversity Intactness</span>
-                        <span class="stat-value">84%</span>
+                    <div class="p-4 bg-white/5 rounded-lg border-l-4 border-green-500">
+                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-widest">Biodiversity Intactness</span>
+                        <span class="text-2xl font-bold">84%</span>
                     </div>
                 </div>
             </div>
 
-            <div class="layer-controls">
-                <button class="layer-btn" id="btn-protected">🛡️ Protected Areas</button>
-                <button class="layer-btn" id="btn-ecosystems">🌲 Tree Cover</button>
-                <button class="layer-btn" id="btn-satellite">🛰️ Satellite View</button>
+            <div class="flex gap-4 mt-6 justify-center flex-wrap">
+                <button class="bg-green-600 text-white rounded-full px-6 py-3 font-semibold hover:bg-green-700 hover:-translate-y-0.5 transition-all flex items-center gap-2" id="btn-protected">🛡️ Protected Areas</button>
+                <button class="bg-green-600 text-white rounded-full px-6 py-3 font-semibold hover:bg-green-700 hover:-translate-y-0.5 transition-all flex items-center gap-2" id="btn-ecosystems">🌲 Tree Cover</button>
+                <button class="bg-green-600 text-white rounded-full px-6 py-3 font-semibold hover:bg-green-700 hover:-translate-y-0.5 transition-all flex items-center gap-2" id="btn-satellite">🛰️ Satellite View</button>
             </div>
         </div>
     </main>
@@ -75,12 +77,15 @@
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
-    <script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const map = L.map('map').setView([54.5, -97.5], 5);
+            const map = L.map('map', {
+                preferCanvas: true
+            }).setView([54.5, -97.5], 5);
+            
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; OpenStreetMap &copy; CARTO'
             }).addTo(map);
@@ -89,42 +94,59 @@
                 attribution: 'Tiles &copy; Esri'
             });
 
-            // Layer 1: WDPA Protected Areas (via ArcGIS)
-            const protectedAreas = L.esri.featureLayer({
-                url: 'https://services5.arcgis.com/sjPPLDdu9vEzU79y/arcgis/rest/services/WDPA_Marine_and_Terrestrial_2023/FeatureServer/0',
-                useCors: true,
-                simplifyFactor: 0.5,
-                precision: 4,
-                style: function () {
-                    return { color: '#27ae60', weight: 1.5, fillOpacity: 0.5 };
-                }
+            // Layer 1: WDPA Protected Areas (Dynamic Map Layer is often more reliable than Feature Layer for large datasets)
+            const protectedAreas = L.esri.dynamicMapLayer({
+                url: 'https://services.arcgis.com/P3ePLMYs2RVChqtp/arcgis/rest/services/World_Database_on_Protected_Areas/MapServer',
+                opacity: 0.5,
+                useCors: false
             });
 
-            // Layer 2: Tree Cover / Global Land Cover (Standard Tile Service)
+            // Layer 2: Tree Cover (Esri 2020 Land Cover)
             const treeCover = L.tileLayer('https://tiles.arcgis.com/tiles/P3ePLMYs2RVChqtp/arcgis/rest/services/Esri_2020_Land_Cover_V2/MapServer/tile/{z}/{y}/{x}', {
                 opacity: 0.7,
                 attribution: 'Esri 2020 Land Cover'
             });
 
-            let satelliteActive = false;
-            document.getElementById('btn-satellite').addEventListener('click', function() {
-                satelliteActive = !satelliteActive;
-                if (satelliteActive) { satellite.addTo(map); } else { map.removeLayer(satellite); }
-                this.classList.toggle('active');
-            });
-
             let protectedActive = false;
             document.getElementById('btn-protected').addEventListener('click', function() {
                 protectedActive = !protectedActive;
-                if (protectedActive) { protectedAreas.addTo(map); } else { map.removeLayer(protectedAreas); }
-                this.classList.toggle('active');
+                if (protectedActive) { 
+                    protectedAreas.addTo(map); 
+                    this.classList.replace('bg-green-600', 'bg-slate-700');
+                    this.classList.add('ring-2', 'ring-green-500');
+                } else { 
+                    map.removeLayer(protectedAreas); 
+                    this.classList.replace('bg-slate-700', 'bg-green-600');
+                    this.classList.remove('ring-2', 'ring-green-500');
+                }
             });
 
             let ecosystemsActive = false;
             document.getElementById('btn-ecosystems').addEventListener('click', function() {
                 ecosystemsActive = !ecosystemsActive;
-                if (ecosystemsActive) { treeCover.addTo(map); } else { map.removeLayer(treeCover); }
-                this.classList.toggle('active');
+                if (ecosystemsActive) { 
+                    treeCover.addTo(map); 
+                    this.classList.replace('bg-green-600', 'bg-slate-700');
+                    this.classList.add('ring-2', 'ring-green-500');
+                } else { 
+                    map.removeLayer(treeCover); 
+                    this.classList.replace('bg-slate-700', 'bg-green-600');
+                    this.classList.remove('ring-2', 'ring-green-500');
+                }
+            });
+
+            let satelliteActive = false;
+            document.getElementById('btn-satellite').addEventListener('click', function() {
+                satelliteActive = !satelliteActive;
+                if (satelliteActive) { 
+                    satellite.addTo(map); 
+                    this.classList.replace('bg-green-600', 'bg-slate-700');
+                    this.classList.add('ring-2', 'ring-green-500');
+                } else { 
+                    map.removeLayer(satellite); 
+                    this.classList.replace('bg-slate-700', 'bg-green-600');
+                    this.classList.remove('ring-2', 'ring-green-500');
+                }
             });
 
             // Territory Logic
