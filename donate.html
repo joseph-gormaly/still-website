@@ -4,139 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support STILL | Donate</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        .donate-container {
-            max-width: 600px;
-            margin: 4rem auto;
-            text-align: center;
-            padding: 2rem;
-        }
-        .wallet-box {
-            background: #f5f3ef;
-            border: 2px solid #8b5a2b;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        .wallet-address {
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            word-break: break-all;
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            color: #2c3e50;
-        }
-        .copy-btn {
-            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        }
-        .copy-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
-        }
-        .copy-btn:active {
-            transform: translateY(0);
-        }
-        .crypto-badge {
-            display: inline-block;
-            background: #8b5a2b;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        .success-message {
-            color: #27ae60;
-            font-weight: 600;
-            margin-top: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .success-message.show {
-            opacity: 1;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
     </style>
 </head>
-<body>
-    <nav aria-label="Main navigation">
-        <ul>
-            <li class="logo" style="margin-right:2rem;">
-                <a href="index.html" aria-label="STILL Home">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height:32px;width:32px;vertical-align:middle;margin-right:8px;">
+<body class="bg-gray-50 text-gray-900 leading-relaxed antialiased">
+    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
                     STILL
                 </a>
-            </li>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="resume.html">Resume</a></li>
-            <li><a href="projects.html">Research Labs</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li style="margin-left: auto;"><a href="donate.html" class="support-btn active">Support</a></li>
-        </ul>
-    </nav>
+                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600"></span>
+                </button>
+                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
+                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
+                    <li><a href="about.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">About</a></li>
+                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
+                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
+                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
+                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <main>
-        <div class="donate-container">
-            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Support Our Work</h1>
-            <div class="divider" style="max-width: 200px; margin: 1.5rem auto;"></div>
+    <main class="py-16 md:py-24">
+        <div class="container mx-auto px-4 max-w-2xl text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-6">Support Our Work</h1>
+            <div class="w-20 h-1 bg-[#27ae60] mx-auto mb-10"></div>
 
-            <p style="font-size: 1.1rem; color: #555; line-height: 1.8; margin-bottom: 2rem;">
+            <p class="text-xl text-gray-600 mb-12 leading-relaxed">
                 Your support helps us continue our research in Indigenous sovereignty, environmental justice,
                 and sustainable land management. Every contribution makes a difference.
             </p>
 
-            <div class="wallet-box">
-                <div class="crypto-badge">SOLANA (SOL)</div>
-                <h3 style="margin-bottom: 1rem; color: #8b5a2b;">Cryptocurrency Donation</h3>
-                <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem;">
-                    Send Solana (SOL) to the address below:
-                </p>
-                <div class="wallet-address" id="walletAddress">
-                    GfH1KUSryGDTRNJXNoNpoRWLhHsLDUxiBBLRQmpBVP9
+            <div class="bg-white rounded-3xl border border-gray-200 shadow-xl overflow-hidden mb-12">
+                <div class="bg-[#8b5a2b] py-3 text-white text-xs font-bold uppercase tracking-widest">
+                    Solana (SOL)
                 </div>
-                <button class="copy-btn" onclick="copyAddress()">
-                    📋 Copy Address
-                </button>
-                <div class="success-message" id="successMessage">
-                    ✓ Address copied to clipboard!
+                <div class="p-8 md:p-12">
+                    <h3 class="text-2xl font-bold text-[#8b5a2b] mb-4">Cryptocurrency Donation</h3>
+                    <p class="text-gray-500 mb-8">Send Solana (SOL) to the address below:</p>
+                    
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 font-mono text-sm md:text-base break-all text-[#2c3e50] mb-8" id="walletAddress">
+                        GfH1KUSryGDTRNJXNoNpoRWLhHsLDUxiBBLRQmpBVP9
+                    </div>
+
+                    <button onclick="copyAddress()" class="w-full bg-gradient-to-br from-[#27ae60] to-[#229954] text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all shadow-md">
+                        📋 Copy Address
+                    </button>
+                    
+                    <div id="successMessage" class="mt-4 text-[#27ae60] font-bold opacity-0 transition-opacity duration-300">
+                        ✓ Address copied to clipboard!
+                    </div>
                 </div>
             </div>
 
-            <div style="margin-top: 3rem; padding: 1.5rem; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <h3 style="color: #8b5a2b; margin-bottom: 1rem;">Thank You</h3>
-                <p style="font-size: 0.95rem; color: #666; line-height: 1.6;">
+            <div class="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm mb-12">
+                <h3 class="text-xl font-bold text-[#8b5a2b] mb-4 font-serif italic">Thank You</h3>
+                <p class="text-gray-600 leading-relaxed text-sm">
                     Your generosity enables us to advance Indigenous-led conservation, conduct critical research,
                     and build bridges between Western science and Indigenous knowledge systems.
                 </p>
             </div>
 
-            <p style="margin-top: 2rem; font-size: 0.85rem; color: #999;">
-                Questions about donations? <a href="contact.html" style="color: #27ae60;">Contact us</a>
+            <p class="text-gray-400 text-sm">
+                Questions about donations? <a href="contact.html" class="text-[#27ae60] hover:underline font-semibold">Contact us</a>
             </p>
         </div>
     </main>
 
-    <footer role="contentinfo">
-        <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
+            <p class="text-sm italic italic">Honouring all relations.</p>
+        </div>
     </footer>
 
     <script>
@@ -144,14 +98,22 @@
             const address = document.getElementById('walletAddress').textContent.trim();
             navigator.clipboard.writeText(address).then(() => {
                 const successMsg = document.getElementById('successMessage');
-                successMsg.classList.add('show');
+                successMsg.style.opacity = '1';
                 setTimeout(() => {
-                    successMsg.classList.remove('show');
+                    successMsg.style.opacity = '0';
                 }, 3000);
             }).catch(err => {
                 alert('Failed to copy address. Please copy manually.');
             });
         }
+
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('hidden');
+            document.querySelector('.nav-links').classList.toggle('flex');
+            document.querySelector('.nav-links').classList.toggle('flex-col');
+            document.querySelector('.nav-links').classList.toggle('w-full');
+            document.querySelector('.nav-links').classList.toggle('mt-4');
+        });
     </script>
 </body>
 </html>

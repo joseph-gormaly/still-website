@@ -5,82 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSV Calculator | STILL</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <nav role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo_v0.png" alt="STILL Logo">
+<body class="bg-gray-50 text-gray-900 leading-relaxed antialiased">
+    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
                     STILL
                 </a>
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
+                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600"></span>
                 </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="projects.html">Research Labs</a></li>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html" class="active">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
+                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
+                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
+                    <li><a href="about.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">About</a></li>
+                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
+                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
+                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
+                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html" class="font-medium text-blue-600 hover:no-underline">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="page-section">
-            <div class="container">
-                <h1>BSV Profit Calculator</h1>
-                <p>Estimate the potential impact and value of environmental data transactions on the Bitcoin SV network.</p>
+    <main class="py-16 md:py-24">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-4">BSV Impact Calculator</h1>
+                <p class="text-xl text-gray-600">Estimate the potential impact and value of environmental data transactions on the Bitcoin SV network.</p>
+            </div>
 
-                <div class="calculator-grid">
-                    <div class="calculator-inputs">
-                        <div class="input-group">
-                            <label for="sensor-count">Number of Active Sensors</label>
-                            <input type="number" id="sensor-count" placeholder="e.g. 50" value="50">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-white p-8 md:p-10 rounded-2xl border border-gray-200 shadow-sm">
+                    <h2 class="text-2xl font-bold text-[#2c3e50] mb-8">Parameters</h2>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="sensor-count" class="block text-sm font-semibold text-gray-700 uppercase tracking-wider mb-2">Number of Active Sensors</label>
+                            <input type="number" id="sensor-count" value="50" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#27ae60] focus:border-transparent transition-all outline-none">
                         </div>
-                        <div class="input-group">
-                            <label for="data-rate">Data Points per Day (per sensor)</label>
-                            <input type="number" id="data-rate" placeholder="e.g. 1440" value="1440">
+                        <div>
+                            <label for="data-rate" class="block text-sm font-semibold text-gray-700 uppercase tracking-wider mb-2">Data Points per Day (per sensor)</label>
+                            <input type="number" id="data-rate" value="1440" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#27ae60] focus:border-transparent transition-all outline-none">
                         </div>
-                        <div class="input-group">
-                            <label for="bsv-price">BSV Price (USD)</label>
-                            <input type="number" id="bsv-price" placeholder="e.g. 50" value="50">
+                        <div>
+                            <label for="bsv-price" class="block text-sm font-semibold text-gray-700 uppercase tracking-wider mb-2">BSV Price (USD)</label>
+                            <input type="number" id="bsv-price" value="50" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#27ae60] focus:border-transparent transition-all outline-none">
                         </div>
-                        <button id="calculate-btn" style="background-color: var(--color-primary); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-weight: 600;">Calculate Impact</button>
+                        <button id="calculate-btn" class="w-full bg-[#27ae60] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#219150] transition-all transform hover:-translate-y-1 shadow-lg">Calculate Impact</button>
                     </div>
+                </div>
 
-                    <div class="results-panel">
-                        <h3>Estimated Impact</h3>
-                        <p>Based on current network fees and transaction volume.</p>
-                        
-                        <div class="result-item" style="margin-bottom: 1rem;">
-                            <strong>Total Daily Transactions:</strong>
-                            <span id="res-daily-tx">0</span>
+                <div class="bg-[#2c3e50] p-8 md:p-10 rounded-2xl text-white shadow-2xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-10">
+                        <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.29 14.71L11 14.41V9h2v4.59l1.71 1.71-1.42 1.41z"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-8 relative z-10">Estimated Impact</h3>
+                    <p class="text-blue-200 mb-10 relative z-10">Based on current network fees and transaction volume.</p>
+                    
+                    <div class="space-y-8 relative z-10">
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase tracking-widest mb-1">Total Daily Transactions</span>
+                            <span id="res-daily-tx" class="text-3xl font-mono font-bold tracking-tighter text-white">0</span>
                         </div>
-                        <div class="result-item" style="margin-bottom: 1rem;">
-                            <strong>Estimated Network Fees (BSV):</strong>
-                            <span id="res-fees-bsv">0.000000</span>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase tracking-widest mb-1">Estimated Network Fees (BSV)</span>
+                            <span id="res-fees-bsv" class="text-3xl font-mono font-bold tracking-tighter text-[#27ae60]">0.000000</span>
                         </div>
-                        <div class="result-item">
-                            <strong>Equivalent CO2 Offset (simulated):</strong>
-                            <span id="res-co2">0 kg</span>
+                        <div class="flex flex-col">
+                            <span class="text-gray-400 text-xs uppercase tracking-widest mb-1">Equivalent CO2 Offset (Simulated)</span>
+                            <span id="res-co2" class="text-3xl font-mono font-bold tracking-tighter text-blue-400">0 kg</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
-    <footer role="contentinfo">
-        <div class="container">
-            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
+            <p class="text-sm italic italic">Honouring all relations.</p>
         </div>
     </footer>
 
@@ -89,30 +105,27 @@
             const btn = document.getElementById('calculate-btn');
             
             btn.addEventListener('click', function() {
-                // Get inputs
                 const sensors = parseFloat(document.getElementById('sensor-count').value) || 0;
                 const rate = parseFloat(document.getElementById('data-rate').value) || 0;
-                const price = parseFloat(document.getElementById('bsv-price').value) || 0;
                 
-                // Calculations
                 const dailyTx = sensors * rate;
-                // Assuming standard tx fee is minimal, e.g., 0.0000005 BSV per tx for small data
                 const feePerTx = 0.0000005; 
                 const totalFeesBSV = dailyTx * feePerTx;
-                
-                // Simulated CO2 offset logic: 
-                // e.g. 1 tx represents 0.01kg of CO2 data captured/avoided
                 const co2PerTx = 0.01; 
                 const totalCO2 = dailyTx * co2PerTx;
                 
-                // Update UI
                 document.getElementById('res-daily-tx').textContent = dailyTx.toLocaleString();
                 document.getElementById('res-fees-bsv').textContent = totalFeesBSV.toFixed(6);
                 document.getElementById('res-co2').textContent = totalCO2.toFixed(2) + ' kg';
             });
 
             document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.toggle('active');
+                const links = document.querySelector('.nav-links');
+                links.classList.toggle('hidden');
+                links.classList.toggle('flex');
+                links.classList.toggle('flex-col');
+                links.classList.toggle('w-full');
+                links.classList.toggle('mt-4');
             });
         });
     </script>

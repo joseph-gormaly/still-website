@@ -5,68 +5,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | STILL</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <nav role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo_v0.png" alt="STILL Logo">
+<body class="bg-white text-gray-900 leading-relaxed antialiased">
+    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
                     STILL
                 </a>
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
+                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600"></span>
                 </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="projects.html">Research Labs</a></li>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
+                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
+                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
+                    <li><a href="about.html" class="font-medium text-blue-600 hover:no-underline">About</a></li>
+                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
+                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
+                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
+                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="page-section">
-            <div class="container">
-                <div class="section-content">
-                    <h1>About STILL</h1>
-                    <div class="divider"></div>
+    <main class="py-20">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-8">About STILL</h1>
+            <div class="w-20 h-1 bg-[#27ae60] mb-10"></div>
 
-                    <p><strong>STILL</strong> is a research initiative focused on developing evidence-based policy frameworks for Indigenous-led land management. We specialize in IPCA governance, GIS analysis, and resource valuation methodologies.</p>
+            <div class="prose prose-lg prose-gray">
+                <p class="mb-6"><strong>STILL</strong> is a research initiative focused on developing evidence-based policy frameworks for Indigenous-led land management. We specialize in IPCA governance, GIS analysis, and resource valuation methodologies.</p>
 
-                    <p>Our work bridges academic research with practical implementation, providing measurable outcomes for sustainable land use.</p>
+                <p class="mb-10">Our work bridges academic research with practical implementation, providing measurable outcomes for sustainable land use.</p>
 
-                    <h3>Our Approach</h3>
-                    <p>STILL brings together Indigenous knowledge keepers and Western scientists to create holistic approaches to land stewardship. We practice Etuaptmumk (Two-Eyed Seeing)—learning to see from one eye with the strengths of Indigenous ways of knowing, and from the other eye with the strengths of Western ways of knowing, and using both eyes together.</p>
+                <h3 class="text-2xl font-bold text-[#2c3e50] mt-12 mb-6">Our Approach</h3>
+                <p class="mb-6 text-gray-700">STILL brings together Indigenous knowledge keepers and Western scientists to create holistic approaches to land stewardship. We practice Etuaptmumk (Two-Eyed Seeing)—learning to see from one eye with the strengths of Indigenous ways of knowing, and from the other eye with the strengths of Western ways of knowing, and using both eyes together.</p>
 
-                    <p>This approach allows us to develop solutions that are both scientifically rigorous and culturally grounded.</p>
+                <p class="mb-10 text-gray-700">This approach allows us to develop solutions that are both scientifically rigorous and culturally grounded.</p>
 
-                    <h3>Our Values</h3>
-                    <p>We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil.</p>
+                <h3 class="text-2xl font-bold text-[#2c3e50] mt-12 mb-6">Our Values</h3>
+                <p class="mb-6 text-gray-700 italic">"We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil."</p>
 
-                    <p>We carry the responsibility passed down through generations: to care for the land so that it may care for those yet to come. All our relations.</p>
-                </div>
+                <p class="mb-6 text-gray-700">We carry the responsibility passed down through generations: to care for the land so that it may care for those yet to come. All our relations.</p>
             </div>
-        </section>
+        </div>
     </main>
 
-    <footer role="contentinfo">
-        <div class="container">
-            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
+            <p class="text-sm italic italic">Honouring all relations.</p>
         </div>
     </footer>
 
     <script>
         document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('hidden');
+            document.querySelector('.nav-links').classList.toggle('flex');
+            document.querySelector('.nav-links').classList.toggle('flex-col');
+            document.querySelector('.nav-links').classList.toggle('w-full');
+            document.querySelector('.nav-links').classList.toggle('mt-4');
         });
     </script>
 </body>

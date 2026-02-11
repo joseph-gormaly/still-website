@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | STILL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
+        #map { z-index: 10; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900 leading-relaxed antialiased">
     <header class="bg-white border-b sticky top-0 z-[1000] py-4">
         <div class="container mx-auto px-4">
             <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
@@ -23,14 +28,14 @@
                     <span class="block w-6 h-0.5 bg-gray-600"></span>
                 </button>
                 <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
-                    <li><a href="index.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Home</a></li>
-                    <li><a href="about.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">About</a></li>
-                    <li><a href="resume.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Resume</a></li>
-                    <li><a href="projects.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Research Labs</a></li>
-                    <li><a href="timeline.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">Timeline</a></li>
-                    <li><a href="dashboard.html" class="font-medium text-blue-500 border-b-2 border-green-500 hover:no-underline">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html" class="font-medium text-gray-900 hover:text-blue-500 hover:no-underline">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
+                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
+                    <li><a href="about.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">About</a></li>
+                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
+                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
+                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
+                    <li><a href="dashboard.html" class="font-medium text-blue-600 hover:no-underline">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
@@ -38,47 +43,54 @@
 
     <main class="bg-[#1a252f] text-white py-12 min-h-[calc(100vh-80px)]">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl md:text-5xl font-serif font-bold text-center mb-2">Field Dashboard</h1>
-            <p class="text-center text-gray-400 mb-8">Interactive GIS-based Territory & Ecosystem Monitor</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-2">Field Dashboard</h1>
+            <p class="text-center text-gray-400 mb-8 font-medium">Interactive GIS-based Territory & Ecosystem Monitor</p>
 
-            <div class="max-w-[1200px] mx-auto bg-[#2c3e50] rounded-xl overflow-hidden shadow-2xl border border-[#34495e]">
-                <div id="map" class="h-[600px] w-full z-10"></div>
+            <div class="max-w-[1200px] mx-auto bg-[#2c3e50] rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                <div id="map" class="h-[600px] w-full"></div>
             </div>
 
-            <div class="bg-[#2c3e50]/95 backdrop-blur-md p-6 rounded-xl mt-6 max-w-[1200px] mx-auto border border-white/10">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="p-4 bg-white/5 rounded-lg border-l-4 border-green-500">
-                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-widest">Indigenous Territory</span>
-                        <span class="text-2xl font-bold" id="territory-name">Locating...</span>
+            <div class="bg-[#2c3e50]/95 backdrop-blur-md p-6 rounded-2xl mt-6 max-w-[1200px] mx-auto border border-white/10 shadow-lg">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+                    <div class="p-5 bg-white/5 rounded-xl border-l-4 border-[#27ae60] hover:bg-white/10 transition-colors">
+                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-[0.2em] font-bold">Indigenous Territory</span>
+                        <span class="text-2xl font-bold tracking-tight" id="territory-name">Locating...</span>
                     </div>
-                    <div class="p-4 bg-white/5 rounded-lg border-l-4 border-green-500">
-                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-widest">Human Development Index</span>
-                        <span class="text-2xl font-bold">0.929</span>
+                    <div class="p-5 bg-white/5 rounded-xl border-l-4 border-blue-500 hover:bg-white/10 transition-colors">
+                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-[0.2em] font-bold">Human Development Index</span>
+                        <span class="text-2xl font-bold tracking-tight">0.929</span>
                     </div>
-                    <div class="p-4 bg-white/5 rounded-lg border-l-4 border-green-500">
-                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-widest">Biodiversity Intactness</span>
-                        <span class="text-2xl font-bold">84%</span>
+                    <div class="p-5 bg-white/5 rounded-xl border-l-4 border-purple-500 hover:bg-white/10 transition-colors">
+                        <span class="text-xs text-gray-400 block mb-2 uppercase tracking-[0.2em] font-bold">Biodiversity Intactness</span>
+                        <span class="text-2xl font-bold tracking-tight">84%</span>
                     </div>
                 </div>
             </div>
 
-            <div class="flex gap-4 mt-6 justify-center flex-wrap">
-                <button class="bg-green-600 text-white rounded-full px-6 py-3 font-semibold hover:bg-green-700 hover:-translate-y-0.5 transition-all flex items-center gap-2" id="btn-protected">🛡️ Protected Areas</button>
-                <button class="bg-green-600 text-white rounded-full px-6 py-3 font-semibold hover:bg-green-700 hover:-translate-y-0.5 transition-all flex items-center gap-2" id="btn-ecosystems">🌲 Tree Cover</button>
-                <button class="bg-green-600 text-white rounded-full px-6 py-3 font-semibold hover:bg-green-700 hover:-translate-y-0.5 transition-all flex items-center gap-2" id="btn-satellite">🛰️ Satellite View</button>
+            <div class="flex gap-4 mt-8 justify-center flex-wrap">
+                <button class="bg-green-600 text-white rounded-full px-8 py-3.5 font-bold hover:bg-green-700 hover:-translate-y-1 transition-all flex items-center gap-2 shadow-lg group" id="btn-protected">
+                    <span class="group-hover:scale-110 transition-transform">🛡️</span> Protected Areas
+                </button>
+                <button class="bg-green-600 text-white rounded-full px-8 py-3.5 font-bold hover:bg-green-700 hover:-translate-y-1 transition-all flex items-center gap-2 shadow-lg group" id="btn-ecosystems">
+                    <span class="group-hover:scale-110 transition-transform">🌲</span> Tree Cover
+                </button>
+                <button class="bg-slate-600 text-white rounded-full px-8 py-3.5 font-bold hover:bg-slate-700 hover:-translate-y-1 transition-all flex items-center gap-2 shadow-lg group" id="btn-satellite">
+                    <span class="group-hover:scale-110 transition-transform">🛰️</span> Satellite View
+                </button>
             </div>
         </div>
     </main>
 
-    <footer role="contentinfo">
-        <div class="container">
-            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
+            <p class="text-sm italic italic">Honouring all relations.</p>
         </div>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/esri-leaflet@3.0.12/dist/esri-leaflet.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -94,14 +106,12 @@
                 attribution: 'Tiles &copy; Esri'
             });
 
-            // Layer 1: WDPA Protected Areas (Dynamic Map Layer is often more reliable than Feature Layer for large datasets)
             const protectedAreas = L.esri.dynamicMapLayer({
                 url: 'https://services.arcgis.com/P3ePLMYs2RVChqtp/arcgis/rest/services/World_Database_on_Protected_Areas/MapServer',
                 opacity: 0.5,
                 useCors: false
             });
 
-            // Layer 2: Tree Cover (Esri 2020 Land Cover)
             const treeCover = L.tileLayer('https://tiles.arcgis.com/tiles/P3ePLMYs2RVChqtp/arcgis/rest/services/Esri_2020_Land_Cover_V2/MapServer/tile/{z}/{y}/{x}', {
                 opacity: 0.7,
                 attribution: 'Esri 2020 Land Cover'
@@ -140,16 +150,15 @@
                 satelliteActive = !satelliteActive;
                 if (satelliteActive) { 
                     satellite.addTo(map); 
-                    this.classList.replace('bg-green-600', 'bg-slate-700');
-                    this.classList.add('ring-2', 'ring-green-500');
+                    this.classList.replace('bg-slate-600', 'bg-slate-700');
+                    this.classList.add('ring-2', 'ring-blue-500');
                 } else { 
                     map.removeLayer(satellite); 
-                    this.classList.replace('bg-slate-700', 'bg-green-600');
-                    this.classList.remove('ring-2', 'ring-green-500');
+                    this.classList.replace('bg-slate-700', 'bg-slate-600');
+                    this.classList.remove('ring-2', 'ring-blue-500');
                 }
             });
 
-            // Territory Logic
             function queryNativeLand(lat, lng) {
                 fetch(`https://native-land.ca/api/index.php?maps=territories&position=${lat},${lng}`)
                     .then(res => res.json())
@@ -169,7 +178,12 @@
             }
 
             document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.toggle('active');
+                const links = document.querySelector('.nav-links');
+                links.classList.toggle('hidden');
+                links.classList.toggle('flex');
+                links.classList.toggle('flex-col');
+                links.classList.toggle('w-full');
+                links.classList.toggle('mt-4');
             });
         });
     </script>

@@ -5,85 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline | STILL</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <nav role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo_v0.png" alt="STILL Logo">
+<body class="bg-gray-50 text-gray-900 leading-relaxed antialiased">
+    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
                     STILL
                 </a>
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
+                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600"></span>
                 </button>
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="projects.html">Research Labs</a></li>
-                    <li><a href="timeline.html" class="active">Timeline</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
+                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
+                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
+                    <li><a href="about.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">About</a></li>
+                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
+                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
+                    <li><a href="timeline.html" class="font-medium text-blue-600 hover:no-underline">Timeline</a></li>
+                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="page-section">
-            <div class="container">
-                <h1>Our Journey</h1>
-                <p>A history of the Two-Eyed Seeing initiative and its milestones.</p>
+    <main class="py-20">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-4">Our Journey</h1>
+                <p class="text-xl text-gray-600">A history of the Two-Eyed Seeing initiative and its milestones.</p>
+            </div>
 
-                <div class="timeline-container">
-                    <div class="timeline-item left">
-                        <div class="timeline-content">
-                            <h3>2022</h3>
-                            <p>Launch of the STILL initiative. Initial partnerships formed with local communities and research institutions.</p>
-                        </div>
+            <div class="relative space-y-12 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 before:to-transparent">
+                
+                <!-- 2022 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#27ae60] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <svg class="fill-current w-5 h-5" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
                     </div>
-                    <div class="timeline-item right">
-                        <div class="timeline-content">
-                            <h3>2023</h3>
-                            <p>First set of environmental sensors deployed. Pilot workshops held for community mapping.</p>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-[#2c3e50] text-2xl">2022</h3>
                         </div>
-                    </div>
-                    <div class="timeline-item left">
-                        <div class="timeline-content">
-                            <h3>2024</h3>
-                            <p>Expansion to 3 new regions. Educational curriculum drafting began. Received major grant for biodiversity tracking.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item right">
-                        <div class="timeline-content">
-                            <h3>2025</h3>
-                            <p>Dashboard v1.0 released. International conference on Two-Eyed Seeing hosted.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item left">
-                        <div class="timeline-content">
-                            <h3>2026</h3>
-                            <p>Current phase: Scaling up impact and integrating blockchain for transparent data verification.</p>
-                        </div>
+                        <p class="text-gray-600 leading-relaxed">Launch of the STILL initiative. Initial partnerships formed with local communities and research institutions.</p>
                     </div>
                 </div>
+
+                <!-- 2023 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#27ae60] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <svg class="fill-current w-5 h-5" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-[#2c3e50] text-2xl">2023</h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">First set of environmental sensors deployed. Pilot workshops held for community mapping.</p>
+                    </div>
+                </div>
+
+                <!-- 2024 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#27ae60] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <svg class="fill-current w-5 h-5" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-[#2c3e50] text-2xl">2024</h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">Expansion to 3 new regions. Educational curriculum drafting began. Received major grant for biodiversity tracking.</p>
+                    </div>
+                </div>
+
+                <!-- 2025 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#27ae60] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <svg class="fill-current w-5 h-5" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-[#2c3e50] text-2xl">2025</h3>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">Dashboard v1.0 released. International conference on Two-Eyed Seeing hosted.</p>
+                    </div>
+                </div>
+
+                <!-- 2026 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-[#27ae60] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 animate-pulse">
+                        <svg class="fill-current w-5 h-5" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl bg-white border border-[#27ae60] shadow-md">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-bold text-[#27ae60] text-2xl uppercase tracking-widest">2026</h3>
+                        </div>
+                        <p class="text-[#2c3e50] font-medium leading-relaxed">Current phase: Scaling up impact and integrating blockchain for transparent data verification.</p>
+                    </div>
+                </div>
+
             </div>
-        </section>
+        </div>
     </main>
 
-    <footer role="contentinfo">
-        <div class="container">
-            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
+            <p class="text-sm italic italic">Honouring all relations.</p>
         </div>
     </footer>
 
     <script>
         document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('hidden');
+            document.querySelector('.nav-links').classList.toggle('flex');
+            document.querySelector('.nav-links').classList.toggle('flex-col');
+            document.querySelector('.nav-links').classList.toggle('w-full');
+            document.querySelector('.nav-links').classList.toggle('mt-4');
         });
     </script>
 </body>

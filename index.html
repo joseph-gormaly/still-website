@@ -6,98 +6,113 @@
     <title>STILL - Sustainable Transformation Initiative for Land & Learning</title>
     <meta name="description" content="Integrating Western science and Indigenous wisdom for sustainable land and learning transformation.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="container">
-            <nav role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="logo">
-                    <img src="assets/logo_v0.png" alt="STILL Logo">
+<body class="bg-white text-gray-900 leading-relaxed antialiased">
+    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
                     STILL
                 </a>
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
+                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
+                    <span class="block w-6 h-0.5 bg-gray-600"></span>
                 </button>
-                <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="resume.html">Resume</a></li>
-                    <li><a href="projects.html">Research Labs</a></li>
-                    <li><a href="timeline.html">Timeline</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
+                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
+                    <li><a href="index.html" class="font-medium text-blue-600 hover:no-underline">Home</a></li>
+                    <li><a href="about.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">About</a></li>
+                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
+                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
+                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
+                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
+                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="page-section">
-            <div class="container">
-                <h1>Sustainable Transformation Initiative for Land & Learning</h1>
-                <p style="font-size: 1.25rem; color: #555; max-width: 800px;">
+        <section class="py-20">
+            <div class="container mx-auto px-4 text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#2c3e50] mb-6">Sustainable Transformation Initiative for Land & Learning</h1>
+                <p class="text-xl text-gray-600 max-w-3xl mb-10 leading-relaxed">
                     We bridge the gap between Western science and Indigenous wisdom through <strong>Etuaptmumk</strong> (Two-Eyed Seeing). 
                     Our mission is to foster sustainable relationships with the land and each other.
                 </p>
-                <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-                    <a href="projects.html" class="btn-support">Learn About Our Work</a>
-                    <a href="dashboard.html" style="border: 1px solid #27ae60; color: #27ae60; padding: 0.5rem 1rem; border-radius: 4px;">Explore the Map</a>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="projects.html" class="bg-[#2c3e50] text-white px-8 py-3 rounded-md font-semibold hover:bg-gray-800 transition-all text-center">Learn About Our Work</a>
+                    <a href="dashboard.html" class="border-2 border-[#27ae60] text-[#27ae60] px-8 py-3 rounded-md font-semibold hover:bg-[#27ae60] hover:text-white transition-all text-center">Explore the Map</a>
                 </div>
             </div>
         </section>
 
-        <section class="page-section" style="background-color: #f9f9f9;">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 3rem;">Our Approach: Two-Eyed Seeing</h2>
-                <div class="cards-grid">
-                    <div class="card">
-                        <h3>Indigenous Wisdom</h3>
-                        <p>Honouring traditional knowledge systems, oral histories, and deep connection to the land that has sustained communities for millennia.</p>
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-[#2c3e50] mb-16">Our Approach: Two-Eyed Seeing</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                        <h3 class="text-xl font-bold text-[#27ae60] mb-4">Indigenous Wisdom</h3>
+                        <p class="text-gray-600">Honouring traditional knowledge systems, oral histories, and deep connection to the land that has sustained communities for millennia.</p>
                     </div>
-                    <div class="card">
-                        <h3>Western Science</h3>
-                        <p>Utilizing data-driven analysis, ecological monitoring, and modern technological tools to understand environmental changes.</p>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                        <h3 class="text-xl font-bold text-[#27ae60] mb-4">Western Science</h3>
+                        <p class="text-gray-600">Utilizing data-driven analysis, ecological monitoring, and modern technological tools to understand environmental changes.</p>
                     </div>
-                    <div class="card">
-                        <h3>The Synthesis</h3>
-                        <p>By viewing the world through both lenses simultaneously, we create more holistic, resilient, and effective solutions for the future.</p>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                        <h3 class="text-xl font-bold text-[#27ae60] mb-4">The Synthesis</h3>
+                        <p class="text-gray-600">By viewing the world through both lenses simultaneously, we create more holistic, resilient, and effective solutions for the future.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="page-section">
-            <div class="container">
-                <h2 style="text-align: center; margin-bottom: 3rem;">Latest Research</h2>
-                <div class="cards-grid">
-                    <div class="card">
-                        <h3>Arctic Vegetation Monitoring</h3>
-                        <p>Using remote sensing to monitor 28 years of vegetation changes in the Low Canadian Arctic.</p>
-                        <a href="blog/veg_change.html">Read More &rarr;</a>
+        <section class="py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-[#2c3e50] mb-16">Latest Research</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-blue-200 transition-all">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors">Arctic Vegetation Monitoring</h3>
+                            <p class="text-gray-600 mb-6">Using remote sensing to monitor 28 years of vegetation changes in the Low Canadian Arctic.</p>
+                            <a href="blog/veg_change.html" class="text-[#27ae60] font-semibold flex items-center gap-2 hover:underline">Read More <span>&rarr;</span></a>
+                        </div>
                     </div>
-                    <div class="card">
-                        <h3>Axolotl Conservation</h3>
-                        <p>Environmental justice and urban biodiversity: protecting the critically endangered Mexican Axolotl.</p>
-                        <a href="blog/axolotl_protection.html">Read More &rarr;</a>
+                    <div class="group bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-blue-200 transition-all">
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold mb-4 group-hover:text-blue-600 transition-colors">Axolotl Conservation</h3>
+                            <p class="text-gray-600 mb-6">Environmental justice and urban biodiversity: protecting the critically endangered Mexican Axolotl.</p>
+                            <a href="blog/axolotl_protection.html" class="text-[#27ae60] font-semibold flex items-center gap-2 hover:underline">Read More <span>&rarr;</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer role="contentinfo">
-        <div class="container">
-            <p>&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
-            <p>Honouring all relations.</p>
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
+            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
+            <p class="text-sm italic italic">Honouring all relations.</p>
         </div>
     </footer>
 
     <script>
         document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('hidden');
+            document.querySelector('.nav-links').classList.toggle('flex');
+            document.querySelector('.nav-links').classList.toggle('flex-col');
+            document.querySelector('.nav-links').classList.toggle('w-full');
+            document.querySelector('.nav-links').classList.toggle('mt-4');
         });
     </script>
 </body>
