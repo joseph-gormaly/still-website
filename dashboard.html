@@ -76,6 +76,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -88,10 +89,38 @@
                 attribution: 'Tiles &copy; Esri'
             });
 
+            // Layer 1: WDPA Protected Areas (via ArcGIS)
+            const protectedAreas = L.esri.featureLayer({
+                url: 'https://services5.arcgis.com/sjPPLDdu9vEzU79y/arcgis/rest/services/WDPA_Marine_and_Terrestrial_2023/FeatureServer/0',
+                style: function () {
+                    return { color: '#27ae60', weight: 1, fillOpacity: 0.4 };
+                }
+            });
+
+            // Layer 2: Tree Cover / Global Land Cover (via Esri)
+            const treeCover = L.tileLayer('https://tiles.arcgis.com/tiles/P3ePLMYs2RVChqtp/arcgis/rest/services/Esri_2020_Land_Cover_V2/MapServer/tile/{z}/{y}/{x}', {
+                opacity: 0.6,
+                attribution: 'Esri 2020 Land Cover'
+            });
+
             let satelliteActive = false;
             document.getElementById('btn-satellite').addEventListener('click', function() {
                 satelliteActive = !satelliteActive;
                 if (satelliteActive) { satellite.addTo(map); } else { map.removeLayer(satellite); }
+                this.classList.toggle('active');
+            });
+
+            let protectedActive = false;
+            document.getElementById('btn-protected').addEventListener('click', function() {
+                protectedActive = !protectedActive;
+                if (protectedActive) { protectedAreas.addTo(map); } else { map.removeLayer(protectedAreas); }
+                this.classList.toggle('active');
+            });
+
+            let ecosystemsActive = false;
+            document.getElementById('btn-ecosystems').addEventListener('click', function() {
+                ecosystemsActive = !ecosystemsActive;
+                if (ecosystemsActive) { treeCover.addTo(map); } else { map.removeLayer(treeCover); }
                 this.classList.toggle('active');
             });
 
