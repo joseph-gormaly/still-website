@@ -93,15 +93,16 @@
             const protectedAreas = L.esri.featureLayer({
                 url: 'https://services5.arcgis.com/sjPPLDdu9vEzU79y/arcgis/rest/services/WDPA_Marine_and_Terrestrial_2023/FeatureServer/0',
                 useCors: true,
+                simplifyFactor: 0.5,
+                precision: 4,
                 style: function () {
-                    return { color: '#27ae60', weight: 1, fillOpacity: 0.4 };
+                    return { color: '#27ae60', weight: 1.5, fillOpacity: 0.5 };
                 }
             });
 
-            // Layer 2: Tree Cover / Global Land Cover (via Esri)
-            const treeCover = L.esri.tiledMapLayer({
-                url: 'https://tiles.arcgis.com/tiles/P3ePLMYs2RVChqtp/arcgis/rest/services/Esri_2020_Land_Cover_V2/MapServer',
-                opacity: 0.6,
+            // Layer 2: Tree Cover / Global Land Cover (Standard Tile Service)
+            const treeCover = L.tileLayer('https://tiles.arcgis.com/tiles/P3ePLMYs2RVChqtp/arcgis/rest/services/Esri_2020_Land_Cover_V2/MapServer/tile/{z}/{y}/{x}', {
+                opacity: 0.7,
                 attribution: 'Esri 2020 Land Cover'
             });
 
