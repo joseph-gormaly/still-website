@@ -35,7 +35,7 @@
                     <p class="text-gray-400 text-xl font-light text-wrap"></p>
                 </div>
                 <div class="flex gap-3">
-                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Optimized Web</span>
+                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Self-Hosted Libs</span>
                     <span class="px-4 py-1.5 bg-blue-900/20 text-blue-400 border border-blue-800/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Google Sat + Zoom 22</span>
                 </div>
             </div>
@@ -51,11 +51,11 @@
                         <div class="space-y-6 text-xs">
                             <div>
                                 <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Status</span>
-                                <span class="text-green-400 font-bold tracking-widest">LIVE SYNC</span>
+                                <span class="text-green-400 font-bold tracking-widest uppercase">Sync Optimized</span>
                             </div>
                             <div>
-                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1 text-white">Performance</span>
-                                <span class="text-gray-300 italic">Pre-optimized for Field Bandwidth.</span>
+                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1 text-white text-wrap">Cache Busting Enabled</span>
+                                <span class="text-gray-300 italic">Forcing re-deploy of all assets.</span>
                             </div>
                         </div>
                     </div>
@@ -99,29 +99,27 @@
                 const data = await response.json();
                 const sidebar = document.getElementById('media-sidebar');
 
-                // 1. Populate Sidebar First
+                // 1. Populate Sidebar
                 data.features.forEach(feature => {
                     if (feature.properties.attachments) {
                         feature.properties.attachments.forEach(att => {
                             if (att.type === 'photo') {
                                 const sideImg = document.createElement('img');
-                                const preview = mediaBase + att.name + '_preview.jpg';
-                                const web = mediaBase + att.name + '_web.jpg';
-                                const original = mediaBase + att.name + '_original.jpg';
+                                const t = mediaBase + att.name + '_t.jpg';
+                                const w = mediaBase + att.name + '_w.jpg';
+                                const o = mediaBase + att.name + '_o.jpg';
                                 
-                                sideImg.src = preview;
+                                sideImg.src = t;
                                 sideImg.loading = 'lazy';
                                 sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-transform hover:scale-105';
                                 
-                                // Direct error handling for sidebar
                                 sideImg.onerror = function() {
-                                    if (this.src.includes('_preview')) this.src = web;
-                                    else if (this.src.includes('_web')) this.src = original;
+                                    if (this.src.includes('_t.jpg')) this.src = w;
+                                    else if (this.src.includes('_w.jpg')) this.src = o;
                                 };
 
                                 sideImg.onclick = () => {
                                     map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 21);
-                                    // Popups will be opened by marker logic
                                 };
                                 sidebar.appendChild(sideImg);
                             }
@@ -153,14 +151,14 @@
                         if (feature.properties.attachments) {
                             feature.properties.attachments.forEach(att => {
                                 if (att.type === 'photo') {
-                                    const preview = mediaBase + att.name + '_preview.jpg';
-                                    const web = mediaBase + att.name + '_web.jpg';
-                                    const original = mediaBase + att.name + '_original.jpg';
+                                    const t = mediaBase + att.name + '_t.jpg';
+                                    const w = mediaBase + att.name + '_w.jpg';
+                                    const o = mediaBase + att.name + '_o.jpg';
                                     
-                                    mediaHtml += `<img loading="lazy" src="${web}" onclick="openFullImage('${original}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${original}'; this.onerror=function(){this.src='${preview}'};" />`;
+                                    mediaHtml += `<img loading="lazy" src="${w}" onclick="openFullImage('${o}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${o}'; this.onerror=function(){this.src='${t}'};" />`;
                                 }
                                 if (att.type === 'audio') {
-                                    const src = mediaBase + att.name + '_original.m4a';
+                                    const src = mediaBase + att.name + '_a.m4a';
                                     mediaHtml += `
                                         <div class="mt-2 p-2 bg-gray-100 rounded-lg flex flex-col gap-1 text-gray-900">
                                             <span class="text-[9px] font-bold text-gray-400 font-sans">VOICE NOTE</span>
