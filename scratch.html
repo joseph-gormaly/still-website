@@ -16,6 +16,17 @@
         .media-container img { width: 100%; height: auto; border-radius: 0.5rem; margin-top: 0.5rem; display: block; cursor: pointer; transition: opacity 0.2s; }
         .media-container img:hover { opacity: 0.8; }
         
+        /* Flash Animation */
+        @keyframes marker-flash {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(2.5); filter: brightness(2) drop-shadow(0 0 15px #fff); }
+            100% { transform: scale(1); filter: brightness(1); }
+        }
+        .marker-highlight {
+            animation: marker-flash 0.8s ease-out 2;
+            z-index: 9999 !important;
+        }
+        
         #img-modal { display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.9); padding: 2rem; cursor: zoom-out; align-items: center; justify-content: center; }
         #img-modal img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 1rem; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
     </style>
@@ -35,7 +46,7 @@
                     <p class="text-gray-400 text-xl font-light text-wrap"></p>
                 </div>
                 <div class="flex gap-3">
-                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Self-Hosted Libs</span>
+                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Optimized Web</span>
                     <span class="px-4 py-1.5 bg-blue-900/20 text-blue-400 border border-blue-800/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Google Sat + Zoom 22</span>
                 </div>
             </div>
@@ -46,12 +57,14 @@
                 </div>
 
                 <div class="lg:col-span-1 space-y-6 text-center lg:text-left text-white">
-                    <!-- Dataset Overview Box Removed -->
-
+                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
+                        <h3 class="text-xl font-bold mb-6 text-[#27ae60] font-serif italic text-sm text-center">Field Interaction</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed text-center">Click a photo in the viewer below to locate and highlight its exact coordinates on the map.</p>
+                    </div>
 
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
                         <h3 class="text-xl font-bold mb-4 text-blue-400 font-serif italic text-sm">Media Quickview</h3>
-                        <div id="media-sidebar" class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[400px] pr-2">
+                        <div id="media-sidebar" class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[500px] pr-2">
                             <!-- Populated via JS -->
                         </div>
                     </div>
@@ -82,41 +95,14 @@
             }).addTo(map);
 
             const mediaBase = 'assets/media/belize-field/CoMapeo_GalesPointActivity_Media_2026_02_17/';
+            const markerMap = {}; // Storage to link docId to Leaflet layers
 
             try {
                 const response = await fetch('assets/media/belize-field/CoMapeo_GalesPointActivity_Obsvns_2026_02_17.geojson');
                 const data = await response.json();
                 const sidebar = document.getElementById('media-sidebar');
 
-                // 1. Populate Sidebar
-                data.features.forEach(feature => {
-                    if (feature.properties.attachments) {
-                        feature.properties.attachments.forEach(att => {
-                            if (att.type === 'photo') {
-                                const sideImg = document.createElement('img');
-                                const t = mediaBase + att.name + '_t.jpg';
-                                const w = mediaBase + att.name + '_w.jpg';
-                                const o = mediaBase + att.name + '_o.jpg';
-                                
-                                sideImg.src = t;
-                                sideImg.loading = 'lazy';
-                                sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-transform hover:scale-105';
-                                
-                                sideImg.onerror = function() {
-                                    if (this.src.includes('_t.jpg')) this.src = w;
-                                    else if (this.src.includes('_w.jpg')) this.src = o;
-                                };
-
-                                sideImg.onclick = () => {
-                                    map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 21);
-                                };
-                                sidebar.appendChild(sideImg);
-                            }
-                        });
-                    }
-                });
-
-                // 2. Add Map Layers
+                // 1. Create Map Layers First
                 L.geoJSON(data, {
                     pointToLayer: function (feature, latlng) {
                         let color = '#27ae60';
@@ -126,25 +112,30 @@
                         if (type === 'camp') color = '#ec4899';
                         if (tags.activity === 'fishing') color = '#f59e0b';
 
-                        return L.circleMarker(latlng, {
+                        const marker = L.circleMarker(latlng, {
                             radius: 12,
                             fillColor: color,
                             color: "#fff",
                             weight: 3,
                             opacity: 1,
-                            fillOpacity: 0.9
+                            fillOpacity: 0.9,
+                            className: 'transition-all'
                         });
+                        
+                        // Link marker to ID
+                        markerMap[feature.properties.docId] = marker;
+                        return marker;
                     },
                     onEachFeature: function (feature, layer) {
                         let mediaHtml = '';
                         if (feature.properties.attachments) {
                             feature.properties.attachments.forEach(att => {
                                 if (att.type === 'photo') {
-                                    const t = mediaBase + att.name + '_t.jpg';
-                                    const w = mediaBase + att.name + '_w.jpg';
-                                    const o = mediaBase + att.name + '_o.jpg';
+                                    const preview = mediaBase + att.name + '_t.jpg';
+                                    const web = mediaBase + att.name + '_w.jpg';
+                                    const original = mediaBase + att.name + '_o.jpg';
                                     
-                                    mediaHtml += `<img loading="lazy" src="${w}" onclick="openFullImage('${o}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${o}'; this.onerror=function(){this.src='${t}'};" />`;
+                                    mediaHtml += `<img loading="lazy" src="${web}" onclick="openFullImage('${original}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${original}'; this.onerror=function(){this.src='${preview}'};" />`;
                                 }
                                 if (att.type === 'audio') {
                                     const src = mediaBase + att.name + '_a.m4a';
@@ -174,6 +165,48 @@
                         `, { maxWidth: 350 });
                     }
                 }).addTo(map);
+
+                // 2. Populate Sidebar and link to markers
+                data.features.forEach(feature => {
+                    if (feature.properties.attachments) {
+                        feature.properties.attachments.forEach(att => {
+                            if (att.type === 'photo') {
+                                const sideImg = document.createElement('img');
+                                const t = mediaBase + att.name + '_t.jpg';
+                                const w = mediaBase + att.name + '_w.jpg';
+                                const o = mediaBase + att.name + '_o.jpg';
+                                
+                                sideImg.src = t;
+                                sideImg.loading = 'lazy';
+                                sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-all hover:scale-105';
+                                
+                                sideImg.onerror = function() {
+                                    if (this.src.includes('_t.jpg')) this.src = w;
+                                    else if (this.src.includes('_w.jpg')) this.src = o;
+                                };
+
+                                sideImg.onclick = () => {
+                                    const coords = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
+                                    map.flyTo(coords, 21);
+                                    
+                                    // Flash the marker
+                                    const marker = markerMap[feature.properties.docId];
+                                    if (marker) {
+                                        const el = marker.getElement();
+                                        if (el) {
+                                            el.classList.remove('marker-highlight');
+                                            void el.offsetWidth; // Trigger reflow
+                                            el.classList.add('marker-highlight');
+                                            setTimeout(() => el.classList.remove('marker-highlight'), 3000);
+                                        }
+                                        setTimeout(() => marker.openPopup(), 400);
+                                    }
+                                };
+                                sidebar.appendChild(sideImg);
+                            }
+                        });
+                    }
+                });
 
                 const bounds = L.geoJSON(data).getBounds();
                 map.fitBounds(bounds, { padding: [50, 50], maxZoom: 20 });
