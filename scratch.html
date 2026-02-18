@@ -125,14 +125,16 @@
                                 let fileName = att.name;
                                 if (att.type === 'photo') {
                                     const preview = mediaBase + fileName + '_preview.jpg';
-                                    const original = mediaBase + fileName + '_original.jpg';
+                                    const highRes = mediaBase + fileName + '_web.jpg';
+                                    const fallback = mediaBase + fileName + '_original.jpg';
                                     
-                                    mediaHtml += `<img loading="lazy" src="${preview}" onclick="openFullImage('${original}')" class="w-full rounded-lg mt-2 border border-gray-200" title="Click for full view" />`;
+                                    mediaHtml += `<img loading="lazy" src="${preview}" onclick="openFullImage('${highRes}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-sm" title="Click for high-res view" onerror="this.src='${fallback}'" />`;
                                     
                                     // Sidebar
                                     const sideImg = document.createElement('img');
                                     sideImg.src = preview;
-                                    sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer';
+                                    sideImg.loading = 'lazy';
+                                    sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-transform hover:scale-105';
                                     sideImg.onclick = () => {
                                         map.flyTo(layer.getLatLng(), 21);
                                         layer.openPopup();
