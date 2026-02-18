@@ -13,11 +13,21 @@
         h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
         #map { height: 700px; width: 100%; border-radius: 1.5rem; background: #000; }
         .leaflet-popup-content-wrapper { border-radius: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); }
-        /* Fix for popup images */
-        .media-container img { width: 100%; height: auto; border-radius: 0.5rem; margin-top: 0.5rem; display: block; }
+        .media-container img { width: 100%; height: auto; border-radius: 0.5rem; margin-top: 0.5rem; display: block; cursor: pointer; transition: opacity 0.2s; }
+        .media-container img:hover { opacity: 0.8; }
+        
+        /* Modal Style */
+        #img-modal { display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.9); padding: 2rem; cursor: zoom-out; }
+        #img-modal img { max-width: 100%; max-height: 100%; margin: auto; display: block; border-radius: 1rem; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body class="bg-gray-950 text-white leading-relaxed antialiased">
+    <!-- Image Modal -->
+    <div id="img-modal" onclick="this.style.display='none'">
+        <img id="modal-img" src="" alt="Full view" />
+        <div class="absolute top-8 right-8 text-white text-4xl font-light cursor-pointer">&times;</div>
+    </div>
+
     <main class="py-12 md:py-20">
         <div class="container mx-auto px-4">
             <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -26,7 +36,7 @@
                     <p class="text-gray-400 text-xl font-light text-wrap">Gales Point Activity Phase - Internal Dataset.</p>
                 </div>
                 <div class="flex gap-3">
-                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Media Debugged</span>
+                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Fast Previews</span>
                     <span class="px-4 py-1.5 bg-blue-900/20 text-blue-400 border border-blue-800/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Google Sat + Zoom 22</span>
                 </div>
             </div>
@@ -38,15 +48,15 @@
 
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
-                        <h3 class="text-xl font-bold mb-6 text-[#27ae60] font-serif italic">Dataset Overview</h3>
-                        <div class="space-y-6 text-sm">
+                        <h3 class="text-xl font-bold mb-6 text-[#27ae60] font-serif italic text-sm">Dataset Overview</h3>
+                        <div class="space-y-6 text-xs">
                             <div>
                                 <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Status</span>
                                 <span class="text-green-400 font-bold">LIVE SYNC</span>
                             </div>
                             <div>
-                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Imagery</span>
-                                <span class="text-gray-300">Google Hybrid (Max Res)</span>
+                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Performance</span>
+                                <span class="text-gray-300 italic">Previews loaded, full quality on click.</span>
                             </div>
                         </div>
                     </div>
@@ -64,14 +74,20 @@
 
     <script src="../lib/leaflet.js"></script>
     <script>
+        const modal = document.getElementById('img-modal');
+        const modalImg = document.getElementById('modal-img');
+        
+        function openFullImage(src) {
+            modalImg.src = src;
+            modal.style.display = 'flex';
+        }
+
         document.addEventListener('DOMContentLoaded', async function() {
-            // Initialize map
             const map = L.map('map', { 
                 preferCanvas: true,
                 maxZoom: 22 
             }).setView([17.18825, -88.33342], 19);
             
-            // Switch to Google Satellite Hybrid for higher resolution in rural Belize
             L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
                 maxZoom: 22,
                 attribution: 'Google'
@@ -106,20 +122,16 @@
                         let mediaHtml = '';
                         if (feature.properties.attachments) {
                             feature.properties.attachments.forEach(att => {
-                                // Direct path mapping based on folder scan
                                 let fileName = att.name;
                                 if (att.type === 'photo') {
-                                    // Use preview if original doesn't exist, but our scan shows most have originals
-                                    // We'll prioritize original then preview based on actual presence
-                                    const src = mediaBase + fileName + '_preview.jpg';
-                                    const fallback = mediaBase + fileName + '_original.jpg';
+                                    const preview = mediaBase + fileName + '_preview.jpg';
+                                    const original = mediaBase + fileName + '_original.jpg';
                                     
-                                    mediaHtml += `<img loading="lazy" src="${src}" onerror="this.src='${fallback}'" class="w-full rounded-lg mt-2 border border-gray-200" />`;
+                                    mediaHtml += `<img loading="lazy" src="${preview}" onclick="openFullImage('${original}')" class="w-full rounded-lg mt-2 border border-gray-200" title="Click for full view" />`;
                                     
                                     // Sidebar
                                     const sideImg = document.createElement('img');
-                                    sideImg.src = src;
-                                    sideImg.onerror = function() { this.src = fallback; };
+                                    sideImg.src = preview;
                                     sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer';
                                     sideImg.onclick = () => {
                                         map.flyTo(layer.getLatLng(), 21);
@@ -130,7 +142,7 @@
                                 if (att.type === 'audio') {
                                     const src = mediaBase + fileName + '_original.m4a';
                                     mediaHtml += `
-                                        <div class="mt-2 p-2 bg-gray-100 rounded-lg flex flex-col gap-1">
+                                        <div class="mt-2 p-2 bg-gray-100 rounded-lg flex flex-col gap-1 text-gray-900">
                                             <span class="text-[9px] font-bold text-gray-400">VOICE NOTE</span>
                                             <audio controls class="h-8 w-full"><source src="${src}" type="audio/mp4"></audio>
                                         </div>`;
