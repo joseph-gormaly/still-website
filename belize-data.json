@@ -1,16 +1,201 @@
 {
   "type": "FeatureCollection",
   "features": [
-    {"type":"Feature","properties":{"name":"Observation Point","notes":"Test","type":"observation"},"geometry":{"type":"Point","coordinates":[-88.3334091,17.1882582]}},
-    {"type":"Feature","properties":{"name":"Field Camp","notes":"Field","type":"camp"},"geometry":{"type":"Point","coordinates":[-88.3334305,17.1882575]}},
-    {"type":"Feature","properties":{"name":"Community Center","notes":"Meeting, workshop","type":"building"},"geometry":{"type":"Point","coordinates":[-88.3333745,17.1882362]}},
-    {"type":"Feature","properties":{"name":"Community Centre","notes":"Other","type":"building"},"geometry":{"type":"Point","coordinates":[-88.3334412,17.1882152]}},
-    {"type":"Feature","properties":{"name":"Community Shelter","notes":"Community shelter for meeting","type":"building"},"geometry":{"type":"Point","coordinates":[-88.33345,17.1882538]}},
-    {"type":"Feature","properties":{"name":"Community Center","notes":"Research cluster","type":"building"},"geometry":{"type":"Point","coordinates":[-88.3334339,17.1882681]}},
-    {"type":"Feature","properties":{"name":"Community Center","notes":"Other","type":"building"},"geometry":{"type":"Point","coordinates":[-88.3334238,17.1882634]}},
-    {"type":"Feature","properties":{"name":"Community","notes":"Other","type":"building"},"geometry":{"type":"Point","coordinates":[-88.3334292,17.188243]}},
-    {"type":"Feature","properties":{"name":"Fishing Activity","notes":"GG","type":"activity"},"geometry":{"type":"Point","coordinates":[-88.3334349,17.1882469]}},
-    {"type":"Feature","properties":{"name":"Airstrip","notes":"Infrastructure","type":"aeroway"},"geometry":{"type":"Point","coordinates":[-88.3334228,17.1882444]}},
-    {"type":"Feature","properties":{"name":"White Ridge Airstrip","notes":"Infrastructure","type":"aeroway"},"geometry":{"type":"Point","coordinates":[-88.3334232,17.188244]}}
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Observation Point",
+        "notes": "Test",
+        "type": "observation",
+        "attachments": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334091,
+          17.1882582
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Field Camp",
+        "notes": "Field",
+        "type": "camp",
+        "attachments": [
+          { "type": "photo", "id": "5c29eda067079aa9", "model": "LM-G900" },
+          { "type": "photo", "id": "0ac3cd444f032efb", "model": "LM-G900" },
+          { "type": "audio", "id": "7e5d63ffe81108e7" },
+          { "type": "audio", "id": "091382dc5c2b6e51" }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334305,
+          17.1882575
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Center",
+        "notes": "Meeting, workshop",
+        "type": "building",
+        "attachments": [
+          { "type": "photo", "id": "8eb25b3ee54f01ee", "model": "SM-A065M" },
+          { "type": "photo", "id": "d43608e1a77da483", "model": "SM-A065M" },
+          { "type": "audio", "id": "bc3eea9433c1ac77" }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3333745,
+          17.1882362
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Centre",
+        "notes": "Other",
+        "type": "building",
+        "attachments": [
+          { "type": "photo", "id": "e6f23fffa41160e5", "model": "SM-G950W" }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334412,
+          17.1882152
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Shelter",
+        "notes": "Community shelter for meeting",
+        "type": "building",
+        "attachments": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.33345,
+          17.1882538
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Center",
+        "notes": "Research cluster",
+        "type": "building",
+        "attachments": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334339,
+          17.1882681
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community Center",
+        "notes": "Other",
+        "type": "building",
+        "attachments": [
+          { "type": "photo", "id": "ac3b2be8ec9e9413", "model": "SM-G991U" }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334238,
+          17.1882634
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Community",
+        "notes": "Other",
+        "type": "building",
+        "attachments": [
+          { "type": "photo", "id": "a3079b2aef323811", "model": "LM-G900" },
+          { "type": "photo", "id": "fc0e41da66e2136f", "model": "LM-G900" },
+          { "type": "audio", "id": "0105c7bd15ba1972" },
+          { "type": "audio", "id": "214f8b412ab42283" }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334292,
+          17.188243
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Fishing Activity",
+        "notes": "GG",
+        "type": "activity",
+        "attachments": [
+          { "type": "photo", "id": "ab8c987bf5bdbec5", "model": "LM-G900" }
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334349,
+          17.1882469
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Airstrip",
+        "notes": "Infrastructure",
+        "type": "aeroway",
+        "attachments": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334228,
+          17.1882444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "White Ridge Airstrip",
+        "notes": "Infrastructure",
+        "type": "aeroway",
+        "attachments": []
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3334232,
+          17.188244
+        ]
+      }
+    }
   ]
 }
