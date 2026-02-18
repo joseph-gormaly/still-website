@@ -31,7 +31,7 @@
         <div class="container mx-auto px-4">
             <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
-                    <h1 class="text-3xl md:text-6xl font-bold mb-4 tracking-tight uppercase">Belize Field Logs</h1>
+                    <h1 class="text-3xl md:text-6xl font-bold mb-4 tracking-tight uppercase text-white">Belize Field Logs</h1>
                     <p class="text-gray-400 text-xl font-light text-wrap"></p>
                 </div>
                 <div class="flex gap-3">
@@ -45,7 +45,7 @@
                     <div id="map"></div>
                 </div>
 
-                <div class="lg:col-span-1 space-y-6 text-center lg:text-left">
+                <div class="lg:col-span-1 space-y-6 text-center lg:text-left text-white">
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
                         <h3 class="text-xl font-bold mb-6 text-[#27ae60] font-serif italic text-sm">Dataset Overview</h3>
                         <div class="space-y-6 text-xs">
@@ -54,7 +54,7 @@
                                 <span class="text-green-400 font-bold tracking-widest">LIVE SYNC</span>
                             </div>
                             <div>
-                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Performance</span>
+                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1 text-white">Performance</span>
                                 <span class="text-gray-300 italic">Pre-optimized for Field Bandwidth.</span>
                             </div>
                         </div>
@@ -87,7 +87,6 @@
                 maxZoom: 22 
             }).setView([17.18825, -88.33342], 19);
             
-            // Switch to mt0 for potentially faster tiles
             L.tileLayer('https://mt0.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
                 maxZoom: 22,
                 attribution: 'Google'
@@ -100,6 +99,37 @@
                 const data = await response.json();
                 const sidebar = document.getElementById('media-sidebar');
 
+                // 1. Populate Sidebar First
+                data.features.forEach(feature => {
+                    if (feature.properties.attachments) {
+                        feature.properties.attachments.forEach(att => {
+                            if (att.type === 'photo') {
+                                const sideImg = document.createElement('img');
+                                const preview = mediaBase + att.name + '_preview.jpg';
+                                const web = mediaBase + att.name + '_web.jpg';
+                                const original = mediaBase + att.name + '_original.jpg';
+                                
+                                sideImg.src = preview;
+                                sideImg.loading = 'lazy';
+                                sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-transform hover:scale-105';
+                                
+                                // Direct error handling for sidebar
+                                sideImg.onerror = function() {
+                                    if (this.src.includes('_preview')) this.src = web;
+                                    else if (this.src.includes('_web')) this.src = original;
+                                };
+
+                                sideImg.onclick = () => {
+                                    map.flyTo([feature.geometry.coordinates[1], feature.geometry.coordinates[0]], 21);
+                                    // Popups will be opened by marker logic
+                                };
+                                sidebar.appendChild(sideImg);
+                            }
+                        });
+                    }
+                });
+
+                // 2. Add Map Layers
                 L.geoJSON(data, {
                     pointToLayer: function (feature, latlng) {
                         let color = '#27ae60';
@@ -122,38 +152,18 @@
                         let mediaHtml = '';
                         if (feature.properties.attachments) {
                             feature.properties.attachments.forEach(att => {
-                                let fileName = att.name;
                                 if (att.type === 'photo') {
-                                    const preview = mediaBase + fileName + '_preview.jpg';
-                                    const web = mediaBase + fileName + '_web.jpg';
-                                    const original = mediaBase + fileName + '_original.jpg';
+                                    const preview = mediaBase + att.name + '_preview.jpg';
+                                    const web = mediaBase + att.name + '_web.jpg';
+                                    const original = mediaBase + att.name + '_original.jpg';
                                     
-                                    // Use preview for thumbnail, web for popup, original as ultimate fallback
-                                    const thumbSrc = preview;
-                                    const fullSrc = web;
-                                    
-                                    mediaHtml += `<img loading="lazy" src="${fullSrc}" onclick="openFullImage('${original}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${original}'; this.onerror=function(){this.src='${preview}'};" />`;
-                                    
-                                    // Sidebar
-                                    const sideImg = document.createElement('img');
-                                    sideImg.src = thumbSrc;
-                                    sideImg.onerror = function() { 
-                                        this.src = web; 
-                                        this.onerror = function() { this.src = original; };
-                                    };
-                                    sideImg.loading = 'lazy';
-                                    sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-transform hover:scale-105';
-                                    sideImg.onclick = () => {
-                                        map.flyTo(layer.getLatLng(), 21);
-                                        layer.openPopup();
-                                    };
-                                    sidebar.appendChild(sideImg);
+                                    mediaHtml += `<img loading="lazy" src="${web}" onclick="openFullImage('${original}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${original}'; this.onerror=function(){this.src='${preview}'};" />`;
                                 }
                                 if (att.type === 'audio') {
-                                    const src = mediaBase + fileName + '_original.m4a';
+                                    const src = mediaBase + att.name + '_original.m4a';
                                     mediaHtml += `
                                         <div class="mt-2 p-2 bg-gray-100 rounded-lg flex flex-col gap-1 text-gray-900">
-                                            <span class="text-[9px] font-bold text-gray-400">VOICE NOTE</span>
+                                            <span class="text-[9px] font-bold text-gray-400 font-sans">VOICE NOTE</span>
                                             <audio controls class="h-8 w-full"><source src="${src}" type="audio/mp4"></audio>
                                         </div>`;
                                 }
