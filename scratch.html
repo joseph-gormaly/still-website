@@ -111,10 +111,10 @@
                                 if (att.type === 'photo') {
                                     // Use preview if original doesn't exist, but our scan shows most have originals
                                     // We'll prioritize original then preview based on actual presence
-                                    const src = mediaBase + fileName + '_original.jpg';
-                                    const fallback = mediaBase + fileName + '_preview.jpg';
+                                    const src = mediaBase + fileName + '_preview.jpg';
+                                    const fallback = mediaBase + fileName + '_original.jpg';
                                     
-                                    mediaHtml += `<img src="${src}" onerror="this.src='${fallback}'" class="w-full rounded-lg mt-2 border border-gray-200" />`;
+                                    mediaHtml += `<img loading="lazy" src="${src}" onerror="this.src='${fallback}'" class="w-full rounded-lg mt-2 border border-gray-200" />`;
                                     
                                     // Sidebar
                                     const sideImg = document.createElement('img');
