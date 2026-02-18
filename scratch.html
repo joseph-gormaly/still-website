@@ -13,7 +13,8 @@
         h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
         #map { height: 700px; width: 100%; border-radius: 1.5rem; background: #000; }
         .leaflet-popup-content-wrapper { border-radius: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); }
-        .media-container img { cursor: zoom-in; }
+        /* Fix for popup images */
+        .media-container img { width: 100%; height: auto; border-radius: 0.5rem; margin-top: 0.5rem; display: block; }
     </style>
 </head>
 <body class="bg-gray-950 text-white leading-relaxed antialiased">
@@ -22,11 +23,11 @@
             <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
                 <div>
                     <h1 class="text-3xl md:text-6xl font-bold mb-4 tracking-tight uppercase">Belize Field Logs</h1>
-                    <p class="text-gray-400 text-xl font-light">Gales Point Activity Phase - Internal Dataset.</p>
+                    <p class="text-gray-400 text-xl font-light text-wrap">Gales Point Activity Phase - Internal Dataset.</p>
                 </div>
                 <div class="flex gap-3">
-                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Live Media Linked</span>
-                    <span class="px-4 py-1.5 bg-blue-900/20 text-blue-400 border border-blue-800/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Zoom 22 Enabled</span>
+                    <span class="px-4 py-1.5 bg-[#27ae60]/20 text-[#27ae60] border border-[#27ae60]/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Media Debugged</span>
+                    <span class="px-4 py-1.5 bg-blue-900/20 text-blue-400 border border-blue-800/50 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Google Sat + Zoom 22</span>
                 </div>
             </div>
 
@@ -38,20 +39,20 @@
                 <div class="lg:col-span-1 space-y-6">
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
                         <h3 class="text-xl font-bold mb-6 text-[#27ae60] font-serif italic">Dataset Overview</h3>
-                        <div class="space-y-6">
+                        <div class="space-y-6 text-sm">
                             <div>
-                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Location</span>
-                                <span class="text-lg font-bold">Gales Point, Belize</span>
+                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Status</span>
+                                <span class="text-green-400 font-bold">LIVE SYNC</span>
                             </div>
                             <div>
-                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Last Updated</span>
-                                <span class="text-sm text-gray-300 font-mono">2026-02-17</span>
+                                <span class="text-[10px] text-gray-500 uppercase font-bold tracking-widest block mb-1">Imagery</span>
+                                <span class="text-gray-300">Google Hybrid (Max Res)</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
-                        <h3 class="text-xl font-bold mb-4 text-blue-400 font-serif italic">Gallery</h3>
+                        <h3 class="text-xl font-bold mb-4 text-blue-400 font-serif italic text-sm">Media Quickview</h3>
                         <div id="media-sidebar" class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[400px] pr-2">
                             <!-- Populated via JS -->
                         </div>
@@ -64,21 +65,21 @@
     <script src="../lib/leaflet.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
+            // Initialize map
             const map = L.map('map', { 
                 preferCanvas: true,
                 maxZoom: 22 
             }).setView([17.18825, -88.33342], 19);
             
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                maxNativeZoom: 19,
+            // Switch to Google Satellite Hybrid for higher resolution in rural Belize
+            L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
                 maxZoom: 22,
-                attribution: 'Esri, i-cubed, USDA, USGS, Maxar'
+                attribution: 'Google'
             }).addTo(map);
 
-            const mediaPath = 'assets/media/belize-field/CoMapeo_GalesPointActivity_Media_2026_02_17/';
+            const mediaBase = 'assets/media/belize-field/CoMapeo_GalesPointActivity_Media_2026_02_17/';
 
             try {
-                // Using the specific extracted GeoJSON for real properties
                 const response = await fetch('assets/media/belize-field/CoMapeo_GalesPointActivity_Obsvns_2026_02_17.geojson');
                 const data = await response.json();
                 const sidebar = document.getElementById('media-sidebar');
@@ -86,10 +87,11 @@
                 L.geoJSON(data, {
                     pointToLayer: function (feature, latlng) {
                         let color = '#27ae60';
-                        const type = feature.properties.tags?.type || feature.properties.tags?.aeroway || 'other';
+                        const tags = feature.properties.tags || {};
+                        const type = tags.type || tags.aeroway || 'observation';
                         if (type === 'airstrip' || type === 'aeroway') color = '#3b82f6';
                         if (type === 'camp') color = '#ec4899';
-                        if (feature.properties.tags?.activity === 'fishing') color = '#f59e0b';
+                        if (tags.activity === 'fishing') color = '#f59e0b';
 
                         return L.circleMarker(latlng, {
                             radius: 10,
@@ -101,18 +103,24 @@
                         });
                     },
                     onEachFeature: function (feature, layer) {
-                        let mediaContent = '';
+                        let mediaHtml = '';
                         if (feature.properties.attachments) {
                             feature.properties.attachments.forEach(att => {
+                                // Direct path mapping based on folder scan
+                                let fileName = att.name;
                                 if (att.type === 'photo') {
-                                    const suffix = att.photoExif ? '_original.jpg' : '_preview.jpg';
-                                    const src = mediaPath + att.name + suffix;
-                                    mediaContent += `<img src="${src}" class="w-full rounded-lg mb-2 shadow-sm border border-gray-200" />`;
+                                    // Use preview if original doesn't exist, but our scan shows most have originals
+                                    // We'll prioritize original then preview based on actual presence
+                                    const src = mediaBase + fileName + '_original.jpg';
+                                    const fallback = mediaBase + fileName + '_preview.jpg';
                                     
-                                    // Add to sidebar
+                                    mediaHtml += `<img src="${src}" onerror="this.src='${fallback}'" class="w-full rounded-lg mt-2 border border-gray-200" />`;
+                                    
+                                    // Sidebar
                                     const sideImg = document.createElement('img');
                                     sideImg.src = src;
-                                    sideImg.className = 'rounded-lg border border-white/10 hover:border-blue-500 transition-colors cursor-pointer';
+                                    sideImg.onerror = function() { this.src = fallback; };
+                                    sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer';
                                     sideImg.onclick = () => {
                                         map.flyTo(layer.getLatLng(), 21);
                                         layer.openPopup();
@@ -120,10 +128,10 @@
                                     sidebar.appendChild(sideImg);
                                 }
                                 if (att.type === 'audio') {
-                                    const src = mediaPath + att.name + '_original.m4a';
-                                    mediaContent += `
-                                        <div class="bg-gray-100 p-2 rounded-lg mb-2 flex items-center gap-2">
-                                            <span class="text-lg">🎙️</span>
+                                    const src = mediaBase + fileName + '_original.m4a';
+                                    mediaHtml += `
+                                        <div class="mt-2 p-2 bg-gray-100 rounded-lg flex flex-col gap-1">
+                                            <span class="text-[9px] font-bold text-gray-400">VOICE NOTE</span>
                                             <audio controls class="h-8 w-full"><source src="${src}" type="audio/mp4"></audio>
                                         </div>`;
                                 }
@@ -131,29 +139,28 @@
                         }
 
                         const tags = feature.properties.tags || {};
-                        const notes = tags.notes || 'No notes.';
+                        const notes = tags.notes || 'No notes provided.';
                         const type = tags.type || tags.aeroway || 'Observation';
 
                         layer.bindPopup(`
-                            <div class="text-gray-900 font-sans p-2 min-w-[240px] max-w-[300px]">
+                            <div class="text-gray-900 font-sans min-w-[240px]">
                                 <span class="text-[9px] uppercase tracking-widest text-gray-400 font-bold mb-1 block border-b pb-1">${type}</span>
-                                <p class="text-sm text-gray-700 my-3 leading-relaxed font-medium">${notes}</p>
-                                <div class="media-container max-h-[300px] overflow-y-auto">${mediaContent}</div>
-                                <div class="mt-4 pt-2 border-t flex justify-between items-center text-[8px] text-gray-400 font-mono">
-                                    <span>${feature.properties.createdAt.substring(0,16)}</span>
-                                    <span>PRECISION: HIGH</span>
+                                <p class="text-sm text-gray-800 my-2 font-medium leading-relaxed">${notes}</p>
+                                <div class="media-container max-h-[300px] overflow-y-auto">${mediaHtml}</div>
+                                <div class="mt-3 pt-2 border-t flex justify-between items-center text-[8px] text-gray-400 font-mono">
+                                    <span>${feature.properties.createdAt.substring(0,10)}</span>
+                                    <span>ID: ${feature.properties.docId.substring(0,6)}</span>
                                 </div>
                             </div>
                         `, { maxWidth: 350 });
                     }
                 }).addTo(map);
 
-                // Auto-zoom to fit data if cluster is larger
                 const bounds = L.geoJSON(data).getBounds();
-                map.fitBounds(bounds, { padding: [50, 50], maxZoom: 19 });
+                map.fitBounds(bounds, { padding: [50, 50], maxZoom: 20 });
 
             } catch (e) {
-                console.error("Error loading field data:", e);
+                console.error("Error loading data:", e);
             }
         });
     </script>
