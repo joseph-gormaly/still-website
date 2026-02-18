@@ -124,17 +124,23 @@
                             feature.properties.attachments.forEach(att => {
                                 let fileName = att.name;
                                 if (att.type === 'photo') {
-                                    // Use the new _web version for popups (0.5MB vs 2.5MB)
-                                    // and _preview for thumbnails.
                                     const preview = mediaBase + fileName + '_preview.jpg';
                                     const web = mediaBase + fileName + '_web.jpg';
-                                    const fallback = mediaBase + fileName + '_original.jpg';
+                                    const original = mediaBase + fileName + '_original.jpg';
                                     
-                                    mediaHtml += `<img loading="lazy" src="${web}" onclick="openFullImage('${fallback}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${fallback}'" />`;
+                                    // Use preview for thumbnail, web for popup, original as ultimate fallback
+                                    const thumbSrc = preview;
+                                    const fullSrc = web;
+                                    
+                                    mediaHtml += `<img loading="lazy" src="${fullSrc}" onclick="openFullImage('${original}')" class="w-full rounded-lg mt-2 border border-gray-200 shadow-md" title="Click for original resolution" onerror="this.src='${original}'; this.onerror=function(){this.src='${preview}'};" />`;
                                     
                                     // Sidebar
                                     const sideImg = document.createElement('img');
-                                    sideImg.src = preview;
+                                    sideImg.src = thumbSrc;
+                                    sideImg.onerror = function() { 
+                                        this.src = web; 
+                                        this.onerror = function() { this.src = original; };
+                                    };
                                     sideImg.loading = 'lazy';
                                     sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-transform hover:scale-105';
                                     sideImg.onclick = () => {
