@@ -4,166 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume | STILL</title>
-    <meta name="description" content="Environmental professional with expertise in Indigenous land use planning, GIS, and project management.">
+    <meta name="description" content="Professional experience and education in Indigenous land use planning and GIS.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="lib/tailwind.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 4rem;
+            border-left: 2px dashed var(--color-stone-aged);
+        }
+        .timeline-item::before {
+            content: '🐝';
+            position: absolute;
+            left: -14px;
+            top: 0;
+            background: var(--color-stone-light);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .date-label {
+            font-family: var(--font-primary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-soil-oak);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .skill-tag {
+            background: var(--color-nectar);
+            padding: 1.5rem;
+            border-radius: 20px 5px 20px 5px;
+            text-align: center;
+            border: 1px solid var(--color-pollen);
+        }
     </style>
 </head>
-<body class="bg-white text-gray-900 leading-relaxed antialiased">
-    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
-        <div class="container mx-auto px-4">
-            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
-                    STILL
+<body>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo" style="text-decoration: none; display: flex; align-items: center; font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.5rem; color: var(--color-forest-deep);">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; margin-right: 12px;">
+                    STILL<span style="color: var(--color-honey);">.bz</span>
                 </a>
-                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
-                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-600"></span>
-                </button>
-                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
-                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
-                    <li><a href="about.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">About</a></li>
-                    <li><a href="resume.html" class="font-medium text-blue-600 hover:no-underline">Resume</a></li>
-                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
-                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
-                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
-                </ul>
+                
+                <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="projects.html">Research</a>
+                    <a href="dashboard.html">Map</a>
+                    <a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-cta" target="_blank" rel="noopener noreferrer">Support</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main class="py-16">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <div class="text-center mb-16">
-                <h1 class="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-4">Resume</h1>
-                <div class="w-16 h-1 bg-[#27ae60] mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+    <main>
+        <section class="resume-hero">
+            <div class="container">
+                <span class="text-science">Professional Journey</span>
+                <h1>Resume</h1>
+                <p style="font-size: 1.25rem; color: var(--color-forest-moss); max-width: 800px;">
                     Environmental professional with expertise in Indigenous land use planning, GIS, and project management.
                 </p>
             </div>
+        </section>
 
-            <!-- Professional Experience -->
-            <section class="mb-20">
-                <h2 class="text-2xl font-bold text-[#2c3e50] uppercase tracking-widest border-b-2 border-[#27ae60] pb-2 mb-8">Professional Experience</h2>
+        <div class="container"><hr class="flight-path"></div>
+
+        <section class="experience">
+            <div class="container">
+                <h2 style="margin-bottom: 4rem;">Professional Experience</h2>
                 
-                <div class="space-y-12">
-                    <!-- Item 1 -->
-                    <div class="relative pl-8 border-l-2 border-gray-200 hover:border-[#27ae60] transition-colors">
-                        <div class="absolute w-4 h-4 bg-white border-2 border-[#27ae60] rounded-full -left-[9px] top-1"></div>
-                        <h3 class="text-2xl font-bold text-[#2c3e50] mb-1">Protected Area Project Manager</h3>
-                        <div class="text-[#27ae60] font-semibold mb-1">Wuskwi Sipihk First Nation, Birch River, MB</div>
-                        <div class="text-sm text-gray-500 uppercase tracking-wider mb-4 italic">Aug 2025 – Present</div>
-                        <p class="text-gray-700 leading-relaxed">Leading development of a comprehensive vision and plan for a proposed Indigenous Protected Area in west-central Manitoba. Facilitating tri-Nation Working Group coordination, managing ECCC funding, and conducting community engagement to ensure land use plans reflect Nation values.</p>
-                    </div>
+                <div class="timeline-item">
+                    <span class="date-label">Aug 2025 – Present</span>
+                    <h3>Protected Area Project Manager</h3>
+                    <p class="text-science" style="margin-bottom: 1rem;">Wuskwi Sipihk First Nation • Birch River, MB</p>
+                    <p>Leading development of a comprehensive vision and plan for a proposed Indigenous Protected Area in west-central Manitoba. Facilitating tri-Nation Working Group coordination and managing ECCC funding.</p>
+                </div>
 
-                    <!-- Item 2 -->
-                    <div class="relative pl-8 border-l-2 border-gray-200 hover:border-[#27ae60] transition-colors">
-                        <div class="absolute w-4 h-4 bg-white border-2 border-[#27ae60] rounded-full -left-[9px] top-1"></div>
-                        <h3 class="text-2xl font-bold text-[#2c3e50] mb-1">GIS Specialist</h3>
-                        <div class="text-[#27ae60] font-semibold mb-1">Chris Werner Consulting, Winnipeg, MB</div>
-                        <div class="text-sm text-gray-500 uppercase tracking-wider mb-4 italic">Oct 2023 – Aug 2025</div>
-                        <p class="text-gray-700 leading-relaxed">Designed and maintained geospatial systems supporting Indigenous communities in land claim negotiations. Built workflows for data analysis and cartography using ArcGIS and Python. Collaborated on monitoring during community culture camps in Northern Manitoba, Southern Nunavut, and NWT.</p>
-                    </div>
+                <div class="timeline-item">
+                    <span class="date-label">Oct 2023 – Aug 2025</span>
+                    <h3>GIS Specialist</h3>
+                    <p class="text-science" style="margin-bottom: 1rem;">Chris Werner Consulting • Winnipeg, MB</p>
+                    <p>Designed and maintained geospatial systems supporting Indigenous communities in land claim negotiations. Built workflows for data analysis using ArcGIS and Python.</p>
+                </div>
 
-                    <!-- Item 3 -->
-                    <div class="relative pl-8 border-l-2 border-gray-200 hover:border-[#27ae60] transition-colors">
-                        <div class="absolute w-4 h-4 bg-white border-2 border-[#27ae60] rounded-full -left-[9px] top-1"></div>
-                        <h3 class="text-2xl font-bold text-[#2c3e50] mb-1">Environmental Program Manager</h3>
-                        <div class="text-[#27ae60] font-semibold mb-1">Kátł'odeeche First Nation, Hay River, NT</div>
-                        <div class="text-sm text-gray-500 uppercase tracking-wider mb-4 italic">Jul 2021 – Jan 2023</div>
-                        <p class="text-gray-700 leading-relaxed">Led planning, implementation, and reporting of community-based environmental monitoring programs. Managed environmental data collection and analysis using MS Access and ArcGIS. Oversaw budget management and authored comprehensive technical reports.</p>
-                    </div>
+                <div class="timeline-item">
+                    <span class="date-label">Jul 2021 – Jan 2023</span>
+                    <h3>Environmental Program Manager</h3>
+                    <p class="text-science" style="margin-bottom: 1rem;">Kátł'odeeche First Nation • Hay River, NT</p>
+                    <p>Led implementation of community-based environmental monitoring programs. Managed data collection and authored comprehensive technical reports.</p>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Item 4 -->
-                    <div class="relative pl-8 border-l-2 border-gray-200 hover:border-[#27ae60] transition-colors">
-                        <div class="absolute w-4 h-4 bg-white border-2 border-[#27ae60] rounded-full -left-[9px] top-1"></div>
-                        <h3 class="text-2xl font-bold text-[#2c3e50] mb-1">Research Assistant</h3>
-                        <div class="text-[#27ae60] font-semibold mb-1">Carleton University, Ottawa, ON</div>
-                        <div class="text-sm text-gray-500 uppercase tracking-wider mb-4 italic">Aug 2017 – Apr 2018</div>
-                        <p class="text-gray-700 leading-relaxed">Managed research project analyzing changes in growing season in the Canadian Arctic using remotely sensed data.</p>
+        <section class="education" style="background: var(--color-stone-aged); border-radius: 100px 0 100px 0; padding: 6rem 0;">
+            <div class="container">
+                <h2 style="margin-bottom: 4rem;">Education</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div class="organic-card" style="background: white;">
+                        <span class="date-label">In Progress</span>
+                        <h3>Master of Natural Resources Management</h3>
+                        <p class="text-science">University of Manitoba</p>
+                    </div>
+                    <div class="organic-card" style="background: white;">
+                        <span class="date-label">2022</span>
+                        <h3>B. Applied Technology – GIS</h3>
+                        <p class="text-science">SAIT, Calgary</p>
+                    </div>
+                    <div class="organic-card" style="background: white;">
+                        <span class="date-label">2018</span>
+                        <h3>Diploma in Natural Resource Technology</h3>
+                        <p class="text-science">Aurora College, NT</p>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Education -->
-            <section class="mb-20">
-                <h2 class="text-2xl font-bold text-[#2c3e50] uppercase tracking-widest border-b-2 border-[#27ae60] pb-2 mb-8">Education</h2>
-                <div class="space-y-10">
-                    <div class="relative pl-8 border-l-2 border-gray-200">
-                        <div class="absolute w-4 h-4 bg-white border-2 border-[#27ae60] rounded-full -left-[9px] top-1"></div>
-                        <h3 class="text-xl font-bold text-[#2c3e50]">Master of Natural Resources Management</h3>
-                        <div class="text-[#27ae60] font-semibold">University of Manitoba, Winnipeg, MB</div>
-                        <div class="text-sm text-gray-500 italic uppercase tracking-wider mb-2">In Progress</div>
-                        <p class="text-gray-700">Focus: Natural Resources Policy, Human Dimensions, Ecological Dimensions, Project Management.</p>
+        <section class="skills" style="padding: 6rem 0;">
+            <div class="container">
+                <h2 style="margin-bottom: 4rem;">Core Competencies</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div class="skill-tag">
+                        <span class="text-science">Land Management</span>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.9rem;">IPCAs, Planning, Monitoring</p>
                     </div>
-
-                    <div class="relative pl-8 border-l-2 border-gray-200">
-                        <div class="absolute w-4 h-4 bg-white border-2 border-[#27ae60] rounded-full -left-[9px] top-1"></div>
-                        <h3 class="text-xl font-bold text-[#2c3e50]">Bachelor of Applied Technology – GIS</h3>
-                        <div class="text-[#27ae60] font-semibold">SAIT, Calgary, AB</div>
-                        <div class="text-sm text-gray-500 italic uppercase tracking-wider mb-2">2022</div>
-                        <p class="text-gray-700">Intensive study in geographic systems (GIS) as a technologist and analyst across diverse industries, from forestry and natural resource exploration to government sectors.</p>
+                    <div class="skill-tag">
+                        <span class="text-science">Technical GIS</span>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.9rem;">ArcGIS Pro, Python, Remote Sensing</p>
                     </div>
-
-                    <div class="relative pl-8 border-l-2 border-gray-200">
-                        <div class="absolute w-4 h-4 bg-white border-2 border-[#27ae60] rounded-full -left-[9px] top-1"></div>
-                        <h3 class="text-xl font-bold text-[#2c3e50]">Diploma in Natural Resource Technology</h3>
-                        <div class="text-[#27ae60] font-semibold">Aurora College, Fort Smith, NT</div>
-                        <div class="text-sm text-gray-500 italic uppercase tracking-wider mb-2">2018</div>
-                        <p class="text-gray-700">Comprehensive training in the use and management of air, land, water, fish, and wildlife resources, including practical experience in environmental monitoring and Indigenous land claims.</p>
+                    <div class="skill-tag">
+                        <span class="text-science">Engagement</span>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.9rem;">Consultation, Facilitation</p>
+                    </div>
+                    <div class="skill-tag">
+                        <span class="text-science">Administration</span>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.9rem;">Proposals, Budgets, Management</p>
                     </div>
                 </div>
-            </section>
-
-            <!-- Skills -->
-            <section>
-                <h2 class="text-2xl font-bold text-[#2c3e50] uppercase tracking-widest border-b-2 border-[#27ae60] pb-2 mb-8">Core Competencies</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 text-center hover:shadow-md transition-shadow">
-                        <h4 class="text-[#27ae60] font-bold text-xs uppercase tracking-widest mb-3">Land Management</h4>
-                        <p class="text-sm text-gray-600">IPCAs, Land Use Planning, Environmental Monitoring</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 text-center hover:shadow-md transition-shadow">
-                        <h4 class="text-[#27ae60] font-bold text-xs uppercase tracking-widest mb-3">Technical</h4>
-                        <p class="text-sm text-gray-600">ArcGIS Pro, Python (ArcPy), Remote Sensing, Data Management</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 text-center hover:shadow-md transition-shadow">
-                        <h4 class="text-[#27ae60] font-bold text-xs uppercase tracking-widest mb-3">Engagement</h4>
-                        <p class="text-sm text-gray-600">Community Consultation, Stakeholder Facilitation, Government Relations</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-100 text-center hover:shadow-md transition-shadow">
-                        <h4 class="text-[#27ae60] font-bold text-xs uppercase tracking-widest mb-3">Administration</h4>
-                        <p class="text-sm text-gray-600">Proposal Writing, Budget Management, Staff Supervision</p>
-                    </div>
-                </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
-            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
-            <p class="text-sm italic italic">Honouring all relations.</p>
+    <footer style="text-align: center;">
+        <div class="container">
+            <p style="color: white; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">STILL<span style="color: var(--color-pollen);">.bz</span></p>
+            <p style="margin-bottom: 2rem;">Sustainable Transformation Initiative for Land & Learning</p>
+            <div style="margin-bottom: 2rem;">
+                <a href="mailto:info@still.bz" style="color: var(--color-pollen); font-weight: 600;">info@still.bz</a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Honouring all relations. Bzzzz.</p>
+            <p style="font-size: 0.8rem; margin-top: 3rem; opacity: 0.5;">&copy; 2026 STILL</p>
         </div>
     </footer>
-
-    <script>
-        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('hidden');
-            document.querySelector('.nav-links').classList.toggle('flex');
-            document.querySelector('.nav-links').classList.toggle('flex-col');
-            document.querySelector('.nav-links').classList.toggle('w-full');
-            document.querySelector('.nav-links').classList.toggle('mt-4');
-        });
-    </script>
 </body>
 </html>

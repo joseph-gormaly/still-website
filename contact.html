@@ -4,77 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | STILL</title>
+    <meta name="description" content="Get in touch with the Sustainable Transformation Initiative for Land & Learning (STILL).">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="lib/tailwind.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
-    </style>
 </head>
-<body class="bg-white text-gray-900 leading-relaxed antialiased">
-    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
-        <div class="container mx-auto px-4">
-            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
-                    STILL
+<body>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo" style="text-decoration: none; display: flex; align-items: center; font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.5rem; color: var(--color-forest-deep);">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; margin-right: 12px;">
+                    STILL<span style="color: var(--color-honey);">.bz</span>
                 </a>
-                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
-                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-600"></span>
-                </button>
-                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
-                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
-                    <li><a href="about.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">About</a></li>
-                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
-                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
-                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
-                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
-                </ul>
+                
+                <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="projects.html">Research</a>
+                    <a href="dashboard.html">Map</a>
+                    <a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-cta" target="_blank" rel="noopener noreferrer">Support</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main class="py-20 md:py-32">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-[#2c3e50] mb-8">Get in Touch</h1>
-            <div class="w-20 h-1 bg-[#27ae60] mx-auto mb-12"></div>
-            
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-16 leading-relaxed">
-                Interested in collaborating or learning more about the Sustainable Transformation Initiative for Land & Learning?
-            </p>
+    <main>
+        <section class="contact-hero" style="text-align: center;">
+            <div class="container">
+                <span class="text-science">The Hive</span>
+                <h1>Get in Touch</h1>
+                <p style="font-size: 1.25rem; color: var(--color-forest-moss); max-width: 800px; margin: 0 auto 3rem;">
+                    Interested in collaborating or learning more about the Sustainable Transformation Initiative for Land & Learning?
+                </p>
+                
+                <div class="organic-card" style="display: inline-block; max-width: 100%; text-align: left; background: white;">
+                    <span class="text-science" style="margin-bottom: 0.5rem; display: block;">Official Email</span>
+                    <a href="mailto:info@still.bz" style="font-size: 2.5rem; font-weight: 700; text-decoration: none; color: var(--color-forest-deep); word-break: break-all;">info@still.bz</a>
+                </div>
+            </div>
+        </section>
 
-            <div class="inline-block bg-gray-50 p-8 md:p-12 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                <span class="block text-sm font-bold text-[#27ae60] uppercase tracking-widest mb-4">Official Email</span>
-                <a href="mailto:info@still.bz" class="text-3xl md:text-5xl font-bold text-[#2c3e50] hover:text-blue-600 transition-colors break-all">info@still.bz</a>
+        <div class="container"><hr class="flight-path"></div>
+
+        <section style="padding: 4rem 0; text-align: center;">
+            <div class="container">
+                <p style="font-size: 1.1rem; color: var(--color-soil-oak); font-style: italic;">"Honouring all relations. Listening to the land."</p>
             </div>
-            
-            <div class="mt-20 flex justify-center gap-8 text-gray-400">
-                <span class="flex items-center gap-2 italic">Honouring all relations</span>
-            </div>
-        </div>
+        </section>
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
-            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
-            <p class="text-sm italic italic">Honouring all relations.</p>
+    <footer style="text-align: center;">
+        <div class="container">
+            <p style="color: white; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">STILL<span style="color: var(--color-pollen);">.bz</span></p>
+            <p style="margin-bottom: 2rem;">Sustainable Transformation Initiative for Land & Learning</p>
+            <div style="margin-bottom: 2rem;">
+                <a href="mailto:info@still.bz" style="color: var(--color-pollen); font-weight: 600;">info@still.bz</a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Honouring all relations. Bzzzz.</p>
+            <p style="font-size: 0.8rem; margin-top: 3rem; opacity: 0.5;">&copy; 2026 STILL</p>
         </div>
     </footer>
-
-    <script>
-        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('hidden');
-            document.querySelector('.nav-links').classList.toggle('flex');
-            document.querySelector('.nav-links').classList.toggle('flex-col');
-            document.querySelector('.nav-links').classList.toggle('w-full');
-            document.querySelector('.nav-links').classList.toggle('mt-4');
-        });
-    </script>
 </body>
 </html>

@@ -4,80 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | STILL</title>
+    <meta name="description" content="About the Sustainable Transformation Initiative for Land & Learning (STILL).">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="lib/tailwind.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
-    </style>
 </head>
-<body class="bg-white text-gray-900 leading-relaxed antialiased">
-    <header class="bg-white border-b sticky top-0 z-[1000] py-4">
-        <div class="container mx-auto px-4">
-            <nav class="flex justify-between items-center flex-wrap" role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-[#2c3e50] hover:no-underline">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" class="h-10 w-auto mr-3">
-                    STILL
+<body>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo" style="text-decoration: none; display: flex; align-items: center; font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.5rem; color: var(--color-forest-deep);">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; margin-right: 12px;">
+                    STILL<span style="color: var(--color-honey);">.bz</span>
                 </a>
-                <button class="mobile-menu-toggle block md:hidden p-2" aria-label="Toggle navigation">
-                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-600 mb-1"></span>
-                    <span class="block w-6 h-0.5 bg-gray-600"></span>
-                </button>
-                <ul class="nav-links hidden md:flex list-none m-0 p-0 gap-6 items-center">
-                    <li><a href="index.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Home</a></li>
-                    <li><a href="about.html" class="font-medium text-blue-600 hover:no-underline">About</a></li>
-                    <li><a href="resume.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Resume</a></li>
-                    <li><a href="projects.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Research Labs</a></li>
-                    <li><a href="timeline.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Timeline</a></li>
-                    <li><a href="dashboard.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">Dashboard</a></li>
-                    <li><a href="bsv-calculator.html" class="font-medium text-gray-700 hover:text-blue-600 transition-colors hover:no-underline">BSV Calculator</a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="bg-[#2c3e50] text-white px-4 py-2 rounded hover:bg-gray-800 transition-colors hover:no-underline" target="_blank" rel="noopener noreferrer">Support</a></li>
-                </ul>
+                
+                <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="index.html">Home</a>
+                    <a href="about.html" style="color: var(--color-forest-deep); border-bottom: 2px solid var(--color-pollen);">About</a>
+                    <a href="projects.html">Research</a>
+                    <a href="dashboard.html">Map</a>
+                    <a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-cta" target="_blank" rel="noopener noreferrer">Support</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main class="py-20">
-        <div class="container mx-auto px-4 max-w-3xl">
-            <h1 class="text-4xl md:text-5xl font-bold text-[#2c3e50] mb-8">About STILL</h1>
-            <div class="w-20 h-1 bg-[#27ae60] mb-10"></div>
-
-            <div class="prose prose-lg prose-gray">
-                <p class="mb-6"><strong>STILL</strong> is a research initiative focused on developing evidence-based policy frameworks for Indigenous-led land management. We specialize in IPCA governance, GIS analysis, and resource valuation methodologies.</p>
-
-                <p class="mb-10">Our work bridges academic research with practical implementation, providing measurable outcomes for sustainable land use.</p>
-
-                <h3 class="text-2xl font-bold text-[#2c3e50] mt-12 mb-6">Our Approach</h3>
-                <p class="mb-6 text-gray-700">STILL brings together Indigenous knowledge keepers and Western scientists to create holistic approaches to land stewardship. We practice Etuaptmumk (Two-Eyed Seeing)—learning to see from one eye with the strengths of Indigenous ways of knowing, and from the other eye with the strengths of Western ways of knowing, and using both eyes together.</p>
-
-                <p class="mb-10 text-gray-700">This approach allows us to develop solutions that are both scientifically rigorous and culturally grounded.</p>
-
-                <h3 class="text-2xl font-bold text-[#2c3e50] mt-12 mb-6">Our Values</h3>
-                <p class="mb-6 text-gray-700 italic">"We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil."</p>
-
-                <p class="mb-6 text-gray-700">We carry the responsibility passed down through generations: to care for the land so that it may care for those yet to come. All our relations.</p>
+    <main>
+        <section class="about-hero">
+            <div class="container">
+                <span class="text-science">The Initiative</span>
+                <h1>About STILL</h1>
+                <p style="font-size: 1.25rem; color: var(--color-forest-moss); margin-bottom: 3rem;">
+                    Sustainable Transformation Initiative for Land & Learning (STILL) is a research initiative focused on developing evidence-based policy frameworks for Indigenous-led land management.
+                </p>
             </div>
-        </div>
+        </section>
+
+        <div class="container"><hr class="flight-path"></div>
+
+        <section class="details">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+                    <div class="organic-card">
+                        <span class="text-science">Methodology</span>
+                        <h3>Our Approach</h3>
+                        <p>We specialize in IPCA governance, GIS analysis, and resource valuation methodologies. Our work bridges academic research with practical implementation, providing measurable outcomes for sustainable land use.</p>
+                        <p>We practice <strong>Etuaptmumk (Two-Eyed Seeing)</strong>—learning to see from one eye with the strengths of Indigenous ways of knowing, and from the other eye with the strengths of Western ways of knowing, and using both eyes together.</p>
+                    </div>
+
+                    <div class="organic-card" style="background: var(--color-nectar);">
+                        <span class="text-science">Philosophy</span>
+                        <h3>Our Values</h3>
+                        <p style="font-style: italic; color: var(--color-soil-rich);">"We walk with the understanding that land is not a resource to be extracted, but a relative to be honoured. Our work grows from listening—to Elders, to the waters, to the stories written in stone and soil."</p>
+                        <p>We carry the responsibility passed down through generations: to care for the land so that it may care for those yet to come. All our relations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="navigation-links" style="background: var(--color-stone-aged); border-radius: 0 100px 0 100px; padding: 4rem 0;">
+            <div class="container" style="text-align: center;">
+                <h3 style="margin-bottom: 2rem;">Explore More</h3>
+                <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="resume.html" class="btn-outline">Professional Resume</a>
+                    <a href="timeline.html" class="btn-outline">Project Timeline</a>
+                    <a href="bsv-calculator.html" class="btn-outline">BSV Calculator</a>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-4">&copy; 2026 STILL | Sustainable Transformation Initiative for Land & Learning</p>
-            <p class="mb-4 text-white font-medium">Contact: <a href="mailto:info@still.bz" class="text-[#27ae60] hover:underline">info@still.bz</a></p>
-            <p class="text-sm italic italic">Honouring all relations.</p>
+    <footer style="text-align: center;">
+        <div class="container">
+            <p style="color: white; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">STILL<span style="color: var(--color-pollen);">.bz</span></p>
+            <p style="margin-bottom: 2rem;">Sustainable Transformation Initiative for Land & Learning</p>
+            <div style="margin-bottom: 2rem;">
+                <a href="mailto:info@still.bz" style="color: var(--color-pollen); font-weight: 600;">info@still.bz</a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Honouring all relations. Bzzzz.</p>
+            <p style="font-size: 0.8rem; margin-top: 3rem; opacity: 0.5;">&copy; 2026 STILL</p>
         </div>
     </footer>
-
-    <script>
-        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('hidden');
-            document.querySelector('.nav-links').classList.toggle('flex');
-            document.querySelector('.nav-links').classList.toggle('flex-col');
-            document.querySelector('.nav-links').classList.toggle('w-full');
-            document.querySelector('.nav-links').classList.toggle('mt-4');
-        });
-    </script>
 </body>
 </html>

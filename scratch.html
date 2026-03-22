@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scratchpad | Belize Field Data | STILL</title>
+    <title>Belize Field Logs | STILL</title>
+    <meta name="description" content="Field data and media from the Gales Point Activity in Belize.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="../lib/tailwind.js"></script>
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/logo_v0.png">
-    <link rel="stylesheet" href="../lib/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+    <link rel="stylesheet" href="lib/leaflet.css" />
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        h1, h2, h3, .font-serif { font-family: 'Merriweather', serif; }
-        #map { height: 700px; width: 100%; border-radius: 1.5rem; background: #000; }
-        .leaflet-popup-content-wrapper { border-radius: 1rem; padding: 0.5rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); }
-        .media-container img { width: 100%; height: auto; border-radius: 0.5rem; margin-top: 0.5rem; display: block; cursor: pointer; transition: opacity 0.2s; }
+        #map { height: 700px; width: 100%; border-radius: 40px; background: #000; }
+        .leaflet-popup-content-wrapper { border-radius: 20px; padding: 0.5rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(4px); border: 1px solid var(--color-stone-aged); }
+        .media-container img { width: 100%; height: auto; border-radius: 10px; margin-top: 0.5rem; display: block; cursor: pointer; transition: opacity 0.2s; }
         .media-container img:hover { opacity: 0.8; }
         
-        /* Flash Animation */
+        /* Flash Animation for markers */
         @keyframes marker-flash {
             0% { transform: scale(1); filter: brightness(1); }
             50% { transform: scale(2.5); filter: brightness(2) drop-shadow(0 0 15px #fff); }
@@ -28,49 +27,83 @@
         }
         
         #img-modal { display: none; position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.9); padding: 2rem; cursor: zoom-out; align-items: center; justify-content: center; }
-        #img-modal img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 1rem; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        #img-modal img { max-width: 95%; max-height: 95%; object-fit: contain; border-radius: 20px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+
+        .sidebar-scroll {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 0.5rem;
+        }
+        .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+        .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--color-pollen); border-radius: 10px; }
     </style>
 </head>
-<body class="bg-gray-950 text-white leading-relaxed antialiased">
+<body>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo" style="text-decoration: none; display: flex; align-items: center; font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.5rem; color: var(--color-forest-deep);">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; margin-right: 12px;">
+                    STILL<span style="color: var(--color-honey);">.bz</span>
+                </a>
+                
+                <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="projects.html">Research</a>
+                    <a href="dashboard.html">Map</a>
+                    <a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-cta" target="_blank" rel="noopener noreferrer">Support</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
     <!-- Image Modal -->
     <div id="img-modal" onclick="this.style.display='none'">
         <img id="modal-img" src="" alt="Full view" />
-        <div class="absolute top-8 right-8 text-white text-4xl font-light cursor-pointer">&times;</div>
     </div>
 
-    <main class="py-12 md:py-20">
-        <div class="container mx-auto px-4">
-            <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div>
-                    <h1 class="text-3xl md:text-6xl font-bold mb-4 tracking-tight uppercase text-white">Belize Field Logs</h1>
-                    <p class="text-gray-400 text-xl font-light text-wrap"></p>
-                </div>
-<!-- Status Badges Removed -->
-            </div>
+    <main>
+        <section class="scratch-hero">
+            <div class="container">
+                <span class="text-science">Field Logs • Belize</span>
+                <h1>Gales Point Activity</h1>
+                <p style="font-size: 1.1rem; color: var(--color-forest-moss); margin-bottom: 3rem;">
+                    Synchronized field observations and multimedia from the Gales Point research zone.
+                </p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <div class="lg:col-span-3 shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/5 overflow-hidden rounded-3xl">
-                    <div id="map"></div>
-                </div>
-
-                <div class="lg:col-span-1 space-y-6 text-center lg:text-left text-white">
-                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
-                        <h3 class="text-xl font-bold mb-6 text-[#27ae60] font-serif italic text-sm text-center">Field Interaction</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed text-center">Click a photo in the viewer below to locate and highlight its exact coordinates on the map.</p>
+                <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem;">
+                    <div class="map-container" style="border: 1px solid var(--color-stone-aged);">
+                        <div id="map"></div>
                     </div>
 
-                    <div class="bg-white/5 p-8 rounded-3xl border border-white/10 backdrop-blur-xl shadow-2xl">
-                        <h3 class="text-xl font-bold mb-4 text-blue-400 font-serif italic text-sm">Media Quickview</h3>
-                        <div id="media-sidebar" class="grid grid-cols-2 gap-3 overflow-y-auto max-h-[500px] pr-2">
+                    <div class="organic-card" style="padding: 1.5rem; display: flex; flex-direction: column;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 1rem;">Media Quickview</h3>
+                        <p style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 1.5rem;">Click a photo to fly to its location on the map.</p>
+                        <div id="media-sidebar" class="sidebar-scroll" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
                             <!-- Populated via JS -->
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <div class="container"><hr class="flight-path"></div>
     </main>
 
-    <script src="../lib/leaflet.js"></script>
+    <footer style="text-align: center;">
+        <div class="container">
+            <p style="color: white; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">STILL<span style="color: var(--color-pollen);">.bz</span></p>
+            <p style="margin-bottom: 2rem;">Sustainable Transformation Initiative for Land & Learning</p>
+            <div style="margin-bottom: 2rem;">
+                <a href="mailto:info@still.bz" style="color: var(--color-pollen); font-weight: 600;">info@still.bz</a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Honouring all relations. Bzzzz.</p>
+            <p style="font-size: 0.8rem; margin-top: 3rem; opacity: 0.5;">&copy; 2026 STILL</p>
+        </div>
+    </footer>
+
+    <script src="lib/leaflet.js"></script>
     <script>
         const modal = document.getElementById('img-modal');
         const modalImg = document.getElementById('modal-img');
@@ -92,14 +125,13 @@
             }).addTo(map);
 
             const mediaBase = 'assets/media/belize-field/CoMapeo_GalesPointActivity_Media_2026_02_17/';
-            const markerMap = {}; // Storage to link docId to Leaflet layers
+            const markerMap = {}; 
 
             try {
                 const response = await fetch('assets/media/belize-field/CoMapeo_GalesPointActivity_Obsvns_2026_02_17.geojson');
                 const data = await response.json();
                 const sidebar = document.getElementById('media-sidebar');
 
-                // 1. Create Map Layers First
                 L.geoJSON(data, {
                     pointToLayer: function (feature, latlng) {
                         let color = '#27ae60';
@@ -119,7 +151,6 @@
                             className: 'transition-all'
                         });
                         
-                        // Link marker to ID
                         markerMap[feature.properties.docId] = marker;
                         return marker;
                     },
@@ -139,7 +170,7 @@
                                     mediaHtml += `
                                         <div class="mt-2 p-2 bg-gray-100 rounded-lg flex flex-col gap-1 text-gray-900">
                                             <span class="text-[9px] font-bold text-gray-400 font-sans">VOICE NOTE</span>
-                                            <audio controls class="h-8 w-full"><source src="${src}" type="audio/mp4"></audio>
+                                            <audio controls class="h-8 w-full" style="height: 30px;"><source src="${src}" type="audio/mp4"></audio>
                                         </div>`;
                                 }
                             });
@@ -163,7 +194,6 @@
                     }
                 }).addTo(map);
 
-                // 2. Populate Sidebar and link to markers
                 data.features.forEach(feature => {
                     if (feature.properties.attachments) {
                         feature.properties.attachments.forEach(att => {
@@ -175,8 +205,11 @@
                                 
                                 sideImg.src = t;
                                 sideImg.loading = 'lazy';
-                                sideImg.className = 'w-full aspect-square object-cover rounded-lg border border-white/10 hover:border-blue-500 cursor-pointer transition-all hover:scale-105';
+                                sideImg.style.cssText = 'width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; border: 1px solid var(--color-stone-aged); cursor: pointer; transition: transform 0.2s;';
                                 
+                                sideImg.onmouseover = () => sideImg.style.transform = 'scale(1.05)';
+                                sideImg.onmouseout = () => sideImg.style.transform = 'scale(1)';
+
                                 sideImg.onerror = function() {
                                     if (this.src.includes('_t.jpg')) this.src = w;
                                     else if (this.src.includes('_w.jpg')) this.src = o;
@@ -186,13 +219,12 @@
                                     const coords = [feature.geometry.coordinates[1], feature.geometry.coordinates[0]];
                                     map.flyTo(coords, 21);
                                     
-                                    // Flash the marker
                                     const marker = markerMap[feature.properties.docId];
                                     if (marker) {
                                         const el = marker.getElement();
                                         if (el) {
                                             el.classList.remove('marker-highlight');
-                                            void el.offsetWidth; // Trigger reflow
+                                            void el.offsetWidth; 
                                             el.classList.add('marker-highlight');
                                             setTimeout(() => el.classList.remove('marker-highlight'), 3000);
                                         }
