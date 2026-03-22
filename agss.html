@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGSS - Agentic GIS & Sovereign Stewardship | STILL</title>
+    <meta name="description" content="Empowering Indigenous Guardians with Headless AI, Pro-Grade Cartography, and the Sovereign Edge.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Supabase JS Client CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#fcfaf7',
+                            primary: '#2d4a22',
+                            accent: '#8b4513',
+                            earth: '#5d4037',
+                            leaf: '#4a6d3a',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Merriweather', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        body {
+            background-color: #fcfaf7;
+            color: #2d3748;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', serif;
+            color: #2d4a22;
+        }
+        .text-accent { color: #8b4513; }
+        .bg-primary { background-color: #2d4a22; }
+        .border-primary { border-color: #2d4a22; }
+        
+        /* Custom selection color */
+        ::selection {
+            background: #d4e3cf;
+            color: #2d4a22;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-leaf/20">
+
+    <!-- Navigation -->
+    <header class="py-6 border-b border-brand-primary/10">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="flex items-center font-serif font-bold text-2xl text-brand-primary group">
+                <span class="mr-2 text-brand-accent group-hover:rotate-12 transition-transform inline-block">🍀</span>
+                STILL
+            </a>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-wider text-brand-earth">
+                <a href="index.html" class="hover:text-brand-primary transition-colors">Home</a>
+                <a href="#approach" class="hover:text-brand-primary transition-colors">Approach</a>
+                <a href="#syllabus" class="hover:text-brand-primary transition-colors">Syllabus</a>
+                <a href="#waitlist" class="bg-brand-primary text-white px-5 py-2 rounded-sm hover:bg-brand-leaf transition-all">Join Waitlist</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 md:py-32">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl">
+                <span class="inline-block px-3 py-1 bg-brand-leaf/10 text-brand-leaf font-bold text-xs uppercase tracking-widest rounded-full mb-6">Course Enrollment Now Open</span>
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-8">
+                    Stop Renting Your Maps. <br class="hidden md:block">
+                    <span class="text-brand-accent">Start Owning Your Land Data.</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-brand-earth/80 font-light leading-relaxed mb-10 max-w-3xl">
+                    Agentic GIS & Sovereign Stewardship (AGSS) empowers Indigenous Guardians with headless AI, pro-grade cartography, and the Sovereign Edge.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#waitlist" class="bg-brand-primary text-white px-8 py-4 rounded-md font-bold text-lg hover:shadow-lg hover:-translate-y-1 transition-all text-center">
+                        Join the Waitlist
+                    </a>
+                    <a href="#syllabus" class="border-2 border-brand-primary text-brand-primary px-8 py-4 rounded-md font-bold text-lg hover:bg-brand-primary hover:text-white transition-all text-center">
+                        View Curriculum
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Context/Pain Point -->
+    <section class="py-16 bg-brand-primary text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-white">The Cloud is just someone else's computer.</h2>
+                    <p class="text-lg opacity-90 leading-relaxed mb-6">
+                        For Indigenous Nations, "The Cloud" often means high subscription costs, poor connectivity in remote areas, and a loss of control over ancestral knowledge.
+                    </p>
+                    <p class="text-lg font-serif italic border-l-4 border-brand-accent pl-6">
+                        "AGSS is the alternative. We teach you how to run a world-class GIS engine on a $100 Raspberry Pi—fully offline, fully sovereign, and powered by AI."
+                    </p>
+                </div>
+                <div class="bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10">
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-brand-accent mr-3 font-bold">✓</span>
+                            <span>Zero subscription fees. Own your hardware.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-accent mr-3 font-bold">✓</span>
+                            <span>Works in the deep bush, no internet required.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-accent mr-3 font-bold">✓</span>
+                            <span>Keep sensitive cultural data off 3rd-party servers.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-brand-accent mr-3 font-bold">✓</span>
+                            <span>Automate monitoring with local AI agents.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Approach: Two-Eyed Seeing -->
+    <section id="approach" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <h2 class="text-4xl font-bold mb-6">Two-Eyed Seeing: Etuaptmumk</h2>
+                <p class="text-xl text-brand-earth">We bridge the precision of Western remote sensing with the deep wisdom of Indigenous land stewardship.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Left Eye -->
+                <div class="bg-white p-10 rounded-2xl shadow-sm border border-brand-primary/5 hover:border-brand-primary/20 transition-all">
+                    <div class="text-4xl mb-6">👁️‍🗨️</div>
+                    <h3 class="text-2xl font-bold mb-4">The Left Eye</h3>
+                    <p class="text-brand-earth leading-relaxed">
+                        Ancestral place names, oral histories, and community-led monitoring. Honoring the deep connection to the land that has sustained communities for millennia.
+                    </p>
+                </div>
+                <!-- Right Eye -->
+                <div class="bg-white p-10 rounded-2xl shadow-sm border border-brand-primary/5 hover:border-brand-primary/20 transition-all">
+                    <div class="text-4xl mb-6">📡</div>
+                    <h3 class="text-2xl font-bold mb-4">The Right Eye</h3>
+                    <p class="text-brand-earth leading-relaxed">
+                        High-resolution satellite imagery, agentic automation, and edge computing. Utilizing modern technical tools to understand environmental changes at scale.
+                    </p>
+                </div>
+                <!-- The Vision -->
+                <div class="bg-brand-accent/5 p-10 rounded-2xl shadow-sm border border-brand-accent/20 transition-all">
+                    <div class="text-4xl mb-6">✨</div>
+                    <h3 class="text-2xl font-bold mb-4 text-brand-accent">The Vision</h3>
+                    <p class="text-brand-earth leading-relaxed">
+                        By viewing the world through both lenses simultaneously, we create more holistic, resilient, and effective solutions for a sovereign future on the Land.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syllabus -->
+    <section id="syllabus" class="py-24 bg-brand-bg relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-brand-leaf/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-brand-accent/5 rounded-full blur-3xl"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl font-bold mb-4">8-Module Syllabus</h2>
+                    <p class="text-xl text-brand-earth">A progression from hardware setup to autonomous agent-led spatial analytics.</p>
+                </div>
+                <div class="hidden md:block">
+                    <span class="text-sm font-bold uppercase tracking-widest text-brand-accent">Progression Model</span>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Mod 1 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 1</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">The Sovereign Edge</h4>
+                    <p class="text-sm text-brand-earth/80">Establish a functional, air-gapped GIS environment on a Raspberry Pi that you own completely.</p>
+                </div>
+                <!-- Mod 2 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 2</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">The Digital Bundle</h4>
+                    <p class="text-sm text-brand-earth/80">Integrate OCAP® principles and Two-Eyed Seeing into your territory's data management strategy.</p>
+                </div>
+                <!-- Mod 3 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 3</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">Cartography of the Heart</h4>
+                    <p class="text-sm text-brand-earth/80">Create professional-grade aesthetic maps (Swiss Hillshade & Firefly) that tell your story.</p>
+                </div>
+                <!-- Mod 4 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 4</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">The Guardian’s Eye</h4>
+                    <p class="text-sm text-brand-earth/80">Automate the monitoring of remote areas using Sentinel-2 satellite imagery and edge computing.</p>
+                </div>
+                <!-- Mod 5 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 5</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">The Agentic Interface</h4>
+                    <p class="text-sm text-brand-earth/80">Deploy 'Map-Bots' to talk to your maps using natural language on Telegram to generate reports.</p>
+                </div>
+                <!-- Mod 6 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 6</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">Field Intelligence</h4>
+                    <p class="text-sm text-brand-earth/80">Offline-first data collection with P2P sync for guardians working in deep wilderness areas.</p>
+                </div>
+                <!-- Mod 7 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 7</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">Autonomous Stewardship</h4>
+                    <p class="text-sm text-brand-earth/80">Set up AI "Watchers" to proactively monitor data feeds for unauthorized roads or fire hotspots.</p>
+                </div>
+                <!-- Mod 8 -->
+                <div class="bg-white p-6 rounded-lg border border-brand-primary/10 hover:shadow-md transition-shadow group">
+                    <div class="text-xs font-bold text-brand-leaf mb-2">Module 8</div>
+                    <h4 class="text-lg font-bold mb-3 group-hover:text-brand-accent transition-colors">The Sovereign Network</h4>
+                    <p class="text-sm text-brand-earth/80">Scale your local GIS services to turn personal skills into a Nation-wide infrastructure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="waitlist" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto bg-brand-primary rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+                <div class="p-12 md:p-16 md:w-1/2 text-white">
+                    <h2 class="text-4xl font-bold mb-6 text-white leading-tight">Join the Next Cohort.</h2>
+                    <p class="text-lg opacity-80 mb-8">
+                        Limited to 15 Guardians per cohort to ensure hands-on technical support and meaningful collaboration.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <span class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4">📍</span>
+                            <span>Remote & Field-Ready Training</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4">🤖</span>
+                            <span>Hands-on AI & Raspberry Pi Setup</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4">🌍</span>
+                            <span>First Nations Data Sovereignty Focus</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-12 md:p-16 md:w-1/2 bg-white">
+                    <form id="waitlist-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-brand-earth mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="Guardian Name" class="w-full px-4 py-3 rounded-md border border-gray-200 focus:outline-none focus:border-brand-primary transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-brand-earth mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="guardian@nation.org" class="w-full px-4 py-3 rounded-md border border-gray-200 focus:outline-none focus:border-brand-primary transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold uppercase tracking-widest text-brand-earth mb-2">Nation / Organization</label>
+                            <input type="text" id="nation" name="nation" required placeholder="Community or Dept" class="w-full px-4 py-3 rounded-md border border-gray-200 focus:outline-none focus:border-brand-primary transition-colors">
+                        </div>
+                        <button type="submit" id="submit-btn" class="w-full bg-brand-accent text-white py-4 rounded-md font-bold text-lg hover:bg-brand-earth transition-all">
+                            Join the Waitlist
+                        </button>
+                    </form>
+                    <div id="form-message" class="hidden mt-6 p-4 rounded-md text-center font-medium"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-brand-primary/10">
+        <div class="container mx-auto px-6 text-center">
+            <div class="font-serif font-bold text-2xl text-brand-primary mb-4">STILL</div>
+            <p class="text-brand-earth/60 mb-8 italic">Honouring the Land. Mastering the Tech.</p>
+            <div class="text-sm text-brand-earth/40">
+                &copy; 2026 STILL.bz/agss | All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Supabase Initialization
+        // Replace 'YOUR_SUPABASE_URL' and 'YOUR_SUPABASE_ANON_KEY' with your actual Supabase credentials.
+        const SUPABASE_URL = 'https://zqaitwxasunttgvxbnga.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxYWl0d3hhc3VudHRndnhibmdhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMjE3ODcsImV4cCI6MjA4OTY5Nzc4N30.HqT6HDjzUsA-7jv6AaJPB0QnY55ZYk7toBKOWSpogVY';
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Waitlist Form Handling
+        const waitlistForm = document.getElementById('waitlist-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formMessage = document.getElementById('form-message');
+
+        waitlistForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // UI Feedback: Disable button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Sending...';
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            const formData = new FormData(waitlistForm);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                nation: formData.get('nation')
+            };
+
+            try {
+                const { error } = await supabaseClient
+                    .from('agss_waitlist')
+                    .insert([data]);
+
+                if (error) throw error;
+
+                // Success State
+                formMessage.innerText = 'Success! You have been added to the waitlist.';
+                formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+                formMessage.classList.add('bg-green-100', 'text-green-700');
+                waitlistForm.reset();
+                submitBtn.innerText = 'Join the Waitlist';
+                
+            } catch (error) {
+                console.error('Supabase error:', error.message);
+                
+                // Error State
+                formMessage.innerText = 'Something went wrong. Please try again.';
+                formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+                formMessage.classList.add('bg-red-100', 'text-red-700');
+                submitBtn.innerText = 'Join the Waitlist';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        });
+    </script>
+</body>
+</html>
