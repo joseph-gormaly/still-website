@@ -13,7 +13,7 @@
   --color-lichen: #a4ac86;
   
   /* Bee-Inspired Accents (STILL.bz) */
-  --color-pollen: #f3c75f;
+  --color-pollen: #e6b800; /* Darker yellow for better contrast */
   --color-honey: #d4a017;
   --color-nectar: #fff9e6;
 
@@ -290,6 +290,9 @@ footer a {
 /* 7. Mobile Adjustments */
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
-    section { padding: 3rem 0; }
+    section { padding: 3rem 1rem; }
+    .nav-links a { font-size: 0.85rem; }
+    header nav { flex-wrap: wrap; justify-content: center; text-align: center; }
+    header img { max-width: 80px; } /* Responsive logo */
     .organic-card { padding: 1.5rem; border-radius: 30px 10px; }
 }
