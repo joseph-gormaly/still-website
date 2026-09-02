@@ -16,6 +16,9 @@
   var REDUCED_MOTION = '(prefers-reduced-motion: reduce)';
   var LAYER_ID = 'comb-light';
   var LIT_CLASS = 'is-lit';
+  // Gates the specular sweep on the glass surfaces (see styles.css). Kept on
+  // the root so a single class controls every glass element at once.
+  var ROOT_LIT_CLASS = 'pointer-lit';
 
   if (!window.matchMedia || !window.matchMedia(FINE_POINTER).matches) return;
   if (window.matchMedia(REDUCED_MOTION).matches) return;
@@ -41,7 +44,10 @@
   function onPointerMove(event) {
     pointerX = event.clientX;
     pointerY = event.clientY;
-    if (!layer.classList.contains(LIT_CLASS)) layer.classList.add(LIT_CLASS);
+    if (!layer.classList.contains(LIT_CLASS)) {
+      layer.classList.add(LIT_CLASS);
+      root.classList.add(ROOT_LIT_CLASS);
+    }
     if (!frame) frame = window.requestAnimationFrame(paint);
   }
 
@@ -51,6 +57,7 @@
       frame = 0;
     }
     layer.classList.remove(LIT_CLASS);
+    root.classList.remove(ROOT_LIT_CLASS);
   }
 
   window.addEventListener('pointermove', onPointerMove, { passive: true });

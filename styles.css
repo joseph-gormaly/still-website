@@ -45,10 +45,27 @@
   /* Hairline highlight along a material's top edge — the cue that reads as a
      pane of glass catching light rather than a flat rectangle. */
   --color-material-highlight: rgba(255, 255, 255, 0.72);
-  --material-tint: rgba(250, 249, 245, 0.72);
-  --material-tint-strong: rgba(250, 249, 245, 0.88);
-  --material-blur: 22px;
-  --material-saturate: 180%;
+  /* Tints stay low so the blur has something to reveal — these sit over the
+     honeycomb, and anything much above ~0.6 reads as a flat panel instead. */
+  --material-tint: rgba(252, 250, 244, 0.42);
+  --material-tint-strong: rgba(252, 250, 244, 0.52);
+  --material-blur: 24px;
+  --material-saturate: 200%;
+  --material-brightness: 1.05;
+  /* Edge treatment is what sells thickness: a bright specular top, a dimmer
+     bounce along the bottom, and a light-catching hairline border. */
+  --material-edge-top: rgba(255, 255, 255, 0.92);
+  --material-edge-bottom: rgba(255, 255, 255, 0.34);
+  --material-border: rgba(255, 255, 255, 0.58);
+  /* Specular sweep. Transparent until comb-light.js reports a live pointer, so
+     touch, no-JS and reduced-motion visitors never see a stranded highlight. */
+  --glass-specular: transparent;
+  --glass-specular-lit: rgba(255, 243, 208, 0.9);
+  --glass-specular-radius: 190px;
+  /* The rim carries the effect where the surface has no headroom to brighten —
+     which is how real glass reads in low light anyway. */
+  --glass-rim: transparent;
+  --glass-rim-lit: rgba(255, 236, 186, 0.85);
 
   /* --- Radii: continuous-corner scale --- */
   --radius-xs: 8px;
@@ -160,8 +177,19 @@
     --color-on-primary: #141613;
 
     --color-material-highlight: rgba(255, 255, 255, 0.10);
-    --material-tint: rgba(28, 32, 28, 0.72);
-    --material-tint-strong: rgba(28, 32, 28, 0.90);
+    --material-tint: rgba(26, 30, 26, 0.46);
+    --material-tint-strong: rgba(26, 30, 26, 0.58);
+    /* Lifted a little further: a dark tint over a dark page needs the backdrop
+       brightened to read as glass rather than as a hole. */
+    --material-brightness: 1.12;
+    --material-edge-top: rgba(255, 255, 255, 0.16);
+    --material-edge-bottom: rgba(255, 255, 255, 0.05);
+    --material-border: rgba(255, 255, 255, 0.14);
+    /* No headroom to brighten dark glass sitting under light text without
+       costing legibility (measured 3.8:1 at a visible strength), so the surface
+       sweep is light-appearance only and the rim does the work here. */
+    --glass-specular-lit: transparent;
+    --glass-rim-lit: rgba(255, 226, 158, 0.95);
 
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
     --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.40), 0 10px 28px rgba(0, 0, 0, 0.34);
@@ -377,11 +405,14 @@ p {
   padding: var(--space-2xs) var(--space-sm);
   margin-bottom: var(--space-md);
   border-radius: var(--radius-pill);
-  background: var(--material-tint);
-  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
-  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--material-tint);
+  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
+  border: 1px solid var(--material-border);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 var(--material-edge-top),
+    inset 0 -1px 0 var(--material-edge-bottom);
 }
 
 a {
@@ -485,12 +516,69 @@ section {
 /* -----------------------------------------------------------------------------
    6. Materials
    -------------------------------------------------------------------------- */
+
+/* Specular sweep across every glass surface.
+   `background-attachment: fixed` re-anchors the gradient's coordinate system to
+   the viewport rather than the element, so one declaration lights whichever
+   glass the pointer happens to be over — no per-element measurement, and no JS
+   beyond the pointer position comb-light.js already publishes. The offscreen
+   fallback position keeps it invisible until that position exists. */
+header,
+.eyebrow-chip,
+.btn-outline,
 .material {
-  background: var(--material-tint);
-  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
-  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md), inset 0 1px 0 var(--color-material-highlight);
+  background-image: radial-gradient(
+    circle var(--glass-specular-radius) at var(--pointer-x, -100%) var(--pointer-y, -100%),
+    var(--glass-specular),
+    transparent 62%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.pointer-lit {
+  --glass-specular: var(--glass-specular-lit);
+  --glass-rim: var(--glass-rim-lit);
+}
+
+/* Rim glint. The padding + mask-composite pair leaves only a 1px ring, so the
+   travelling highlight lands on the edge and never behind body text. */
+header::after,
+.eyebrow-chip::after,
+.btn-outline::after,
+.material::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: radial-gradient(
+    circle var(--glass-specular-radius) at var(--pointer-x, -100%) var(--pointer-y, -100%),
+    var(--glass-rim),
+    transparent 62%
+  );
+  background-attachment: fixed;
+  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.eyebrow-chip,
+.btn-outline,
+.material {
+  position: relative;
+}
+.material {
+  background-color: var(--material-tint);
+  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
+  border: 1px solid var(--material-border);
+  box-shadow: var(--shadow-md), inset 0 1px 0 var(--material-edge-top),
+    inset 0 -1px 0 var(--material-edge-bottom);
 }
 
 /* -----------------------------------------------------------------------------
@@ -501,10 +589,13 @@ header {
   top: 0;
   z-index: 1000;
   padding-block: var(--space-xs);
-  background: var(--material-tint-strong);
-  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
-  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--material-tint-strong);
+  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
+  border-bottom: 1px solid var(--material-border);
+  box-shadow: inset 0 1px 0 var(--material-edge-top), 0 1px 12px rgba(36, 26, 18, 0.05);
 }
 
 nav {
@@ -659,17 +750,21 @@ ul.nav-links li {
 }
 
 .btn-outline {
-  background: var(--material-tint);
-  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
-  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate));
+  background-color: var(--material-tint);
+  -webkit-backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
+  backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
+    brightness(var(--material-brightness));
   color: var(--color-primary) !important;
-  border-color: var(--color-border-strong);
-  box-shadow: var(--shadow-sm);
+  border-color: var(--material-border);
+  box-shadow: var(--shadow-sm), inset 0 1px 0 var(--material-edge-top),
+    inset 0 -1px 0 var(--material-edge-bottom);
 }
 
 .btn-outline:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), inset 0 1px 0 var(--material-edge-top),
+    inset 0 -1px 0 var(--material-edge-bottom);
   border-color: var(--color-accent);
 }
 
