@@ -49,14 +49,24 @@
      honeycomb, and anything much above ~0.6 reads as a flat panel instead. */
   --material-tint: rgba(252, 250, 244, 0.42);
   --material-tint-strong: rgba(252, 250, 244, 0.52);
-  --material-blur: 24px;
-  --material-saturate: 200%;
-  --material-brightness: 1.05;
+  --material-blur: 16px;
+  --material-saturate: 230%;
+  --material-brightness: 1.06;
   /* Edge treatment is what sells thickness: a bright specular top, a dimmer
      bounce along the bottom, and a light-catching hairline border. */
-  --material-edge-top: rgba(255, 255, 255, 0.92);
-  --material-edge-bottom: rgba(255, 255, 255, 0.34);
+  --material-edge-top: rgba(255, 255, 255, 0.95);
+  --material-edge-bottom: rgba(120, 90, 40, 0.16);
   --material-border: rgba(255, 255, 255, 0.58);
+  /* The rim is a gradient, not a flat stroke: bright where a light above would
+     catch it, nearly gone across the middle, with a softer bounce underneath.
+     This varied edge is the clearest single tell of the iOS material. */
+  --material-rim: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 255, 255, 0.3) 38%,
+    rgba(255, 255, 255, 0.12) 62%,
+    rgba(255, 255, 255, 0.66) 100%
+  );
   /* Specular sweep. Transparent until comb-light.js reports a live pointer, so
      touch, no-JS and reduced-motion visitors never see a stranded highlight. */
   --glass-specular: transparent;
@@ -182,9 +192,16 @@
     /* Lifted a little further: a dark tint over a dark page needs the backdrop
        brightened to read as glass rather than as a hole. */
     --material-brightness: 1.12;
-    --material-edge-top: rgba(255, 255, 255, 0.16);
-    --material-edge-bottom: rgba(255, 255, 255, 0.05);
+    --material-edge-top: rgba(255, 255, 255, 0.18);
+    --material-edge-bottom: rgba(0, 0, 0, 0.35);
     --material-border: rgba(255, 255, 255, 0.14);
+    --material-rim: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.42) 0%,
+      rgba(255, 255, 255, 0.1) 38%,
+      rgba(255, 255, 255, 0.04) 62%,
+      rgba(255, 255, 255, 0.22) 100%
+    );
     /* No headroom to brighten dark glass sitting under light text without
        costing legibility (measured 3.8:1 at a visible strength), so the surface
        sweep is light-appearance only and the rim does the work here. */
@@ -410,9 +427,9 @@ p {
     brightness(var(--material-brightness));
   backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
     brightness(var(--material-brightness));
-  border: 1px solid var(--material-border);
+  border: 1px solid transparent; /* the ::before gradient rim draws the edge */
   box-shadow: var(--shadow-sm), inset 0 1px 0 var(--material-edge-top),
-    inset 0 -1px 0 var(--material-edge-bottom);
+    inset 0 -1px 1px var(--material-edge-bottom);
 }
 
 a {
@@ -541,6 +558,26 @@ header,
   --glass-rim: var(--glass-rim-lit);
 }
 
+/* Static gradient rim on the discrete glass surfaces. Replaces the flat border
+   so the edge brightness varies around the perimeter the way a real bevel
+   catches light. The header is excluded: it spans the viewport, so a ring would
+   draw a line along the top of the screen. */
+.eyebrow-chip::before,
+.btn-outline::before,
+.material::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  pointer-events: none;
+  border-radius: inherit;
+  background: var(--material-rim);
+  -webkit-mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
 /* Rim glint. The padding + mask-composite pair leaves only a 1px ring, so the
    travelling highlight lands on the edge and never behind body text. */
 header::after,
@@ -576,9 +613,9 @@ header::after,
     brightness(var(--material-brightness));
   backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
     brightness(var(--material-brightness));
-  border: 1px solid var(--material-border);
+  border: 1px solid transparent; /* the ::before gradient rim draws the edge */
   box-shadow: var(--shadow-md), inset 0 1px 0 var(--material-edge-top),
-    inset 0 -1px 0 var(--material-edge-bottom);
+    inset 0 -1px 1px var(--material-edge-bottom);
 }
 
 /* -----------------------------------------------------------------------------
@@ -756,15 +793,15 @@ ul.nav-links li {
   backdrop-filter: blur(var(--material-blur)) saturate(var(--material-saturate))
     brightness(var(--material-brightness));
   color: var(--color-primary) !important;
-  border-color: var(--material-border);
+  border-color: transparent; /* the ::before gradient rim draws the edge */
   box-shadow: var(--shadow-sm), inset 0 1px 0 var(--material-edge-top),
-    inset 0 -1px 0 var(--material-edge-bottom);
+    inset 0 -1px 1px var(--material-edge-bottom);
 }
 
 .btn-outline:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md), inset 0 1px 0 var(--material-edge-top),
-    inset 0 -1px 0 var(--material-edge-bottom);
+    inset 0 -1px 1px var(--material-edge-bottom);
   border-color: var(--color-accent);
 }
 
@@ -993,6 +1030,22 @@ footer a {
   color: var(--color-primary);
   background: color-mix(in srgb, var(--color-primary) 8%, transparent);
   transform: none;
+}
+
+/* -----------------------------------------------------------------------------
+   11b. Continuous (squircle) corners
+   The superellipse Apple uses, rather than a circular arc. Chromium 139+ only,
+   so it is opt-in via @supports and simply falls back to the circular corners
+   everywhere else. Pill-shaped elements are omitted: a capsule is already the
+   same shape either way.
+   -------------------------------------------------------------------------- */
+@supports (corner-shape: squircle) {
+  .organic-card,
+  .panel-inset,
+  .map-container,
+  footer {
+    corner-shape: squircle;
+  }
 }
 
 /* -----------------------------------------------------------------------------
