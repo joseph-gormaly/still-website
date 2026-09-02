@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thebacha Solar Model | STILL</title>
+    <meta name="description" content="A true-scale solar system laid along the Pine Lake to Fort Smith corridor in Wood Buffalo National Park, anchored on the 9.51 m Dark Sky Circle observation deck as the Sun.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="lib/leaflet.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo_v0.png">
+    <style>
+        /* Night-sky panels: consistent with the dark treatment used on dashboard.html */
+        .night-panel {
+            background: #131a17;
+            background-image: radial-gradient(circle at 20% 30%, rgba(230,184,0,0.06), transparent 55%);
+            border-radius: 40px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+            overflow: hidden;
+        }
+        .night-panel h3 { color: var(--color-nectar); }
+        .night-panel .text-science { color: var(--color-pollen); }
+        .night-panel p { color: #c9d2cb; }
+
+        figure { margin: 0; }
+        .hero-figure {
+            border-radius: 40px;
+            overflow: hidden;
+            margin: 3rem 0 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: #131a17;
+        }
+        .hero-figure img { width: 100%; display: block; }
+        .hero-figure figcaption {
+            font-family: var(--font-primary);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: #8fa094;
+            padding: 0.9rem 1.5rem 1.1rem;
+        }
+        .credit {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            color: #6d7d71;
+            margin-top: 0.3rem;
+        }
+
+        .figure-caption {
+            font-family: var(--font-primary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--color-forest-moss);
+            max-width: 75ch;
+            margin-top: 1rem;
+        }
+        .night-panel .figure-caption { color: #8fa094; }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .stat-block {
+            background: white;
+            border-left: 4px solid var(--color-pollen);
+            border-radius: 4px 20px 20px 4px;
+            padding: 1.5rem;
+        }
+        .stat-block dt {
+            font-family: var(--font-primary);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-soil-oak);
+            margin-bottom: 0.5rem;
+        }
+        .stat-block dd {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: var(--color-forest-deep);
+            line-height: 1.2;
+            margin: 0;
+        }
+        .stat-block dd small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.8rem;
+            color: var(--color-forest-moss);
+            margin-top: 0.35rem;
+            line-height: 1.5;
+        }
+
+        .model-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .model-table caption {
+            text-align: left;
+            font-size: 0.85rem;
+            color: var(--color-forest-moss);
+            margin-bottom: 1rem;
+        }
+        .model-table th, .model-table td {
+            padding: 0.7rem 0.9rem;
+            border-bottom: 1px solid var(--color-stone-aged);
+            text-align: right;
+        }
+        .model-table th:first-child, .model-table td:first-child { text-align: left; }
+        .model-table thead th {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-soil-oak);
+            border-bottom: 2px solid var(--color-pollen);
+        }
+        .model-table tbody tr:hover { background: var(--color-nectar); }
+        .model-table .swatch {
+            display: inline-block;
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            margin-right: 0.6rem;
+            vertical-align: baseline;
+        }
+        .model-table .reference-only td { opacity: 0.55; font-style: italic; }
+
+        .table-scroll { overflow-x: auto; }
+
+        .pull-quote {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: var(--color-forest-deep);
+            border-left: 4px solid var(--color-pollen);
+            padding-left: 2rem;
+            margin: 3rem 0;
+            max-width: 60ch;
+        }
+
+        .meta-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .meta-list dt {
+            font-family: var(--font-primary);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-soil-oak);
+            margin-bottom: 0.3rem;
+        }
+        .meta-list dd { margin: 0; font-weight: 600; color: var(--color-forest-deep); }
+
+        .coord {
+            font-family: var(--font-primary);
+            font-variant-numeric: tabular-nums;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+        }
+
+        svg.chart { width: 100%; height: auto; display: block; }
+        svg.chart text { font-family: 'Inter', system-ui, sans-serif; }
+
+        /* ---- interactive corridor map ---- */
+        #live-map {
+            height: 620px;
+            border-radius: 24px;
+            background: #0d1210;
+            z-index: 10;
+        }
+        #live-map .leaflet-container { font-family: var(--font-primary); }
+        .map-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1.25rem 2rem;
+            margin-top: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            background: #1b241f;
+            border-radius: 20px;
+        }
+        .map-toolbar label {
+            font-family: var(--font-primary);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--color-pollen);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .toolbar-group { flex: 1 1 240px; }
+        .toolbar-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--color-pollen);
+            cursor: pointer;
+        }
+        .toolbar-readout {
+            font-family: var(--font-primary);
+            font-variant-numeric: tabular-nums;
+            font-size: 0.85rem;
+            color: #c9d2cb;
+            margin-top: 0.4rem;
+        }
+        .toolbar-readout b { color: #fff; font-weight: 600; }
+        .map-btn {
+            background: none;
+            border: 1.5px solid var(--color-pollen);
+            color: var(--color-pollen);
+            font-family: var(--font-primary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .map-btn:hover, .map-btn:focus-visible {
+            background: var(--color-pollen);
+            color: #131a17;
+        }
+        .map-btn[aria-pressed="true"] {
+            background: var(--color-pollen);
+            color: #131a17;
+        }
+        .planet-icon { background: none; border: none; }
+        .planet-label {
+            background: none;
+            border: none;
+            box-shadow: none;
+            color: #e8ede9;
+            font-family: var(--font-primary);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-shadow: 0 0 4px #000, 0 0 8px #000;
+            padding: 0;
+            white-space: nowrap;
+        }
+        .planet-label::before { display: none; }
+        .leaflet-popup-content {
+            font-family: var(--font-primary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .leaflet-popup-content h4 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            margin: 0 0 0.5rem;
+            color: var(--color-forest-deep);
+        }
+        .leaflet-popup-content dl {
+            margin: 0;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.2rem 0.9rem;
+            font-variant-numeric: tabular-nums;
+        }
+        .leaflet-popup-content dt { color: var(--color-soil-oak); font-size: 0.78rem; }
+        .leaflet-popup-content dd { margin: 0; font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .night-panel { padding: 1.25rem; border-radius: 24px; }
+            .pull-quote { font-size: 1.15rem; padding-left: 1.25rem; }
+            .hero-figure { border-radius: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main Navigation">
+                <a href="index.html" class="logo" style="text-decoration: none; display: flex; align-items: center; font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.5rem; color: var(--color-forest-deep);">
+                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; margin-right: 12px;">
+                    STILL<span style="color: var(--color-honey);">.bz</span>
+                </a>
+                <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="projects.html" style="color: var(--color-forest-deep); border-bottom: 2px solid var(--color-pollen);">Research</a>
+                    <a href="dashboard.html">Map</a>
+                    <a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-cta" target="_blank" rel="noopener noreferrer">Support</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="research-hero">
+            <div class="container">
+                <span class="text-science">Case Study &middot; Interpretation &amp; Science Communication</span>
+                <h1>Thebacha Solar Model</h1>
+                <p style="font-size: 1.25rem; color: var(--color-forest-moss); max-width: 800px;">
+                    A true-scale model of the solar system laid along the road out of Wood Buffalo
+                    National Park &mdash; anchored on the one object in the park already built to hold
+                    the whole sky.
+                </p>
+
+                <dl class="meta-list" style="margin-top: 3rem;">
+                    <div>
+                        <dt>Role</dt>
+                        <dd>Public Outreach Education Officer III</dd>
+                    </div>
+                    <div>
+                        <dt>Organisation</dt>
+                        <dd>Wood Buffalo National Park, Parks Canada</dd>
+                    </div>
+                    <div>
+                        <dt>Period</dt>
+                        <dd>April &ndash; September 2017</dd>
+                    </div>
+                    <div>
+                        <dt>Partner</dt>
+                        <dd>Thebacha &amp; Wood Buffalo Astronomical Society</dd>
+                    </div>
+                    <div>
+                        <dt>Toolchain</dt>
+                        <dd>ArcMap &middot; ArcGIS Online &middot; Google Earth</dd>
+                    </div>
+                </dl>
+
+                <figure class="hero-figure">
+                    <img src="assets/dark_sky_2_2017.jpg"
+                         alt="An observer crouched at a telescope on a gravel ridge beneath a green aurora and a dense field of stars, working by the light of a red headlamp."
+                         loading="lazy" width="900" height="686">
+                    <figcaption>
+                        Observing under aurora in the Wood Buffalo Dark Sky Preserve.
+                        <span class="credit">Courtesy Thebacha &amp; Wood Buffalo Astronomical Society &middot; tawbas.ca</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <div class="container"><hr class="flight-path"></div>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <span class="text-science">The Problem</span>
+                <h2>Every diagram of the solar system is a lie</h2>
+                <p>
+                    Wood Buffalo National Park is the largest Dark Sky Preserve on Earth, and its
+                    Dark Sky Circle &mdash; the open-air observation deck at Pine Lake &mdash; is where
+                    most visitors meet that fact for the first time. But the poster in the visitor
+                    centre does something quietly dishonest. To fit the planets onto one sheet, it has
+                    to compress the distances by orders of magnitude until they look like neighbours on
+                    a street. Visitors arrive believing the solar system is crowded.
+                </p>
+                <p>
+                    It isn't. It is almost entirely empty, and emptiness is the hardest fact in
+                    astronomy to communicate, because every medium we normally use is optimised to
+                    remove exactly that. A page has edges. A screen has edges. Both punish dead space,
+                    so both delete the thing that matters most.
+                </p>
+                <p>
+                    The park already owned the right apparatus and hadn't noticed: a circular wooden
+                    deck at one end of a sixty-kilometre road. A road has no edges to fit within.
+                    It can afford to be empty.
+                </p>
+
+                <p class="pull-quote">
+                    Make the deck the Sun, and the drive out to it stops being travel time.
+                    It becomes the model.
+                </p>
+            </div>
+        </section>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <span class="text-science">The Method</span>
+                <h2>One measurement fixes everything</h2>
+                <p>
+                    A scale model needs exactly one free parameter. Fix it, and every other number in
+                    the system is forced &mdash; you no longer get to choose anything. Here the free
+                    parameter was the deck itself, measured at
+                    <span class="coord">9.51 m</span> across in Google Earth at
+                    <span class="coord">59&deg;33&prime;28&Prime;N, 112&deg;15&prime;32&Prime;W</span>.
+                    Declaring that circle to be the Sun sets a ratio of
+                    <strong>1 : 146,309,148</strong>, and every distance and diameter in the table
+                    below follows from it by arithmetic alone.
+                </p>
+                <p>
+                    The ratio is what makes the model honest, and it is also what makes it
+                    uncomfortable. At this scale the four rocky planets are all inside the first
+                    1.6 km. Jupiter is at 5.3 km. Neptune &mdash; the outermost planet &mdash; falls at
+                    <strong>30.75 km</strong>, barely halfway to Fort Smith. The remaining thirty-one
+                    kilometres of highway are not part of the solar system at all. You leave it near the
+                    midpoint and drive the rest of the way home through interstellar space.
+                </p>
+
+                <dl class="stat-grid">
+                    <div class="stat-block">
+                        <dt>Scale ratio</dt>
+                        <dd>1 : 146 million<small>1 mm on the model = 146,309 km in space</small></dd>
+                    </div>
+                    <div class="stat-block">
+                        <dt>The Sun</dt>
+                        <dd>9.51 m<small>Measured diameter of the Dark Sky Circle deck</small></dd>
+                    </div>
+                    <div class="stat-block">
+                        <dt>Speed of light</dt>
+                        <dd>7.4 km/h<small>Light crosses this model at walking pace</small></dd>
+                    </div>
+                    <div class="stat-block">
+                        <dt>Edge of the planets</dt>
+                        <dd>30.75 km<small>Neptune &mdash; then 31 km of nothing to town</small></dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <div class="night-panel">
+                    <span class="text-science">Figure 1 &middot; Interactive</span>
+                    <h3 style="margin-bottom: 0.5rem;">The model on the ground</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 2rem;">
+                        Each planet sits at its true modelled position on the real road. Pan and zoom;
+                        the spheres keep their true proportions to one another at every magnification.
+                    </p>
+
+                    <div id="live-map" role="application"
+                         aria-label="Pannable topographic map of the Pine Lake to Fort Smith corridor showing each planet at its modelled position along the road. The full specification is also given as a table later on this page."></div>
+
+                    <div class="map-toolbar">
+                        <div class="toolbar-group">
+                            <label for="mag-slider">Planet magnification</label>
+                            <input type="range" id="mag-slider" min="30" max="320" value="90" step="10"
+                                   aria-describedby="mag-readout">
+                            <p class="toolbar-readout" id="mag-readout"></p>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                            <button type="button" class="map-btn" id="btn-fit">Whole model</button>
+                            <button type="button" class="map-btn" id="btn-inner">Inner planets</button>
+                            <button type="button" class="map-btn" id="btn-sun" aria-pressed="false">Sun to scale</button>
+                        </div>
+                    </div>
+
+                    <p class="figure-caption">
+                        Spheres are magnified for visibility but share one multiplier, so every
+                        size relationship in the set is preserved &mdash; Jupiter really is 29 times
+                        Mercury's diameter at any slider position. The dashed ring around each planet
+                        is a fixed-size locator, not the planet: where a planet is only a few pixels
+                        across inside its ring, that is the honest answer. Saturn's rings are drawn
+                        to the same scale, which is why its silhouette outreaches Jupiter's even
+                        though its body is smaller. Route traced from OpenStreetMap road centrelines;
+                        distances measured along the drivable route from the deck.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <div class="night-panel">
+                    <span class="text-science">Figure 2</span>
+                    <h3 style="margin-bottom: 0.5rem;">The corridor, to scale</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 2rem;">
+                        Every marker sits at its true proportional distance from the deck.
+                    </p>
+                    <div id="corridor-map" role="img"
+                         aria-label="Strip map of the 60 kilometre corridor from the Pine Lake Dark Sky Circle to Fort Smith. The four rocky planets cluster within the first 1.6 kilometres, Jupiter sits at 5.3 km, Saturn at 9.8 km, Uranus at 19.7 km and Neptune at 30.7 km. Beyond Neptune the remaining 29 kilometres of road carry no planets and are labelled interstellar."></div>
+                    <p class="figure-caption">
+                        Route geometry is schematic &mdash; distances along the corridor are exact, the
+                        drawn road alignment is stylised. The lower band magnifies the first 1.7 km,
+                        which on the upper band is compressed into a few millimetres. That compression
+                        is the same distortion the poster commits; here you can watch it happen.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <span class="text-science">The Signs</span>
+                <h2>Each marker carried the planet itself</h2>
+                <p>
+                    The interpretive move that made the installation work was refusing to draw the
+                    planets. Every sign carried a physical sphere built to the <em>same</em> ratio as
+                    the Sun-deck &mdash; so the object in a visitor's hand and the deck kilometres down
+                    the road belonged to one consistent model. No cross-referencing, no legend, no
+                    "not to scale" disclaimer doing quiet damage in six-point type.
+                </p>
+                <p>
+                    The ratio sets these sizes too, and they land in a range you can hold. Earth is an
+                    8.7 cm ball, about a grapefruit. Mercury is 3.3 cm, a walnut. Jupiter is the
+                    outlier at 97.7 cm &mdash; just under a metre, and still shorter than the person
+                    standing next to it. The Sun is the deck under their feet, and it would take
+                    nearly ten Jupiters laid side by side to cross it.
+                </p>
+
+                <div class="night-panel" style="margin-top: 3rem;">
+                    <span class="text-science">Figure 3</span>
+                    <h3 style="margin-bottom: 0.5rem;">The spheres, at one shared scale</h3>
+                    <p style="font-size: 0.95rem; margin-bottom: 2rem;">
+                        Sun, planets and a 1.7 m human, all rendered at 1 : 146 million.
+                    </p>
+                    <div id="size-chart" role="img"
+                         aria-label="Comparison of sphere sizes at the installation scale. The Sun-deck is 9.51 metres across. Jupiter is 97.7 centimetres and Saturn 82.4 centimetres, both shorter than a 1.7 metre person. Uranus and Neptune are about 34 centimetres. The four rocky planets, from 3.3 to 8.7 centimetres, are shown magnified eight times to be visible."></div>
+                    <p class="figure-caption">
+                        The rocky planets are shown at 8&times; magnification in the inset; at true
+                        scale on this figure Mercury would be under a pixel wide.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <span class="text-science">The Numbers</span>
+                <h2>Full model specification</h2>
+                <div class="table-scroll">
+                    <table class="model-table" id="model-table">
+                        <caption>
+                            Every value derives from one measurement: a 9.51 m deck standing in for a
+                            1,391,400 km Sun. Orbital positions use semi-major axes, so the model shows
+                            mean distance rather than the configuration on any particular night.
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Body</th>
+                                <th scope="col">Distance (AU)</th>
+                                <th scope="col">Position on route</th>
+                                <th scope="col">Sphere diameter</th>
+                                <th scope="col">Light travel time</th>
+                            </tr>
+                        </thead>
+                        <tbody><!-- rendered from MODEL constants --></tbody>
+                    </table>
+                </div>
+                <noscript>
+                    <p style="margin-top:1.5rem; padding:1rem; background:var(--color-nectar); border-left:4px solid var(--color-pollen);">
+                        The figures and specification table on this page derive from a single
+                        source-of-truth dataset and require JavaScript to render. Key values: scale
+                        1:146,309,148; Sun 9.51 m; Mercury 0.40 km; Venus 0.74 km; Earth 1.02 km;
+                        Mars 1.56 km; Jupiter 5.32 km; Saturn 9.80 km; Uranus 19.65 km;
+                        Neptune 30.75 km.
+                    </p>
+                </noscript>
+            </div>
+        </section>
+
+        <section style="background: var(--color-stone-aged); border-radius: 100px 0 100px 0;">
+            <div class="container">
+                <span class="text-science">Design Rationale</span>
+                <h2>An exhibit you cannot scroll past</h2>
+                <p>
+                    Science communication has largely conceded the terms of the attention economy. We
+                    are told the public has eight seconds, so we build for eight seconds: the hook, the
+                    infographic, the fact that fits in a caption. The trouble is that this format
+                    selects for a particular kind of knowledge &mdash; surprising, compressible,
+                    immediately legible &mdash; and filters out everything whose entire meaning is
+                    duration. Emptiness cannot be communicated quickly. That is what emptiness
+                    <em>is</em>.
+                </p>
+                <p>
+                    This installation was built on the opposite premise. It takes roughly forty-five
+                    minutes to cross and there is no way to skim it, speed it up, or take it in at a
+                    glance. Its most important interval &mdash; the 3.8 km between Mars and Jupiter
+                    where nothing whatsoever happens, and then the 21 km between Saturn and Neptune
+                    where even less does &mdash; is, by the metrics of engagement, a catastrophe. It is
+                    also the entire lesson. The boredom is load-bearing.
+                </p>
+                <p>
+                    There is a symmetry in siting that argument here. A dark sky preserve exists
+                    because darkness has become scarce and now has to be actively defended from
+                    encroaching light. Sustained attention is scarce in the same way and for related
+                    reasons. Wood Buffalo is one of the few places left where a person can have both
+                    undiminished, and an exhibit that spends a visitor's time this extravagantly is
+                    only possible somewhere that still has time to spend.
+                </p>
+
+                <p class="pull-quote">
+                    Fidelity and legibility are in tension, and most science communication resolves it
+                    by quietly sacrificing fidelity. Given sixty-odd kilometres of road, you can refuse
+                    the trade.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <span class="text-science">Partnership &amp; Audience</span>
+                <h2>Who a northern installation is really for</h2>
+                <p>
+                    The model was built alongside the Thebacha and Wood Buffalo Astronomical Society,
+                    and its public moment was the <strong>6th annual Dark Sky Festival,
+                    17&ndash;21 August 2017</strong>, hosted by TAWBAS with Parks Canada at Pine Lake.
+                    That partnership is not a credit line &mdash; it is the reason the thing has a
+                    social life. Interpretive hardware that no local organisation uses becomes
+                    roadside furniture within a season.
+                </p>
+                <p>
+                    The corridor turns out to be institutionally as well as geometrically convenient.
+                    Its far end, the Parks Canada office and visitor theatre at 149 McDougal in Fort
+                    Smith, is where TAWBAS ran its festival planning meetings; its near end is the
+                    deck where the festival itself happened. The model was installed along the road
+                    the organisers were already driving.
+                </p>
+
+                <p>
+                    Visitor-facing framing undersells what a permanent installation does in a small
+                    northern community. Fort Smith has a few thousand residents, and its students have
+                    the same statistical relationship to a career in the physical sciences that every
+                    remote community's students do &mdash; which is to say a poor one, and not for want
+                    of ability. What is usually missing is not aptitude but proximity: routine,
+                    unremarkable contact with the idea that measuring things carefully is something
+                    people around here do.
+                </p>
+                <p>
+                    A scale model is unusually good at supplying that, because the model is not the
+                    interesting part &mdash; the <em>derivation</em> is. Every number in the table
+                    above comes from one measurement and one ratio. That is arithmetic a middle-school
+                    student can carry out completely, and having done it, they own the result in a way
+                    that being shown a poster never achieves. The installation is a worked example at
+                    landscape scale, sitting permanently on the road to the swimming lake, free, with
+                    no admission and no scheduled programming to miss.
+                </p>
+            </div>
+        </section>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <span class="text-science">What the Model Does</span>
+                <h2>The lesson is structural, not written</h2>
+                <p>
+                    The installation carries almost no interpretive text, because the argument is made
+                    by the spacing rather than by the signs. Three properties of the layout do the
+                    teaching on their own, and each is a consequence of the ratio rather than a
+                    choice:
+                </p>
+                <ul style="max-width: 70ch;">
+                    <li><strong>The inner solar system is over before you have settled in.</strong>
+                        Mercury through Mars occupy 1.6 km &mdash; about a minute of driving. Visitors
+                        who approach the signs as a checklist run out of checklist almost immediately.</li>
+                    <li><strong>The gaps grow faster than anyone expects.</strong> Mars to Jupiter is
+                        3.8 km. Saturn to Uranus is 9.9 km. Uranus to Neptune is 11.1 km. The
+                        acceleration is the single most counter-intuitive fact about the solar system
+                        and here it is measured in odometer readings.</li>
+                    <li><strong>Light is slower than the car.</strong> At this ratio light travels
+                        7.4 km/h, so a vehicle at the posted highway speed is outrunning it roughly
+                        twelvefold. The four hours light needs to reach Neptune becomes four hours a
+                        person can weigh against their own afternoon.</li>
+                </ul>
+                <p style="margin-top: 2rem;">
+                    Placing the Sun at Pine Lake rather than in town also means the model resolves at
+                    the destination instead of the trailhead. Visitors arrive at the deck having
+                    crossed the solar system inbound, and then spend the night standing on the surface
+                    of the Sun, looking out at the real one.
+                </p>
+            </div>
+        </section>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <span class="text-science">Notes &amp; Caveats</span>
+                <h2>Honest limits of the model</h2>
+                <ul style="max-width: 70ch;">
+                    <li><strong>Distances are mean, not instantaneous.</strong> Positions use
+                        semi-major axes. A model showing the planets' true configuration on a given
+                        night would require moving every sign.</li>
+                    <li><strong>The model is linear, the orbits are not.</strong> Laying the solar
+                        system along a road collapses a plane into a line; the signs encode distance
+                        from the Sun, not the planets' positions relative to one another.</li>
+                    <li><strong>The corridor is longer than the model.</strong> Neptune falls at
+                        30.75 km and the road runs 62.6 km. Half the drive lies beyond the
+                        planets &mdash; an artefact of anchoring on the deck rather than on the far
+                        endpoint, and arguably the most instructive thing about the layout.</li>
+                    <li><strong>Pluto is shown for reference only.</strong> At 39.48 AU it would fall
+                        at 40.37 km, inside the corridor but well past Neptune.</li>
+                    <li><strong>Marker positions are reconstructed, not surveyed.</strong> The signs
+                        stood at the roadside, so positions on the interactive map are interpolated
+                        along the drivable route &mdash; highway and Pine Lake access road, excluding
+                        campground loops &mdash; at each planet's modelled distance from the deck.
+                        They show where the model puts each planet, not a record of where each post
+                        was set.</li>
+                    <li><strong>Strip-map geometry is schematic.</strong> Corridor distances are
+                        accurate; the drawn road alignment in Figure 2 is stylised for legibility and
+                        is not for navigation. Deck coordinates are approximate to about 100 m, and
+                        the Fort Smith endpoint is an estimate of the office location.</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="container"><hr class="flight-path"></div>
+
+        <section style="padding-top: 0;">
+            <div class="container">
+                <a href="projects.html" class="btn-outline">&larr; Back to Research</a>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center;">
+        <div class="container">
+            <p style="color: white; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">STILL<span style="color: var(--color-pollen);">.bz</span></p>
+            <p style="margin-bottom: 2rem;">Sustainable Transformation Initiative for Land &amp; Learning</p>
+            <div style="margin-bottom: 2rem;">
+                <a href="mailto:info@still.bz" style="color: var(--color-pollen); font-weight: 600;">info@still.bz</a>
+            </div>
+            <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Honouring all relations. Bzzzz.</p>
+            <p style="font-size: 0.8rem; margin-top: 3rem; opacity: 0.5;">&copy; 2026 STILL</p>
+        </div>
+    </footer>
+
+<script>
+(function () {
+    'use strict';
+
+    /* ---------------------------------------------------------------------
+     * Physical constants and the single measurement that defines the model.
+     * Everything rendered on this page derives from these values, so the
+     * figures and the specification table can never drift apart.
+     * ------------------------------------------------------------------ */
+    var AU_KM             = 149597870.7;  // astronomical unit, kilometres
+    var SUN_DIAMETER_KM   = 1391400;      // solar diameter, kilometres
+    var LIGHT_SPEED_KM_S  = 299792.458;   // kilometres per second
+    var DECK_DIAMETER_M   = 9.51;         // measured in Google Earth: the model's only free parameter
+    var CORRIDOR_KM       = 62.6;         // Pine Lake deck -> Fort Smith, routed on main roads (OSM)
+    var HUMAN_HEIGHT_M    = 1.7;          // reference figure in Figure 3
+
+    // Real km per model km. The single derived quantity the whole model rests on.
+    var SCALE = SUN_DIAMETER_KM / (DECK_DIAMETER_M / 1000);
+
+    /* Body name, semi-major axis (AU), equatorial diameter (km), display colour.
+     * `reference` marks a body shown for context but not installed on the route. */
+    var BODIES = [
+        { name: 'Sun',     au: 0,         diamKm: SUN_DIAMETER_KM, color: '#ffd24a' },
+        { name: 'Mercury', au: 0.387098,  diamKm: 4879,            color: '#9c8f86' },
+        { name: 'Venus',   au: 0.723332,  diamKm: 12104,           color: '#e0c98f' },
+        { name: 'Earth',   au: 1.000000,  diamKm: 12756,           color: '#6b93c9' },
+        { name: 'Mars',    au: 1.523679,  diamKm: 6792,            color: '#c1603f' },
+        { name: 'Jupiter', au: 5.204400,  diamKm: 142984,          color: '#d3a06b' },
+        { name: 'Saturn',  au: 9.582600,  diamKm: 120536,          color: '#e0c88f' },
+        { name: 'Uranus',  au: 19.218400, diamKm: 51118,           color: '#9fd0d4' },
+        { name: 'Neptune', au: 30.070000, diamKm: 49528,           color: '#5a7fc4' },
+        { name: 'Pluto',   au: 39.482000, diamKm: 2376,            color: '#b9a58f', reference: true }
+    ];
+
+    /**
+     * Enrich each body with its derived model values.
+     * @returns {Array<Object>} bodies with routeKm, sphereM, lightMinutes
+     */
+    function deriveModel() {
+        return BODIES.map(function (b) {
+            var distanceKm = b.au * AU_KM;
+            return {
+                name:         b.name,
+                au:           b.au,
+                color:        b.color,
+                reference:    Boolean(b.reference),
+                routeKm:      distanceKm / SCALE,
+                sphereM:      (b.diamKm / SCALE) * 1000,
+                lightMinutes: distanceKm / LIGHT_SPEED_KM_S / 60
+            };
+        });
+    }
+
+    var MODEL = deriveModel();
+
+    // Outermost installed body: where the modelled solar system stops.
+    var MODEL_EDGE_KM = MODEL.filter(function (b) { return !b.reference; })
+                             .reduce(function (m, b) { return Math.max(m, b.routeKm); }, 0);
+
+    // --- small formatting helpers -------------------------------------------
+    function fmtMetres(m) {
+        return m >= 1 ? m.toFixed(2) + ' m' : (m * 100).toFixed(1) + ' cm';
+    }
+    function fmtLight(minutes) {
+        if (minutes < 1)  { return (minutes * 60).toFixed(0) + ' s'; }
+        if (minutes < 90) { return minutes.toFixed(1) + ' min'; }
+        return (minutes / 60).toFixed(2) + ' h';
+    }
+    function svgEl(tag, attrs) {
+        var el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        Object.keys(attrs || {}).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+        return el;
+    }
+    function svgText(attrs, content) {
+        var t = svgEl('text', attrs);
+        t.textContent = content;
+        return t;
+    }
+
+    /* =====================================================================
+     * FIGURE 2 - corridor strip map
+     * Upper band: the whole 60 km corridor, so the 29 km of road beyond
+     * Neptune is visible as part of the argument. Lower band: the first
+     * 1.7 km magnified, where the rocky planets otherwise collapse to a dot.
+     * ================================================================== */
+    function renderCorridor(mount) {
+        var W = 1000, H = 344;
+        var PAD_L = 52, PAD_R = 52;
+        var TRACK_W = W - PAD_L - PAD_R;
+        var Y_MAIN = 120, Y_INSET = 278;
+        var INSET_MAX_KM = 1.7;
+        var MARKER_R = 5.5;
+        var STAR_COUNT = 90;
+
+        var svg = svgEl('svg', {
+            'class': 'chart', viewBox: '0 0 ' + W + ' ' + H,
+            role: 'presentation', 'aria-hidden': 'true'
+        });
+
+        var defs = svgEl('defs', {});
+        var glow = svgEl('radialGradient', { id: 'sunGlow' });
+        [['0%', '#ffd24a', '0.85'], ['60%', '#e6b800', '0.18'], ['100%', '#e6b800', '0']]
+            .forEach(function (s) {
+                glow.appendChild(svgEl('stop', {
+                    offset: s[0], 'stop-color': s[1], 'stop-opacity': s[2]
+                }));
+            });
+        defs.appendChild(glow);
+        svg.appendChild(defs);
+
+        // Sparse starfield. Golden-angle spacing keeps it even and deterministic.
+        for (var s = 0; s < STAR_COUNT; s++) {
+            svg.appendChild(svgEl('circle', {
+                cx: ((s * 137.508) % W).toFixed(1),
+                cy: ((s * 71.3) % H).toFixed(1),
+                r: (s % 5 === 0 ? 1.3 : 0.7),
+                fill: '#ffffff', 'fill-opacity': (s % 3 === 0 ? 0.30 : 0.14)
+            }));
+        }
+
+        /** Draws one distance band of the strip map. */
+        function band(y, maxKm, label, isMain) {
+            var x = function (km) { return PAD_L + (km / maxKm) * TRACK_W; };
+
+            if (isMain) {
+                // The stretch of road past Neptune: still driving, no longer in the solar system.
+                svg.appendChild(svgEl('rect', {
+                    x: x(MODEL_EDGE_KM), y: y - 46, width: x(maxKm) - x(MODEL_EDGE_KM), height: 92,
+                    fill: '#5a7fc4', 'fill-opacity': 0.07
+                }));
+                svg.appendChild(svgText({
+                    x: (x(MODEL_EDGE_KM) + x(maxKm)) / 2, y: y - 32,
+                    fill: '#7f8f85', 'font-size': '10', 'text-anchor': 'middle',
+                    'letter-spacing': '1.6'
+                }, 'INTERSTELLAR · ' + Math.round(CORRIDOR_KM - MODEL_EDGE_KM) + ' KM OF ROAD, NO PLANETS'));
+
+                // Stylised highway alignment: exact in distance, schematic in shape.
+                svg.appendChild(svgEl('path', {
+                    d: 'M ' + PAD_L + ' ' + (y + 15) +
+                       ' C ' + (PAD_L + TRACK_W * 0.28) + ' ' + (y - 18) +
+                       ', ' + (PAD_L + TRACK_W * 0.62) + ' ' + (y + 28) +
+                       ', ' + (PAD_L + TRACK_W) + ' ' + (y - 5),
+                    fill: 'none', stroke: '#3c4a41', 'stroke-width': 11,
+                    'stroke-linecap': 'round'
+                }));
+            }
+
+            svg.appendChild(svgEl('line', {
+                x1: PAD_L, y1: y, x2: PAD_L + TRACK_W, y2: y,
+                stroke: '#e6b800', 'stroke-width': 1.6, 'stroke-opacity': 0.55,
+                'stroke-dasharray': '2 5'
+            }));
+
+            var step = maxKm > 10 ? 10 : 0.5;
+            for (var km = 0; km <= maxKm + 1e-9; km += step) {
+                var tx = x(km);
+                svg.appendChild(svgEl('line', {
+                    x1: tx, y1: y + 8, x2: tx, y2: y + 14,
+                    stroke: '#6d7d71', 'stroke-width': 1
+                }));
+                svg.appendChild(svgText({
+                    x: tx, y: y + 27, fill: '#8fa094', 'font-size': '10.5',
+                    'text-anchor': 'middle'
+                }, (step < 1 ? km.toFixed(1) : String(km)) + (km === 0 ? ' km' : '')));
+            }
+
+            svg.appendChild(svgText({
+                x: PAD_L, y: y - 58, fill: '#e6b800', 'font-size': '10.5',
+                'font-weight': '600', 'letter-spacing': '1.4'
+            }, label));
+
+            MODEL.forEach(function (b) {
+                if (b.routeKm > maxKm + 1e-9) { return; }
+                var cx = x(b.routeKm);
+
+                if (b.name === 'Sun') {
+                    svg.appendChild(svgEl('circle', { cx: cx, cy: y, r: 34, fill: 'url(#sunGlow)' }));
+                    svg.appendChild(svgEl('circle', {
+                        cx: cx, cy: y, r: 9, fill: 'none',
+                        stroke: '#ffd24a', 'stroke-width': 2.5
+                    }));
+                    return;
+                }
+
+                svg.appendChild(svgEl('line', {
+                    x1: cx, y1: y, x2: cx, y2: y - 22,
+                    stroke: b.color, 'stroke-width': 1,
+                    'stroke-opacity': b.reference ? 0.3 : 0.5,
+                    'stroke-dasharray': b.reference ? '2 3' : 'none'
+                }));
+                svg.appendChild(svgEl('circle', {
+                    cx: cx, cy: y, r: b.reference ? 4 : MARKER_R,
+                    fill: b.reference ? 'none' : b.color,
+                    stroke: b.reference ? b.color : '#131a17',
+                    'stroke-width': 1.5,
+                    'stroke-dasharray': b.reference ? '2 2' : 'none'
+                }));
+                svg.appendChild(svgText({
+                    x: cx, y: y - 30, fill: b.reference ? '#8fa094' : '#e8ede9',
+                    'font-size': b.reference ? '10' : '11.5',
+                    'font-weight': '600', 'text-anchor': 'middle',
+                    'font-style': b.reference ? 'italic' : 'normal'
+                }, b.name));
+                svg.appendChild(svgText({
+                    x: cx, y: y - 18, fill: b.color, 'font-size': '9.5',
+                    'text-anchor': 'middle', 'fill-opacity': b.reference ? '0.6' : '0.9'
+                }, b.routeKm.toFixed(2)));
+            });
+        }
+
+        band(Y_MAIN, CORRIDOR_KM, 'FULL CORRIDOR · 62 KM', true);
+        band(Y_INSET, INSET_MAX_KM,
+             'INSET · FIRST 1.7 KM · ' + Math.round(CORRIDOR_KM / INSET_MAX_KM) + '×', false);
+
+        function endpoint(x, y, anchor, title, sub) {
+            svg.appendChild(svgText({
+                x: x, y: y, fill: '#ffffff', 'font-size': '12.5',
+                'font-weight': '600', 'text-anchor': anchor
+            }, title));
+            svg.appendChild(svgText({
+                x: x, y: y + 14, fill: '#8fa094', 'font-size': '10',
+                'text-anchor': anchor
+            }, sub));
+        }
+        endpoint(PAD_L, 34, 'start', 'PINE LAKE — Dark Sky Circle', 'the Sun · 9.51 m deck');
+        endpoint(W - PAD_R, 34, 'end', 'FORT SMITH — Parks Office', '62.6 km · beyond the planets');
+
+        // Connector showing which slice of the main band the inset expands.
+        svg.appendChild(svgEl('path', {
+            d: 'M ' + PAD_L + ' ' + (Y_MAIN + 32) + ' L ' + PAD_L + ' ' + (Y_INSET - 80) +
+               ' M ' + (PAD_L + (INSET_MAX_KM / CORRIDOR_KM) * TRACK_W) + ' ' + (Y_MAIN + 32) +
+               ' L ' + (PAD_L + TRACK_W) + ' ' + (Y_INSET - 80),
+            stroke: '#e6b800', 'stroke-width': 1, 'stroke-opacity': 0.32,
+            'stroke-dasharray': '3 4', fill: 'none'
+        }));
+
+        mount.appendChild(svg);
+    }
+
+    /* =====================================================================
+     * FIGURE 3 - sphere sizes at one shared scale
+     * ================================================================== */
+    function renderSizes(mount) {
+        var W = 1000, H = 300;
+        var PX_PER_M = 24;            // shared scale for the true-size row
+        var INNER_MAGNIFY = 8;        // inset magnification for the rocky planets
+        var BASELINE = 232;
+
+        var svg = svgEl('svg', {
+            'class': 'chart', viewBox: '0 0 ' + W + ' ' + H,
+            role: 'presentation', 'aria-hidden': 'true'
+        });
+
+        /* This figure owns its gradient rather than borrowing Figure 2's by id,
+         * so it renders correctly regardless of which figure is drawn first. */
+        var defs = svgEl('defs', {});
+        var glow = svgEl('radialGradient', { id: 'sunGlowSizes' });
+        [['0%', '#ffd24a', '0.55'], ['70%', '#e6b800', '0.12'], ['100%', '#e6b800', '0']]
+            .forEach(function (s) {
+                glow.appendChild(svgEl('stop', {
+                    offset: s[0], 'stop-color': s[1], 'stop-opacity': s[2]
+                }));
+            });
+        defs.appendChild(glow);
+        svg.appendChild(defs);
+
+        svg.appendChild(svgEl('line', {
+            x1: 0, y1: BASELINE, x2: W, y2: BASELINE,
+            stroke: '#3c4a41', 'stroke-width': 1.5
+        }));
+
+        var byName = {};
+        MODEL.forEach(function (b) { byName[b.name] = b; });
+
+        // At 9.51 m the Sun-deck fits on the figure whole, so draw the full disc.
+        var sunR = (byName.Sun.sphereM * PX_PER_M) / 2;
+        var sunCx = 40 + sunR;
+        svg.appendChild(svgEl('circle', {
+            cx: sunCx, cy: BASELINE - sunR, r: sunR,
+            fill: 'none', stroke: '#ffd24a', 'stroke-width': 2.5, 'stroke-opacity': 0.8
+        }));
+        svg.appendChild(svgEl('circle', {
+            cx: sunCx, cy: BASELINE - sunR, r: sunR, fill: 'url(#sunGlowSizes)'
+        }));
+        svg.appendChild(svgText({
+            x: sunCx, y: BASELINE - sunR + 4, fill: '#ffd24a',
+            'font-size': '12', 'font-weight': '600', 'text-anchor': 'middle'
+        }, 'THE SUN'));
+        svg.appendChild(svgText({
+            x: sunCx, y: BASELINE - sunR + 20, fill: '#c9a63a',
+            'font-size': '10.5', 'text-anchor': 'middle'
+        }, 'the deck · ' + fmtMetres(byName.Sun.sphereM)));
+
+        // Human reference figure
+        var humanH = HUMAN_HEIGHT_M * PX_PER_M;
+        var hx = sunCx + sunR + 46;
+        svg.appendChild(svgEl('rect', {
+            x: hx, y: BASELINE - humanH, width: 7, height: humanH, rx: 3.5, fill: '#6d7d71'
+        }));
+        svg.appendChild(svgEl('circle', {
+            cx: hx + 3.5, cy: BASELINE - humanH - 5, r: 4.5, fill: '#6d7d71'
+        }));
+        svg.appendChild(svgText({
+            x: hx + 3.5, y: BASELINE + 16, fill: '#8fa094',
+            'font-size': '9.5', 'text-anchor': 'middle'
+        }, HUMAN_HEIGHT_M.toFixed(1) + ' m'));
+
+        // Gas and ice giants at true scale
+        var gx = hx + 34;
+        ['Jupiter', 'Saturn', 'Uranus', 'Neptune'].forEach(function (name) {
+            var b = byName[name];
+            var r = (b.sphereM * PX_PER_M) / 2;
+            gx += r + 30;
+            svg.appendChild(svgEl('circle', { cx: gx, cy: BASELINE - r, r: r, fill: b.color }));
+            svg.appendChild(svgText({
+                x: gx, y: BASELINE + 16, fill: '#e8ede9',
+                'font-size': '10.5', 'font-weight': '600', 'text-anchor': 'middle'
+            }, b.name));
+            svg.appendChild(svgText({
+                x: gx, y: BASELINE + 29, fill: '#8fa094',
+                'font-size': '9.5', 'text-anchor': 'middle'
+            }, fmtMetres(b.sphereM)));
+            gx += r + 30;
+        });
+
+        // Inset: rocky planets, magnified so they are visible at all
+        var insetX = 640, insetY = 40, insetW = 336, insetH = 96;
+        svg.appendChild(svgEl('rect', {
+            x: insetX, y: insetY, width: insetW, height: insetH, rx: 14,
+            fill: '#1b241f', stroke: '#3c4a41', 'stroke-width': 1
+        }));
+        svg.appendChild(svgText({
+            x: insetX + 16, y: insetY + 20, fill: '#e6b800',
+            'font-size': '10', 'font-weight': '600', 'letter-spacing': '1.2'
+        }, 'ROCKY PLANETS · ' + INNER_MAGNIFY + '× MAGNIFIED'));
+
+        var rx = insetX + 34;
+        var rockyBaseline = insetY + insetH - 26;
+        ['Mercury', 'Venus', 'Earth', 'Mars'].forEach(function (name) {
+            var b = byName[name];
+            var r = (b.sphereM * PX_PER_M * INNER_MAGNIFY) / 2;
+            svg.appendChild(svgEl('circle', { cx: rx, cy: rockyBaseline - r, r: r, fill: b.color }));
+            svg.appendChild(svgText({
+                x: rx, y: rockyBaseline + 14, fill: '#c9d2cb',
+                'font-size': '9.5', 'text-anchor': 'middle'
+            }, b.name + ' · ' + fmtMetres(b.sphereM)));
+            rx += 84;
+        });
+
+        mount.appendChild(svg);
+    }
+
+    /* ===================== specification table ========================== */
+    function renderTable(tbody) {
+        MODEL.forEach(function (b) {
+            var tr = document.createElement('tr');
+            if (b.reference) { tr.className = 'reference-only'; }
+
+            var th = document.createElement('th');
+            th.setAttribute('scope', 'row');
+            th.style.textAlign = 'left';
+            th.style.fontWeight = '600';
+            var sw = document.createElement('span');
+            sw.className = 'swatch';
+            sw.style.background = b.color;
+            th.appendChild(sw);
+            th.appendChild(document.createTextNode(b.name));
+            tr.appendChild(th);
+
+            [
+                b.name === 'Sun' ? '—' : b.au.toFixed(3),
+                b.name === 'Sun' ? '0 · the deck'
+                                 : b.routeKm.toFixed(2) + ' km' + (b.reference ? ' †' : ''),
+                fmtMetres(b.sphereM),
+                b.name === 'Sun' ? '—' : fmtLight(b.lightMinutes)
+            ].forEach(function (v) {
+                var td = document.createElement('td');
+                td.textContent = v;
+                tr.appendChild(td);
+            });
+            tbody.appendChild(tr);
+        });
+
+        var note = document.createElement('tr');
+        var td = document.createElement('td');
+        td.colSpan = 5;
+        td.style.textAlign = 'left';
+        td.style.fontSize = '0.82rem';
+        td.style.color = 'var(--color-forest-moss)';
+        td.style.borderBottom = 'none';
+        td.style.paddingTop = '1rem';
+        td.textContent = '† Dwarf planet, shown for reference; falls beyond Neptune at 40.37 km.';
+        note.appendChild(td);
+        tbody.appendChild(note);
+    }
+
+    function init() {
+        var corridor = document.getElementById('corridor-map');
+        var sizes    = document.getElementById('size-chart');
+        var tbody    = document.querySelector('#model-table tbody');
+
+        // Fail loudly in the console rather than silently rendering a blank page.
+        if (!corridor || !sizes || !tbody) {
+            console.error('thebacha-solar-model: expected mount points are missing from the DOM.');
+            return;
+        }
+        renderCorridor(corridor);
+        renderSizes(sizes);
+        renderTable(tbody);
+    }
+
+    /* The interactive map derives its sphere sizes from the same MODEL, so the
+     * map, the figures and the table cannot disagree about the scale. */
+    window.THEBACHA = {
+        MODEL: MODEL,
+        SCALE: SCALE,
+        DECK_DIAMETER_M: DECK_DIAMETER_M,
+        fmtMetres: fmtMetres,
+        fmtLight: fmtLight
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+}());
+</script>
+
+<script src="lib/leaflet.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    var api = window.THEBACHA;
+    if (!window.L || !api) {
+        console.error('thebacha-solar-model: Leaflet or the shared model failed to load; map skipped.');
+        return;
+    }
+
+    /* Route traced from OpenStreetMap road centrelines (ODbL), simplified to ~25 m
+     * tolerance. Index 0 is the Dark Sky Circle deck itself. */
+    var ROUTE = [[59.55783,-112.25895],[59.55737,-112.26064],[59.55793,-112.26194],
+        [59.55746,-112.26593],[59.55884,-112.26748],[59.559,-112.26822],[59.57429,-112.27041],
+        [59.57624,-112.27114],[59.58175,-112.27434],[59.58396,-112.27479],[59.59302,-112.27597],
+        [59.59499,-112.27533],[59.61807,-112.25005],[59.64178,-112.22515],[59.67724,-112.18536],
+        [59.69149,-112.1771],[59.77517,-112.076],[59.77735,-112.07283],[59.81069,-111.99113],
+        [59.81319,-111.97963],[59.82284,-111.94737],[59.82503,-111.94124],[59.82643,-111.93955],
+        [59.83499,-111.93381],[59.8654,-111.90584],[59.86743,-111.9052],[59.88994,-111.9041],
+        [59.89109,-111.90352],[59.89267,-111.90135],[59.90887,-111.86832],[59.91406,-111.8522],
+        [59.92265,-111.83943],[59.92534,-111.83793],[59.92709,-111.83752],[59.93293,-111.84078],
+        [59.93414,-111.84248],[59.93889,-111.85359],[59.94557,-111.86285],[59.94698,-111.86391],
+        [59.958,-111.86772],[59.95983,-111.86722],[59.97047,-111.8595],[59.97904,-111.85643],
+        [59.98039,-111.85455],[59.98887,-111.83792],[59.99634,-111.8425],[59.99773,-111.84425],
+        [59.99872,-111.84662],[59.99946,-111.85063],[59.99953,-111.86195],[60.0017,-111.86195],
+        [60.00169,-111.88108],[60.0028,-111.8811],[60.00288,-111.88254],[60.00408,-111.88587]];
+
+    /* Positions interpolated along the routed centreline at each planet's modelled
+     * distance from the deck. Derived offline; see the specification table. */
+    var POSITIONS = {
+        Mercury: [59.556310, -112.264590],
+        Venus:   [59.558960, -112.267710],
+        Earth:   [59.561270, -112.268580],
+        Mars:    [59.566080, -112.269260],
+        Jupiter: [59.598990, -112.271050],
+        Saturn:  [59.634350, -112.232970],
+        Uranus:  [59.712470, -112.151780],
+        Neptune: [59.792400, -112.036560]
+    };
+
+    var DECK        = [59.55783, -112.25895];
+    var FORT_SMITH  = [60.00408, -111.88587];
+    var LOCATOR_R   = 13;    // px radius of the fixed-size finder ring
+    var MIN_BODY_PX = 3;     // px floor so a planet never vanishes entirely
+    var DEFAULT_MAG = 90;    // px per metre of modelled sphere
+
+    var map = L.map('live-map', { scrollWheelZoom: false, zoomControl: true })
+               .setView([59.78, -112.09], 9);
+
+    // Scroll-wheel zoom only once the map has focus, so the page still scrolls normally.
+    map.on('focus', function () { map.scrollWheelZoom.enable(); });
+    map.on('blur',  function () { map.scrollWheelZoom.disable(); });
+
+    var topo = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',
+        { attribution: 'Tiles &copy; Esri', maxZoom: 17 }).addTo(map);
+    var openTopo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        { attribution: '&copy; OpenTopoMap (CC-BY-SA)', maxZoom: 16 });
+    var imagery = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        { attribution: 'Imagery &copy; Esri', maxZoom: 18 });
+
+    L.control.layers({ 'Topographic': topo, 'OpenTopoMap': openTopo, 'Satellite': imagery },
+                     null, { position: 'topright' }).addTo(map);
+
+    map.attributionControl.addAttribution('Route &copy; OpenStreetMap contributors (ODbL)');
+
+    L.polyline(ROUTE, {
+        color: '#e6b800', weight: 3, opacity: 0.85, dashArray: '1 6', lineCap: 'round'
+    }).addTo(map);
+
+    /** Endpoint markers: the two ends of the corridor. */
+    function endpoint(latlng, title, detail) {
+        L.circleMarker(latlng, {
+            radius: 5, color: '#fff', weight: 2, fillColor: '#131a17', fillOpacity: 1
+        }).addTo(map).bindPopup('<h4>' + title + '</h4>' + detail);
+    }
+    endpoint(DECK, 'Dark Sky Circle',
+        '<dl><dt>Role</dt><dd>The Sun</dd><dt>Measured</dt><dd>9.51 m across</dd>' +
+        '<dt>Position</dt><dd>km 0</dd></dl>');
+    endpoint(FORT_SMITH, 'Fort Smith',
+        '<dl><dt>Parks office</dt><dd>149 McDougal</dd><dt>By road</dt><dd>62.6 km from the deck</dd>' +
+        '<dt>In the model</dt><dd>31.9 km past Neptune</dd></dl>');
+
+    // --- planet artwork ----------------------------------------------------
+    /* Each planet is drawn in a coordinate system where the body radius is 1,
+     * so a single pixel diameter drives the whole sprite. `box` is the artwork
+     * extent in body radii - which is where Saturn's rings get their true
+     * relative span, reaching 2.27 body radii just as they do in life. */
+    var ART = {
+        Mercury: { base: '#8c8279', light: '#c8bcb0', dark: '#433d38', box: 1.12,
+                   craters: [[-0.35,-0.25,0.28],[0.30,0.10,0.20],[0.05,0.45,0.16],
+                             [-0.50,0.35,0.12],[0.45,-0.45,0.13]] },
+        Venus:   { base: '#e0c489', light: '#f8ecc9', dark: '#8d7538', box: 1.12,
+                   bands: [[-0.45,0.16,'#f3e0b0',0.50],[0.05,0.20,'#c9a962',0.35],
+                           [0.55,0.14,'#f0dca8',0.40]] },
+        Earth:   { base: '#2f6fb5', light: '#79b0e4', dark: '#0e3055', box: 1.12,
+                   blobs: [[-0.30,-0.20,0.34,0.26,'#4a8a45'],[0.35,0.15,0.28,0.34,'#3f7a3f'],
+                           [-0.15,0.55,0.22,0.16,'#5d9550']],
+                   clouds: [[-0.50,0.30,0.30,0.10],[0.25,-0.45,0.34,0.10],[0.10,0.25,0.26,0.08]] },
+        Mars:    { base: '#b8532f', light: '#e69163', dark: '#5f2412', box: 1.12,
+                   blobs: [[-0.25,0.15,0.36,0.22,'#8b3c22'],[0.40,-0.20,0.24,0.18,'#93412a']],
+                   caps:  [[0,-0.86,0.34,0.16],[0,0.90,0.28,0.12]] },
+        Jupiter: { base: '#cfa877', light: '#ecd7b0', dark: '#7d5f3c', box: 1.12,
+                   bands: [[-0.62,0.13,'#e8d3ab',0.75],[-0.30,0.15,'#b98f5f',0.70],
+                           [0,0.12,'#efdcb8',0.70],[0.30,0.16,'#b5895a',0.70],
+                           [0.62,0.13,'#e6d0a6',0.65]],
+                   spot: [0.28,0.30,0.22,0.13,'#b5533a'] },
+        Saturn:  { base: '#dcc48f', light: '#f4e6c2', dark: '#8e7645', box: 2.50,
+                   bands: [[-0.50,0.16,'#f0e0b6',0.60],[-0.10,0.18,'#c9ad74',0.50],
+                           [0.35,0.16,'#eddfb4',0.55]],
+                   ring: { inner: 1.24, outer: 2.27, color: '#cfb98d', opacity: 0.85, ry: 0.30 } },
+        Uranus:  { base: '#9fd8dc', light: '#d8f2f4', dark: '#5b959c', box: 1.12,
+                   bands: [[-0.35,0.20,'#bce7ea',0.40],[0.30,0.20,'#8cc6cc',0.35]] },
+        Neptune: { base: '#3f63c4', light: '#8aa4e6', dark: '#1d3070', box: 1.12,
+                   bands: [[-0.40,0.18,'#6b8ade',0.40],[0.35,0.18,'#2f4ea6',0.40]],
+                   spot: [-0.25,0.25,0.20,0.12,'#22397d'] }
+    };
+
+    function ringHalf(r, clipId) {
+        var mid = (r.inner + r.outer) / 2;
+        return '<g clip-path="url(#' + clipId + ')"><ellipse cx="0" cy="0" rx="' + mid +
+               '" ry="' + (mid * r.ry).toFixed(3) + '" fill="none" stroke="' + r.color +
+               '" stroke-width="' + (r.outer - r.inner).toFixed(3) +
+               '" opacity="' + r.opacity + '"/></g>';
+    }
+
+    /**
+     * Build an SVG sprite for one planet.
+     * @param {string} name body name, keying into ART
+     * @param {number} bodyPx rendered diameter of the body itself, in pixels
+     * @returns {{html: string, px: number}} markup and the icon box size
+     */
+    function planetSVG(name, bodyPx) {
+        var a = ART[name], B = a.box, uid = 'p' + name;
+        var px = bodyPx * B;
+        var vb = (-B) + ' ' + (-B) + ' ' + (2 * B) + ' ' + (2 * B);
+        var o = ['<svg xmlns="http://www.w3.org/2000/svg" width="' + px.toFixed(1) +
+                 '" height="' + px.toFixed(1) + '" viewBox="' + vb + '">'];
+
+        o.push('<defs><radialGradient id="g' + uid + '" cx="34%" cy="30%" r="78%">' +
+               '<stop offset="0%" stop-color="' + a.light + '"/>' +
+               '<stop offset="55%" stop-color="' + a.base + '"/>' +
+               '<stop offset="100%" stop-color="' + a.dark + '"/></radialGradient>' +
+               '<clipPath id="c' + uid + '"><circle cx="0" cy="0" r="1"/></clipPath>');
+        if (a.ring) {
+            o.push('<clipPath id="rb' + uid + '"><rect x="' + (-B) + '" y="' + (-B) +
+                   '" width="' + (2 * B) + '" height="' + B + '"/></clipPath>' +
+                   '<clipPath id="rf' + uid + '"><rect x="' + (-B) +
+                   '" y="0" width="' + (2 * B) + '" height="' + B + '"/></clipPath>');
+        }
+        o.push('</defs>');
+
+        if (a.ring) { o.push(ringHalf(a.ring, 'rb' + uid)); }   // far half, behind the body
+        o.push('<circle cx="0" cy="0" r="1" fill="url(#g' + uid + ')"/>');
+
+        o.push('<g clip-path="url(#c' + uid + ')">');
+        (a.bands || []).forEach(function (b) {
+            o.push('<ellipse cx="0" cy="' + b[0] + '" rx="1.08" ry="' + b[1] +
+                   '" fill="' + b[2] + '" opacity="' + b[3] + '"/>');
+        });
+        (a.blobs || []).forEach(function (b) {
+            o.push('<ellipse cx="' + b[0] + '" cy="' + b[1] + '" rx="' + b[2] +
+                   '" ry="' + b[3] + '" fill="' + b[4] + '" opacity="0.85"/>');
+        });
+        (a.craters || []).forEach(function (c) {
+            o.push('<circle cx="' + c[0] + '" cy="' + c[1] + '" r="' + c[2] +
+                   '" fill="#000" opacity="0.13"/>');
+        });
+        (a.caps || []).forEach(function (c) {
+            o.push('<ellipse cx="' + c[0] + '" cy="' + c[1] + '" rx="' + c[2] +
+                   '" ry="' + c[3] + '" fill="#fff" opacity="0.9"/>');
+        });
+        (a.clouds || []).forEach(function (c) {
+            o.push('<ellipse cx="' + c[0] + '" cy="' + c[1] + '" rx="' + c[2] +
+                   '" ry="' + c[3] + '" fill="#fff" opacity="0.55"/>');
+        });
+        if (a.spot) {
+            o.push('<ellipse cx="' + a.spot[0] + '" cy="' + a.spot[1] + '" rx="' + a.spot[2] +
+                   '" ry="' + a.spot[3] + '" fill="' + a.spot[4] + '" opacity="0.85"/>');
+        }
+        // Darkened limb, drawn inside the clip so it reads as curvature.
+        o.push('<circle cx="0" cy="0" r="1" fill="none" stroke="#000" ' +
+               'stroke-opacity="0.35" stroke-width="0.09"/></g>');
+
+        if (a.ring) { o.push(ringHalf(a.ring, 'rf' + uid)); }   // near half, in front
+        o.push('</svg>');
+        return { html: o.join(''), px: px };
+    }
+
+    function planetIcon(name, bodyPx) {
+        var art = planetSVG(name, bodyPx);
+        return L.divIcon({
+            className: 'planet-icon', html: art.html,
+            iconSize: [art.px, art.px], iconAnchor: [art.px / 2, art.px / 2]
+        });
+    }
+
+    // --- planets -----------------------------------------------------------
+    var byName = {};
+    api.MODEL.forEach(function (b) { byName[b.name] = b; });
+
+    var planets = [];
+    Object.keys(POSITIONS).forEach(function (name) {
+        var b = byName[name];
+        var latlng = POSITIONS[name];
+
+        // Fixed-size locator ring: always findable, explicitly not the planet.
+        L.circleMarker(latlng, {
+            radius: LOCATOR_R, color: b.color, weight: 1, opacity: 0.45,
+            dashArray: '2 3', fill: false, interactive: false
+        }).addTo(map);
+
+        var marker = L.marker(latlng, {
+            icon: planetIcon(name, Math.max(MIN_BODY_PX, b.sphereM * DEFAULT_MAG)),
+            title: b.name, riseOnHover: true
+        }).addTo(map);
+
+        marker.bindPopup(
+            '<h4>' + b.name + '</h4><dl>' +
+            '<dt>From the deck</dt><dd>' + b.routeKm.toFixed(2) + ' km</dd>' +
+            '<dt>True sphere</dt><dd>' + api.fmtMetres(b.sphereM) + '</dd>' +
+            '<dt>Real distance</dt><dd>' + b.au.toFixed(3) + ' AU</dd>' +
+            '<dt>Light delay</dt><dd>' + api.fmtLight(b.lightMinutes) + '</dd></dl>');
+        marker.bindTooltip(b.name, {
+            permanent: true, direction: 'right', offset: [LOCATOR_R + 3, 0],
+            className: 'planet-label'
+        });
+
+        planets.push({ name: name, body: b, marker: marker });
+    });
+
+    // The Sun drawn to the same multiplier swamps the inner planets, so it is
+    // opt-in rather than on by default.
+    var sunDisc = L.circleMarker(DECK, {
+        radius: (api.DECK_DIAMETER_M * DEFAULT_MAG) / 2,
+        color: '#ffd24a', weight: 2, fillColor: '#ffd24a', fillOpacity: 0.12
+    });
+
+    // --- controls ----------------------------------------------------------
+    var slider   = document.getElementById('mag-slider');
+    var readout  = document.getElementById('mag-readout');
+    var btnFit   = document.getElementById('btn-fit');
+    var btnInner = document.getElementById('btn-inner');
+    var btnSun   = document.getElementById('btn-sun');
+
+    function applyMagnification(mag) {
+        planets.forEach(function (p) {
+            p.marker.setIcon(planetIcon(p.name, Math.max(MIN_BODY_PX, p.body.sphereM * mag)));
+        });
+        sunDisc.setRadius((api.DECK_DIAMETER_M * mag) / 2);
+        readout.innerHTML =
+            '&times;' + Math.round(mag / 10) * 10 + ' &mdash; Jupiter <b>' +
+            Math.round(byName.Jupiter.sphereM * mag) + ' px</b>, Earth <b>' +
+            Math.round(byName.Earth.sphereM * mag) + ' px</b>, Mercury <b>' +
+            Math.round(byName.Mercury.sphereM * mag) + ' px</b>';
+    }
+
+    slider.addEventListener('input', function () {
+        applyMagnification(Number(slider.value));
+    });
+
+    btnFit.addEventListener('click', function () {
+        map.fitBounds(L.latLngBounds(ROUTE), { padding: [30, 30] });
+    });
+    btnInner.addEventListener('click', function () {
+        map.fitBounds(L.latLngBounds([
+            POSITIONS.Mercury, POSITIONS.Venus, POSITIONS.Earth, POSITIONS.Mars, DECK
+        ]), { padding: [50, 50] });
+    });
+    btnSun.addEventListener('click', function () {
+        var on = btnSun.getAttribute('aria-pressed') === 'true';
+        if (on) {
+            map.removeLayer(sunDisc);
+        } else {
+            sunDisc.addTo(map);
+        }
+        btnSun.setAttribute('aria-pressed', String(!on));
+    });
+
+    applyMagnification(DEFAULT_MAG);
+    map.fitBounds(L.latLngBounds(ROUTE), { padding: [30, 30] });
+}());
+</script>
+</body>
+</html>
