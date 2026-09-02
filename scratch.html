@@ -42,12 +42,12 @@
     <header>
         <div class="container">
             <nav role="navigation" aria-label="Main Navigation">
-                <a href="index.html" class="logo" style="text-decoration: none; display: flex; align-items: center; font-family: 'Merriweather', serif; font-weight: 700; font-size: 1.5rem; color: var(--color-forest-deep);">
-                    <img src="assets/logo_v0.png" alt="STILL Logo" style="height: 40px; margin-right: 12px;">
-                    STILL<span style="color: var(--color-honey);">.bz</span>
+                <a href="index.html" class="logo">
+                    <img src="assets/logo_v0.png" alt="STILL Logo">
+                    STILL<span class="logo-accent">.bz</span>
                 </a>
                 
-                <div class="nav-links" style="display: flex; gap: 2rem; align-items: center;">
+                <div class="nav-links">
                     <a href="index.html">Home</a>
                     <a href="about.html">About</a>
                     <a href="projects.html">Research</a>
@@ -66,9 +66,9 @@
     <main>
         <section class="scratch-hero">
             <div class="container">
-                <span class="text-science">Field Logs • Belize</span>
+                <span class="eyebrow-chip text-science">Field Logs • Belize</span>
                 <h1>Gales Point Activity</h1>
-                <p style="font-size: 1.1rem; color: var(--color-forest-moss); margin-bottom: 3rem;">
+                <p class="lead">
                     Synchronized field observations and multimedia from the Gales Point research zone.
                 </p>
 
@@ -91,15 +91,22 @@
         <div class="container"><hr class="flight-path"></div>
     </main>
 
-    <footer style="text-align: center;">
+    <footer>
         <div class="container">
-            <p style="color: white; font-weight: 700; font-size: 1.2rem; margin-bottom: 1rem;">STILL<span style="color: var(--color-pollen);">.bz</span></p>
-            <p style="margin-bottom: 2rem;">Sustainable Transformation Initiative for Land & Learning</p>
-            <div style="margin-bottom: 2rem;">
-                <a href="mailto:info@still.bz" style="color: var(--color-pollen); font-weight: 600;">info@still.bz</a>
-            </div>
-            <p style="font-size: 0.9rem; opacity: 0.7; font-style: italic;">Honouring all relations. Bzzzz.</p>
-            <p style="font-size: 0.8rem; margin-top: 3rem; opacity: 0.5;">&copy; 2026 STILL</p>
+            <p class="footer-wordmark">STILL<span class="logo-accent">.bz</span></p>
+            <p class="footer-tagline">Sustainable Transformation Initiative for Land &amp; Learning</p>
+            <nav class="social-links" aria-label="Contact and social links">
+                <a class="social-link" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    <span>@_still.bz</span>
+                </a>
+                <a class="social-link" href="mailto:info@still.bz">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>info@still.bz</span>
+                </a>
+            </nav>
+            <p class="footer-note">Honouring all relations. Bzzzz.</p>
+            <p class="footer-legal">&copy; 2026 STILL</p>
         </div>
     </footer>
 
@@ -245,5 +252,6 @@
             }
         });
     </script>
+    <script defer src="assets/comb-light.js"></script>
 </body>
 </html>

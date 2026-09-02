@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="51.9615" height="90"
+     viewBox="0 0 51.9615 90" shape-rendering="geometricPrecision">
+  <!--
+    Alpha mask companion to honeycomb.svg — identical lattice, but only the
+    cells carry alpha and the wax wall is fully transparent. styles.css masks
+    the cursor light layer with this, so the moving highlight lands inside the
+    combs and never on the walls between them.
+
+    Alpha stays high across most of the cell and falls off only near the rim,
+    so a cell under the light deepens as a whole — the way filled honey reads —
+    rather than picking up a single hot spot. The static specular dot lives in
+    honeycomb.svg's gloss ellipse instead.
+  -->
+  <defs>
+    <radialGradient id="cellAlpha" cx="38%" cy="30%" r="82%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.98"/>
+      <stop offset="58%" stop-color="#fff" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0.44"/>
+    </radialGradient>
+
+    <path id="cellShape"
+          d="M 0,-27.5 L 23.8157,-13.75 L 23.8157,13.75 L 0,27.5 L -23.8157,13.75 L -23.8157,-13.75 Z"
+          fill="url(#cellAlpha)"/>
+  </defs>
+
+  <use href="#cellShape" x="0" y="0"/>
+  <use href="#cellShape" x="51.9615" y="0"/>
+  <use href="#cellShape" x="25.9808" y="45"/>
+  <use href="#cellShape" x="0" y="90"/>
+  <use href="#cellShape" x="51.9615" y="90"/>
+</svg>

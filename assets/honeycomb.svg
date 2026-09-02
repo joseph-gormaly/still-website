@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="51.9615" height="90"
+     viewBox="0 0 51.9615 90" shape-rendering="geometricPrecision">
+  <!--
+    Seamless honeycomb tile for the site background (see styles.css, body::after).
+
+    Geometry: pointy-top hexagons on a lattice of circumradius 30. Cell centres
+    sit at (0,0), (W,0), (W/2,45), (0,90) and (W,90), which is the smallest
+    rectangle that repeats without a seam. Cells are drawn at radius 27.5 so the
+    2.5-unit inset on each side leaves the wax wall visible between them.
+
+    The tile is exactly one cell wide, so `background-size: <n>px auto` in CSS
+    sets the on-screen cell width directly.
+  -->
+  <defs>
+    <radialGradient id="honey" cx="34%" cy="26%" r="80%">
+      <stop offset="0%" stop-color="#ffeaa9"/>
+      <stop offset="45%" stop-color="#eabb45"/>
+      <stop offset="100%" stop-color="#bd8210"/>
+    </radialGradient>
+
+    <!-- Specular highlight: the wet sheen on a filled cell. -->
+    <radialGradient id="gloss" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffdf2" stop-opacity="0.62"/>
+      <stop offset="60%" stop-color="#fffdf2" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#fffdf2" stop-opacity="0"/>
+    </radialGradient>
+
+    <g id="cell">
+      <path d="M 0,-27.5 L 23.8157,-13.75 L 23.8157,13.75 L 0,27.5 L -23.8157,13.75 L -23.8157,-13.75 Z"
+            fill="url(#honey)" stroke="#a9740c" stroke-opacity="0.34" stroke-width="1.4"/>
+      <ellipse cx="-5.5" cy="-7.5" rx="12.5" ry="9.5" fill="url(#gloss)"/>
+    </g>
+  </defs>
+
+  <!-- Wax ground shows through as the wall between cells. -->
+  <rect width="51.9615" height="90" fill="#fdf4d9"/>
+
+  <use href="#cell" x="0" y="0"/>
+  <use href="#cell" x="51.9615" y="0"/>
+  <use href="#cell" x="25.9808" y="45"/>
+  <use href="#cell" x="0" y="90"/>
+  <use href="#cell" x="51.9615" y="90"/>
+</svg>
