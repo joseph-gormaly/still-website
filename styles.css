@@ -662,7 +662,7 @@ nav {
 }
 
 .logo img {
-  height: 34px;
+  height: 56px;
   width: auto;
 }
 
@@ -712,6 +712,46 @@ ul.nav-links li {
   color: var(--color-primary);
   font-weight: 600;
   background: color-mix(in srgb, var(--palette-pollen-bright) 22%, transparent);
+}
+
+/* Language switcher — ISO 639-1 codes as a small pill group, dropped into
+   the same nav-links row (or li, on the blog templates' list markup). */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--radius-pill);
+  background: var(--material-tint);
+  border: 1px solid var(--color-border);
+}
+
+.lang-switch .lang-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.25rem;
+  padding: 0.3rem 0.625rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--color-text-secondary);
+  transition: background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+a.lang-link:hover {
+  color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+.lang-switch .lang-link.is-active {
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  cursor: default;
 }
 
 /* Hamburger, present only on the blog templates. Its handler toggles
@@ -1123,7 +1163,7 @@ footer a {
   }
 
   .logo img {
-    height: 28px;
+    height: 46px;
   }
 
   .organic-card {

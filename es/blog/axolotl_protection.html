@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <script>try{localStorage.setItem('still_lang_seen','1');}catch(e){}</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protegiendo el Pulso de Xochimilco: La Lucha por el Ajolote Mexicano | STILL</title>
+
+    <!-- SEO Enhancements -->
+    <meta property="og:title" content="Protegiendo el Pulso de Xochimilco">
+    <meta property="og:description" content="La Lucha por el Ajolote Mexicano: biodiversidad, urbanización y justicia ambiental en la Ciudad de México.">
+    <meta property="og:image" content="../../assets/axolotl.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="alternate" hreflang="en" href="https://still.bz/blog/axolotl_protection.html">
+    <link rel="alternate" hreflang="es" href="https://still.bz/es/blog/axolotl_protection.html">
+    <link rel="alternate" hreflang="fr-ca" href="https://still.bz/fr/blog/axolotl_protection.html">
+    <link rel="alternate" hreflang="x-default" href="https://still.bz/blog/axolotl_protection.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles.css">
+
+    <style>
+        /* Blog specific styles extending styles.css */
+        .hero-banner {
+            position: relative;
+            height: 60vh;
+            min-height: 400px;
+            background-image: url('../../assets/axolotl.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero-content h1,
+        .hero-content h2,
+        .hero-content p {
+            color: #fff;
+        }
+
+        .hero-tag {
+            background: rgba(39, 174, 96, 0.2);
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+            font-family: 'Merriweather', serif;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+
+        .article-content h2, .article-content h3 {
+            font-family: 'Inter', sans-serif;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .highlight-box {
+                flex-direction: column;
+            }
+        }
+
+        .highlight-box img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--color-accent);
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: var(--color-text-secondary);
+            margin: 3rem 0;
+            background: var(--color-surface-muted);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        figure {
+            margin: 3rem 0;
+        }
+
+        figure img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-tertiary);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .conclusion-box {
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .conclusion-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--color-surface);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Navegación principal">
+                <a href="../index.html" class="logo">
+                    <img src="../../assets/logo_v1.gif" alt="Logo de STILL">
+                    STILL
+                </a>
+                <button class="mobile-menu-toggle" aria-label="Alternar navegación">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="../about.html">Nosotros</a></li>
+                    <li><a href="../projects.html" class="active">Laboratorios de Investigación</a></li>
+                    <li><a href="../timeline.html">Cronología</a></li>
+                    <li><a href="../dashboard.html">Panel</a></li>
+                    <li><a href="../bsv-calculator.html">Calculadora BSV</a></li>
+                    <li class="lang-switch" aria-label="Idioma">
+                        <a class="lang-link" href="../../blog/axolotl_protection.html" lang="en" hreflang="en">EN</a>
+                        <span class="lang-link is-active" lang="es" aria-current="true">ES</span>
+                        <a class="lang-link" href="../../fr/blog/axolotl_protection.html" lang="fr" hreflang="fr">FR</a>
+                    </li>
+                    <li><a class="social-link social-link--bare" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer" aria-label="STILL en Instagram (se abre en una pestaña nueva)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Apoyar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="hero-banner">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag">Biodiversidad y Urbanización</span>
+                <h1 style="color: white; margin-bottom: 1rem; font-size: clamp(2rem, 5vw, 3.5rem);">Protegiendo el Pulso de Xochimilco: La Lucha por el Ajolote Mexicano</h1>
+                <p style="font-size: 1.1rem; opacity: 0.9;">Por el Equipo de Investigación de STILL | 5 de diciembre de 2024</p>
+            </div>
+        </div>
+
+        <article class="article-content">
+            <p style="font-size: 1.25rem; color: var(--color-text-secondary); margin-bottom: 2rem;">
+                La Tierra está entrando en un período de cambio sin precedentes. A medida que las actividades humanas impulsan el calentamiento global y la rápida pérdida de biodiversidad, pocas criaturas simbolizan la lucha entre la expansión urbana y la naturaleza tan bien como el ajolote mexicano (<em>Ambystoma mexicanum</em>).
+            </p>
+
+            <div class="highlight-box">
+                <div>
+                    <img src="../../assets/peso.jpg" alt="Billete de 50 pesos con la imagen del ajolote">
+                </div>
+                <div>
+                    <h3 style="margin-top: 0;">Un Ícono Nacional en Peligro</h3>
+                    <p style="margin-bottom: 0;">
+                        El ajolote es lo suficientemente célebre como para aparecer en el billete mexicano de 50 pesos, y aun así se encuentra en peligro crítico de extinción en estado silvestre. Esta paradoja pone de relieve una brecha crucial entre el aprecio cultural y la realidad ambiental.
+                    </p>
+                </div>
+            </div>
+
+            <h2>La Amenaza Urbana</h2>
+            <p>
+                En la extensa metrópoli de la Ciudad de México, la conservación no es solo cuestión de biología: es cuestión de supervivencia en una jungla urbana. Los únicos hábitats naturales que le quedan al ajolote, el lago de Xochimilco y el lago de Chalco, están bajo una presión inmensa.
+            </p>
+            <p>
+                Rodeadas por una conurbación de más de 20 millones de habitantes, estas antiguas vías acuáticas enfrentan una severa degradación de su hábitat. El desafío es evidente: ¿cómo protegemos a una especie acuática delicada cuando vive a la sombra de una de las ciudades más grandes del mundo?
+            </p>
+
+            <figure>
+                <img src="../../assets/map.jpg" alt="Mapa que muestra el hábitat del ajolote en relación con la expansión urbana de la Ciudad de México">
+                <figcaption>Figura 1: la imagen satelital resalta el hábitat cada vez más reducido del ajolote (contorno rojo) frente al denso gris del desarrollo urbano de la Ciudad de México.</figcaption>
+            </figure>
+
+            <h2>Una Cuestión de Justicia Ambiental</h2>
+            <p>
+                Para salvar al ajolote, debemos ir más allá de los métodos tradicionales de conservación. La crisis actual es un asunto de <strong>justicia ambiental</strong>. La pérdida de biodiversidad afecta a las poblaciones de todo el mundo, y sin embargo suele estar impulsada por las actividades de grupos sociales específicos.
+            </p>
+            <blockquote>
+                "Si queremos criar buenos ciudadanos, entonces enseñemos la reciprocidad. Si aspiramos a la justicia para todos, que sea justicia para toda la creación."
+                <br>
+                <span style="display: block; margin-top: 1rem; font-size: 0.9rem; font-weight: bold; font-style: normal; color: var(--color-accent);">— Robin Wall Kimmerer, Una trenza de hierba sagrada</span>
+            </blockquote>
+            <p>
+                Las estrategias modernas de conservación en Xochimilco están cambiando de perspectiva. Están adoptando un marco de "Perspectiva Multinivel" que valora los puntos de vista diversos y prioriza la redistribución del poder de decisión. Reconoce que las comunidades locales no son simples espectadoras: son las guardianas de la tierra.
+            </p>
+
+            <div class="highlight-box">
+                <figure style="margin: 0; flex: 1;">
+                    <img src="../../assets/Sign.jpg" alt="Virginia Graue junto a un letrero interpretativo">
+                    <figcaption>La defensa comunitaria local cumple un papel vital en la sensibilización pública.</figcaption>
+                </figure>
+                <div style="flex: 1;">
+                    <h3 style="margin-top: 0;">La Comunidad en el Centro</h3>
+                    <p>
+                        Una conservación exitosa exige pasar de mandatos impuestos desde arriba a soluciones basadas en la comunidad. En Xochimilco, esto significa involucrar a actores como los <em>remeros</em>, los agricultores y los residentes locales.
+                    </p>
+                    <p>
+                        Al comprender la "Teoría de la Práctica Social" —cómo el uso de los recursos y los significados culturales moldean las creencias—, quienes trabajan en conservación pueden fomentar cambios de comportamiento duraderos que beneficien tanto a las personas como al ajolote.
+                    </p>
+                </div>
+            </div>
+
+            <h2>Ciencia en Acción: La Alianza con los Remeros</h2>
+            <p>
+                Uno de los avances más prometedores ha sido la alianza entre investigadores y la comunidad local. Pescadores y operadores de embarcaciones turísticas han unido fuerzas con científicos para modelar los hábitats del ajolote.
+            </p>
+            <p>
+                Combinando datos de censos poblacionales pasados con un riguroso muestreo de la calidad del agua, estos equipos identificaron un hallazgo crucial: <strong>los ajolotes prefieren agua dulce baja en minerales y contaminación, particularmente cerca de manantiales subterráneos sumergidos.</strong>
+            </p>
+
+            <figure>
+                <img src="../../assets/collect_NW.jpg" alt="Investigadores y habitantes locales trabajando juntos en trajineras">
+                <figcaption>Trabajo de campo colaborativo: investigadores y remeros locales muestrean la calidad del agua y monitorean las poblaciones en los canales.</figcaption>
+            </figure>
+
+            <h2>El Camino a Seguir</h2>
+            <p>
+                La lucha por el ajolote está lejos de terminar, pero el camino a seguir se vuelve cada vez más claro. Requiere una combinación de respaldo legislativo, inversión financiera y un compromiso comunitario inquebrantable.
+            </p>
+            <ul style="margin-bottom: 2rem; color: var(--color-text);">
+                <li><strong>Respaldo Legislativo:</strong> la Comisión Nacional de Recursos Naturales de México debe priorizar las políticas de preservación del hábitat.</li>
+                <li><strong>Participación de Actores Clave:</strong> son esenciales las alianzas continuas con la academia, los zoológicos y los trabajadores locales.</li>
+                <li><strong>Desarrollo Sostenible:</strong> las ciudades deben equilibrar el crecimiento urbano con la preservación de los espacios verdes y azules.</li>
+            </ul>
+
+            <div class="conclusion-box">
+                <img src="../../assets/ax2.jpg" alt="Primer plano de un ajolote">
+                <div>
+                    <h3 style="margin-top: 0; color: var(--color-accent);">Un Modelo para el Mundo</h3>
+                    <p style="margin-bottom: 0;">
+                        La conservación del ajolote representa la intersección entre la justicia ambiental y el desarrollo urbano sostenible. Si logramos salvar a este "monstruo de agua" en el corazón de una megaciudad, creamos un modelo para iniciativas de conservación urbana en todo el mundo.
+                    </p>
+                </div>
+            </div>
+
+            <hr style="margin: 3rem 0; border: 0; border-top: 1px solid #eee;">
+
+            <div style="background: var(--color-surface-muted); padding: 1.5rem; border-radius: 8px; font-size: 0.9rem; color: #777;">
+                <h4 style="margin-top: 0; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; color: #333;">Referencias y Lecturas Adicionales</h4>
+                <ul style="padding-left: 1rem;">
+                    <li>American Association of Landscape Architects. (n.d.). Xochimilco Ecological Park.</li>
+                    <li>Bride, I. G., et al. (2008). Flying an amphibian flagship: conservation of the Axolotl through nature tourism.</li>
+                    <li>Contreras, V., et al. (2009). Recent decline and potential distribution in the last remnant area of the microendemic Mexican Axolotl.</li>
+                    <li>Martin, A., et al. (2020). Environmental Justice and Transformations to Sustainability.</li>
+                    <li>Mexico Lore. (2019). Axolotl.</li>
+                </ul>
+            </div>
+
+        </article>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-wordmark">STILL<span class="logo-accent">.bz</span></p>
+            <p class="footer-tagline">Iniciativa de Transformación Sostenible para la Tierra y el Aprendizaje</p>
+            <nav class="social-links" aria-label="Enlaces de contacto y redes sociales">
+                <a class="social-link" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    <span>@_still.bz</span>
+                </a>
+                <a class="social-link" href="mailto:info@still.bz">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <span>info@still.bz</span>
+                </a>
+            </nav>
+            <p class="footer-note">Honrando todas las relaciones. Bzzzz.</p>
+            <p class="footer-legal">&copy; 2026 STILL</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+    <script defer src="../../assets/comb-light.js"></script>
+</body>
+</html>

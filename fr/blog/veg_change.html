@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr-CA">
 <head>
     <meta charset="UTF-8">
-    <script>(function(){try{var K='still_lang_seen';if(!localStorage.getItem(K)){localStorage.setItem(K,'1');var l=(navigator.language||'').toLowerCase();var p=location.pathname;if(l.indexOf('es')===0){location.replace('/es'+(p==='/'?'/index.html':p));}else if(l.indexOf('fr')===0){location.replace('/fr'+(p==='/'?'/index.html':p));}}}catch(e){}})();</script>
+    <script>try{localStorage.setItem('still_lang_seen','1');}catch(e){}</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vegetation Changes in the Low Canadian Arctic | STILL</title>
+    <title>Changements de Végétation dans le Bas-Arctique Canadien | STILL</title>
 
     <!-- SEO Enhancements -->
-    <meta property="og:title" content="Vegetation Changes in the Low Canadian Arctic">
-    <meta property="og:description" content="Using remote sensing to monitor 28 years of vegetation changes in the Low Canadian Arctic (1981-2008).">
-    <meta property="og:image" content="../assets/og-image-research.png">
+    <meta property="og:title" content="Changements de Végétation dans le Bas-Arctique Canadien">
+    <meta property="og:description" content="Utiliser la télédétection pour suivre 28 années de changements de végétation dans le Bas-Arctique canadien (1981-2008).">
+    <meta property="og:image" content="../../assets/og-image-research.png">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="alternate" hreflang="en" href="https://still.bz/blog/veg_change.html">
     <link rel="alternate" hreflang="es" href="https://still.bz/es/blog/veg_change.html">
@@ -19,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../../styles.css">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -33,7 +33,7 @@
             text-align: center;
             border-bottom: 1px solid var(--color-border);
         }
-        
+
         .article-meta {
             color: var(--color-accent);
             font-weight: 700;
@@ -121,7 +121,7 @@
         .data-table tr:nth-child(even) {
             background-color: var(--color-surface-muted);
         }
-        
+
         .chart-container {
             margin: 2rem 0;
             padding: 1rem;
@@ -134,30 +134,30 @@
 <body>
     <header>
         <div class="container">
-            <nav role="navigation" aria-label="Main Navigation">
+            <nav role="navigation" aria-label="Navigation principale">
                 <a href="../index.html" class="logo">
-                    <img src="../assets/logo_v1.gif" alt="STILL Logo">
+                    <img src="../../assets/logo_v1.gif" alt="Logo STILL">
                     STILL
                 </a>
-                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                <button class="mobile-menu-toggle" aria-label="Basculer la navigation">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
                 <ul class="nav-links">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="../about.html">About</a></li>
-                    <li><a href="../projects.html" class="active">Research Labs</a></li>
-                    <li><a href="../timeline.html">Timeline</a></li>
-                    <li><a href="../dashboard.html">Dashboard</a></li>
-                    <li><a href="../bsv-calculator.html">BSV Calculator</a></li>
-                    <li class="lang-switch" aria-label="Language">
-                        <span class="lang-link is-active" lang="en" aria-current="true">EN</span>
+                    <li><a href="../index.html">Accueil</a></li>
+                    <li><a href="../about.html">À propos</a></li>
+                    <li><a href="../projects.html" class="active">Laboratoires de Recherche</a></li>
+                    <li><a href="../timeline.html">Chronologie</a></li>
+                    <li><a href="../dashboard.html">Tableau de Bord</a></li>
+                    <li><a href="../bsv-calculator.html">Calculatrice BSV</a></li>
+                    <li class="lang-switch" aria-label="Langue">
+                        <a class="lang-link" href="../../blog/veg_change.html" lang="en" hreflang="en">EN</a>
                         <a class="lang-link" href="../../es/blog/veg_change.html" lang="es" hreflang="es">ES</a>
-                        <a class="lang-link" href="../../fr/blog/veg_change.html" lang="fr" hreflang="fr">FR</a>
+                        <span class="lang-link is-active" lang="fr" aria-current="true">FR</span>
                     </li>
-                    <li><a class="social-link social-link--bare" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer" aria-label="STILL on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
-                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Support</a></li>
+                    <li><a class="social-link social-link--bare" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer" aria-label="STILL sur Instagram (s'ouvre dans un nouvel onglet)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></li>
+                    <li><a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-support" target="_blank" rel="noopener noreferrer">Soutenir</a></li>
                 </ul>
             </nav>
         </div>
@@ -167,33 +167,33 @@
         <!-- Article Header -->
         <div class="article-header">
             <div class="container">
-                <span class="article-meta">Technical Project • April 2018</span>
-                <h1 style="max-width: 900px; margin: 0 auto; line-height: 1.2;">Using Remote Sensing to Monitor 28 Years of Vegetation Changes in the Low Canadian Arctic</h1>
+                <span class="article-meta">Projet Technique • Avril 2018</span>
+                <h1 style="max-width: 900px; margin: 0 auto; line-height: 1.2;">Utiliser la Télédétection pour Suivre 28 Années de Changements de Végétation dans le Bas-Arctique Canadien</h1>
                 <div style="margin-top: 1.5rem;">
-                    <p style="font-weight: 700; color: var(--color-text); margin-bottom: 0;">STILL Research Team</p>
-                    <p style="font-size: 0.9rem; color: var(--color-text-tertiary);">Aurora College, Environment & Natural Resources</p>
+                    <p style="font-weight: 700; color: var(--color-text); margin-bottom: 0;">Équipe de Recherche de STILL</p>
+                    <p style="font-size: 0.9rem; color: var(--color-text-tertiary);">Aurora College, Environnement et Ressources Naturelles</p>
                 </div>
             </div>
         </div>
 
         <div class="container" style="display: flex; gap: 3rem; margin-top: 3rem; flex-wrap: wrap;">
-            
+
             <!-- Sidebar: Abstract -->
             <aside style="flex: 1; min-width: 280px;">
                 <div class="sidebar-abstract">
-                    <h3 style="margin-top: 0; color: var(--color-text); border-bottom: 2px solid #27ae60; padding-bottom: 0.5rem; display: inline-block;">Abstract</h3>
+                    <h3 style="margin-top: 0; color: var(--color-text); border-bottom: 2px solid #27ae60; padding-bottom: 0.5rem; display: inline-block;">Résumé</h3>
                     <p>
-                        Climate change has led to global temperature increases, magnified in the low Canadian Arctic. This warming is affecting the seasonality of many vegetation communities. Using ground verified data and long-term satellite imagery, this study quantified changes to vegetation, specifically annual start and end dates of seasons using NDVI.
+                        Le changement climatique a entraîné des hausses de température à l'échelle mondiale, amplifiées dans le bas-Arctique canadien. Ce réchauffement affecte la saisonnalité de nombreuses communautés végétales. À l'aide de données validées sur le terrain et d'images satellites à long terme, cette étude a quantifié les changements de la végétation, en particulier les dates annuelles de début et de fin de saison à l'aide du NDVI.
                     </p>
                     <p style="margin-top: 1rem;">
-                        <strong>Key Finding:</strong> The season start date was seven days earlier in 2008 compared to 1981, and the season end date was 17 days later. Temperatures rose 0.07°C annually on average.
+                        <strong>Constat clé :</strong> la date de début de saison était sept jours plus hâtive en 2008 par rapport à 1981, et la date de fin de saison était 17 jours plus tardive. Les températures ont augmenté en moyenne de 0,07 °C par année.
                     </p>
                     <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #eee;">
-                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: #95a5a6; margin-bottom: 0.5rem;">Keywords</h4>
+                        <h4 style="font-size: 0.8rem; text-transform: uppercase; color: #95a5a6; margin-bottom: 0.5rem;">Mots-clés</h4>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">Arctic</span>
+                            <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">Arctique</span>
                             <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">NDVI</span>
-                            <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">Climate Change</span>
+                            <span style="background: #f0f0f0; font-size: 0.8rem; padding: 2px 8px; border-radius: 4px;">Changement Climatique</span>
                         </div>
                     </div>
                 </div>
@@ -201,118 +201,118 @@
 
             <!-- Main Article -->
             <article class="article-content" style="flex: 3; padding-top: 0; min-width: 300px;">
-                
+
                 <section id="introduction">
                     <h2 style="margin-top: 0;">Introduction</h2>
                     <p>
-                        In recent decades, ecosystems in the low Arctic have seen an increase in average temperature, and this trend is expected to continue into the near future. The results of this increase for low Arctic ecosystems are vast and observed in several different ways, including longer and more severe forest fire seasons, permafrost thawing, and changes to vegetation (Symon et al. 2005). 
+                        Au cours des dernières décennies, les écosystèmes du bas-Arctique ont connu une hausse de la température moyenne, et cette tendance devrait se poursuivre dans un avenir rapproché. Les effets de cette hausse sur les écosystèmes du bas-Arctique sont vastes et se manifestent de plusieurs façons, notamment des saisons de feux de forêt plus longues et plus sévères, le dégel du pergélisol et des changements dans la végétation (Symon et al. 2005).
                     </p>
                     <p>
-                        Climate change is forecasted to change the ranges of numerous communities of vegetation by increasing the range of shrub species such as willow (<em>Salix spp.</em>), birch (<em>Betula spp.</em>), and alder (<em>Alnus spp.</em>). Shrub species are often the dominant vegetation cover observed using remote sensing, often forming dense clusters of vegetation that can be easily quantified (Olthof and Fraser 2014).
+                        Le changement climatique devrait modifier l'aire de répartition de nombreuses communautés végétales en augmentant celle des espèces arbustives comme le saule (<em>Salix spp.</em>), le bouleau (<em>Betula spp.</em>) et l'aulne (<em>Alnus spp.</em>). Les espèces arbustives constituent souvent le couvert végétal dominant observé par télédétection, formant fréquemment des amas denses de végétation faciles à quantifier (Olthof et Fraser 2014).
                     </p>
                     <blockquote>
-                        Experiments at Daring Lake, NT tested the effects of warming and fertilization, where deciduous shrubs showed increased growth rates to become the dominant cover.
+                        Des expériences menées à Daring Lake, T.N.-O., ont testé les effets du réchauffement et de la fertilisation, où les arbustes décidus ont montré des taux de croissance accrus jusqu'à devenir le couvert dominant.
                     </blockquote>
                     <p>
-                        In this study, we explore how remote sensing can be utilized to categorize and quantify the "shrubification" observed in the Canadian low Arctic, particularly in areas adjacent to the tree line.
+                        Dans cette étude, nous explorons comment la télédétection peut être utilisée pour catégoriser et quantifier l'« arbustification » observée dans le bas-Arctique canadien, en particulier dans les zones adjacentes à la limite forestière.
                     </p>
                 </section>
 
                 <section id="remote-sensing">
-                    <h2>The Science: Remote Sensing & NDVI</h2>
+                    <h2>La Science : Télédétection et NDVI</h2>
                     <p>
-                        Remote sensing collects imagery to gain insight into large-scale patterns of landcover. Through the process of photosynthesis, living green plants absorb solar radiation in the photosynthetically active radiation (PAR) spectrum. However, they reflect solar radiation in the near-infrared (NIR) spectrum to avoid overheating.
+                        La télédétection recueille des images pour dégager des tendances à grande échelle de l'occupation du sol. Par la photosynthèse, les plantes vertes vivantes absorbent le rayonnement solaire dans le spectre du rayonnement photosynthétiquement actif (PAR). Elles réfléchissent toutefois le rayonnement solaire dans le proche infrarouge (NIR) pour éviter la surchauffe.
                     </p>
                     <p>
-                        Therefore, live green plants appear relatively bright in the NIR and dark in PAR. This contrast allows satellites like Landsat to calculate the <strong>Normalized Difference Vegetation Index (NDVI)</strong>, a key metric for monitoring vegetation health and density over time.
+                        Par conséquent, les plantes vertes vivantes apparaissent relativement claires dans le NIR et sombres dans le PAR. Ce contraste permet à des satellites comme Landsat de calculer l'<strong>indice de végétation par différence normalisée (NDVI)</strong>, une mesure clé pour suivre la santé et la densité de la végétation dans le temps.
                     </p>
                 </section>
 
                 <section id="study-area">
-                    <h2>Study Area & Methods</h2>
+                    <h2>Zone d'Étude et Méthodes</h2>
                     <p>
-                        This study looked at an area (40,000 km²) adjacent to the Daring Lake Tundra Ecosystem Research Station (TERS) located at 111°35′W 64°52′N. TERS is approximately 50 km north of the tree line. 
+                        Cette étude a porté sur une zone (40 000 km²) adjacente à la station de recherche sur l'écosystème de toundra de Daring Lake (TERS), située à 111°35′O 64°52′N. La TERS se trouve à environ 50 km au nord de la limite forestière.
                     </p>
-                    
+
                     <div class="figure-container">
-                        <img src="../assets/veg_change_fig1.png" alt="Map of study area showing 40,000 km² region adjacent to TERS and Baker Lake, NU">
-                        <div class="caption">Figure 1. Study area: 40 000 km² adjacent to TERS and Baker Lake, NU.</div>
+                        <img src="../../assets/veg_change_fig1.png" alt="Carte de la zone d'étude montrant la région de 40 000 km² adjacente à la TERS et à Baker Lake, NU">
+                        <div class="caption">Figure 1. Zone d'étude : 40 000 km² adjacents à la TERS et à Baker Lake, NU.</div>
                     </div>
 
                     <p>
-                        Temperature data was downloaded from Environment and Climate Change Canada for the weather station at Baker Lake, Nunavut. A global data set of Vegetation Index and Phenology data was retrieved courtesy of NASA.
+                        Les données de température ont été obtenues auprès d'Environnement et Changement climatique Canada pour la station météorologique de Baker Lake, au Nunavut. Un jeu de données mondial sur l'indice de végétation et la phénologie a été obtenu gracieuseté de la NASA.
                     </p>
 
                      <div class="figure-container">
-                        <img src="../assets/veg_change_fig2.png" alt="Phenology metrics bell-curve graph">
-                        <div class="caption">Figure 2. Phenology metrics for Tundra with one well defined growing season (Didan and Barreto 2016).</div>
+                        <img src="../../assets/veg_change_fig2.png" alt="Courbe en cloche des mesures de phénologie">
+                        <div class="caption">Figure 2. Mesures de phénologie pour la toundra avec une saison de croissance bien définie (Didan et Barreto 2016).</div>
                     </div>
 
                     <p>
-                        The start and end of the growing season are defined as five days of increasing or decreasing NDVI, respectively.
+                        Le début et la fin de la saison de croissance sont définis comme cinq jours consécutifs de NDVI croissant ou décroissant, respectivement.
                     </p>
                 </section>
 
                 <section id="results">
-                    <h2>Results</h2>
+                    <h2>Résultats</h2>
                     <p>
-                        The data analysis revealed significant trends over the 28-year period (1981-2008). Below is the complete dataset utilized for the analysis, followed by graphical representations of the trends.
+                        L'analyse des données a révélé des tendances significatives sur la période de 28 ans (1981-2008). Voici l'ensemble de données complet utilisé pour l'analyse, suivi de représentations graphiques des tendances.
                     </p>
 
                     <div style="overflow-x: auto;">
                         <table class="data-table" id="dataTable">
                             <thead>
                                 <tr>
-                                    <th>Year</th>
-                                    <th>Baker Lake Avg Temp (°C)</th>
-                                    <th>Start of Season</th>
-                                    <th>End of Season</th>
+                                    <th>Année</th>
+                                    <th>Temp. Moy. Baker Lake (°C)</th>
+                                    <th>Début de Saison</th>
+                                    <th>Fin de Saison</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- JS will populate or we keep static list for brevity, keeping sample here -->
-                                <tr><td>1981</td><td>-10.0</td><td>11-Jun</td><td>27-Sep</td></tr>
-                                <tr><td>2008</td><td>-11.0</td><td>04-Jun</td><td>14-Oct</td></tr>
+                                <tr><td>1981</td><td>-10,0</td><td>11 juin</td><td>27 sept.</td></tr>
+                                <tr><td>2008</td><td>-11,0</td><td>04 juin</td><td>14 oct.</td></tr>
                                 <!-- Full table truncated for display, full data in script -->
                             </tbody>
                         </table>
                     </div>
-                    <div class="caption">Table 1. Values for temperature, start and end date of growing seasons 1981-2008.</div>
+                    <div class="caption">Tableau 1. Valeurs de température et dates de début/fin de saison de croissance, 1981-2008.</div>
 
                     <div class="chart-container">
                         <canvas id="tempChart"></canvas>
-                        <div class="caption">Figure 3. Linear regression showing average temperature changes 1981-2008. ($y=0.068x - 147.02$, $R^2=0.18$)</div>
+                        <div class="caption">Figure 3. Régression linéaire montrant les changements de température moyenne, 1981-2008. ($y=0.068x - 147.02$, $R^2=0.18$)</div>
                     </div>
 
                     <div class="chart-container">
                         <canvas id="startSeasonChart"></canvas>
-                        <div class="caption">Figure 4. Linear regression showing start date of growing season 1981-2008. ($y=-0.4305x + 1019.7$, $R^2=0.81$)</div>
+                        <div class="caption">Figure 4. Régression linéaire montrant la date de début de la saison de croissance, 1981-2008. ($y=-0.4305x + 1019.7$, $R^2=0.81$)</div>
                     </div>
 
                     <div class="chart-container">
                         <canvas id="endSeasonChart"></canvas>
-                        <div class="caption">Figure 5. Linear regression showing end date of growing season 1981-2008. ($y=0.7646x - 1247.9$, $R^2=0.72$)</div>
+                        <div class="caption">Figure 5. Régression linéaire montrant la date de fin de la saison de croissance, 1981-2008. ($y=0.7646x - 1247.9$, $R^2=0.72$)</div>
                     </div>
                 </section>
 
                 <section id="discussion">
                     <h2>Discussion</h2>
                     <p>
-                        Weather data from Baker Lake, NU showed an average increase of <strong>0.07°C per year</strong> over the study period (1981-2008), totaling a two-degree increase. This result was as expected, consistent with numerous studies published in the Arctic Climate Impact Assessment (2005). The statistical analysis of the linear regression showed a weak correlation to the trend line ($R^2=0.18$, $p=0.023$). This weak correlation is likely a result of variations in local weather phenomena as well as a relatively short study period.
+                        Les données météorologiques de Baker Lake, NU, ont montré une hausse moyenne de <strong>0,07 °C par année</strong> durant la période étudiée (1981-2008), totalisant une hausse de deux degrés. Ce résultat était attendu, conforme à de nombreuses études publiées dans l'Arctic Climate Impact Assessment (2005). L'analyse statistique de la régression linéaire a montré une corrélation faible avec la droite de tendance ($R^2=0.18$, $p=0.023$). Cette corrélation faible s'explique probablement par des variations des phénomènes météorologiques locaux ainsi que par une période d'étude relativement courte.
                     </p>
                     <p>
-                        The average <strong>Start of the Growing Season</strong> for the study area showed a strong negative trend ($R^2=0.81$, $p < 0.001$). Over the 28 years, the start of season date shifted earlier by seven days (from June 11 in 1981 to June 4 in 2008).
+                        La moyenne du <strong>début de la saison de croissance</strong> pour la zone d'étude a montré une forte tendance négative ($R^2=0.81$, $p < 0.001$). Sur les 28 années, la date de début de saison a avancé de sept jours (du 11 juin en 1981 au 4 juin en 2008).
                     </p>
                     <p>
-                        The <strong>End of Season</strong> data showed a strong positive trend ($R^2=0.72$, $p < 0.001$), meaning the season is ending later. These results are consistent with studies published by Xu et al. (2013).
+                        Les données de <strong>fin de saison</strong> ont montré une forte tendance positive ($R^2=0.72$, $p < 0.001$), ce qui signifie que la saison se termine plus tard. Ces résultats concordent avec les études publiées par Xu et al. (2013).
                     </p>
                     <p>
-                        The cumulative effect of this observed change to ecosystems in the low Arctic can have far-reaching implications for various natural cycles (carbon cycle, water cycle, albedo effect, snow depths). Climate change models will require more accurate information about vegetation structure and extent in the changing low Arctic (Martin et al. 2017).
+                        L'effet cumulatif de ce changement observé dans les écosystèmes du bas-Arctique peut avoir des répercussions considérables sur divers cycles naturels (cycle du carbone, cycle de l'eau, effet d'albédo, épaisseur de neige). Les modèles de changement climatique nécessiteront des informations plus précises sur la structure et l'étendue de la végétation dans ce bas-Arctique en mutation (Martin et al. 2017).
                     </p>
                 </section>
 
                 <section id="references" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #eee; font-size: 0.9rem;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Literature Cited</h3>
+                    <h3 style="font-size: 1.2rem; margin-bottom: 1rem;">Références Citées</h3>
                     <ul style="list-style: none; padding: 0; color: var(--color-text-secondary);">
                         <li style="margin-bottom: 0.5rem;">Didan, K. and A. Barreto. 2016. NASA measures vegetation index and phenology (VIP) phenology NDVI yearly global 0.05Deg CMG. NASA EOSDIS Land Processes DAAC.</li>
                         <li style="margin-bottom: 0.5rem;">Symon, C., L. Arris, and B. Heal, editors. 2005. Arctic climate impact assessment. Cambridge University Press, New York, NY, USA.</li>
@@ -326,8 +326,8 @@
     <footer>
         <div class="container">
             <p class="footer-wordmark">STILL<span class="logo-accent">.bz</span></p>
-            <p class="footer-tagline">Sustainable Transformation Initiative for Land &amp; Learning</p>
-            <nav class="social-links" aria-label="Contact and social links">
+            <p class="footer-tagline">Initiative de transformation durable pour la terre et l'apprentissage</p>
+            <nav class="social-links" aria-label="Liens de contact et réseaux sociaux">
                 <a class="social-link" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                     <span>@_still.bz</span>
@@ -337,7 +337,7 @@
                     <span>info@still.bz</span>
                 </a>
             </nav>
-            <p class="footer-note">Honouring all relations. Bzzzz.</p>
+            <p class="footer-note">En l'honneur de toutes nos relations. Bzzzz.</p>
             <p class="footer-legal">&copy; 2026 STILL</p>
         </div>
     </footer>
@@ -385,14 +385,14 @@
             type: 'scatter',
             data: {
                 datasets: [{
-                    label: 'Avg Temperature (°C)',
+                    label: 'Temp. Moyenne (°C)',
                     data: data.map(d => ({x: d.year, y: d.temp})),
                     backgroundColor: 'rgba(39, 174, 96, 1)',
                     borderColor: 'rgba(39, 174, 96, 0.5)',
                     showLine: false
                 },
                 {
-                    label: 'Trend Line',
+                    label: 'Droite de Tendance',
                     data: [
                         {x: 1981, y: 0.068 * 1981 - 147.02},
                         {x: 2008, y: 0.068 * 2008 - 147.02}
@@ -406,8 +406,8 @@
             options: {
                 responsive: true,
                 scales: {
-                    x: { type: 'linear', position: 'bottom', title: {display: true, text: 'Year'} },
-                    y: { title: {display: true, text: 'Temperature (°C)'} }
+                    x: { type: 'linear', position: 'bottom', title: {display: true, text: 'Année'} },
+                    y: { title: {display: true, text: 'Température (°C)'} }
                 }
             }
         });
@@ -423,12 +423,12 @@
             type: 'scatter',
             data: {
                 datasets: [{
-                    label: 'Start of Season (Day of Year)',
+                    label: 'Début de Saison (Jour de l\'Année)',
                     data: data.map(d => ({x: d.year, y: getDayOfYear(d.start)})),
                     backgroundColor: 'rgba(39, 174, 96, 1)',
                 },
                 {
-                    label: 'Trend Line',
+                    label: 'Droite de Tendance',
                     data: [
                         {x: 1981, y: -0.4305 * 1981 + 1019.7},
                         {x: 2008, y: -0.4305 * 2008 + 1019.7}
@@ -441,9 +441,9 @@
             },
             options: {
                 scales: {
-                    x: { type: 'linear', title: {display: true, text: 'Year'} },
-                    y: { 
-                        title: {display: true, text: 'Day of Year (approx June)'},
+                    x: { type: 'linear', title: {display: true, text: 'Année'} },
+                    y: {
+                        title: {display: true, text: 'Jour de l\'Année (environ juin)'},
                         reverse: true
                     }
                 }
@@ -454,12 +454,12 @@
             type: 'scatter',
             data: {
                 datasets: [{
-                    label: 'End of Season (Day of Year)',
+                    label: 'Fin de Saison (Jour de l\'Année)',
                     data: data.map(d => ({x: d.year, y: getDayOfYear(d.end)})),
                     backgroundColor: 'rgba(192, 57, 43, 1)',
                 },
                  {
-                    label: 'Trend Line',
+                    label: 'Droite de Tendance',
                     data: [
                         {x: 1981, y: 0.7646 * 1981 - 1247.9},
                         {x: 2008, y: 0.7646 * 2008 - 1247.9}
@@ -472,12 +472,12 @@
             },
             options: {
                 scales: {
-                    x: { type: 'linear', title: {display: true, text: 'Year'} },
-                    y: { title: {display: true, text: 'Day of Year (approx Sept/Oct)'} }
+                    x: { type: 'linear', title: {display: true, text: 'Année'} },
+                    y: { title: {display: true, text: 'Jour de l\'Année (environ sept/oct)'} }
                 }
             }
         });
     </script>
-    <script defer src="../assets/comb-light.js"></script>
+    <script defer src="../../assets/comb-light.js"></script>
 </body>
 </html>

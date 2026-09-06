@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <script>(function(){try{var K='still_lang_seen';if(!localStorage.getItem(K)){localStorage.setItem(K,'1');var l=(navigator.language||'').toLowerCase();var p=location.pathname;if(l.indexOf('es')===0){location.replace('/es'+(p==='/'?'/index.html':p));}else if(l.indexOf('fr')===0){location.replace('/fr'+(p==='/'?'/index.html':p));}}}catch(e){}})();</script>
+    <script>try{localStorage.setItem('still_lang_seen','1');}catch(e){}</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thebacha Solar Model | STILL</title>
-    <meta name="description" content="A true-scale solar system laid along the Pine Lake to Fort Smith corridor in Wood Buffalo National Park, anchored on the 9.51 m Dark Sky Circle observation deck as the Sun.">
+    <title>Modelo Solar de Thebacha | STILL</title>
+    <meta name="description" content="Un sistema solar a escala real trazado a lo largo del corredor de Pine Lake a Fort Smith en el Parque Nacional Wood Buffalo, anclado en la plataforma de observación Dark Sky Circle de 9,51 m como el Sol.">
     <link rel="alternate" hreflang="en" href="https://still.bz/thebacha-solar-model.html">
     <link rel="alternate" hreflang="es" href="https://still.bz/es/thebacha-solar-model.html">
     <link rel="alternate" hreflang="fr-ca" href="https://still.bz/fr/thebacha-solar-model.html">
     <link rel="alternate" hreflang="x-default" href="https://still.bz/thebacha-solar-model.html">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="lib/leaflet.css">
-    <link rel="icon" type="image/gif" sizes="32x32" href="assets/logo_v1.gif">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../lib/leaflet.css">
+    <link rel="icon" type="image/gif" sizes="32x32" href="../assets/logo_v1.gif">
     <style>
         /* Night-sky panels: consistent with the dark treatment used on dashboard.html */
         .night-panel {
@@ -282,25 +282,25 @@
 <body>
     <header>
         <div class="container">
-            <nav role="navigation" aria-label="Main Navigation">
+            <nav role="navigation" aria-label="Navegación principal">
                 <a href="index.html" class="logo">
-                    <img src="assets/logo_v1.gif" alt="STILL Logo">
+                    <img src="../assets/logo_v1.gif" alt="Logo de STILL">
                     STILL<span class="logo-accent">.bz</span>
                 </a>
                 <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="projects.html" class="is-active">Research</a>
-                    <a href="dashboard.html">Map</a>
-                    <div class="lang-switch" aria-label="Language">
-                        <span class="lang-link is-active" lang="en" aria-current="true">EN</span>
-                        <a class="lang-link" href="es/thebacha-solar-model.html" lang="es" hreflang="es">ES</a>
-                        <a class="lang-link" href="fr/thebacha-solar-model.html" lang="fr" hreflang="fr">FR</a>
+                    <a href="index.html">Inicio</a>
+                    <a href="about.html">Nosotros</a>
+                    <a href="projects.html" class="is-active">Investigación</a>
+                    <a href="dashboard.html">Mapa</a>
+                    <div class="lang-switch" aria-label="Idioma">
+                        <a class="lang-link" href="../thebacha-solar-model.html" lang="en" hreflang="en">EN</a>
+                        <span class="lang-link is-active" lang="es" aria-current="true">ES</span>
+                        <a class="lang-link" href="../fr/thebacha-solar-model.html" lang="fr" hreflang="fr">FR</a>
                     </div>
-                    <a class="social-link social-link--bare" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer" aria-label="STILL on Instagram (opens in a new tab)">
+                    <a class="social-link social-link--bare" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer" aria-label="STILL en Instagram (se abre en una pestaña nueva)">
                         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                     </a>
-                    <a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-cta" target="_blank" rel="noopener noreferrer">Support</a>
+                    <a href="https://commerce.coinbase.com/checkout/bfaaf80e-dfa5-485a-b93f-b0f4b11cb4b4" class="btn-cta" target="_blank" rel="noopener noreferrer">Apoyar</a>
                 </div>
             </nav>
         </div>
@@ -309,44 +309,44 @@
     <main>
         <section class="research-hero">
             <div class="container">
-                <span class="eyebrow-chip text-science">Case Study &middot; Interpretation &amp; Science Communication</span>
-                <h1>Thebacha Solar Model</h1>
+                <span class="eyebrow-chip text-science">Caso de Estudio &middot; Interpretación y Comunicación Científica</span>
+                <h1>Modelo Solar de Thebacha</h1>
                 <p style="font-size: 1.25rem; color: var(--color-forest-moss); max-width: 800px;">
-                    A true-scale model of the solar system laid along the road out of Wood Buffalo
-                    National Park &mdash; anchored on the one object in the park already built to hold
-                    the whole sky.
+                    Un modelo a escala real del sistema solar trazado a lo largo del camino que sale
+                    del Parque Nacional Wood Buffalo &mdash; anclado en el único objeto del parque ya
+                    construido para contener el cielo entero.
                 </p>
 
                 <dl class="meta-list" style="margin-top: 3rem;">
                     <div>
-                        <dt>Role</dt>
-                        <dd>Public Outreach Education Officer III</dd>
+                        <dt>Rol</dt>
+                        <dd>Oficial de Educación y Divulgación Pública III</dd>
                     </div>
                     <div>
-                        <dt>Organisation</dt>
-                        <dd>Wood Buffalo National Park, Parks Canada</dd>
+                        <dt>Organización</dt>
+                        <dd>Parque Nacional Wood Buffalo, Parks Canada</dd>
                     </div>
                     <div>
-                        <dt>Year</dt>
+                        <dt>Año</dt>
                         <dd>2017</dd>
                     </div>
                     <div>
-                        <dt>Partner</dt>
+                        <dt>Socio</dt>
                         <dd>Thebacha &amp; Wood Buffalo Astronomical Society</dd>
                     </div>
                     <div>
-                        <dt>Toolchain</dt>
+                        <dt>Herramientas</dt>
                         <dd>ArcMap &middot; ArcGIS Online &middot; Google Earth</dd>
                     </div>
                 </dl>
 
                 <figure class="hero-figure">
-                    <img src="assets/dark_sky_2_2017.jpg"
-                         alt="An observer crouched at a telescope on a gravel ridge beneath a green aurora and a dense field of stars, working by the light of a red headlamp."
+                    <img src="../assets/dark_sky_2_2017.jpg"
+                         alt="Un observador agachado ante un telescopio en una cresta de grava bajo una aurora verde y un denso campo de estrellas, trabajando con la luz de una linterna frontal roja."
                          loading="lazy" width="900" height="686">
                     <figcaption>
-                        Observing under aurora in the Wood Buffalo Dark Sky Preserve.
-                        <span class="credit">Courtesy Thebacha &amp; Wood Buffalo Astronomical Society &middot; tawbas.ca</span>
+                        Observando bajo la aurora en la Reserva de Cielo Oscuro de Wood Buffalo.
+                        <span class="credit">Cortesía de Thebacha &amp; Wood Buffalo Astronomical Society &middot; tawbas.ca</span>
                     </figcaption>
                 </figure>
             </div>
@@ -356,52 +356,57 @@
 
         <section style="padding-top: 0;">
             <div class="container">
-                <span class="text-science">The Model</span>
-                <h2>Every diagram of the solar system lies about distance</h2>
+                <span class="text-science">El Modelo</span>
+                <h2>Todo diagrama del sistema solar miente sobre la distancia</h2>
                 <p>
-                    To fit the planets onto one page, a poster compresses the distances until they
-                    look like neighbours on a street. Visitors arrive believing the solar system is
-                    crowded. It is almost entirely empty &mdash; and emptiness is the one fact a page
-                    or a screen cannot carry, because both are built to delete dead space.
+                    Para hacer caber los planetas en una sola página, un póster comprime las
+                    distancias hasta que parecen vecinos en una misma calle. Los visitantes llegan
+                    creyendo que el sistema solar está abarrotado. En realidad está casi
+                    completamente vacío &mdash; y el vacío es el único hecho que una página o una
+                    pantalla no puede transmitir, porque ambas están construidas para eliminar el
+                    espacio muerto.
                 </p>
                 <p>
-                    Wood Buffalo already owned the right apparatus: a circular observing deck at Pine
-                    Lake, <span class="coord">9.51 m</span> across, and 62 km of road to Fort Smith.
-                    Declaring that deck to be the Sun fixes the model's only free parameter. Every
-                    other number then follows by arithmetic &mdash; a ratio of
-                    <strong>1 : 146,309,148</strong>, with nothing left to choose.
+                    Wood Buffalo ya contaba con el aparato correcto: una plataforma de observación
+                    circular en Pine Lake, de <span class="coord">9,51 m</span> de diámetro, y 62 km
+                    de carretera hasta Fort Smith. Declarar que esa plataforma es el Sol fija el
+                    único parámetro libre del modelo. Todos los demás números se derivan luego por
+                    simple aritmética &mdash; una proporción de <strong>1 : 146.309.148</strong>, sin
+                    nada más que elegir.
                 </p>
 
                 <p class="pull-quote">
-                    Make the deck the Sun, and the drive out to it stops being travel time.
-                    It becomes the model.
+                    Convierte la plataforma en el Sol, y el trayecto hasta ella deja de ser tiempo
+                    de viaje. Se convierte en el modelo.
                 </p>
 
                 <p>
-                    The result is uncomfortable, which is the point. All four rocky planets fall
-                    inside the first 1.6 km. Neptune, the outermost, sits at <strong>30.75 km</strong>
-                    &mdash; barely halfway to town, leaving 32 km of highway that is not in the solar
-                    system at all. Each sign carried a sphere built to the same ratio, so the object
-                    in a visitor's hand and the deck kilometres away belonged to one model: Earth an
-                    8.7 cm ball, Mercury 3.3 cm, Jupiter just under a metre.
+                    El resultado es incómodo, y ese es justamente el punto. Los cuatro planetas
+                    rocosos caben dentro del primer <strong>1,6 km</strong>. Neptuno, el más externo,
+                    se ubica a <strong>30,75 km</strong> &mdash; apenas a mitad de camino hacia el
+                    pueblo, dejando 32 km de carretera que ya no forman parte del sistema solar. Cada
+                    letrero llevaba una esfera construida a la misma proporción, de modo que el
+                    objeto en la mano del visitante y la plataforma a kilómetros de distancia
+                    pertenecían a un mismo modelo: la Tierra, una bola de 8,7 cm; Mercurio, 3,3 cm;
+                    Júpiter, poco menos de un metro.
                 </p>
 
                 <dl class="stat-grid">
                     <div class="stat-block">
-                        <dt>Scale ratio</dt>
-                        <dd>1 : 146 million<small>1 mm on the model = 146,309 km in space</small></dd>
+                        <dt>Escala</dt>
+                        <dd>1 : 146 millones<small>1 mm en el modelo = 146.309 km en el espacio</small></dd>
                     </div>
                     <div class="stat-block">
-                        <dt>The Sun</dt>
-                        <dd>9.51 m<small>Measured diameter of the Dark Sky Circle deck</small></dd>
+                        <dt>El Sol</dt>
+                        <dd>9,51 m<small>Diámetro medido de la plataforma Dark Sky Circle</small></dd>
                     </div>
                     <div class="stat-block">
-                        <dt>Speed of light</dt>
-                        <dd>7.4 km/h<small>Light crosses this model at walking pace</small></dd>
+                        <dt>Velocidad de la luz</dt>
+                        <dd>7,4 km/h<small>La luz cruza este modelo a paso de caminata</small></dd>
                     </div>
                     <div class="stat-block">
-                        <dt>Edge of the planets</dt>
-                        <dd>30.75 km<small>Neptune &mdash; then 32 km of nothing to town</small></dd>
+                        <dt>Borde de los planetas</dt>
+                        <dd>30,75 km<small>Neptuno &mdash; luego 32 km de nada hasta el pueblo</small></dd>
                     </div>
                 </dl>
             </div>
@@ -410,39 +415,42 @@
         <section style="padding-top: 0;">
             <div class="container">
                 <div class="night-panel">
-                    <span class="text-science">Interactive</span>
-                    <h3 style="margin-bottom: 0.5rem;">The model on the ground</h3>
+                    <span class="text-science">Interactivo</span>
+                    <h3 style="margin-bottom: 0.5rem;">El modelo sobre el terreno</h3>
                     <p style="font-size: 0.95rem; margin-bottom: 2rem;">
-                        Each planet sits at its true modelled position on the real road. Pan and zoom;
-                        the spheres keep their true proportions to one another at every magnification.
+                        Cada planeta se ubica en su verdadera posición modelada sobre la carretera
+                        real. Desplázate y haz zoom; las esferas mantienen sus proporciones reales
+                        entre sí en cualquier grado de aumento.
                     </p>
 
                     <div id="live-map" role="application"
-                         aria-label="Pannable topographic map of the Pine Lake to Fort Smith corridor showing each planet at its modelled position along the road. The full specification is also given as a table later on this page."></div>
+                         aria-label="Mapa desplazable del corredor de Pine Lake a Fort Smith que muestra cada planeta en su posición modelada a lo largo de la carretera. La especificación completa también se presenta como tabla más adelante en esta página."></div>
 
                     <div class="map-toolbar">
                         <div class="toolbar-group">
-                            <label for="mag-slider">Planet magnification</label>
+                            <label for="mag-slider">Aumento de los planetas</label>
                             <input type="range" id="mag-slider" min="30" max="320" value="90" step="10"
                                    aria-describedby="mag-readout">
                             <p class="toolbar-readout" id="mag-readout"></p>
                         </div>
                         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                            <button type="button" class="map-btn" id="btn-fit">Whole model</button>
-                            <button type="button" class="map-btn" id="btn-inner">Inner planets</button>
-                            <button type="button" class="map-btn" id="btn-sun" aria-pressed="false">Sun to scale</button>
+                            <button type="button" class="map-btn" id="btn-fit">Modelo completo</button>
+                            <button type="button" class="map-btn" id="btn-inner">Planetas interiores</button>
+                            <button type="button" class="map-btn" id="btn-sun" aria-pressed="false">Sol a escala</button>
                         </div>
                     </div>
 
                     <p class="figure-caption">
-                        Spheres are magnified for visibility but share one multiplier, so every
-                        size relationship in the set is preserved &mdash; Jupiter really is 29 times
-                        Mercury's diameter at any slider position. The dashed ring around each planet
-                        is a fixed-size locator, not the planet: where a planet is only a few pixels
-                        across inside its ring, that is the honest answer. Saturn's rings are drawn
-                        to the same scale, which is why its silhouette outreaches Jupiter's even
-                        though its body is smaller. Route traced from OpenStreetMap road centrelines;
-                        distances measured along the drivable route from the deck.
+                        Las esferas están ampliadas para poder verlas, pero todas comparten un
+                        mismo multiplicador, de modo que cada relación de tamaño del conjunto se
+                        conserva &mdash; Júpiter realmente mide 29 veces el diámetro de Mercurio en
+                        cualquier posición del control. El anillo punteado alrededor de cada planeta
+                        es un localizador de tamaño fijo, no el planeta: donde un planeta apenas
+                        mide unos pocos píxeles dentro de su anillo, esa es la respuesta honesta. Los
+                        anillos de Saturno están dibujados a la misma escala, por lo que su silueta
+                        supera a la de Júpiter aunque su cuerpo sea más pequeño. Ruta trazada a
+                        partir de las líneas centrales de OpenStreetMap; distancias medidas a lo
+                        largo de la ruta transitable desde la plataforma.
                     </p>
                 </div>
             </div>
@@ -450,22 +458,23 @@
 
         <section style="padding-top: 0;">
             <div class="container">
-                <span class="text-science">The Numbers</span>
-                <h2>Full model specification</h2>
+                <span class="text-science">Los Números</span>
+                <h2>Especificación completa del modelo</h2>
                 <div class="table-scroll">
                     <table class="model-table" id="model-table">
                         <caption>
-                            Every value derives from one measurement: a 9.51 m deck standing in for a
-                            1,391,400 km Sun. Orbital positions use semi-major axes, so the model shows
-                            mean distance rather than the configuration on any particular night.
+                            Todo valor se deriva de una sola medición: una plataforma de 9,51 m que
+                            representa un Sol de 1.391.400 km. Las posiciones orbitales usan los
+                            semiejes mayores, así que el modelo muestra la distancia media y no la
+                            configuración de una noche en particular.
                         </caption>
                         <thead>
                             <tr>
-                                <th scope="col">Body</th>
-                                <th scope="col">Distance (AU)</th>
-                                <th scope="col">Position on route</th>
-                                <th scope="col">Sphere diameter</th>
-                                <th scope="col">Light travel time</th>
+                                <th scope="col">Cuerpo</th>
+                                <th scope="col">Distancia (UA)</th>
+                                <th scope="col">Posición en la ruta</th>
+                                <th scope="col">Diámetro de la esfera</th>
+                                <th scope="col">Tiempo de viaje de la luz</th>
                             </tr>
                         </thead>
                         <tbody><!-- rendered from MODEL constants --></tbody>
@@ -473,11 +482,11 @@
                 </div>
                 <noscript>
                     <p style="margin-top:1.5rem; padding:1rem; background:var(--color-nectar); border-left:4px solid var(--color-pollen);">
-                        The map and this table are generated from a single dataset and need
-                        JavaScript to render. Key values: scale
-                        1:146,309,148; Sun 9.51 m; Mercury 0.40 km; Venus 0.74 km; Earth 1.02 km;
-                        Mars 1.56 km; Jupiter 5.32 km; Saturn 9.80 km; Uranus 19.65 km;
-                        Neptune 30.75 km.
+                        El mapa y esta tabla se generan a partir de un mismo conjunto de datos y
+                        necesitan JavaScript para renderizarse. Valores clave: escala
+                        1:146.309.148; Sol 9,51 m; Mercurio 0,40 km; Venus 0,74 km; Tierra 1,02 km;
+                        Marte 1,56 km; Júpiter 5,32 km; Saturno 9,80 km; Urano 19,65 km;
+                        Neptuno 30,75 km.
                     </p>
                 </noscript>
             </div>
@@ -485,51 +494,56 @@
 
         <section style="background: var(--color-stone-aged); border-radius: var(--radius-2xl);">
             <div class="container">
-                <span class="text-science">Design Rationale</span>
-                <h2>An exhibit you cannot scroll past</h2>
+                <span class="text-science">Fundamento de Diseño</span>
+                <h2>Una exhibición que no puedes desplazar rápidamente</h2>
                 <p>
-                    Science communication has largely accepted the terms of the attention economy:
-                    eight seconds, a hook, a fact that fits in a caption. That format selects for the
-                    compressible and filters out anything whose entire meaning is duration. Emptiness
-                    cannot be communicated quickly. That is what emptiness <em>is</em>.
+                    La comunicación científica ha aceptado en gran medida los términos de la
+                    economía de la atención: ocho segundos, un gancho, un dato que cabe en un pie de
+                    foto. Ese formato favorece lo comprimible y descarta todo aquello cuyo
+                    significado completo reside en la duración. El vacío no se puede comunicar
+                    rápido. Eso es justamente lo que <em>es</em> el vacío.
                 </p>
                 <p>
-                    This takes about forty-five minutes to cross and cannot be skimmed. Its most
-                    important stretch &mdash; the 21 km between Saturn and Neptune, where nothing
-                    whatsoever happens &mdash; is by any engagement metric a failure. It is also the
-                    whole lesson: the boredom is load-bearing. There is a symmetry in siting that
-                    argument in a dark sky preserve, since darkness and sustained attention are both
-                    scarce now, and for related reasons.
+                    Este recorrido toma unos cuarenta y cinco minutos y no se puede hojear. Su tramo
+                    más importante &mdash; los 21 km entre Saturno y Neptuno, donde no ocurre
+                    absolutamente nada &mdash; es, según cualquier métrica de interacción, un
+                    fracaso. También es la lección completa: el aburrimiento cumple una función
+                    estructural. Hay una simetría en ubicar ese argumento en una reserva de cielo
+                    oscuro, ya que la oscuridad y la atención sostenida son ambas escasas hoy en día,
+                    y por razones relacionadas.
                 </p>
                 <p>
-                    Built with the Thebacha and Wood Buffalo Astronomical Society for the
-                    <strong>6th annual Dark Sky Festival, August 17&ndash;21, 2017</strong>. The
-                    partnership is why it has a social life &mdash; interpretive hardware no local
-                    group uses becomes roadside furniture within a season. It also leaves a worked
-                    example on the road to the swimming lake, which matters more than the model
-                    itself: every number here comes from one measurement and one ratio, arithmetic a
-                    middle-school student can carry out completely and then own, in a way that being
-                    shown a poster never achieves.
+                    Construido junto con la Thebacha and Wood Buffalo Astronomical Society para el
+                    <strong>6.º Festival Anual de Cielo Oscuro, del 17 al 21 de agosto de 2017</strong>.
+                    Esa alianza es la razón por la que tiene vida social &mdash; el equipamiento
+                    interpretativo que ningún grupo local usa se convierte en mobiliario de carretera
+                    en una sola temporada. También deja un ejemplo resuelto en el camino hacia el
+                    lago de baño, lo cual importa más que el modelo en sí: cada número aquí proviene
+                    de una sola medición y una sola proporción, una aritmética que un estudiante de
+                    secundaria puede realizar por completo y hacer suya, de una forma que ver un
+                    póster nunca logra.
                 </p>
             </div>
         </section>
 
         <section style="padding-top: 0;">
             <div class="container">
-                <span class="text-science">Notes &amp; Caveats</span>
-                <h2>Honest limits of the model</h2>
+                <span class="text-science">Notas y Advertencias</span>
+                <h2>Límites honestos del modelo</h2>
                 <ul style="max-width: 70ch;">
-                    <li><strong>Distances are mean, and the line is not the orbit.</strong> Positions
-                        use semi-major axes, and laying the solar system along a road collapses a
-                        plane into a line: the signs encode distance from the Sun, not the planets'
-                        positions relative to one another.</li>
-                    <li><strong>Marker positions are reconstructed, not surveyed.</strong> The signs
-                        stood at the roadside; map positions are interpolated along the drivable
-                        route at each planet's modelled distance from the deck.</li>
-                    <li><strong>Pluto did not fit, and coordinates are approximate.</strong> At
-                        39.48 AU it lands 40.37 km out, past Neptune, and is listed for reference
-                        only. Deck coordinates are good to about 100 m; the Fort Smith endpoint is an
-                        estimate of the office location.</li>
+                    <li><strong>Las distancias son medias, y la línea no es la órbita.</strong> Las
+                        posiciones usan los semiejes mayores, y trazar el sistema solar a lo largo de
+                        una carretera colapsa un plano en una línea: los letreros codifican la
+                        distancia al Sol, no la posición de los planetas entre sí.</li>
+                    <li><strong>Las posiciones de los marcadores son reconstruidas, no
+                        levantadas topográficamente.</strong> Los letreros se ubicaban al borde de la
+                        carretera; las posiciones en el mapa se interpolan a lo largo de la ruta
+                        transitable, en la distancia modelada de cada planeta desde la plataforma.</li>
+                    <li><strong>Plutón no cupo, y sus coordenadas son aproximadas.</strong> A
+                        39,48 UA cae a 40,37 km, más allá de Neptuno, y se incluye solo como
+                        referencia. Las coordenadas de la plataforma tienen una precisión de unos
+                        100 m; el punto final en Fort Smith es una estimación de la ubicación de la
+                        oficina.</li>
                 </ul>
             </div>
         </section>
@@ -538,7 +552,7 @@
 
         <section style="padding-top: 0;">
             <div class="container">
-                <a href="projects.html" class="btn-outline">&larr; Back to Research</a>
+                <a href="projects.html" class="btn-outline">&larr; Volver a Investigación</a>
             </div>
         </section>
     </main>
@@ -546,8 +560,8 @@
     <footer>
         <div class="container">
             <p class="footer-wordmark">STILL<span class="logo-accent">.bz</span></p>
-            <p class="footer-tagline">Sustainable Transformation Initiative for Land &amp; Learning</p>
-            <nav class="social-links" aria-label="Contact and social links">
+            <p class="footer-tagline">Iniciativa de Transformación Sostenible para la Tierra y el Aprendizaje</p>
+            <nav class="social-links" aria-label="Enlaces de contacto y redes sociales">
                 <a class="social-link" href="https://www.instagram.com/_still.bz/" target="_blank" rel="noopener noreferrer">
                     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                     <span>@_still.bz</span>
@@ -557,7 +571,7 @@
                     <span>info@still.bz</span>
                 </a>
             </nav>
-            <p class="footer-note">Honouring all relations. Bzzzz.</p>
+            <p class="footer-note">Honrando todas las relaciones. Bzzzz.</p>
             <p class="footer-legal">&copy; 2026 STILL</p>
         </div>
     </footer>
@@ -593,6 +607,14 @@
         { name: 'Neptune', au: 30.070000, diamKm: 49528,           color: '#5a7fc4' },
         { name: 'Pluto',   au: 39.482000, diamKm: 2376,            color: '#b9a58f', reference: true }
     ];
+
+    /* Display names for the user-facing UI. Internal `name` fields above stay in
+     * English because they are used as lookup keys throughout this file and the
+     * script below; only the rendered text is localized. */
+    var PLANET_NAMES = {
+        Sun: 'Sol', Mercury: 'Mercurio', Venus: 'Venus', Earth: 'Tierra', Mars: 'Marte',
+        Jupiter: 'Júpiter', Saturn: 'Saturno', Uranus: 'Urano', Neptune: 'Neptuno', Pluto: 'Plutón'
+    };
 
     /**
      * Enrich each body with its derived model values.
@@ -640,12 +662,12 @@
             sw.className = 'swatch';
             sw.style.background = b.color;
             th.appendChild(sw);
-            th.appendChild(document.createTextNode(b.name));
+            th.appendChild(document.createTextNode(PLANET_NAMES[b.name] || b.name));
             tr.appendChild(th);
 
             [
                 b.name === 'Sun' ? '—' : b.au.toFixed(3),
-                b.name === 'Sun' ? '0 · the deck'
+                b.name === 'Sun' ? '0 · la plataforma'
                                  : b.routeKm.toFixed(2) + ' km' + (b.reference ? ' †' : ''),
                 fmtMetres(b.sphereM),
                 b.name === 'Sun' ? '—' : fmtLight(b.lightMinutes)
@@ -665,7 +687,7 @@
         td.style.color = 'var(--color-forest-moss)';
         td.style.borderBottom = 'none';
         td.style.paddingTop = '1rem';
-        td.textContent = '† Dwarf planet, shown for reference; falls beyond Neptune at 40.37 km.';
+        td.textContent = '† Planeta enano, mostrado solo como referencia; cae más allá de Neptuno, a 40,37 km.';
         note.appendChild(td);
         tbody.appendChild(note);
     }
@@ -687,6 +709,7 @@
         MODEL: MODEL,
         SCALE: SCALE,
         DECK_DIAMETER_M: DECK_DIAMETER_M,
+        PLANET_NAMES: PLANET_NAMES,
         fmtMetres: fmtMetres,
         fmtLight: fmtLight
     };
@@ -699,7 +722,7 @@
 }());
 </script>
 
-<script src="lib/leaflet.js"></script>
+<script src="../lib/leaflet.js"></script>
 <script>
 (function () {
     'use strict';
@@ -709,6 +732,7 @@
         console.error('thebacha-solar-model: Leaflet or the shared model failed to load; map skipped.');
         return;
     }
+    var NAMES = api.PLANET_NAMES || {};
 
     /* Route traced from OpenStreetMap road centrelines (ODbL), simplified to ~25 m
      * tolerance. Index 0 is the Dark Sky Circle deck itself. */
@@ -762,10 +786,10 @@
         'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
         { attribution: 'Imagery &copy; Esri', maxZoom: 18 });
 
-    L.control.layers({ 'Topographic': topo, 'OpenTopoMap': openTopo, 'Satellite': imagery },
+    L.control.layers({ 'Topográfico': topo, 'OpenTopoMap': openTopo, 'Satélite': imagery },
                      null, { position: 'topright' }).addTo(map);
 
-    map.attributionControl.addAttribution('Route &copy; OpenStreetMap contributors (ODbL)');
+    map.attributionControl.addAttribution('Ruta &copy; colaboradores de OpenStreetMap (ODbL)');
 
     L.polyline(ROUTE, {
         color: '#e6b800', weight: 3, opacity: 0.85, dashArray: '1 6', lineCap: 'round'
@@ -778,11 +802,11 @@
         }).addTo(map).bindPopup('<h4>' + title + '</h4>' + detail);
     }
     endpoint(DECK, 'Dark Sky Circle',
-        '<dl><dt>Role</dt><dd>The Sun</dd><dt>Measured</dt><dd>9.51 m across</dd>' +
-        '<dt>Position</dt><dd>km 0</dd></dl>');
+        '<dl><dt>Rol</dt><dd>El Sol</dd><dt>Medida</dt><dd>9,51 m de diámetro</dd>' +
+        '<dt>Posición</dt><dd>km 0</dd></dl>');
     endpoint(FORT_SMITH, 'Fort Smith',
-        '<dl><dt>Parks office</dt><dd>149 McDougal</dd><dt>By road</dt><dd>62.6 km from the deck</dd>' +
-        '<dt>In the model</dt><dd>31.9 km past Neptune</dd></dl>');
+        '<dl><dt>Oficina de Parks Canada</dt><dd>149 McDougal</dd><dt>Por carretera</dt><dd>62,6 km desde la plataforma</dd>' +
+        '<dt>En el modelo</dt><dd>31,9 km más allá de Neptuno</dd></dl>');
 
     // --- planet artwork ----------------------------------------------------
     /* Each planet is drawn in a coordinate system where the body radius is 1,
@@ -906,6 +930,7 @@
     Object.keys(POSITIONS).forEach(function (name) {
         var b = byName[name];
         var latlng = POSITIONS[name];
+        var label = NAMES[name] || name;
 
         // Fixed-size locator ring: always findable, explicitly not the planet.
         L.circleMarker(latlng, {
@@ -915,16 +940,16 @@
 
         var marker = L.marker(latlng, {
             icon: planetIcon(name, Math.max(MIN_BODY_PX, b.sphereM * DEFAULT_MAG)),
-            title: b.name, riseOnHover: true
+            title: label, riseOnHover: true
         }).addTo(map);
 
         marker.bindPopup(
-            '<h4>' + b.name + '</h4><dl>' +
-            '<dt>From the deck</dt><dd>' + b.routeKm.toFixed(2) + ' km</dd>' +
-            '<dt>True sphere</dt><dd>' + api.fmtMetres(b.sphereM) + '</dd>' +
-            '<dt>Real distance</dt><dd>' + b.au.toFixed(3) + ' AU</dd>' +
-            '<dt>Light delay</dt><dd>' + api.fmtLight(b.lightMinutes) + '</dd></dl>');
-        marker.bindTooltip(b.name, {
+            '<h4>' + label + '</h4><dl>' +
+            '<dt>Desde la plataforma</dt><dd>' + b.routeKm.toFixed(2) + ' km</dd>' +
+            '<dt>Esfera real</dt><dd>' + api.fmtMetres(b.sphereM) + '</dd>' +
+            '<dt>Distancia real</dt><dd>' + b.au.toFixed(3) + ' UA</dd>' +
+            '<dt>Retraso de luz</dt><dd>' + api.fmtLight(b.lightMinutes) + '</dd></dl>');
+        marker.bindTooltip(label, {
             permanent: true, direction: 'right', offset: [LOCATOR_R + 3, 0],
             className: 'planet-label'
         });
@@ -952,9 +977,9 @@
         });
         sunDisc.setRadius((api.DECK_DIAMETER_M * mag) / 2);
         readout.innerHTML =
-            '&times;' + Math.round(mag / 10) * 10 + ' &mdash; Jupiter <b>' +
-            Math.round(byName.Jupiter.sphereM * mag) + ' px</b>, Earth <b>' +
-            Math.round(byName.Earth.sphereM * mag) + ' px</b>, Mercury <b>' +
+            '&times;' + Math.round(mag / 10) * 10 + ' &mdash; ' + (NAMES.Jupiter || 'Jupiter') + ' <b>' +
+            Math.round(byName.Jupiter.sphereM * mag) + ' px</b>, ' + (NAMES.Earth || 'Earth') + ' <b>' +
+            Math.round(byName.Earth.sphereM * mag) + ' px</b>, ' + (NAMES.Mercury || 'Mercury') + ' <b>' +
             Math.round(byName.Mercury.sphereM * mag) + ' px</b>';
     }
 
@@ -984,6 +1009,6 @@
     map.fitBounds(L.latLngBounds(ROUTE), { padding: [30, 30] });
 }());
 </script>
-    <script defer src="assets/comb-light.js"></script>
+    <script defer src="../assets/comb-light.js"></script>
 </body>
 </html>
